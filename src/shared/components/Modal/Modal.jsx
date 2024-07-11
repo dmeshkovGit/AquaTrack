@@ -1,9 +1,10 @@
-import  { useEffect } from 'react';
-import styles from './Modal.module.css';
+import { useEffect } from 'react';
+import css from './Modal.module.css';
+import { createPortal } from 'react-dom';
 
 export default function Modal({ children, isOpen, onClose }) {
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = event => {
       if (event.key === 'Escape') {
         onClose();
       }
@@ -18,18 +19,19 @@ export default function Modal({ children, isOpen, onClose }) {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
-          &times;
-        </button>
-        {children}
-      </div>
-    </div>
+    <>
+      {createPortal(
+        <div className={css.backdrop} onClick={onClose}>
+          <div className={css.modal} onClick={e => e.stopPropagation()}>
+            <button className={css.closeButton} onClick={onClose}>
+              &times;
+            </button>
+            {children}
+          </div>
+        </div>,
+        document.body,
+      )}
+    </>
   );
 }

@@ -1,10 +1,9 @@
-.modal {
+/* .modal {
   border-radius: 15px;
   padding: 40px 14px;
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: var(--main-white);
   position: relative;
-}
+} */
 
 .title {
   font-family: var(--font-family);
@@ -82,7 +81,7 @@
 @media screen and (min-width: 768px) {
   .modal {
     width: 516px;
-    padding: 40px;
+    /* padding: 40px; */
   }
   .title {
     font-size: 28px;

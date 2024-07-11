@@ -17,13 +17,13 @@ export default function LogOutModal({ isModalOpen }) {
           Cancel
         </button>
       </div>
-      <button
+      {/* <button
         className={css.closeBtn}
         type="button"
         onClick={() => isModalOpen(false)}
       >
         X
-      </button>
+      </button> */}
     </div>
   );
 }
