@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
+import clsx from 'clsx';
 
-export default function Modal({ children, isOpen, onClose }) {
+export default function Modal({ children, isOpen, onClose, btnClassName }) {
   useEffect(() => {
     const handleEscape = event => {
       if (event.key === 'Escape') {
@@ -24,7 +25,10 @@ export default function Modal({ children, isOpen, onClose }) {
       {createPortal(
         <div className={css.backdrop} onClick={onClose}>
           <div className={css.modal} onClick={e => e.stopPropagation()}>
-            <button className={css.closeButton} onClick={onClose}>
+            <button
+              className={clsx(css.closeButton, btnClassName)}
+              onClick={onClose}
+            >
               &times;
             </button>
             {children}
