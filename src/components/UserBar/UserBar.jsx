@@ -14,14 +14,20 @@ export default function UserBar() {
       positions={['bottom']}
       onClickOutside={() => setIsPopoverOpen(!isPopoverOpen)}
       content={<UserBarPopover />}
+      containerClassName={css.popover}
     >
       <button
+        type="button"
         className={css.btn}
         onClick={() => setIsPopoverOpen(!isPopoverOpen)}
       >
         <p className={css.name}>Username</p>
-        <RxAvatar />
-        {isPopoverOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        <RxAvatar size={38} />
+        {isPopoverOpen ? (
+          <IoIosArrowUp size={16} />
+        ) : (
+          <IoIosArrowDown size={16} />
+        )}
       </button>
     </Popover>
   );
