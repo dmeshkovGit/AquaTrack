@@ -28,12 +28,22 @@ export default function UserBarPopover() {
         Log out
       </button>
       {isSettingsModalOpen && (
-        <Modal isModal={isSettingsModalOpen} onClose={setIsSettingsModalOpen}>
+        <Modal
+          isOpen={isSettingsModalOpen}
+          onClose={() => {
+            setIsSettingsModalOpen(false);
+          }}
+        >
           <UserSettingsModal />
         </Modal>
       )}
       {isLogOutModalOpen && (
-        <Modal isModal={isLogOutModalOpen} onClose={setIsLogOutModalOpen}>
+        <Modal
+          isOpen={isLogOutModalOpen}
+          onClose={() => {
+            setIsLogOutModalOpen(false);
+          }}
+        >
           <LogOutModal isModalOpen={setIsLogOutModalOpen} />
         </Modal>
       )}

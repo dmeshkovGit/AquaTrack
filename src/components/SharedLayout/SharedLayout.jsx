@@ -1,7 +1,7 @@
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 
 export default function SharedLayout({ children }) {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
     <div>
       {!isLoggedIn && <AdvantagesSection />}
