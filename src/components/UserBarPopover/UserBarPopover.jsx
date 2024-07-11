@@ -43,6 +43,7 @@ export default function UserBarPopover() {
           onClose={() => {
             setIsLogOutModalOpen(false);
           }}
+          btnClassName={css.modalCloseButton}
         >
           <LogOutModal isModalOpen={setIsLogOutModalOpen} />
         </Modal>
