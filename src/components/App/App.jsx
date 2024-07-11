@@ -7,6 +7,7 @@ import WelcomeSection from '../../pages/WelcomeSection/WelcomeSection';
 import SignUpPage from '../../pages/SignUpPage/SignUpPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               <PrivateRoute component={<TrackerPage />} redirectTo="/" />
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </div>

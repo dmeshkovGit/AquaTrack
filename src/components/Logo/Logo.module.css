@@ -1,0 +1,12 @@
+.logo {
+  display: flex;
+  font-size: 18px;
+  line-height: 1.11em;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  text-transform: uppercase;
+  letter-spacing: -0.1em;
+}
