@@ -44,6 +44,16 @@
 .logoutBtn:focus {
   color: var(--main);
 }
+
+.modalCloseButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
 /* =============TABLET============= */
 
 @media screen and (min-width: 768px) {
