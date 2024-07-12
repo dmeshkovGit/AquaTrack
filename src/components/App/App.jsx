@@ -9,45 +9,53 @@ import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SharedLayout from '../SharedLayout/SharedLayout';
 import HomePage from '../../pages/HomePage/HomePage';
+import { Loader } from '../Loader/Loader';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <SharedLayout>
-      <Suspense>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <RestrictedRoute component={<HomePage />} redirectTo="/tracker" />
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <RestrictedRoute
-                component={<SignUpPage />}
-                redirectTo="/tracker"
-              />
-            }
-          />
-          <Route
-            path="/signin"
-            element={
-              <RestrictedRoute
-                component={<SignInPage />}
-                redirectTo="/tracker"
-              />
-            }
-          />
-          <Route
-            path="/tracker"
-            element={
-              <PrivateRoute component={<TrackerPage />} redirectTo="/" />
-            }
-          />
-        </Routes>
-      </Suspense>
-    </SharedLayout>
+    <>
+      <Toaster position="top-center" />
+      <SharedLayout>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RestrictedRoute
+                  component={<HomePage />}
+                  redirectTo="/tracker"
+                />
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <RestrictedRoute
+                  component={<SignUpPage />}
+                  redirectTo="/tracker"
+                />
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <RestrictedRoute
+                  component={<SignInPage />}
+                  redirectTo="/tracker"
+                />
+              }
+            />
+            <Route
+              path="/tracker"
+              element={
+                <PrivateRoute component={<TrackerPage />} redirectTo="/" />
+              }
+            />
+          </Routes>
+        </Suspense>
+      </SharedLayout>
+    </>
   );
 }
 
