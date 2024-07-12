@@ -7,24 +7,27 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 auto;
+  margin-bottom: 16px;
 }
 
 .inputGroup {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .inputGroup label {
   display: block;
   margin-bottom: 8px;
   text-align: start;
+  font-weight: bold;
 }
 
 .inputGroup input {
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  border: #007bff;
+  border-radius: 15px;
+  border-color: solid 1px;
+  background-color: transparent;
 }
 
 .error {
@@ -34,12 +37,17 @@
 }
 
 .submitButton {
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  margin-top: 16px;
   background-color: #9be1a0; /*var(Accent) */
   color: inherit;
   border: none;
+  border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: bold;
 }
 
 .link {
@@ -51,11 +59,15 @@
   color: #007bff;
   text-decoration: none;
 }
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #87d28d;
+}
+
+/* desktop 375px + */
+@media screen and (min-width: 375px) {
+}
 
 /* desktop 1440px + */
 @media screen and (min-width: 1440px) {
-  .submitButton:hover,
-  .submitButton:focus {
-    background-color: #87d28d;
-  }
 }

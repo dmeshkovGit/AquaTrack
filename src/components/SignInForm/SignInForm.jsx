@@ -55,12 +55,16 @@ export const SignInForm = () => {
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={css.inputGroup}>
         <label>Email</label>
-        <input type="email" {...register('email')} />
+        <input type="email" placeholder="Email" {...register('email')} />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
       <div className={css.inputGroup}>
         <label>Password</label>
-        <input type="password" {...register('password')} />
+        <input
+          type="password"
+          placeholder="Enter your password"
+          {...register('password')}
+        />
         {errors.password && (
           <p className={css.error}>{errors.password.message}</p>
         )}

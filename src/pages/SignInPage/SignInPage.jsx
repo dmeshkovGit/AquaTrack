@@ -11,14 +11,21 @@ const SignInPage = () => {
   };
   return (
     <div className={css.container}>
-      <Logo />
+      <div className={css.logo}>
+        <Logo />
+      </div>
+
       <div className={css.heading}>
         <h2>sign in</h2>
       </div>
       <SignInForm onSubmit={handleSignIn} />
 
-      <p>Don`t have an account?</p>
-      <Link to="/signup">Sign Up</Link>
+      <p>
+        Don`t have an account?
+        <span>
+          <Link to="/signup">Sign Up</Link>
+        </span>
+      </p>
     </div>
   );
 };
