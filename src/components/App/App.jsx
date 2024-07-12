@@ -1,12 +1,14 @@
 import { Suspense } from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
 // import WelcomeSection from '../WelcomeSection/WelcomeSection';
 import SignUpPage from '../../pages/SignUpPage/SignUpPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
+import SharedLayout from '../SharedLayout/SharedLayout';
+import HomePage from '../../pages/HomePage/HomePage';
 
 function App() {
   return (
@@ -43,7 +45,6 @@ function App() {
               <PrivateRoute component={<TrackerPage />} redirectTo="/" />
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </SharedLayout>
