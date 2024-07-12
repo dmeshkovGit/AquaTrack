@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
-import './App.css';
 import { Route, Routes } from 'react-router';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
+import '../App/App.css';
 // import WelcomeSection from '../WelcomeSection/WelcomeSection';
 import SignUpPage from '../../pages/SignUpPage/SignUpPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
