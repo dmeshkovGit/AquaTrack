@@ -1,29 +1,11 @@
-import { Outlet, Link } from 'react-router-dom';
-import './SharedLayout.css';
+import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 
-const SharedLayout = () => {
+export default function SharedLayout({ children }) {
+  const isLoggedIn = false;
   return (
-    <div className="container">
-      <header className="header">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/signin">Sign In</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main className="main">
-        <Outlet />
-      </main>
+    <div>
+      {!isLoggedIn && <AdvantagesSection />}
+      {children}
     </div>
   );
-};
-
-export default SharedLayout;
+}

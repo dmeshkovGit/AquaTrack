@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import Logo from '../../components/Logo/Logo';
+import Logo from '../../shared/components/Logo/Logo';
+import SignInForm from '../../components/SignInForm/SignInForm';
 import SignInForm from '../../components/SignInForm/SignInForm';
 import css from './SignInPage.module.css';
 import Btn from '../../components/Btn/Btn';

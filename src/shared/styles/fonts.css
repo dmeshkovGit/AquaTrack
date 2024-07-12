@@ -2,14 +2,14 @@
   font-family: 'Poppins';
   font-weight: normal;
   font-style: normal;
-  src: url('../fonts/Poppins-Regular.woff') format('woff'),
-    url('../fonts/Poppins-SemiBold.woff') format('woff'),
-    url('../fonts/Poppins-Medium.woff') format('woff');
+  src: url('./fonts/Poppins-Regular.ttf') format('truetype'),
+    url('./fonts/Poppins-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Lobster', sans-serif;
-  font-weight: 400;
+  font-family: 'Gilroy';
+  font-weight: normal;
   font-style: normal;
-  src: url('fonts/Lobster-Regular.ttf') format('truetype');
+  src: url('./fonts/Gilroy-Regular.ttf') format('truetype'),
+    url('./fonts/Gilroy-Bold.ttf') format('truetype');
 }

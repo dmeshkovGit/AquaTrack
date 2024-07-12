@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from '../../components/Logo/Logo';
+import Logo from '../../shared/components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from './SignUpPage.module.css';
 

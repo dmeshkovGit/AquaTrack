@@ -3,24 +3,20 @@ import './App.css';
 import { Route, Routes } from 'react-router';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
-import WelcomeSection from '../../pages/WelcomeSection/WelcomeSection';
+// import WelcomeSection from '../WelcomeSection/WelcomeSection';
 import SignUpPage from '../../pages/SignUpPage/SignUpPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
-import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
-    <div>
+    <SharedLayout>
       <Suspense>
         <Routes>
           <Route
             path="/"
             element={
-              <RestrictedRoute
-                component={<WelcomeSection />}
-                redirectTo="/tracker"
-              />
+              <RestrictedRoute component={<HomePage />} redirectTo="/tracker" />
             }
           />
           <Route
@@ -50,7 +46,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </div>
+    </SharedLayout>
   );
 }
 

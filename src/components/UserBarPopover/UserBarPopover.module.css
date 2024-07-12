@@ -1,0 +1,68 @@
+.wrap {
+  border-radius: 15px;
+  padding: 14px 57px 14px 20px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: var(--main-white);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settingBtn {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--main);
+  border: none;
+  background-color: inherit;
+  gap: 8px;
+  transition: all ease-in-out;
+}
+
+.settingBtn:hover,
+.settingBtn:focus {
+  color: #87d28d;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: rgba(50, 63, 71, 0.4);
+  border: none;
+  background-color: inherit;
+  gap: 8px;
+  transition: all ease-in-out;
+}
+.logoutBtn:hover,
+.logoutBtn:focus {
+  color: var(--main);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* =============TABLET============= */
+
+@media screen and (min-width: 768px) {
+  .settingBtn {
+    font-size: 15px;
+    line-height: 149%;
+  }
+  .logoutBtn {
+    font-size: 15px;
+    line-height: 149%;
+  }
+}
