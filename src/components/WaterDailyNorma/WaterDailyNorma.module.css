@@ -8,6 +8,7 @@
   border-radius: 15px;
   padding: 12px;
   background-color: var(--main-white);
+  margin-right: auto;
 }
 .waterCount {
   font-weight: 700;
