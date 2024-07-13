@@ -18,7 +18,7 @@
   .WaterMainInfoContainer {
     height: 578px;
     padding: 32px 32px 64px 32px;
-    background-image: url('/public/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
+    background-image: url('/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
     background-size: 374px 477px;
     background-position: bottom 32px center;
   }
@@ -28,7 +28,7 @@
   .WaterMainInfoContainer {
     height: auto;
     width: 672px;
-    background-image: url('/public/boardBg/Desctop/1x/transparent_bottle_for_water\ 1-1-min.png');
+    background-image: url('/boardBg/Desctop/1x/transparent_bottle_for_water\ 1-1-min.png');
     background-size: 472px 604px;
     background-position: bottom 40px center;
   }
@@ -36,16 +36,16 @@
 
 @media (min-resolution: 192dpi) and (min-width: 375px) {
   .WaterMainInfoContainer {
-    background-image: url('/public/boardBg/Mobile/2x/transparent_bottle_for_water\ 1@2x-min.png');
+    background-image: url('/boardBg/Mobile/2x/transparent_bottle_for_water\ 1@2x-min.png');
   }
 }
 @media (min-resolution: 192dpi) and (min-width: 768px) {
   .WaterMainInfoContainer {
-    background-image: url('/public/boardBg/Tablet/2x/transparent_bottle_for_water\ 1@2x-min.png');
+    background-image: url('/boardBg/Tablet/2x/transparent_bottle_for_water\ 1@2x-min.png');
   }
 }
 @media (min-resolution: 192dpi) and (min-width: 1440px) {
   .WaterMainInfoContainer {
-    background-image: url('/public/boardBg/Desctop/2x/transparent_bottle_for_water\ 1-min.png');
+    background-image: url('/boardBg/Desctop/2x/transparent_bottle_for_water\ 1-min.png');
   }
 }
