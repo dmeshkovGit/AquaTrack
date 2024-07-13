@@ -5,7 +5,7 @@ import MonthInfo from '../../components/MonthInfo/MonthInfo';
 
 export default function WaterDetailedInfo() {
   return (
-    <div>
+    <div className={css.WaterDetailedInfoContainer}>
       <UserPanel />
       <DailyInfo />
       <MonthInfo />
