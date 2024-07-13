@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -7,6 +8,12 @@
   background-color: #f0eff4;
   max-width: 375px;
   border-radius: 30px;
+}
+
+.logo{
+  position: absolute;
+  left: 16px;
+  top: 24px;
 }
 
 .titles {
@@ -72,6 +79,10 @@
   }
   .signIn {
     padding: 18px 40px;
+  }
+  .logo{
+    top: 32px;
+    left: 32px;
   }
 }
 

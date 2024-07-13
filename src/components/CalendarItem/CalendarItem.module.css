@@ -1,4 +1,8 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 .button {
   border-radius: 50%;
@@ -10,6 +14,24 @@
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
+  border: none;
+  background: rgba(50, 63, 71, 0.2);
+}
+.activeButton {
+  background: rgb(50, 63, 71);
+  color: rgb(155, 225, 160);
 }
 .label {
+  color: rgba(47, 47, 47, 0.6);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: 0%;
+}
+@media screen and (min-width: 768px) {
+  .button {
+    height: 38px;
+    width: 38px;
+    font-size: 16px;
+  }
 }

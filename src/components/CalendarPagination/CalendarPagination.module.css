@@ -10,11 +10,17 @@
 }
 .button {
   border: none;
-  background-color: transperent;
+  background-color: transparent;
 }
 .title {
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
+}
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }

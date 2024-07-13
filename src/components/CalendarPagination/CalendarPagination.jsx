@@ -1,3 +1,4 @@
+import Icon from '../../shared/components/Icon/Icon';
 import css from '../CalendarPagination/CalendarPagination.module.css';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -13,7 +14,7 @@ export default function CalendarPagination() {
           <FaAngleRight />
         </button>
       </div>
-      <span>I</span>
+      <Icon id="pieChart" height={20} width={20} />
     </div>
   );
 }

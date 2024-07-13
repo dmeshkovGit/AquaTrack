@@ -1,7 +1,6 @@
 .monthInfoContainer {
   height: 348px;
   width: 303px;
-  background-color: rgb(240, 239, 244);
 }
 .monthInfoPaginationContainer {
   display: flex;
@@ -14,4 +13,20 @@
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -1%;
+}
+@media screen and (min-width: 768px) {
+  .monthInfoContainer {
+    height: 362px;
+    width: 640px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .monthInfoContainer {
+    width: 608px;
+    height: 361px;
+  }
 }
