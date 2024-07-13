@@ -7,11 +7,14 @@ import { useState } from 'react';
 import WaterList from '../../components/WaterList/WaterList';
 
 export default function DailyInfo() {
-  const [isOpen, serIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
+    <div className={css.container}>
+      <div className={css.container_top_daily_info}>
       <ChooseDate />
       <AddWaterBtn />
+      </div>
+      
       {isOpen && (
         <Modal>
           <WaterModal />
