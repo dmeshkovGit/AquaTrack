@@ -1,4 +1,5 @@
 .WaterMainInfoContainer {
+  height: 415px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -9,21 +10,27 @@
   padding: 24px 16px 32px 16px;
   background-image: url('/public/boardBg/Mobile/1x/transparent_bottle_for_water\ 1-min.png');
   background-repeat: no-repeat;
-  background-position: bottom 28px center;
-  background-size: 65%;
+  background-position: bottom 30px center;
+  background-size: 262px 335px;
 }
 
 @media screen and (min-width: 768px) {
   .WaterMainInfoContainer {
+    height: 578px;
     padding: 32px 32px 64px 32px;
     background-image: url('/public/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
+    background-size: 374px 477px;
+    background-position: bottom 32px center;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .WaterMainInfoContainer {
+    height: auto;
     width: 672px;
     background-image: url('/public/boardBg/Desctop/1x/transparent_bottle_for_water\ 1-1-min.png');
+    background-size: 472px 604px;
+    background-position: bottom 40px center;
   }
 }
 

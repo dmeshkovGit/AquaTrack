@@ -11,10 +11,10 @@ export default function DailyInfo() {
   return (
     <div className={css.container}>
       <div className={css.container_top_daily_info}>
-      <ChooseDate />
-      <AddWaterBtn addStyle={true} />
+        <ChooseDate />
+        <AddWaterBtn WaterDetailedInfoStyles={true} />
       </div>
-      
+
       {isOpen && (
         <Modal>
           <WaterModal />

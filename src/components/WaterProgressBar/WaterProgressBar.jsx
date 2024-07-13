@@ -1,16 +1,28 @@
 import css from '../WaterProgressBar/WaterProgressBar.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function WaterProgressBar() {
-  const [percent, setPercent] = useState('35');
+  const [percent, setPercent] = useState(39);
+  const [isPercentVisible, setIsPercentVisible] = useState(true);
+
+  useEffect(() => {
+    if (percent < 10 || (percent > 39 && percent < 57) || percent > 85) {
+      setIsPercentVisible(false);
+    } else {
+      setIsPercentVisible(true);
+    }
+  }, [percent]);
+
   return (
     <div className={css.wrapper}>
       <h6 className={css.header}> Today</h6>
       <div className={css.bar}>
         <div className={css.progressLine} style={{ width: `${percent}%` }}>
-          <span className={css.activePercent} style={{ left: `100%` }}>
-            {`${percent}%`}
-          </span>
+          {isPercentVisible && (
+            <span className={css.activePercent} style={{ left: `100%` }}>
+              {`${percent}%`}
+            </span>
+          )}
         </div>
       </div>
       <div className={css.textContainer}>
