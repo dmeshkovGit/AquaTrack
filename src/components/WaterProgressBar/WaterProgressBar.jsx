@@ -2,7 +2,7 @@ import css from '../WaterProgressBar/WaterProgressBar.module.css';
 import { useState } from 'react';
 
 export default function WaterProgressBar() {
-  const [percent, setPercent] = useState('30');
+  const [percent, setPercent] = useState('35');
   return (
     <div className={css.wrapper}>
       <h6 className={css.header}> Today</h6>
