@@ -1,0 +1,112 @@
+.formulaWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
+.genderFormulaWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.genderFormula {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formulaText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.formula {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+.textWrap {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 16px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.notification {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent);
+}
+
+.notificationText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+/* =================TABLET================== */
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 18px;
+    line-height: 133%;
+  }
+
+  .genderFormulaWrap {
+    flex-direction: row;
+    gap: 28px;
+  }
+  .formulaText {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .formula {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .notificationText {
+    font-size: 16px;
+    line-height: 150%;
+  }
+}
