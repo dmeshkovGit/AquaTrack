@@ -1,0 +1,54 @@
+.wrapper {
+  box-sizing: border-box;
+  height: 70px;
+  background-color: var(--main-white);
+  border-radius: 15px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bar {
+  width: 174px;
+  height: 6px;
+  background-color: var(--background);
+  border-radius: 9px;
+}
+.progressLine {
+  background-color: var(--accent);
+  height: 6px;
+  border-radius: 9px;
+  position: relative;
+}
+.header {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+.textContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.text {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--main-text);
+}
+.activePercent {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 8px;
+  color: var(--accent);
+  position: absolute;
+  top: 13px;
+  transform: translateX(-50%);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+/* .progressLine::after {
+  background-color: var(--accent);
+  height: 6px;
+  border-radius: 9px;
+  position: relative;
+} */
