@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import clsx from 'clsx';
 import FormulaDescription from './FormulaDescription';
+import { useEffect, useState } from 'react';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -30,10 +31,14 @@ const schema = yup.object().shape({
     .string()
     .min(1, 'Too short! Minimum 1 symbols')
     .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/^[0-9]/, 'Value is not valid, only numbers!'),
+    .matches(/^[0-9]|\.|,|:*$/, 'Value is not valid, only numbers!'),
 });
 
 export default function UserSettingsForm() {
+  const [gender, setGender] = useState('');
+  const [activity, setActivity] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [waterVolume, setWaterVolume] = useState(0);
   const {
     register,
     handleSubmit,
@@ -46,16 +51,34 @@ export default function UserSettingsForm() {
       email: '',
       weight: 0,
       activeTime: 0,
-      liters: 0,
+      liters: waterVolume,
     },
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    const countWaterVolume = (gender, activity = 0, weight = 0) => {
+      let volume = 0;
+      if (gender === 'man') {
+        volume = Number(weight) * 0.03 + Number(activity) * 0.4;
+      }
+      if (gender === 'woman') {
+        volume = Number(weight) * 0.04 + Number(activity) * 0.6;
+      }
+      setWaterVolume(volume);
+    };
+    countWaterVolume(gender, activity, weight);
+  }, [gender, activity, weight]);
   const onSubmit = data => {
     console.log(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-      <fieldset className={css.fieldset} {...register('gender')}>
+      <fieldset
+        className={css.fieldset}
+        {...register('gender')}
+        onChange={e => setGender(e.target.value)}
+      >
         <legend className={css.legend}>Your gender identity</legend>
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
@@ -125,6 +148,7 @@ export default function UserSettingsForm() {
               type="number"
               className={clsx(css.input, errors.weight && css.errorInput)}
               {...register('weight')}
+              onBlur={e => setWeight(e.target.value)}
             />
             {errors.weight && (
               <p className={css.errorText}>{errors.weight.message}</p>
@@ -139,6 +163,7 @@ export default function UserSettingsForm() {
               type="number"
               className={clsx(css.input, errors.activeTime && css.errorInput)}
               {...register('activeTime')}
+              onBlur={e => setActivity(e.target.value)}
             />
             {errors.activeTime && (
               <p className={css.errorText}>{errors.activeTime.message}</p>
@@ -146,13 +171,10 @@ export default function UserSettingsForm() {
           </div>
           <p className={css.waterAmount}>
             The required amount of water in liters per day:{' '}
-            <span className={css.accent}>1.8l</span>
+            <span className={css.accent}>{waterVolume.toFixed(1)} l</span>
           </p>
           <div className={css.labelContainer}>
-            <label
-              className={clsx(css.label, css.bold)}
-              {...register('liters')}
-            >
+            <label className={clsx(css.label, css.bold)}>
               Write down how much water you will drink:
             </label>
             <input
