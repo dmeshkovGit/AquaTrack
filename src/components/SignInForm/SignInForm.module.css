@@ -27,7 +27,7 @@
 }
 
 .error {
-  color: red;
+  color: var(--validation-error);
   font-size: 0.8rem;
   margin-top: 5px;
 }
@@ -37,7 +37,7 @@
   justify-content: center;
   padding: 16px;
   margin-top: 16px;
-  background-color: #9be1a0; /*var(Accent) */
+  background-color: var(--accent);
   color: inherit;
   border: none;
   border-radius: 30px;
@@ -47,7 +47,7 @@
 }
 .submitButton:hover,
 .submitButton:focus {
-  background-color: #87d28d;
+  background-color: var(--accent-hover);
 }
 .submitButton:disabled {
   background-color: #cccccc;
