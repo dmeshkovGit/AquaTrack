@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../shared/components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
-import css from './SignInPage.module.css';
+import css from '../SignInPage/SignInPage.module.css';
 
 export default function SignIpPage() {
   const handleSignIn = data => {
