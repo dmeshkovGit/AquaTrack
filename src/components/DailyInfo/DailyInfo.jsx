@@ -12,7 +12,7 @@ export default function DailyInfo() {
     <div className={css.container}>
       <div className={css.container_top_daily_info}>
       <ChooseDate />
-      <AddWaterBtn />
+      <AddWaterBtn addStyle={true} />
       </div>
       
       {isOpen && (

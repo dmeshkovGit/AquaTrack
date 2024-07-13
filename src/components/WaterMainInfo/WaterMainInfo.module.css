@@ -7,16 +7,38 @@
   background-color: var(--accent);
   border-radius: 30px;
   padding: 24px 16px 32px 16px;
+  background-image: url('/public/boardBg/Mobile/1x/transparent_bottle_for_water\ 1-min.png');
+  background-repeat: no-repeat;
+  background-position: bottom 28px center;
+  background-size: 65%;
 }
 
 @media screen and (min-width: 768px) {
   .WaterMainInfoContainer {
     padding: 32px 32px 64px 32px;
+    background-image: url('/public/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
   }
 }
 
 @media screen and (min-width: 1440px) {
   .WaterMainInfoContainer {
     width: 672px;
+    background-image: url('/public/boardBg/Desctop/1x/transparent_bottle_for_water\ 1-1-min.png');
+  }
+}
+
+@media (min-resolution: 192dpi) and (min-width: 375px) {
+  .WaterMainInfoContainer {
+    background-image: url('/public/boardBg/Mobile/2x/transparent_bottle_for_water\ 1@2x-min.png');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 768px) {
+  .WaterMainInfoContainer {
+    background-image: url('/public/boardBg/Tablet/2x/transparent_bottle_for_water\ 1@2x-min.png');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 1440px) {
+  .WaterMainInfoContainer {
+    background-image: url('/public/boardBg/Desctop/2x/transparent_bottle_for_water\ 1-min.png');
   }
 }
