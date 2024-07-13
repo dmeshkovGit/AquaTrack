@@ -15,11 +15,11 @@
   line-height: 18px;
   letter-spacing: -1%;
   border: none;
-  background: rgba(50, 63, 71, 0.2);
+  background: #d5d9da;
 }
 .activeButton {
-  background: rgb(50, 63, 71);
-  color: rgb(155, 225, 160);
+  background: var(--main);
+  color: var(--accent);
 }
 .label {
   color: rgba(47, 47, 47, 0.6);
