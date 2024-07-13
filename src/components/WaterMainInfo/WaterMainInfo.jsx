@@ -8,7 +8,7 @@ export default function WaterMainInfo() {
     <div className={css.WaterMainInfoContainer}>
       <WaterDailyNorma />
       <WaterProgressBar />
-      <AddWaterBtn addStyle={false} />
+      <AddWaterBtn />
     </div>
   );
 }
