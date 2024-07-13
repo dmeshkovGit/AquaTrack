@@ -17,13 +17,6 @@ export default function LogOutModal({ isModalOpen }) {
           Cancel
         </button>
       </div>
-      {/* <button
-        className={css.closeBtn}
-        type="button"
-        onClick={() => isModalOpen(false)}
-      >
-        X
-      </button> */}
     </div>
   );
 }
