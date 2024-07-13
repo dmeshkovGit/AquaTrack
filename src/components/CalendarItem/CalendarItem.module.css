@@ -1,0 +1,15 @@
+.container {
+}
+.button {
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+.label {
+}
