@@ -11,7 +11,7 @@ export default function DailyInfo() {
   return (
     <div>
       <ChooseDate />
-      <AddWaterBtn />
+      <AddWaterBtn addStyle={true} />
       {isOpen && (
         <Modal>
           <WaterModal />
