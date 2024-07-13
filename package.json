@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.6",
+    "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "i18next": "^23.11.5",
     "normalize.css": "^8.0.1",

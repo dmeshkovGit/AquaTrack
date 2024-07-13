@@ -7,9 +7,9 @@ import WaterModal from '../../shared/components/WaterModal/WaterModal';
 import { useState } from 'react';
 
 export default function WaterMainInfo() {
-  const [isOpen, serIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
+    <div className={css.WaterMainInfoContainer}>
       <WaterDailyNorma />
       <WaterProgressBar />
       <AddWaterBtn />

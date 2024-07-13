@@ -2,12 +2,13 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../shared/components/Logo/Logo';
 import styles from './WelcomeSection.module.css';
-import Modal from '../../shared/components/Modal/Modal';
 
 export default function WelcomeSection() {
   return (
     <div className={styles.container}>
+      <div className={styles.logo}>
       <Logo />
+      </div>
       <div className={styles.titles}>
         <h2 className={styles.subtitle}>Record daily water intake and track</h2>
         <h1 className={styles.title}>Water consumption tracker</h1>

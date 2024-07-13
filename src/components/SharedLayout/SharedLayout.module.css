@@ -1,27 +1,34 @@
 .container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  min-width: 320px;
   display: flex;
+  gap: 16px;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 8px;
+  background-color: var(--main-white);
 }
 
-.header {
-  background-color: #007bff;
-  color: white;
-  padding: 1rem;
+@media screen and (min-width: 375px) {
+  .container {
+    padding: 16px;
+    width: 375px;
+  }
 }
 
-.header nav ul {
-  display: flex;
-  list-style: none;
-  gap: 1rem;
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 32px;
+    width: 768px;
+  }
 }
 
-.header nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-.main {
-  flex: 1;
-  padding: 1rem;
+@media screen and (min-width: 1440px) {
+  .container {
+    flex-direction: row;
+    gap: 32px;
+    width: 1440px;
+  }
 }

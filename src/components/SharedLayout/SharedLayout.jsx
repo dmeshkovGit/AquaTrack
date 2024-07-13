@@ -1,11 +1,12 @@
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
+import styles from './SharedLayout.module.css';
 
 export default function SharedLayout({ children }) {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
-    <div>
-      {!isLoggedIn && <AdvantagesSection />}
+    <div className={styles.container}>
       {children}
+      {!isLoggedIn && <AdvantagesSection />}
     </div>
   );
 }
