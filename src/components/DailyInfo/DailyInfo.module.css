@@ -1,0 +1,7 @@
+.container_top_daily_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
