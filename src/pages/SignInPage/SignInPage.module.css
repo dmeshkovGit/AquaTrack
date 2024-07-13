@@ -6,6 +6,7 @@
   width: 343px;
   border-radius: 30px;
   padding: 24px 16px;
+  font-family: inherit;
 }
 .logo {
   display: flex;

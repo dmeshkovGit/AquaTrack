@@ -3,7 +3,13 @@ import css from '../SignInForm/SignInForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Icon from '../../shared/components/Icon/Icon';
+import { useState } from 'react';
+
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -16,10 +22,19 @@ const schema = yup.object().shape({
 });
 
 export default function SignInForm() {
+  const dispatch = useDispatch();
+  // const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -27,50 +42,69 @@ export default function SignInForm() {
   const onSubmit = async data => {
     try {
       // Backend request for sign in
-      const response = await fetch('https://backend-api/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Sign in failed');
+      const result = await dispatch(loginUser(data));
+      if (loginUser.fulfilled.match(result)) {
+        reset();
+        // Save token and redirect to TrackerPage
+        localStorage.setItem('token', result.token);
+        navigate('/tracker');
+      } else if (loginUser.rejected.match(result)) {
+        setErrorMessage(result.payload.message || 'Sign in failed');
       }
-
-      // Save token and redirect to TrackerPage
-      localStorage.setItem('token', result.token);
-      history.push('/tracker');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
+      setErrorMessage(err.message);
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
   return (
-    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.inputGroup}>
-        <label>Email</label>
-        <input type="email" placeholder="Email" {...register('email')} />
-        {errors.email && <p className={css.error}>{errors.email.message}</p>}
-      </div>
-      <div className={css.inputGroup}>
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          {...register('password')}
-        />
-        {errors.password && (
-          <p className={css.error}>{errors.password.message}</p>
-        )}
-      </div>
-      <button type="submit" className={css.submitButton}>
-        Sign In
-      </button>
-      <div className={css.link}></div>
-    </form>
+    <>
+      <ToastContainer />
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.inputGroup}>
+          <label>Email</label>
+          <input type="email" placeholder="Email" {...register('email')} />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        </div>
+        <div className={css.inputGroup}>
+          <label>Password</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Enter your password"
+              {...register('password')}
+            />
+
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? (
+                <Icon id="eyeOff" width={20} height={20} />
+              ) : (
+                <Icon className="icon" id="eye" width={20} height={20} />
+              )}
+            </button>
+          </div>
+          {errors.password && (
+            <p className={css.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className={css.submitButton}
+          // disabled={loading}
+          onClick={onSubmit}
+        >
+          Sign In
+        </button>
+        <div className={css.link}></div>
+      </form>
+    </>
   );
 }

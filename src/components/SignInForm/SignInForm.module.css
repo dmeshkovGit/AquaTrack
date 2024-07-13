@@ -1,8 +1,3 @@
-/* - Точки перелому:
-   • mobile: верстка гумова від 320 px, стає адаптивною з 375 px;
-   • tablet: з 768 px;
-   • desktop: з 1440 рх */
-
 .form {
   display: flex;
   flex-direction: column;
@@ -19,6 +14,7 @@
   margin-bottom: 8px;
   text-align: start;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .inputGroup input {
@@ -49,19 +45,38 @@
   font-size: 1rem;
   font-weight: bold;
 }
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #87d28d;
+}
+.submitButton:disabled {
+  background-color: #cccccc;
+}
 
 .link {
   margin-top: 10px;
   text-align: center;
 }
 
-.link a {
+/* .link a {
   color: #007bff;
   text-decoration: none;
+} */
+
+.passwordContainer {
+  position: relative;
 }
-.submitButton:hover,
-.submitButton:focus {
-  background-color: #87d28d;
+
+.passwordToggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 /* desktop 375px + */

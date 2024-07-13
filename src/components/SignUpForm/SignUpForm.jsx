@@ -1,13 +1,14 @@
-import css from '../SignUpForm/SignUpForm.module.css';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-// import { registerUser } from '../redux/auth/operations'; // створити операцію registerUser в Redux
-// import { selectLoading, selectError } from '../redux/auth/selectors'; // створити в Redux
-// import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import css from '../SignUpForm/SignUpForm.module.css';
+import Icon from '../../shared/components/Icon/Icon';
+// import registerUser from '../../redux/auth/operations';
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
@@ -21,11 +22,11 @@ const schema = yup.object().shape({
 });
 
 export default function SignUpForm() {
-  const { dispatch, useSelector } = useDispatch();
-  // const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  // const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // об'єкт конфігурації параметрів хука useForm
@@ -38,87 +39,96 @@ export default function SignUpForm() {
     resolver: yupResolver(schema), // інтеграція схеми валідації yup в react-hook-form.
   });
 
-  // ф-ція обробник відображення Password
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   const onSubmit = async data => {
-    // запит на реєстрацію user
     try {
-      await dispatch(registerUser(data));
-      history.push('/tracker');
-      result => {
-        if (register.fulfilled.match(result)) {
-          reset(); // скидаємо форму
-        } else if (register.rejected.match(result)) {
-          setErrorMessage(result.payload.message || 'Registration failed');
-        }
-      };
+      // запит на реєстрацію user
+      const result = await dispatch(registerUser(data));
+      if (registerUser.fulfilled.match(result)) {
+        reset();
+        navigate('/tracker');
+      } else if (registerUser.rejected.match(result)) {
+        setErrorMessage(result.payload.message || 'Registration failed');
+      }
     } catch (err) {
       setErrorMessage(err.message);
     }
   };
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const toggleShowRepeatPassword = () => {
+    setShowRepeatPassword(prev => !prev);
+  };
 
   return (
-    <form className={css.signup - form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.form - group}>
-        <Controller
-          name="email"
-          control={register}
-          defaultValue=""
-          render={({ field }) => (
-            <>
-              <label>Email</label>
-              <input {...field} type="email" />
-              {errors.email && (
-                <p className={css.error}>{errors.email.message}</p>
+    <>
+      <ToastContainer />
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.inputGroup}>
+          <label>Email</label>
+          <input type="email" placeholder="Email" {...register('email')} />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        </div>
+        <div className={css.inputGroup}>
+          <label>Password</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Enter your password"
+              {...register('password')}
+            />
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? (
+                <Icon id="eyeOff" width={20} height={20} />
+              ) : (
+                <Icon className="icon" id="eye" width={20} height={20} />
               )}
-            </>
+            </button>
+          </div>
+          {errors.password && (
+            <p className={css.error}>{errors.password.message}</p>
           )}
-        />
-      </div>
-      <div className={css.form - group}>
-        <Controller
-          name="password"
-          control={register}
-          defaultValue=""
-          render={({ field }) => (
-            <>
-              <label>Password</label>
-              <input {...field} type="password" />
-              {errors.password && (
-                <p className={css.error}>{errors.password.message}</p>
+        </div>
+
+        <div className={css.inputGroup}>
+          <label>Repeat Password</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Repeat password"
+              {...register('password')}
+            />{' '}
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowRepeatPassword}
+            >
+              {showPassword ? (
+                <Icon id="eyeOff" width={20} height={20} />
+              ) : (
+                <Icon className="icon" id="eye" width={20} height={20} />
               )}
-            </>
+            </button>
+          </div>
+          {errors.repeatPassword && (
+            <p className={css.error}>{errors.repeatPassword.message}</p>
           )}
-        />
-      </div>
-      <div className={css.form - group}>
-        <Controller
-          name="repeatPassword"
-          control={register}
-          defaultValue=""
-          render={({ field }) => (
-            <>
-              <label>Repeat Password</label>
-              <input {...field} type="password" />
-              {errors.repeatPassword && (
-                <p className={css.error}>{errors.repeatPassword.message}</p>
-              )}
-            </>
-          )}
-        />
-      </div>
-      {error && <p className={css.error}>{errorMessage}</p>}
-      <Btn
-        className={css.btn}
-        type="submit"
-        disabled={loading}
-        onClick={onSubmit}
-      >
-        Sign Up
-      </Btn>
-    </form>
+        </div>
+        <button
+          className={css.submitButton}
+          type="submit"
+          // disabled={loading}
+          onClick={onSubmit}
+        >
+          Sign Up
+        </button>
+        <div className={css.link}></div>
+      </form>
+    </>
   );
 }

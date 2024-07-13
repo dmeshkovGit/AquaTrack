@@ -11,13 +11,20 @@ export default function SignUpPage() {
 
   return (
     <div className={css.container}>
-      <Logo />
-      <h2>Sign Up</h2>
+      <div className={css.logo}>
+        {' '}
+        <Logo />
+      </div>
+      <div className={css.heading}>
+        <h2>Sign Up</h2>
+      </div>
+
       <SignUpForm onSubmit={handleSignUp} />
       <p>
-        Already have an account? <a href="/signin">Sign In</a>
-        {/* or use Link */}
-        <Link to="/signin">Sign In</Link>
+        Already have an account?{' '}
+        <span>
+          <Link to="/signin">Sign In</Link>
+        </span>
       </p>
       <Link to="/"> Home</Link>
     </div>
