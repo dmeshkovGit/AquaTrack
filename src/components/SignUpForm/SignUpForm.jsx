@@ -29,7 +29,7 @@ export default function SignUpForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
@@ -69,7 +69,7 @@ export default function SignUpForm() {
         <div className={css.inputGroup}>
           <label>Email</label>
           <input
-            type="email"
+            type="text"
             placeholder="Email"
             className={clsx(
               css.inputGroupInput,
@@ -112,9 +112,9 @@ export default function SignUpForm() {
           <label>Repeat Password</label>
           <div className={css.passwordContainer}>
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showRepeatPassword ? 'text' : 'password'}
               placeholder="Repeat password"
-              {...register('password')}
+              {...register('repeatPassword')}
               className={clsx(
                 css.inputGroupInput,
                 errors.repeatPassword && css.inputError,
@@ -125,7 +125,7 @@ export default function SignUpForm() {
               className={css.passwordToggle}
               onClick={toggleShowRepeatPassword}
             >
-              {showPassword ? (
+              {showRepeatPassword ? (
                 <Icon id="eyeOff" width={18} height={18} />
               ) : (
                 <Icon className="icon" id="eye" width={18} height={18} />

@@ -44,7 +44,7 @@ export default function SignInForm() {
               css.inputGroupInput,
               errors.email && css.inputError,
             )}
-            type="email"
+            type="text"
             placeholder="Email"
             {...register('email')}
           />
