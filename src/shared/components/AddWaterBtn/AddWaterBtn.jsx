@@ -40,7 +40,7 @@ export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
             setIsOpenModal(false);
           }}
         >
-          <WaterModal />
+          <WaterModal operationAdd={true} />
         </Modal>
       )}
     </>

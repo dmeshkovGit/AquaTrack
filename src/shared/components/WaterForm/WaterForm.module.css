@@ -1,0 +1,59 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.baseLabel {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.counterContainer {
+  display: flex;
+  gap: 8px;
+}
+.counterBtn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--main);
+  background-color: transparent;
+}
+
+.countInput {
+  box-sizing: border-box;
+  width: 89px;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  padding: 11px 20px;
+  text-align: center;
+  background-color: var(--main);
+  color: var(--main-white);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+.timeInput {
+  box-sizing: border-box;
+  width: 303px;
+  height: 46px;
+  padding: 14px 16px;
+  border-radius: 15px;
+  margin-bottom: 24px;
+  border: 1px solid var(--main-text);
+}
+.secondaryLabel {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
