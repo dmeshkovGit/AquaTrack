@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
-import Icon from '../Icon/Icon';
 
 export default function WaterForm() {
   const [count, setCount] = useState(50);
@@ -18,17 +17,14 @@ export default function WaterForm() {
   const { register, handleSubmit, setValue, watch, reset } = useForm({
     defaultValues: {
       Count: count,
-      CountDouble: count,
       Time: time,
     },
   });
 
   const watchedCount = watch('Count');
-  const watchedCountDouble = watch('CountDouble');
 
   useEffect(() => {
     setValue('Count', count);
-    setValue('CountDouble', count);
   }, [count, setValue]);
 
   useEffect(() => {
@@ -37,49 +33,41 @@ export default function WaterForm() {
     }
   }, [watchedCount]);
 
-  useEffect(() => {
-    if (watchedCountDouble !== count) {
-      setCount(Number(watchedCountDouble));
-    }
-  }, [watchedCountDouble]);
-
   const incrementCount = () => {
     setCount(prevCount => prevCount + 50);
   };
 
   const decrementCount = () => {
-    setCount(prevCount => Math.max(0, prevCount - 50));
+    setCount(prevCount => prevCount - 50);
   };
 
   return (
     <form
       className={css.form}
       onSubmit={handleSubmit(data => {
-        console.log({ count: data.Count, time: data.Time });
+        console.log(data);
         reset();
       })}
     >
       <p className={css.text}>Correct entered data:</p>
-      <label className={css.baseLabel}>
-        Amount of water:
-        <div className={css.counterContainer}>
-          <button
-            className={clsx(css.counterBtn, css.decrementBtn)}
-            type="button"
-            onClick={decrementCount}
-          >
-            -
-          </button>
-          <input className={css.countInput} {...register('Count')} disabled />
-          <button
-            className={clsx(css.counterBtn, css.incrementBtn)}
-            type="button"
-            onClick={incrementCount}
-          >
-            +{' '}
-          </button>
-        </div>
-      </label>
+      <p className={css.secondaryText}>Amount of water:</p>
+      <div className={css.counterContainer}>
+        <button
+          className={clsx(css.counterBtn, count < 50 && css.decrementBtn)}
+          type="button"
+          onClick={decrementCount}
+        >
+          -
+        </button>
+        <p className={css.count}>{count} ml</p>
+        <button
+          className={clsx(css.counterBtn, count > 1500 && css.incrementBtn)}
+          type="button"
+          onClick={incrementCount}
+        >
+          +
+        </button>
+      </div>
       <label className={css.baseLabel}>
         Recording time:
         <input
@@ -87,16 +75,10 @@ export default function WaterForm() {
           {...register('Time', { required: true })}
         />
       </label>
-
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
-        <input
-          className={css.baseInput}
-          type="number"
-          {...register('CountDouble')}
-        />
+        <input className={css.baseInput} {...register('Count')} />
       </label>
-
       <button className={css.saveBtn} type="submit">
         Save
       </button>

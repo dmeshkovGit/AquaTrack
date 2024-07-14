@@ -8,6 +8,11 @@
   line-height: 20px;
   margin-bottom: 20px;
 }
+.secondaryText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
 .baseLabel {
   font-weight: 400;
   font-size: 14px;
@@ -20,6 +25,8 @@
 .counterContainer {
   display: flex;
   gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 .counterBtn {
   height: 40px;
@@ -29,10 +36,15 @@
   background-color: transparent;
   cursor: pointer;
 }
+.decrementBtn,
+.incrementBtn {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
 
-.countInput {
+.count {
   box-sizing: border-box;
-  width: 89px;
+  width: 98px;
   height: 40px;
   border-radius: 30px;
   border: none;
