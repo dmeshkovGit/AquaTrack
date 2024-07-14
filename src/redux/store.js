@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import userReducer from './auth/slice';
+import userReducer from './user/slice';
 import waterReducer from './water/slice';
 
 const userPersistConfig = {

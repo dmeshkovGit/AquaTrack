@@ -5,7 +5,7 @@ import {
   selectIsLoading,
   selectIsRefreshing,
   selectIsUpdating,
-} from '../../redux/auth/selectors.js';
+} from '../../redux/user/selectors.js';
 
 const override = {
   position: 'absolute',
