@@ -1,26 +1,33 @@
-
 .view {
-  padding: 14px 28px;
+  width: 101px;
+  height: 10px;
   background-color: #9be1a0;
   color: #323f47;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 11px;
   border-radius: 30px;
-  width: 125px;
-  height: 34px;
+  padding: 9px 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .personal {
-  padding: 14px 28px;
+  padding: 10px 9px;
   background-color: #ffffff;
   color: #323f47;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: bold;
   border-radius: 30px;
   border: 1px solid #323f47;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px; /* Відступ між верхніми і нижніми елементами */
 }
+
 .container {
   position: relative;
   width: 100%;
@@ -32,12 +39,6 @@
   color: white;
 }
 
-.overlay {
-  text-align: center;
-
-  padding: 20px;
-}
-
 .title {
   font-size: 24px;
   margin-bottom: 10px;
@@ -47,6 +48,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 20px;
+  position: absolute; /* Додаємо абсолютне позиціонування */
+  bottom: 10px; /* Відступ від нижнього краю */
+  right: 10px; /* Відступ від правого краю */
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px; /* Можна налаштувати відповідно до ваших потреб */
 }
 
 .feature {
@@ -54,11 +67,38 @@
   margin: 5px 0;
 }
 
+.habit {
+  display: flex;
+  border-radius: 30px;
+  background-color: #323f47;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 8px 10px;
+  height: 13px;
+  width: 85px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drive {
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  background-color: #9be1a0;
+  border-radius: 50%; /* Створюємо кружечок */
+  padding: 2px;
+}
+
+/* Медіа-запити для різних розмірів екрану */
+
 @media (max-width: 374px) {
   .container {
-    background-image: url('../../../public/boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
+    background-image: url('../../../public/boardBg/Mobile/1x/Rectangle 19-min.jpg');
     background-size: cover;
     background-position: center;
+    width: 343px;
+    height: 353px;
   }
 }
 
@@ -67,13 +107,17 @@
     background-image: url('../../../public/boardBg/Tablet/1x/girlWithWater-min.jpg');
     background-size: cover;
     background-position: center;
+    width: 704px;
+    height: 447px;
   }
 }
 
 @media (min-width: 768px) {
   .container {
+    width: 672px;
+    height: 736px;
     background-image: url('../../../public/boardBg/Desctop/1x/girlWithBotle.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: cover; /* Забезпечує, щоб зображення заповнювало весь контейнер */
+    background-position: center; /* Центрує зображення в контейнері */
   }
 }

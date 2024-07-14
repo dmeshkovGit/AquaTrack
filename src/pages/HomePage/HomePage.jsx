@@ -5,6 +5,7 @@ export default function HomePage() {
   return (
     <div>
       <WelcomeSection />
+      <AdvantagesSection />
     </div>
   );
 }
