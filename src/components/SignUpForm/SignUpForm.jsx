@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
+import clsx from 'clsx';
 // import registerUser from '../../redux/auth/operations';
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -67,7 +68,15 @@ export default function SignUpForm() {
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
-          <input type="email" placeholder="Email" {...register('email')} />
+          <input
+            type="email"
+            placeholder="Email"
+            className={clsx(
+              css.inputGroupInput,
+              errors.email && css.inputError,
+            )}
+            {...register('email')}
+          />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div className={css.inputGroup}>
@@ -76,6 +85,10 @@ export default function SignUpForm() {
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
+              className={clsx(
+                css.inputGroupInput,
+                errors.password && css.inputError,
+              )}
               {...register('password')}
             />
             <button
@@ -84,9 +97,9 @@ export default function SignUpForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon id="eyeOff" width={20} height={20} />
+                <Icon id="eyeOff" width={18} height={18} />
               ) : (
-                <Icon className="icon" id="eye" width={20} height={20} />
+                <Icon className="icon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
@@ -102,16 +115,20 @@ export default function SignUpForm() {
               type={showPassword ? 'text' : 'password'}
               placeholder="Repeat password"
               {...register('password')}
-            />{' '}
+              className={clsx(
+                css.inputGroupInput,
+                errors.repeatPassword && css.inputError,
+              )}
+            />
             <button
               type="button"
               className={css.passwordToggle}
               onClick={toggleShowRepeatPassword}
             >
               {showPassword ? (
-                <Icon id="eyeOff" width={20} height={20} />
+                <Icon id="eyeOff" width={18} height={18} />
               ) : (
-                <Icon className="icon" id="eye" width={20} height={20} />
+                <Icon className="icon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
