@@ -9,6 +9,7 @@
   padding: 12px;
   background-color: var(--main-white);
   margin-right: auto;
+  margin-bottom: 49px;
 }
 .waterCount {
   font-weight: 700;
@@ -29,6 +30,7 @@
     height: 78px;
     border-radius: 15px;
     padding: 14px 18px;
+    margin-bottom: 87px;
   }
   .waterCount {
     font-size: 15px;
@@ -37,5 +39,10 @@
   .text {
     font-size: 12px;
     line-height: 22px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .container {
+    margin-bottom: 215px;
   }
 }
