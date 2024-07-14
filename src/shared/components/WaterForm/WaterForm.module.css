@@ -27,6 +27,7 @@
   border-radius: 50%;
   border: 1px solid var(--main);
   background-color: transparent;
+  cursor: pointer;
 }
 
 .countInput {
@@ -43,7 +44,7 @@
   font-size: 14px;
   line-height: 18px;
 }
-.timeInput {
+.baseInput {
   box-sizing: border-box;
   width: 303px;
   height: 46px;
@@ -56,4 +57,19 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.saveBtn {
+  padding: 0;
+  width: 116px;
+  height: 46px;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
 }

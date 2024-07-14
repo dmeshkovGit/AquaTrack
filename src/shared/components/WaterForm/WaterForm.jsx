@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
+import Icon from '../Icon/Icon';
 
 export default function WaterForm() {
   const [count, setCount] = useState(50);
@@ -14,7 +15,7 @@ export default function WaterForm() {
     return `${hours}:${minutes}`;
   }
 
-  const { register, handleSubmit, setValue, watch } = useForm({
+  const { register, handleSubmit, setValue, watch, reset } = useForm({
     defaultValues: {
       Count: count,
       CountDouble: count,
@@ -55,6 +56,7 @@ export default function WaterForm() {
       className={css.form}
       onSubmit={handleSubmit(data => {
         console.log({ count: data.Count, time: data.Time });
+        reset();
       })}
     >
       <p className={css.text}>Correct entered data:</p>
@@ -68,34 +70,36 @@ export default function WaterForm() {
           >
             -
           </button>
-          <input
-            className={css.countInput}
-            type="number"
-            {...register('Count')}
-          />
+          <input className={css.countInput} {...register('Count')} disabled />
           <button
             className={clsx(css.counterBtn, css.incrementBtn)}
             type="button"
             onClick={incrementCount}
           >
-            +
+            +{' '}
           </button>
         </div>
       </label>
       <label className={css.baseLabel}>
         Recording time:
         <input
-          className={css.timeInput}
+          className={css.baseInput}
           {...register('Time', { required: true })}
         />
       </label>
 
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
-        <input type="number" {...register('CountDouble')} />
+        <input
+          className={css.baseInput}
+          type="number"
+          {...register('CountDouble')}
+        />
       </label>
 
-      <input type="submit" />
+      <button className={css.saveBtn} type="submit">
+        Save
+      </button>
     </form>
   );
 }
