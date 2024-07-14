@@ -29,16 +29,26 @@ export default function WaterForm() {
 
   useEffect(() => {
     if (watchedCount !== count) {
-      setCount(Number(watchedCount));
+      setCount(watchedCount);
     }
   }, [watchedCount]);
 
   const incrementCount = () => {
-    setCount(prevCount => prevCount + 50);
+    const newCount = Number(count + 50);
+    setCount(newCount);
+    setValue('Count', newCount);
   };
 
   const decrementCount = () => {
-    setCount(prevCount => prevCount - 50);
+    const newCount = Number(count - 50);
+    setCount(newCount);
+    setValue('Count', newCount);
+  };
+
+  const onCountChange = event => {
+    const value = Number(event.target.value);
+    setCount(value);
+    setValue('Count', value);
   };
 
   return (
@@ -77,7 +87,11 @@ export default function WaterForm() {
       </label>
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
-        <input className={css.baseInput} {...register('Count')} />
+        <input
+          className={css.baseInput}
+          {...register('Count')}
+          onChange={onCountChange}
+        />
       </label>
       <button className={css.saveBtn} type="submit">
         Save

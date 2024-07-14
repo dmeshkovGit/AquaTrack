@@ -85,3 +85,7 @@
   font-size: 14px;
   line-height: 18px;
 }
+.counterBtn:hover {
+  background-color: var(--main);
+  color: var(--main-white);
+}
