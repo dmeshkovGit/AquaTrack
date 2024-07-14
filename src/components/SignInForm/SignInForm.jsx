@@ -2,7 +2,6 @@ import css from '../SignInForm/SignInForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { toast, ToastContainer } from 'react-toastify';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -29,11 +28,7 @@ export default function SignInForm() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const onSubmit = data => {
-    // запит на логін user dispatch(logInUser(data))
-    console.log(data);
-  };
+  const onSubmit = data => console.log(data);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -41,17 +36,16 @@ export default function SignInForm() {
 
   return (
     <>
-      <ToastContainer />
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
           <input
-            type="email"
-            placeholder="Enter your email"
             className={clsx(
               css.inputGroupInput,
               errors.email && css.inputError,
             )}
+            type="text"
+            placeholder="Email"
             {...register('email')}
           />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
@@ -75,9 +69,14 @@ export default function SignInForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon className={css.icon} id="eye" width={20} height={20} />
+                <Icon
+                  className="eyeOffIcon"
+                  id="eyeOff"
+                  width={18}
+                  height={18}
+                />
               ) : (
-                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+                <Icon className="eyeIcon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
@@ -88,6 +87,7 @@ export default function SignInForm() {
         <button type="submit" className={css.submitButton} onClick={onSubmit}>
           Sign In
         </button>
+        <div className={css.link}></div>
       </form>
     </>
   );

@@ -41,21 +41,19 @@ export default function SignUpForm() {
   });
 
   const onSubmit = async data => {
-    // запит на реєстрацію user dispatch(registerUser(data))
-    console.log(data);
-    // try {
-    //   const result = await dispatch(registerUser(data));
-    //   if (registerUser.fulfilled.match(result)) {
-    //     reset();
-    //     navigate('/tracker');
-    //   } else if (registerUser.rejected.match(result)) {
-    //     setErrorMessage(result.payload.message || 'Registration failed');
-    //   }
-    // } catch (err) {
-    //   setErrorMessage(err.message);
-    // }
+    try {
+      // запит на реєстрацію user
+      const result = await dispatch(registerUser(data));
+      if (registerUser.fulfilled.match(result)) {
+        reset();
+        navigate('/tracker');
+      } else if (registerUser.rejected.match(result)) {
+        setErrorMessage(result.payload.message || 'Registration failed');
+      }
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
   };
-
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
   };
@@ -71,8 +69,8 @@ export default function SignUpForm() {
         <div className={css.inputGroup}>
           <label>Email</label>
           <input
-            type="email"
-            placeholder="Enter your email"
+            type="text"
+            placeholder="Email"
             className={clsx(
               css.inputGroupInput,
               errors.email && css.inputError,
@@ -99,9 +97,9 @@ export default function SignUpForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon className={css.icon} id="eye" width={18} height={18} />
+                <Icon id="eyeOff" width={18} height={18} />
               ) : (
-                <Icon className={css.icon} id="eyeOff" width={18} height={18} />
+                <Icon className="icon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
@@ -128,9 +126,9 @@ export default function SignUpForm() {
               onClick={toggleShowRepeatPassword}
             >
               {showRepeatPassword ? (
-                <Icon className={css.icon} id="eye" width={18} height={18} />
+                <Icon id="eyeOff" width={18} height={18} />
               ) : (
-                <Icon className={css.icon} id="eyeOff" width={18} height={18} />
+                <Icon className="icon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
@@ -146,6 +144,7 @@ export default function SignUpForm() {
         >
           Sign Up
         </button>
+        <div className={css.link}></div>
       </form>
     </>
   );
