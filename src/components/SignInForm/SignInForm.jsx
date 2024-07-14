@@ -67,7 +67,11 @@ export default function SignInForm() {
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
-          <input type="email" placeholder="Email" {...register('email')} />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            {...register('email')}
+          />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div className={css.inputGroup}>
@@ -85,9 +89,9 @@ export default function SignInForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon id="eyeOff" width={20} height={20} />
+                <Icon className={css.icon} id="eye" width={20} height={20} />
               ) : (
-                <Icon className="icon" id="eye" width={20} height={20} />
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
               )}
             </button>
           </div>
@@ -103,7 +107,6 @@ export default function SignInForm() {
         >
           Sign In
         </button>
-        <div className={css.link}></div>
       </form>
     </>
   );

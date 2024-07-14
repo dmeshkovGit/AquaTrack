@@ -7,29 +7,40 @@
 
 .inputGroup {
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .inputGroup label {
   display: block;
   margin-bottom: 8px;
-  text-align: start;
   font-weight: bold;
   font-size: 14px;
+  line-height: 0.77;
+  letter-spacing: 0.1em;
 }
 
 .inputGroup input {
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  border-radius: 15px;
-  border-color: solid 1px;
   background-color: transparent;
+  border-radius: 15px;
+  border: solid 1px rgba(47, 47, 47, 0.2);
+}
+
+.inputGroup input:focus {
+  border: solid 1px rgba(47, 47, 47, 0.2);
+}
+.inputGroup input:active {
+  border-color: rgba(47, 47, 47, 0.4);
 }
 
 .error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 5px;
+  color: #ef5050;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .submitButton {
@@ -53,18 +64,12 @@
   background-color: #cccccc;
 }
 
-.link {
-  margin-top: 10px;
-  text-align: center;
-}
-
-/* .link a {
-  color: #007bff;
-  text-decoration: none;
-} */
-
 .passwordContainer {
   position: relative;
+}
+.passwordContainer input {
+  display: flex;
+  justify-content: space-between;
 }
 
 .passwordToggle {
@@ -79,10 +84,8 @@
   align-items: center;
 }
 
-/* desktop 375px + */
-@media screen and (min-width: 375px) {
-}
-
-/* desktop 1440px + */
-@media screen and (min-width: 1440px) {
+.icon {
+  fill: #ffffff;
+  stroke: #2f2f2f;
+  stroke-width: 1.8;
 }
