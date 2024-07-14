@@ -1,0 +1,79 @@
+/* Медіа-запити для різних розмірів екрану */
+.view {
+  padding: 14px 28px;
+  background-color: #9be1a0;
+  color: #323f47;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 30px;
+  width: 125px;
+  height: 34px;
+}
+
+.personal {
+  padding: 14px 28px;
+  background-color: #ffffff;
+  color: #323f47;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: 1px solid #323f47;
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 343px;
+  display: flex;
+  justify-content: center;
+  border-radius: 6%;
+  align-items: center;
+  color: white;
+}
+
+.overlay {
+  text-align: center;
+
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+@media (max-width: 374px) {
+  .container {
+    background-image: url('../../../public/boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .container {
+    background-image: url('../../../public/boardBg/Tablet/1x/girlWithWater-min.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    background-image: url('../../../public/boardBg/Desctop/1x/girlWithBotle.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+}
