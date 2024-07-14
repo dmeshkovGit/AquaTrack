@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
 }
+.header {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
 .text {
   font-weight: 700;
   font-size: 16px;
@@ -92,4 +98,55 @@
 .decrementBtn:hover,
 .incrementBtn:hover {
   background-color: transparent;
+}
+.saveBtn:hover {
+  background-color: var(--accent-hover);
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+  .text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .secondaryText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .baseLabel {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
+  }
+  .counterBtn {
+    height: 43px;
+    width: 43px;
+  }
+  .count {
+    height: 43px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .baseInput {
+    width: 438px;
+    height: 56px;
+    padding: 16px 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--main-text);
+  }
+  .secondaryLabel {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .saveBtn {
+    width: 140px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 24px;
+  }
 }
