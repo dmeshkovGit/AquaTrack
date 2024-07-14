@@ -10,15 +10,15 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from './auth/slice';
+import userReducer from './auth/slice';
 import waterReducer from './water/slice';
 
-const authPersistConfig = {
-  key: 'auth',
+const userPersistConfig = {
+  key: 'user',
   storage,
   whitelist: ['token'], // вказати яку властивість зберігти, поки що додав тільки токен
 };
-const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedAuthReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
