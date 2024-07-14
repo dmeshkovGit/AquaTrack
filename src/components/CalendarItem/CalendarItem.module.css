@@ -16,6 +16,9 @@
   letter-spacing: -1%;
   border: none;
   background: #d5d9da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .activeButton {
   background: var(--main);

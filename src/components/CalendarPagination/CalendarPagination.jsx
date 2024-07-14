@@ -54,7 +54,7 @@ export default function CalendarPagination() {
           <FaAngleRight />
         </button>
       </div>
-      <Icon id="pieChart" height={20} width={20} />
+      <Icon className={css.icon} id="pieChart" height={20} width={20} />
     </div>
   );
 }

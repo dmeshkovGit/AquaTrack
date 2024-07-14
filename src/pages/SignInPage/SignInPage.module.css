@@ -1,28 +1,81 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f0eff4;
-  width: 343px;
-  border-radius: 30px;
+  background-color: rgb(240, 239, 244);
+
   padding: 24px 16px;
-  font-family: inherit;
+  width: 344px;
+  height: 780px;
+  border-radius: 30px;
 }
 .logo {
-  display: flex;
   margin-bottom: 172px;
 }
-.heading {
-  display: flex;
-  text-transform: capitalize;
+.title {
   margin-bottom: 32px;
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -1%;
 }
-.container p {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 4px;
+.notify {
+  color: rgba(47, 47, 47, 0.6);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+  text-align: center;
+  margin-top: 16px;
 }
-.container span {
-  font-weight: bold;
+.navLink {
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+.advantagesSection {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 32px;
+    width: 704px;
+    height: 960px;
+    display: flex;
+    flex-direction: column;
+  }
+  .content {
+    margin: 0 auto;
+  }
+  .logo {
+    margin-bottom: 225px;
+  }
+  .title {
+    font-size: 36px;
+  }
+  .notify {
+    font-size: 16px;
+  }
+  .navLink {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 672px;
+    height: 736px;
+  }
+  .logo {
+    margin-bottom: 113px;
+  }
+  .desctopContainer {
+    display: flex;
+    gap: 32px;
+  }
+  .advantagesSection {
+    width: 672px;
+    height: 736px;
+    display: block;
+  }
 }

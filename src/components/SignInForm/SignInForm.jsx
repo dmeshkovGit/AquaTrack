@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 const schema = yup.object().shape({
   email: yup
@@ -38,7 +39,15 @@ export default function SignInForm() {
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
-          <input type="email" placeholder="Email" {...register('email')} />
+          <input
+            className={clsx(
+              css.inputGroupInput,
+              errors.email && css.inputError,
+            )}
+            type="email"
+            placeholder="Email"
+            {...register('email')}
+          />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div className={css.inputGroup}>
@@ -48,6 +57,10 @@ export default function SignInForm() {
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               {...register('password')}
+              className={clsx(
+                css.inputGroupInput,
+                errors.password && css.inputError,
+              )}
             />
 
             <button
@@ -59,11 +72,11 @@ export default function SignInForm() {
                 <Icon
                   className="eyeOffIcon"
                   id="eyeOff"
-                  width={20}
-                  height={20}
+                  width={18}
+                  height={18}
                 />
               ) : (
-                <Icon className="eyeIcon" id="eye" width={20} height={20} />
+                <Icon className="eyeIcon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
