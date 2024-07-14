@@ -29,7 +29,7 @@ export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
           )}
           width="16"
           height="16"
-          id="upload"
+          id="icon-plus"
         />
         Add water
       </button>
