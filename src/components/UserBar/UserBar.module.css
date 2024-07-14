@@ -7,11 +7,10 @@
   height: 50px;
   gap: 8px;
   background-color: var(--main);
-  margin-top: 20px;
+  border: none;
 }
 
 .name {
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -23,6 +22,16 @@
 .popover {
   padding: 4px;
 }
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: var(--main-white);
+  transition: all ease-in-out;
+}
+.iconUp {
+  transform: rotate(180deg);
+}
 /* ===============TABLET================ */
 
 @media screen and (min-width: 768px) {
@@ -31,9 +40,12 @@
     width: 157px;
     height: 56px;
     gap: 10px;
-    margin-top: 0;
   }
   .popover {
     padding: 8px;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
   }
 }

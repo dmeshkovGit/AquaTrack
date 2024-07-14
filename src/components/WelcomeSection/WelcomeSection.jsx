@@ -7,7 +7,7 @@ export default function WelcomeSection() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-      <Logo />
+        <Logo />
       </div>
       <div className={styles.titles}>
         <h2 className={styles.subtitle}>Record daily water intake and track</h2>

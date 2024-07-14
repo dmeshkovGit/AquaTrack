@@ -1,0 +1,25 @@
+.wrap {
+  border-radius: 15px;
+  padding: 40px 20px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: var(--main-white);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .wrap {
+    padding: 40px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+}

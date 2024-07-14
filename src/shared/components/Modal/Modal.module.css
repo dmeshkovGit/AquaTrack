@@ -1,5 +1,5 @@
 .backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -9,16 +9,32 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 10px 0;
 }
 
 .modal {
   background: #ffffff;
   border-radius: 15px;
-  position: relative;
-  min-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
+.modal::-webkit-scrollbar {
+  border-radius: 15px;
+  width: 8px;
+}
+.modal::-webkit-scrollbar-track {
+  background: inherit;
+}
+.modal::-webkit-scrollbar-thumb {
+  background: var(--background);
+  border-radius: 15px;
+}
 .closeButton {
   z-index: 1;
   position: absolute;
@@ -32,4 +48,10 @@
 
 .closeButton:focus {
   outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  .backdrop {
+    padding: 20px 0;
+  }
 }

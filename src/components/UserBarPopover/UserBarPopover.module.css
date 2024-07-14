@@ -11,7 +11,6 @@
 .settingBtn {
   display: flex;
   align-items: center;
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -27,10 +26,14 @@
   color: #87d28d;
 }
 
+.settingBtn:hover .settingIcon,
+.settingBtn:focus .settingIcon {
+  stroke: #87d28d;
+}
+
 .logoutBtn {
   display: flex;
   align-items: center;
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -40,9 +43,24 @@
   gap: 8px;
   transition: all ease-in-out;
 }
+
+.logoutBtn:hover .logoutIcon,
+.logoutBtn:focus .logoutIcon {
+  stroke: var(--main);
+}
+
 .logoutBtn:hover,
 .logoutBtn:focus {
   color: var(--main);
+}
+.settingIcon {
+  fill: none;
+  stroke: var(--main);
+}
+
+.logoutIcon {
+  fill: none;
+  stroke: rgba(50, 63, 71, 0.4);
 }
 
 .modalCloseButton {
