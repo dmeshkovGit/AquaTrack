@@ -40,8 +40,7 @@ const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.token;
-        state.user.email = action.payload.user.email;
-        state.user.id = action.payload.user.id;
+        state.user = action.payload.user;
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, handleRejected)
