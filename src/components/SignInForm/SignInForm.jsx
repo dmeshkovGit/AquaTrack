@@ -2,6 +2,7 @@ import css from '../SignInForm/SignInForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -28,7 +29,11 @@ export default function SignInForm() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = data => console.log(data);
+
+  const onSubmit = data => {
+    // запит на логін user dispatch(logInUser(data))
+    console.log(data);
+  };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -36,12 +41,17 @@ export default function SignInForm() {
 
   return (
     <>
+      <ToastContainer />
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
           <input
             type="email"
             placeholder="Enter your email"
+            className={clsx(
+              css.inputGroupInput,
+              errors.email && css.inputError,
+            )}
             {...register('email')}
           />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
