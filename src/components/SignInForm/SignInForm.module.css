@@ -1,54 +1,53 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 310px;
+  width: 100%;
 }
 
 .inputGroup {
-  display: flex;
+  margin-bottom: 16px;
+  /* display: flex;
   flex-direction: column;
-  gap: 8px;
-  position: relative;
-  padding-bottom: 18px;
-  width: 100%;
+  align-items: start; */
 }
 
-.inputGroup > label {
-  color: #2f2f2f;
-  font-family: Poppins;
+.inputGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
   font-size: 14px;
-  font-weight: 700;
-  line-height: 18px;
-  letter-spacing: -1%;
+  line-height: 0.77;
+  letter-spacing: 0.1em;
 }
 
-.inputGroupInput {
+.inputGroup input {
   height: 50px;
   width: 100%;
-  border-radius: 15px;
-  border: 1px solid rgba(47, 47, 47, 0.2);
+  padding: 16px;
+  box-sizing: border-box;
   background-color: transparent;
-  padding-left: 16px;
+  border-radius: 15px;
+  border: solid 1px rgba(47, 47, 47, 0.2);
+}
+
+.inputGroup input:active {
   outline: none;
+  border: solid 1px rgba(47, 47, 47, 0.4);
 }
-.inputGroupInput::placeholder {
-  color: rgba(47, 47, 47, 0.6);
-  font-family: Poppins;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -1%;
+
+.inputGroup input:focus {
+  outline: none;
+  border: solid 1px rgba(47, 47, 47, 0.2);
 }
+
 .inputError {
   border: 1px solid rgb(239, 80, 80);
   color: rgb(239, 80, 80);
 }
 .error {
-  color: rgb(239, 80, 80);
-  font-size: 10px;
-  line-height: 18px;
-  letter-spacing: -1%;
-  position: absolute;
-  bottom: 0;
+  color: #ef5050;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .submitButton {
@@ -58,6 +57,7 @@
   border-radius: 30px;
   border: none;
   margin-top: 32px;
+  font-weight: bold;
 }
 .submitButton:hover,
 .submitButton:focus {
@@ -65,37 +65,27 @@
 }
 
 .submitButton:disabled {
+  background-color: transparent;
+  color: rgba(47, 47, 47, 0.2);
+  border: solid 1px rgba(47, 47, 47, 0.2);
+}
+
+.passwordContainer {
+  position: relative;
+}
+.passwordContainer input {
+  flex: 1;
+  padding-right: 40px;
 }
 
 .passwordToggle {
   position: absolute;
   border: none;
   background-color: transparent;
-  right: -10px;
-  top: 42px;
+  right: 16px;
+  top: 16px;
 }
-.passwordToggle svg {
+
+.icon {
   fill: transparent;
-}
-@media screen and (min-width: 768px) {
-  .form {
-    width: 436px;
-  }
-  .submitButton {
-    width: 450px;
-    height: 60px;
-  }
-  .inputGroupInput {
-    width: 436px;
-    height: 56px;
-  }
-  .inputGroup {
-    padding-bottom: 20px;
-  }
-  .inputGroupInput::placeholder {
-    font-size: 16px;
-  }
-  .error {
-    font-size: 14px;
-  }
 }
