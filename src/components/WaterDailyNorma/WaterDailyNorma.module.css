@@ -1,0 +1,41 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 120px;
+  height: 54px;
+  border-radius: 15px;
+  padding: 12px;
+  background-color: var(--main-white);
+  margin-right: auto;
+}
+.waterCount {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+.text {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--main-text);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    gap: 4px;
+    width: 130px;
+    height: 78px;
+    border-radius: 15px;
+    padding: 14px 18px;
+  }
+  .waterCount {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .text {
+    font-size: 12px;
+    line-height: 22px;
+  }
+}
