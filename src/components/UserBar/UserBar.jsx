@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Modal from '../../shared/components/Modal/Modal';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
 import LogOutModal from '../LogOutModal/LogOutModal';
+import clsx from 'clsx';
 
 export default function UserBar() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -36,11 +37,9 @@ export default function UserBar() {
         >
           <p className={css.name}>Username</p>
           <RxAvatar size={38} className={css.icon} />
-          {isPopoverOpen ? (
-            <IoIosArrowUp className={css.icon} />
-          ) : (
-            <IoIosArrowDown className={css.icon} />
-          )}
+          <IoIosArrowDown
+            className={clsx(css.icon, isPopoverOpen && css.iconUp)}
+          />
         </button>
       </Popover>
       {isSettingsModalOpen && (

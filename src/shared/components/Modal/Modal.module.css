@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 10px 0;
 }
 
 .modal {
@@ -47,4 +48,10 @@
 
 .closeButton:focus {
   outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  .backdrop {
+    padding: 20px 0;
+  }
 }
