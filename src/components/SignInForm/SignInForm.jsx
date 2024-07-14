@@ -1,14 +1,10 @@
 import css from '../SignInForm/SignInForm.module.css';
-
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 const schema = yup.object().shape({
   email: yup
@@ -22,48 +18,24 @@ const schema = yup.object().shape({
 });
 
 export default function SignInForm() {
-  const dispatch = useDispatch();
-  // const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
-  // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const onSubmit = async data => {
-    try {
-      // Backend request for sign in
-      const result = await dispatch(loginUser(data));
-      if (loginUser.fulfilled.match(result)) {
-        reset();
-        // Save token and redirect to TrackerPage
-        localStorage.setItem('token', result.token);
-        navigate('/tracker');
-      } else if (loginUser.rejected.match(result)) {
-        setErrorMessage(result.payload.message || 'Sign in failed');
-      }
-    } catch (error) {
-      toast.error(error.message);
-      setErrorMessage(err.message);
-    }
-  };
+  const onSubmit = data => console.log(data);
 
   const toggleShowPassword = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword(!showPassword);
   };
 
   return (
     <>
-      <ToastContainer />
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
@@ -81,6 +53,10 @@ export default function SignInForm() {
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               {...register('password')}
+              className={clsx(
+                css.inputGroupInput,
+                errors.password && css.inputError,
+              )}
             />
 
             <button
@@ -99,12 +75,7 @@ export default function SignInForm() {
             <p className={css.error}>{errors.password.message}</p>
           )}
         </div>
-        <button
-          type="submit"
-          className={css.submitButton}
-          // disabled={loading}
-          onClick={onSubmit}
-        >
+        <button type="submit" className={css.submitButton} onClick={onSubmit}>
           Sign In
         </button>
       </form>

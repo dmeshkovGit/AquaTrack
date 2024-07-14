@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import SharedLayout from '../../components/SharedLayout/SharedLayout.jsx';
 import Logo from '../../shared/components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from '../SignUpPage/SignUpPage.module.css';
+import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
 export default function SignUpPage() {
   const handleSignUp = data => {
@@ -10,23 +12,28 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className={css.container}>
-      <div className={css.logo}>
-        {' '}
-        <Logo />
+    <SharedLayout>
+      <div className={css.desctopContainer}>
+        <div className={css.container}>
+          <div className={css.logo}>
+            <Logo />
+          </div>
+          <div className={css.content}>
+            <h2 className={css.title}>Sign Up</h2>
+            <SignUpForm onSubmit={handleSignUp} />
+            <p className={css.notify}>
+              Already have an account?
+              <NavLink className={css.navLink} to="/signin">
+                {' '}
+                Sign In
+              </NavLink>
+            </p>
+          </div>
+        </div>
+        <div className={css.advantagesSection}>
+          <AdvantagesSection />
+        </div>
       </div>
-      <div className={css.heading}>
-        <h2>Sign Up</h2>
-      </div>
-
-      <SignUpForm onSubmit={handleSignUp} />
-      <p>
-        Already have an account?{' '}
-        <span>
-          <Link to="/signin">Sign In</Link>
-        </span>
-      </p>
-      <Link to="/"> Home</Link>
-    </div>
+    </SharedLayout>
   );
 }

@@ -6,7 +6,6 @@
 }
 
 .title {
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 20px;
   line-height: 120%;
@@ -17,7 +16,6 @@
 }
 
 .text {
-  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;
@@ -30,29 +28,32 @@
 .logoutBtn {
   border-radius: 30px;
   padding: 14px 126px;
-  width: 304px;
-  height: 46px;
+  min-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
   border: none;
   outline: transparent;
   margin-bottom: 9px;
 }
 
 .cancelBtn {
+  min-width: 100%;
   border-radius: 30px;
   padding: 14px 126px;
-  width: 304px;
-  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   outline: transparent;
   background: var(--background);
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -62,12 +63,10 @@
 }
 
 .closeBtn {
-  position: absolute;
   top: 16px;
   right: 16px;
   background-color: transparent;
   border: none;
-  font-family: var(--font-family);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -93,6 +92,7 @@
   }
   .btnWrap {
     display: flex;
+    justify-content: center;
     gap: 10px;
   }
   .logoutBtn {
@@ -102,8 +102,10 @@
     justify-content: center;
     font-size: 16px;
     line-height: 150%;
+    min-width: 0;
   }
   .cancelBtn {
+    min-width: 0;
     padding: 18px 57px;
     display: flex;
     align-items: center;

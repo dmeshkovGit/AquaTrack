@@ -8,6 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 20px;
 }
 .name {
   font-weight: 700;
@@ -17,13 +18,5 @@
   .wrap {
     font-size: 36px;
     line-height: 106%;
-    width: 640px;
-  }
-}
-
-/* ==============DESKTOP================== */
-@media screen and (min-with: 1440px) {
-  .wrap {
-    width: 672px;
   }
 }

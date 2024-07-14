@@ -24,6 +24,7 @@
   font-size: 14px;
   color: #2f2f2f;
   margin-bottom: 16px;
+  font-weight: 400;
 }
 
 .title {
@@ -44,7 +45,7 @@
   background-color: #9be1a0;
   color: #323f47;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 14px;
   border-radius: 30px;
 }
@@ -55,7 +56,7 @@
   color: #323f47;
   text-decoration: none;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 700;
   border-radius: 30px;
   border: 1px solid #323f47;
 }
