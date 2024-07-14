@@ -47,6 +47,7 @@ export default function UserBar() {
         <Modal
           isOpen={isSettingsModalOpen}
           onClose={() => {
+            document.body.style.overflow = 'auto';
             setIsSettingsModalOpen(false);
           }}
         >
@@ -57,6 +58,7 @@ export default function UserBar() {
         <Modal
           isOpen={isLogOutModalOpen}
           onClose={() => {
+            document.body.style.overflow = 'auto';
             setIsLogOutModalOpen(false);
           }}
           btnClassName={css.modalCloseButton}
