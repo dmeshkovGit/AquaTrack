@@ -1,58 +1,42 @@
-/*    
- - Точки перелому:
-   • mobile: верстка гумова від 320 px, стає адаптивною з 375 px;
-   • tablet: з 768 px;
-   • desktop: з 1440 рх  */
-
 .container {
   background-color: rgb(240, 239, 244);
+
   padding: 24px 16px;
-  /* width: 344px; */
-  /* height: 780px; */
+  width: 344px;
+  height: 780px;
   border-radius: 30px;
 }
 .logo {
   margin-bottom: 172px;
 }
 .title {
-  text-transform: capitalize;
   margin-bottom: 32px;
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
   font-size: 32px;
-  line-height: 1;
-  letter-spacing: -0.03125em;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -1%;
 }
 .notify {
   color: rgba(47, 47, 47, 0.6);
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: -0.0555em;
+  letter-spacing: -1%;
   text-align: center;
   margin-top: 16px;
 }
 .navLink {
-  color: #2f2f2f;
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
+  font-size: 14px;
   font-weight: 700;
   line-height: 18px;
+  letter-spacing: -1%;
 }
 .advantagesSection {
   display: none;
 }
-
-/* верстка гумова від 320px - mobile */
-@media screen and (min-width: 320px) {
-  .container {
-    width: 90%;
-  }
-}
-
-/* верстка стає адаптивною з 375px */
-@media screen and (min-width: 375px) {
-  .container {
-    width: 343px;
-    height: 780px;
-  }
-}
-/* tablet з 768px */
 @media screen and (min-width: 768px) {
   .container {
     padding: 32px;
@@ -75,10 +59,8 @@
   }
   .navLink {
     font-size: 16px;
-    letter-spacing: -0.0714em;
   }
 }
-/* desktop з 1440px */
 @media screen and (min-width: 1440px) {
   .container {
     width: 672px;
