@@ -14,24 +14,16 @@ export default function WaterForm() {
     return `${hours}:${minutes}`;
   }
 
-  const { register, handleSubmit, setValue, watch, reset } = useForm({
+  const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       Count: count,
       Time: time,
     },
   });
 
-  const watchedCount = watch('Count');
-
   useEffect(() => {
     setValue('Count', count);
   }, [count, setValue]);
-
-  useEffect(() => {
-    if (watchedCount !== count) {
-      setCount(watchedCount);
-    }
-  }, [watchedCount]);
 
   const incrementCount = () => {
     const newCount = Number(count + 50);
@@ -56,7 +48,6 @@ export default function WaterForm() {
       className={css.form}
       onSubmit={handleSubmit(data => {
         console.log(data);
-        reset();
       })}
     >
       <p className={css.text}>Correct entered data:</p>
@@ -66,14 +57,16 @@ export default function WaterForm() {
           className={clsx(css.counterBtn, count < 50 && css.decrementBtn)}
           type="button"
           onClick={decrementCount}
+          disabled={count < 50}
         >
           -
         </button>
         <p className={css.count}>{count} ml</p>
         <button
-          className={clsx(css.counterBtn, count > 1500 && css.incrementBtn)}
+          className={clsx(css.counterBtn, count >= 1500 && css.incrementBtn)}
           type="button"
           onClick={incrementCount}
+          disabled={count >= 1500}
         >
           +
         </button>
