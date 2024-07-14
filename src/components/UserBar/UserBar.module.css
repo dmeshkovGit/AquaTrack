@@ -25,6 +25,7 @@
 
 .icon {
   width: 16px;
+  height: 16px;
   color: var(--main-white);
 }
 /* ===============TABLET================ */
@@ -41,5 +42,6 @@
   }
   .icon {
     width: 20px;
+    height: 20px;
   }
 }

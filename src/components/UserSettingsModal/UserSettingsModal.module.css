@@ -1,12 +1,8 @@
 .wrap {
   border-radius: 15px;
   padding: 40px 20px;
-  max-height: 100vh;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: var(--main-white);
-  width: 343px;
-  overflow: auto;
-  overscroll-behavior: contain;
 }
 
 .title {
@@ -21,16 +17,9 @@
 @media screen and (min-width: 768px) {
   .wrap {
     padding: 40px;
-    width: 648px;
   }
   .title {
     font-size: 28px;
     line-height: 114%;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .wrap {
-    width: 920px;
   }
 }
