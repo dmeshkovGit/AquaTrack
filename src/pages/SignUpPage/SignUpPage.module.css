@@ -1,6 +1,8 @@
 .container {
+  box-sizing: border-box;
   background-color: rgb(240, 239, 244);
-  width: 334px;
+  width: 100%;
+  max-width: 375px;
   padding: 24px 16px;
   height: 780px;
   border-radius: 30px;
@@ -15,13 +17,13 @@
   font-size: 32px;
   font-weight: 700;
   line-height: 32px;
-  letter-spacing: -0.03125em;
+  letter-spacing: -1%;
 }
 .notify {
   color: rgba(47, 47, 47, 0.6);
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: -0.0555em;
+  letter-spacing: -1%;
   text-align: center;
   margin-top: 16px;
 }
@@ -38,6 +40,7 @@
 }
 @media screen and (min-width: 768px) {
   .container {
+    max-width: none;
     padding: 32px;
     width: 704px;
     height: 960px;

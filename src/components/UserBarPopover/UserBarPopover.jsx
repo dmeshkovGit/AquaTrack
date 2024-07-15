@@ -6,10 +6,12 @@ export default function UserBarPopover({
   openLogoutModal,
 }) {
   const onLogoutClick = () => {
+    document.body.style.overflow = 'hidden';
     openLogoutModal(true);
     closePopover(false);
   };
   const onSettingClick = () => {
+    document.body.style.overflow = 'hidden';
     openSettingModal(true);
     closePopover(false);
   };

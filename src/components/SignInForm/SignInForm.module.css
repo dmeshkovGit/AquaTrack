@@ -1,53 +1,59 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 310px;
 }
 
 .inputGroup {
-  margin-bottom: 16px;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  align-items: start; */
+  gap: 8px;
+  position: relative;
+  padding-bottom: 18px;
+  width: 100%;
 }
 
-.inputGroup label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+.inputGroup > label {
+  color: #2f2f2f;
+  font-family: Poppins;
   font-size: 14px;
-  line-height: 0.77;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
 }
 
-.inputGroup input {
+.inputGroupInput {
+  box-sizing: border-box;
   height: 50px;
   width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  background-color: transparent;
   border-radius: 15px;
-  border: solid 1px rgba(47, 47, 47, 0.2);
-}
-
-.inputGroup input:active {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  background-color: transparent;
+  padding-left: 16px;
   outline: none;
-  border: solid 1px rgba(47, 47, 47, 0.4);
 }
-
-.inputGroup input:focus {
-  outline: none;
-  border: solid 1px rgba(47, 47, 47, 0.2);
+.inputGroupInput::placeholder {
+  color: rgba(47, 47, 47, 0.6);
+  font-family: Poppins;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
 }
-
 .inputError {
   border: 1px solid rgb(239, 80, 80);
   color: rgb(239, 80, 80);
 }
 .error {
-  color: #ef5050;
-  font-size: 14px;
-  margin-top: 10px;
+  color: rgb(239, 80, 80);
+  font-size: 10px;
+  line-height: 18px;
+  letter-spacing: -1%;
+  position: absolute;
+  bottom: 0;
+}
+
+.passwordContainer {
+  position: relative;
 }
 
 .submitButton {
@@ -57,7 +63,6 @@
   border-radius: 30px;
   border: none;
   margin-top: 32px;
-  font-weight: bold;
 }
 .submitButton:hover,
 .submitButton:focus {
@@ -65,17 +70,6 @@
 }
 
 .submitButton:disabled {
-  background-color: transparent;
-  color: rgba(47, 47, 47, 0.2);
-  border: solid 1px rgba(47, 47, 47, 0.2);
-}
-
-.passwordContainer {
-  position: relative;
-}
-.passwordContainer input {
-  flex: 1;
-  padding-right: 40px;
 }
 
 .passwordToggle {
@@ -85,7 +79,37 @@
   right: 16px;
   top: 16px;
 }
-
-.icon {
+.passwordToggle svg {
   fill: transparent;
+}
+@media screen and (min-width: 768px) {
+  .form {
+    width: 436px;
+  }
+  .submitButton {
+    width: 450px;
+    height: 60px;
+  }
+  .inputGroupInput {
+    width: 436px;
+    height: 56px;
+  }
+  .inputGroup {
+    padding-bottom: 20px;
+  }
+  .inputGroupInput::placeholder {
+    font-size: 16px;
+  }
+  .error {
+    font-size: 14px;
+  }
+  .passwordToggle {
+    top: 18px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .passwordToggle {
+    right: 14px;
+  }
 }

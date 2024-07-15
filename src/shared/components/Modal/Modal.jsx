@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
+import Icon from '../Icon/Icon';
 
 export default function Modal({ children, isOpen, onClose, btnClassName }) {
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function Modal({ children, isOpen, onClose, btnClassName }) {
               className={clsx(css.closeButton, btnClassName)}
               onClick={onClose}
             >
-              &times;
+              <Icon id="x-close" width="12" height="12" />
             </button>
             {children}
           </div>

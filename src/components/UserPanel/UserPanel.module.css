@@ -9,6 +9,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
+  width: 100%;
+}
+
+.title {
+  margin-right: auto;
 }
 .name {
   font-weight: 700;
@@ -18,5 +23,7 @@
   .wrap {
     font-size: 36px;
     line-height: 106%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
 }

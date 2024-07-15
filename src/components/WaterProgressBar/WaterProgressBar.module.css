@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 42px;
 }
 .bar {
   width: 174px;
@@ -66,6 +67,7 @@
     border-radius: 15px;
     padding: 20px;
     gap: 6px;
+    margin-bottom: 26px;
   }
   .bar {
     width: 256px;
@@ -88,5 +90,10 @@
     line-height: 18px;
     top: 16px;
     border-radius: 4px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    margin-bottom: 56px;
   }
 }
