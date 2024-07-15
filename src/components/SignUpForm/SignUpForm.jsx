@@ -29,7 +29,6 @@ export default function SignUpForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
@@ -41,25 +40,22 @@ export default function SignUpForm() {
   });
 
   const onSubmit = async data => {
-    try {
-      // запит на реєстрацію user
-      const result = await dispatch(registerUser(data));
-      if (registerUser.fulfilled.match(result)) {
-        reset();
-        navigate('/tracker');
-      } else if (registerUser.rejected.match(result)) {
-        setErrorMessage(result.payload.message || 'Registration failed');
-      }
-    } catch (err) {
-      setErrorMessage(err.message);
-    }
+    console.log(data);
+    // try {
+    //   // запит на реєстрацію user
+    //   const result = await dispatch(registerUser(data));
+    //   if (registerUser.fulfilled.match(result)) {
+    //     reset();
+    //     navigate('/tracker');
+    //   } else if (registerUser.rejected.match(result)) {
+    //     setErrorMessage(result.payload.message || 'Registration failed');
+    //   }
+    // } catch (err) {
+    //   setErrorMessage(err.message);
+    // }
   };
   const toggleShowPassword = () => {
-    setShowPassword(prev => !prev);
-  };
-
-  const toggleShowRepeatPassword = () => {
-    setShowRepeatPassword(prev => !prev);
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -97,9 +93,9 @@ export default function SignUpForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon id="eyeOff" width={18} height={18} />
-              ) : (
                 <Icon className="icon" id="eye" width={18} height={18} />
+              ) : (
+                <Icon id="eyeOff" width={18} height={18} />
               )}
             </button>
           </div>
@@ -112,7 +108,7 @@ export default function SignUpForm() {
           <label>Repeat Password</label>
           <div className={css.passwordContainer}>
             <input
-              type={showRepeatPassword ? 'text' : 'password'}
+              type={showPassword ? 'text' : 'password'}
               placeholder="Repeat password"
               {...register('repeatPassword')}
               className={clsx(
@@ -123,12 +119,12 @@ export default function SignUpForm() {
             <button
               type="button"
               className={css.passwordToggle}
-              onClick={toggleShowRepeatPassword}
+              onClick={toggleShowPassword}
             >
-              {showRepeatPassword ? (
-                <Icon id="eyeOff" width={18} height={18} />
-              ) : (
+              {showPassword ? (
                 <Icon className="icon" id="eye" width={18} height={18} />
+              ) : (
+                <Icon id="eyeOff" width={18} height={18} />
               )}
             </button>
           </div>
