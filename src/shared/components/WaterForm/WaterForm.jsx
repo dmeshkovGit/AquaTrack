@@ -14,7 +14,11 @@ const schema = yup.object().shape({
 
   Count: yup
     .number()
-    .test('Value must be number multiple of 50', value => value % 50 === 0)
+    .test(
+      'is-multiple',
+      'Value must be number multiple of 50',
+      value => value % 50 === 0,
+    )
     .required('Count is required'),
 });
 
