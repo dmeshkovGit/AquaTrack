@@ -2,7 +2,24 @@ import { useState, useEffect } from 'react';
 import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import Icon from '../../../shared/components/Icon/Icon';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import clsx from 'clsx';
+
+const schema = yup.object().shape({
+  Time: yup
+    .string()
+    .matches(
+      /^([01]\d|2[0-3]):([0-5]\d)$/,
+      'Value is not valid, must be in hh:mm format',
+    )
+    .required('Time is required'),
+
+  Count: yup
+    .number()
+    .test('Value must be number multiple of 50', value => value % 50 === 0)
+    .required('Count is required'),
+});
 
 export default function WaterForm() {
   //    <div>
@@ -20,11 +37,17 @@ export default function WaterForm() {
     return `${hours}:${minutes}`;
   }
 
-  const { register, handleSubmit, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       Count: count,
       Time: time,
     },
+    resolver: yupResolver(schema),
   });
 
   useEffect(() => {
@@ -45,8 +68,23 @@ export default function WaterForm() {
 
   const onCountChange = event => {
     const value = Number(event.target.value);
-    setCount(value);
-    setValue('Count', value);
+    if (value % 50 === 0) {
+      setCount(value);
+      setValue('Count', value);
+    }
+  };
+
+  const onInputKeyPressTime = event => {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 48 || charCode > 58) {
+      event.preventDefault();
+    }
+  };
+  const onInputKeyPressCount = event => {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -91,8 +129,10 @@ export default function WaterForm() {
         Recording time:
         <input
           className={css.baseInput}
+          onKeyPress={onInputKeyPressTime}
           {...register('Time', { required: true })}
         />
+        {errors.Time && <p className={css.error}>{errors.Time.message}</p>}
       </label>
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
@@ -100,7 +140,9 @@ export default function WaterForm() {
           className={css.baseInput}
           {...register('Count')}
           onChange={onCountChange}
+          onKeyPress={onInputKeyPressCount}
         />
+        {errors.Count && <p className={css.error}>{errors.Count.message}</p>}
       </label>
       <button className={css.saveBtn} type="submit">
         Save
