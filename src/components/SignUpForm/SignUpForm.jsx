@@ -66,7 +66,7 @@ export default function SignUpForm() {
           <label>Email</label>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Enter your email"
             className={clsx(
               css.inputGroupInput,
               errors.email && css.inputError,
@@ -93,9 +93,9 @@ export default function SignUpForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon className="icon" id="eye" width={18} height={18} />
+                <Icon className={css.icon} id="eye" width={20} height={20} />
               ) : (
-                <Icon id="eyeOff" width={18} height={18} />
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
               )}
             </button>
           </div>
@@ -122,9 +122,9 @@ export default function SignUpForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon className="icon" id="eye" width={18} height={18} />
+                <Icon className={css.icon} id="eye" width={20} height={20} />
               ) : (
-                <Icon id="eyeOff" width={18} height={18} />
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
               )}
             </button>
           </div>
@@ -140,7 +140,7 @@ export default function SignUpForm() {
         >
           Sign Up
         </button>
-        <div className={css.link}></div>
+        {/* <div className={css.link}></div> */}
       </form>
     </>
   );
