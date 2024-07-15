@@ -1,11 +1,13 @@
 .trackerContainer {
   box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 @media screen and (min-width: 1440px) {
   .trackerContainer {
+    max-height: 736px;
     flex-direction: row;
     gap: 32px;
   }
