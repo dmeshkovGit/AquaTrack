@@ -8,22 +8,20 @@
 
 .water_item {
     flex: none;
-    width: 192px;
-    height: 85px;
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
 }
 
 
 .water_item_content {
     display: flex;
     align-items: center;
+    gap: 20px;
   }
 
 .water_item strong {
@@ -50,14 +48,31 @@
     flex-direction: column;
     gap: 5px;
   }
+  
+  .svg_edit {
+    fill: none;
+    stroke: var(--main);
+    stroke-width: 2px;
+  }
+  
+  .svg_delete {
+    fill: none;
+    stroke: var(--main);
+    stroke-width: 2px;
+  }
 
+  .icon_glass_water {
+    fill: var(--accent);
+    stroke: var(--accent);
+    stroke-width: 0;
+  }
 
   
 
 /* Основний скролбар */
 ::-webkit-scrollbar {
-    width: 12px; /* ширина вертикального скролбару */
-    height: 12px; /* висота горизонтального скролбару */
+    width: 10px; /* ширина вертикального скролбару */
+    height: 10px; /* висота горизонтального скролбару */
 }
 
 /* Фон скролбару */
