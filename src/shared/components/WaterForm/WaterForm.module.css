@@ -142,7 +142,6 @@
   .baseLabel {
     font-size: 16px;
     line-height: 24px;
-    /* margin-bottom: 24px; */
   }
   .counterBtn {
     height: 43px;
@@ -152,6 +151,7 @@
     height: 43px;
     font-size: 15px;
     line-height: 22px;
+    width: 100px;
   }
   .baseInput {
     width: 438px;
