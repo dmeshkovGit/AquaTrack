@@ -5,17 +5,17 @@ export default function AdvantagesSection() {
   const users = [
     {
       name: 'firstUser',
-      avatarURL: '/public/images/firstUser-tablet.jpg',
+      avatarURL: 'images/firstUser-tablet.jpg',
       className: css.firstUser,
     },
     {
       name: 'secondUser',
-      avatarURL: '/public/images/secondUser-tablet.jpg',
+      avatarURL: 'images/secondUser-tablet.jpg',
       className: css.secondUser,
     },
     {
       name: 'thirdUser',
-      avatarURL: '/public/images/thirdUser-tablet.jpg',
+      avatarURL: 'images/thirdUser-tablet.jpg',
       className: css.thirdUser,
     },
   ];
