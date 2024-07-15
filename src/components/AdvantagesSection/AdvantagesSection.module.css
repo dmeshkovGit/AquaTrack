@@ -1,79 +1,204 @@
-
-.view {
-  padding: 14px 28px;
-  background-color: #9be1a0;
-  color: #323f47;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  border-radius: 30px;
-  width: 125px;
-  height: 34px;
-}
-
-.personal {
-  padding: 14px 28px;
-  background-color: #ffffff;
-  color: #323f47;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 30px;
-  border: 1px solid #323f47;
-}
 .container {
+  box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 343px;
+  max-width: 344px;
+  height: 353px;
   display: flex;
   justify-content: center;
-  border-radius: 6%;
+  border-radius: 30px;
   align-items: center;
-  color: white;
+  color: var(--main-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url('../../../public/boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.overlay {
-  text-align: center;
-
-  padding: 20px;
+.wrapper {
+  box-sizing: border-box;
+  padding: 32px 16px;
+  width: 100%;
 }
 
-.title {
-  font-size: 24px;
-  margin-bottom: 10px;
+.customersWrapper {
+  box-sizing: border-box;
+  width: 168px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: auto;
+  padding: 10px 14px;
+  color: var(--main);
+  background-color: var(--main-white);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.usersList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.usersItem {
+  border: 1px solid var(--main-white);
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: -10px;
+  width: 28px;
+  height: 28px;
+}
+
+.usersList > .usersItem:first-child {
+  margin-left: 0;
+}
+.usersText {
+  display: block;
+
+  text-align: start;
+}
+
+.firstUser {
+  z-index: 3;
+}
+.secondUser {
+  z-index: 2;
+}
+.thirdUser {
+  z-index: 1;
+}
+
+.textAccent {
+  color: var(--accent);
 }
 
 .features {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 168px;
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .feature {
-  font-size: 18px;
-  margin: 5px 0;
+  display: block;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 8px;
+  letter-spacing: -0.01em;
+  padding: 9px 12px;
+  color: var(--main);
+  border-radius: 30px;
 }
 
-@media (max-width: 374px) {
-  .container {
-    background-image: url('../../../public/boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
-    background-size: cover;
-    background-position: center;
-  }
+.view {
+  background-color: var(--accent);
+}
+
+.habit {
+  position: relative;
+  padding-left: 24px;
+  background-color: var(--main);
+  color: var(--main-white);
+}
+
+.habit::before {
+  position: absolute;
+  content: '';
+  background-color: var(--accent);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  left: 12px;
+  top: 9px;
+}
+
+.personal {
+  background-color: var(--main-white);
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
   .container {
     background-image: url('../../../public/boardBg/Tablet/1x/girlWithWater-min.jpg');
-    background-size: cover;
-    background-position: center;
   }
 }
 
 @media (min-width: 768px) {
   .container {
     background-image: url('../../../public/boardBg/Desctop/1x/girlWithBotle.jpg');
-    background-size: cover;
-    background-position: center;
+    max-width: 704px;
+    height: 446px;
+  }
+
+  .wrapper {
+    padding: 32px;
+  }
+
+  .customersWrapper {
+    margin-bottom: -18px;
+    width: 240px;
+    font-size: 15px;
+    line-height: 22.4px;
+    padding: 10px 20px;
+  }
+  .usersItem {
+    width: 47px;
+    height: 47px;
+    margin-left: -20px;
+  }
+
+  .features {
+    gap: 10px;
+    width: 244px;
+  }
+
+  .feature {
+    padding: 11px 16px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .habit {
+    padding-left: 28px;
+  }
+  .habit::before {
+    left: 16px;
+    top: 13px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 672px;
+    height: 736px;
+  }
+  .wrapper {
+    padding: 64px 32px;
+  }
+}
+
+@media (min-resolution: 192dpi) {
+  .container {
+    background-image: url('/public/boardBg/Mobile/2x/Rectangle\ 19@2x-min.jpg');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 768px) {
+  .container {
+    background-image: url('/public/boardBg/Tablet/2x/girlWithWater\(2x\)-min.jpg');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 1440px) {
+  .container {
+    background-image: url('/public/boardBg/Desctop/2x/girlWithBotle2x.jpg');
   }
 }

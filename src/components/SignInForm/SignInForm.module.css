@@ -23,6 +23,7 @@
 }
 
 .inputGroupInput {
+  box-sizing: border-box;
   height: 50px;
   width: 100%;
   border-radius: 15px;
@@ -51,6 +52,10 @@
   bottom: 0;
 }
 
+.passwordContainer {
+  position: relative;
+}
+
 .submitButton {
   height: 50px;
   background: rgb(155, 225, 160);
@@ -71,8 +76,8 @@
   position: absolute;
   border: none;
   background-color: transparent;
-  right: -10px;
-  top: 42px;
+  right: 16px;
+  top: 16px;
 }
 .passwordToggle svg {
   fill: transparent;
@@ -97,5 +102,14 @@
   }
   .error {
     font-size: 14px;
+  }
+  .passwordToggle {
+    top: 18px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .passwordToggle {
+    right: 14px;
   }
 }

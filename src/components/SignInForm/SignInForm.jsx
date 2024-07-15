@@ -69,14 +69,14 @@ export default function SignInForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
+                <Icon className="eyeIcon" id="eye" width={18} height={18} />
+              ) : (
                 <Icon
                   className="eyeOffIcon"
                   id="eyeOff"
                   width={18}
                   height={18}
                 />
-              ) : (
-                <Icon className="eyeIcon" id="eye" width={18} height={18} />
               )}
             </button>
           </div>
