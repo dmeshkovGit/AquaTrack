@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
+import Icon from '../../../shared/components/Icon/Icon';
 import clsx from 'clsx';
 
 export default function WaterForm() {
-  
-//    <div>
-//     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>) 
-//     : <h2> Тут буде форма для редагуання води</h2>}
-//   </div>;
-  
-  
+  //    <div>
+  //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
+  //     : <h2> Тут буде форма для редагуання води</h2>}
+  //   </div>;
+
   const [count, setCount] = useState(50);
   const [time, setTime] = useState(getFormattedTime());
 
@@ -66,7 +65,12 @@ export default function WaterForm() {
           onClick={decrementCount}
           disabled={count < 50}
         >
-          -
+          <Icon
+            className={css.iconMinus}
+            width="19"
+            height="19"
+            id="icon-minus"
+          />
         </button>
         <p className={css.count}>{count} ml</p>
         <button
@@ -75,7 +79,12 @@ export default function WaterForm() {
           onClick={incrementCount}
           disabled={count >= 1500}
         >
-          +
+          <Icon
+            className={css.iconPlus}
+            width="26"
+            height="26"
+            id="icon-plus"
+          />
         </button>
       </div>
       <label className={css.baseLabel}>

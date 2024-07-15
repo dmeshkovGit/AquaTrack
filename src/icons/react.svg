@@ -58,6 +58,10 @@
 <path  stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 6.667v18.667M6.667 16h18.667"></path>
 </symbol>
 
+<symbol id="icon-minus" viewBox="0 0 203 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="19.2" d="M19.424 16h163.808"></path>
+</symbol>
+
 <symbol id="elipce" viewBox="0 0 12 12">
 <circle cx="6" cy="6" r="5.5" fill="white" stroke="#9BE1A0"/>
 </symbol>
