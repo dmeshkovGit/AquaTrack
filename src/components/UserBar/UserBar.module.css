@@ -35,6 +35,10 @@
 /* ===============TABLET================ */
 
 @media screen and (min-width: 768px) {
+  .name {
+    font-size: 16px;
+    line-height: 150%;
+  }
   .btn {
     margin-left: auto;
     width: 157px;
