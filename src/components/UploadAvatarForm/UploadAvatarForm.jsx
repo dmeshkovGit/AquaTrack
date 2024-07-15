@@ -1,15 +1,18 @@
-import { useForm } from 'react-hook-form';
 import css from './UploadAvatarForm.module.css';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { RxAvatar } from 'react-icons/rx';
+import { selectUser } from '../../redux/user/selectors';
+import { updateUser } from '../../redux/user/operations';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('');
+  const user = useSelector(selectUser);
+  const dispacth = useDispatch();
 
   const onChange = ({ target: { files } }) => {
     files[0] && setFileName(files[0].name);
@@ -18,12 +21,19 @@ export default function UploadAvatarForm() {
     }
   };
   const onSubmit = () => {
-    console.log(fileName.toLocaleLowerCase());
+    dispacth(updateUser({ _id: user._id, avatarURL: image }));
   };
   return (
     <div className={css.container}>
-      {image && (
-        <img src={image} width={60} className={css.img} alt={fileName} />
+      {user.avatarURL || image ? (
+        <img
+          src={user.avatarURL || image}
+          width={60}
+          className={css.img}
+          alt={fileName}
+        />
+      ) : (
+        <RxAvatar size={38} className={css.iconAvatar} />
       )}
       <div className={css.formWrapper}>
         <form

@@ -32,6 +32,16 @@
 .iconUp {
   transform: rotate(180deg);
 }
+.iconAvatar {
+  width: 38px;
+  height: 38px;
+  color: var(--main-white);
+}
+.img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
 /* ===============TABLET================ */
 
 @media screen and (min-width: 768px) {
@@ -48,8 +58,16 @@
   .popover {
     padding: 8px;
   }
+  .iconAvatar {
+    width: 44px;
+    height: 44px;
+  }
   .icon {
     width: 20px;
     height: 20px;
+  }
+  .img {
+    width: 44px;
+    height: 44px;
   }
 }
