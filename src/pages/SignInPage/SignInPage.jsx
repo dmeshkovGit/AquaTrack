@@ -21,10 +21,9 @@ export default function SignIpPage() {
           <SignInForm onSubmit={handleSignIn} />
 
           <p className={css.notify}>
-            Don`t have an account?
+            Don`t have an account?{' '}
             <Link className={css.navLink} to="/signup">
-              {' '}
-              Sign Up
+              sign up
             </Link>
           </p>
         </div>

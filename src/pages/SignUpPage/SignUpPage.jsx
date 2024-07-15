@@ -21,10 +21,9 @@ export default function SignUpPage() {
           <h2 className={css.title}>Sign Up</h2>
           <SignUpForm onSubmit={handleSignUp} />
           <p className={css.notify}>
-            Already have an account?
+            Already have an account?{' '}
             <NavLink className={css.navLink} to="/signin">
-              {' '}
-              Sign In
+              sign in
             </NavLink>
           </p>
         </div>

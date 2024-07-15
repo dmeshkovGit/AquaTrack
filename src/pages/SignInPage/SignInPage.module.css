@@ -17,6 +17,7 @@
   font-weight: 700;
   line-height: 32px;
   letter-spacing: -1%;
+  text-transform: capitalize;
 }
 .notify {
   color: rgba(47, 47, 47, 0.6);
@@ -33,6 +34,7 @@
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
+  text-transform: capitalize;
 }
 .advantagesSection {
   display: none;

@@ -3,14 +3,15 @@
   flex-direction: column;
   width: 310px;
 }
-
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   position: relative;
-  padding-bottom: 18px;
   width: 100%;
+}
+
+.inputGroup:nth-child(-n + 2) {
+  padding-bottom: 16px;
 }
 
 .inputGroup > label {
@@ -20,16 +21,16 @@
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
+  margin-bottom: 8px;
 }
 
 .inputGroupInput {
   box-sizing: border-box;
-  height: 50px;
   width: 100%;
   border-radius: 15px;
   border: 1px solid rgba(47, 47, 47, 0.2);
   background-color: transparent;
-  padding-left: 16px;
+  padding: 16px;
   outline: none;
 }
 .inputGroupInput::placeholder {
@@ -45,24 +46,35 @@
 }
 .error {
   color: rgb(239, 80, 80);
-  font-size: 10px;
+  font-size: 14px;
   line-height: 18px;
   letter-spacing: -1%;
-  position: absolute;
-  bottom: 0;
+  margin-top: 10px;
 }
 
 .passwordContainer {
   position: relative;
 }
+.passwordToggle {
+  position: absolute;
+  border: none;
+  right: 16px;
+  top: 18px;
+  line-height: 0;
+  padding: 0;
+  display: none;
+}
 
+.icon {
+  fill: transparent;
+}
 .submitButton {
-  height: 50px;
   background: rgb(155, 225, 160);
-  width: 100%;
   border-radius: 30px;
   border: none;
   margin-top: 32px;
+  font-weight: bold;
+  padding: 16px;
 }
 .submitButton:hover,
 .submitButton:focus {
@@ -70,37 +82,30 @@
 }
 
 .submitButton:disabled {
+  background-color: transparent;
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  color: rgba(47, 47, 47, 0.2);
 }
 
-.passwordToggle {
-  position: absolute;
-  border: none;
-  background-color: transparent;
-  right: 16px;
-  top: 16px;
-}
-.passwordToggle svg {
-  fill: transparent;
-}
 @media screen and (min-width: 768px) {
   .form {
     width: 436px;
   }
-  .submitButton {
-    width: 450px;
-    height: 60px;
-  }
-  .inputGroupInput {
-    width: 436px;
-    height: 56px;
-  }
-  .inputGroup {
+  .inputGroup:nth-child(-n + 2) {
     padding-bottom: 20px;
   }
+  .inputGroup > label {
+    font-size: 16px;
+  }
+
   .inputGroupInput::placeholder {
     font-size: 16px;
   }
-  .error {
-    font-size: 14px;
+
+  .passwordToggle {
+    display: block;
+  }
+  .submitButton {
+    padding: 18px;
   }
 }
