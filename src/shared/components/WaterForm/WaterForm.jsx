@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     .required('Count is required'),
 });
 
-export default function WaterForm() {
+export default function WaterForm({ isOpen }) {
   //    <div>
   //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
   //     : <h2> Тут буде форма для редагуання води</h2>}
@@ -89,16 +89,17 @@ export default function WaterForm() {
       className={css.form}
       onSubmit={handleSubmit(data => {
         console.log(data);
+        isOpen(false);
       })}
     >
       <p className={css.text}>Correct entered data:</p>
       <p className={css.secondaryText}>Amount of water:</p>
       <div className={css.counterContainer}>
         <button
-          className={clsx(css.counterBtn, count < 50 && css.decrementBtn)}
+          className={clsx(css.counterBtn, count <= 50 && css.decrementBtn)}
           type="button"
           onClick={decrementCount}
-          disabled={count < 50}
+          disabled={count <= 50}
         >
           <Icon
             className={css.iconMinus}
