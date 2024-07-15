@@ -1,0 +1,155 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+.text {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.secondaryText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+.baseLabel {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.counterContainer {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.counterBtn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--main);
+  background-color: transparent;
+  cursor: pointer;
+}
+.decrementBtn,
+.incrementBtn {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.count {
+  box-sizing: border-box;
+  width: 98px;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  padding: 11px 20px;
+  text-align: center;
+  background-color: var(--main);
+  color: var(--main-white);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+.baseInput {
+  box-sizing: border-box;
+  width: 303px;
+  height: 46px;
+  padding: 14px 16px;
+  border-radius: 15px;
+  margin-bottom: 24px;
+  border: 1px solid var(--main-text);
+}
+.secondaryLabel {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.saveBtn {
+  padding: 0;
+  width: 116px;
+  height: 46px;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+.counterBtn:hover {
+  background-color: var(--main);
+  color: var(--main-white);
+}
+.decrementBtn:hover,
+.incrementBtn:hover {
+  background-color: transparent;
+}
+.saveBtn:hover {
+  background-color: var(--accent-hover);
+}
+.baseInput:hover {
+  border: 1px solid var(--main);
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+  .text {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .secondaryText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .baseLabel {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
+  }
+  .counterBtn {
+    height: 43px;
+    width: 43px;
+  }
+  .count {
+    height: 43px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .baseInput {
+    width: 438px;
+    height: 56px;
+    padding: 16px 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--main-text);
+  }
+  .secondaryLabel {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .saveBtn {
+    width: 140px;
+    height: 60px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

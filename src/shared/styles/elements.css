@@ -8,6 +8,12 @@ p {
   margin: 0;
 }
 
+div,
+ul,
+ol {
+  box-sizing: border-box;
+}
+
 ul,
 ol {
   list-style: none;

@@ -1,6 +1,8 @@
 .container {
+  box-sizing: border-box;
   background-color: rgb(240, 239, 244);
-  width: 334px;
+  width: 100%;
+  max-width: 375px;
   padding: 24px 16px;
   height: 780px;
   border-radius: 30px;
@@ -32,12 +34,14 @@
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
+  text-transform: capitalize;
 }
 .advantagesSection {
   display: none;
 }
 @media screen and (min-width: 768px) {
   .container {
+    max-width: none;
     padding: 32px;
     width: 704px;
     height: 960px;

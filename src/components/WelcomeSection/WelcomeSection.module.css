@@ -5,12 +5,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 67px 16px;
-  background-color: #f0eff4;
+  padding: 118px 16px 67px 16px;
+  background-color: var(--background);
   border-radius: 30px;
+  width: 100%;
+  max-width: 344px;
 }
 
-.logo{
+.logo {
   position: absolute;
   left: 16px;
   top: 24px;
@@ -22,14 +24,15 @@
 
 .subtitle {
   font-size: 14px;
-  color: #2f2f2f;
+  color: var(--main-text);
   margin-bottom: 16px;
   font-weight: 400;
+  line-height: 18px;
 }
 
 .title {
   font-size: 38px;
-  color: #323f47;
+  color: var(--main);
   margin-bottom: 32px;
   line-height: 38px;
   font-weight: 700;
@@ -42,37 +45,39 @@
 
 .tryTracker {
   padding: 14px 19px;
-  background-color: #9be1a0;
-  color: #323f47;
+  background-color: var(--accent);
+  color: var(--main);
   text-decoration: none;
   font-weight: 700;
   font-size: 14px;
+  line-height: 18px;
   border-radius: 30px;
 }
 
 .signIn {
   padding: 14px 28px;
-  background-color: #ffffff;
-  color: #323f47;
+  background-color: var(--background);
+  color: var(--main);
   text-decoration: none;
   font-size: 14px;
+  line-height: 18px;
   font-weight: 700;
   border-radius: 30px;
-  border: 1px solid #323f47;
+  border: 1px solid var(--main);
 }
 
 .tryTracker:hover {
-  background-color: #87d28d;
+  background-color: var(--accent-hover);
 }
 
 @media screen and (min-width: 768px) {
   .container {
     display: flex;
-    padding-left: 64px;
-    padding-right: 93px;
+    padding: 106px 93px 50px 64px;
+    max-width: 704px;
   }
   .title {
-    font-size: 68px;
+    font-size: 64px;
     line-height: 70px;
   }
   .tryTracker {
@@ -81,23 +86,33 @@
   .signIn {
     padding: 18px 40px;
   }
-  .logo{
+  .logo {
     top: 32px;
     left: 32px;
   }
+  .subtitle {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .tryTracker,
+  .signIn {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1440px) {
   .container {
     padding-top: 188px;
     padding-bottom: 188px;
     padding-left: 64px;
     padding-right: 61px;
+    max-width: 672px;
   }
 
   .signIn:hover {
-    border-color: #87d28d;
-    color: #87d28d;
+    border-color: var(--accent-hover);
+    color: var(--accent-hover);
   }
   .title {
     font-size: 80px;

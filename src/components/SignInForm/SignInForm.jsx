@@ -45,7 +45,7 @@ export default function SignInForm() {
               errors.email && css.inputError,
             )}
             type="text"
-            placeholder="Email"
+            placeholder="Enter your email"
             {...register('email')}
           />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
@@ -69,14 +69,9 @@ export default function SignInForm() {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <Icon
-                  className="eyeOffIcon"
-                  id="eyeOff"
-                  width={18}
-                  height={18}
-                />
+                <Icon className={css.icon} id="eye" width={18} height={18} />
               ) : (
-                <Icon className="eyeIcon" id="eye" width={18} height={18} />
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
               )}
             </button>
           </div>
@@ -87,7 +82,7 @@ export default function SignInForm() {
         <button type="submit" className={css.submitButton} onClick={onSubmit}>
           Sign In
         </button>
-        <div className={css.link}></div>
+        {/* <div className={css.link}></div> */}
       </form>
     </>
   );
