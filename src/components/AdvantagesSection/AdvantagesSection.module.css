@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-image: url('boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
+  background-image: url('public/boardBg/Mobile/1x/Rectangle\ 19-min.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -130,13 +130,13 @@
 
 @media (min-width: 375px) and (max-width: 767px) {
   .container {
-    background-image: url('boardBg/Tablet/1x/girlWithWater-min.jpg');
+    background-image: url('public/boardBg/Tablet/1x/girlWithWater-min.jpg');
   }
 }
 
 @media (min-width: 768px) {
   .container {
-    background-image: url('boardBg/Desctop/1x/girlWithBotle.jpg');
+    background-image: url('public/boardBg/Desctop/1x/girlWithBotle.jpg');
     max-width: 704px;
     height: 446px;
   }
@@ -189,16 +189,16 @@
 
 @media (min-resolution: 192dpi) {
   .container {
-    background-image: url('boardBg/Mobile/2x/Rectangle\ 19@2x-min.jpg');
+    background-image: url('public/boardBg/Mobile/2x/Rectangle\ 19@2x-min.jpg');
   }
 }
 @media (min-resolution: 192dpi) and (min-width: 768px) {
   .container {
-    background-image: url('boardBg/Tablet/2x/girlWithWater\(2x\)-min.jpg');
+    background-image: url('public/boardBg/Tablet/2x/girlWithWater\(2x\)-min.jpg');
   }
 }
 @media (min-resolution: 192dpi) and (min-width: 1440px) {
   .container {
-    background-image: url('boardBg/Desctop/2x/girlWithBotle2x.jpg');
+    background-image: url('public/boardBg/Desctop/2x/girlWithBotle2x.jpg');
   }
 }
