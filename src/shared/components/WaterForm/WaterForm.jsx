@@ -9,10 +9,7 @@ import clsx from 'clsx';
 const schema = yup.object().shape({
   Time: yup
     .string()
-    .matches(
-      /^([01]\d|2[0-3]):([0-5]\d)$/,
-      'Value is not valid, must be in hh:mm format',
-    )
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Must be in hh:mm format')
     .required('Time is required'),
 
   Count: yup
@@ -128,21 +125,23 @@ export default function WaterForm() {
       <label className={css.baseLabel}>
         Recording time:
         <input
-          className={css.baseInput}
+          className={clsx(css.baseInput, errors.Time && css.errorInput)}
           onKeyPress={onInputKeyPressTime}
           {...register('Time', { required: true })}
         />
-        {errors.Time && <p className={css.error}>{errors.Time.message}</p>}
+        <span className={css.error}>{errors.Time && errors.Time.message}</span>
       </label>
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
         <input
-          className={css.baseInput}
+          className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
           onChange={onCountChange}
           onKeyPress={onInputKeyPressCount}
         />
-        {errors.Count && <p className={css.error}>{errors.Count.message}</p>}
+        <span className={css.error}>
+          {errors.Count && errors.Count.message}
+        </span>
       </label>
       <button className={css.saveBtn} type="submit">
         Save
