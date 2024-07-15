@@ -7,9 +7,23 @@
 }
 
 @font-face {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-style: normal;
+  src: url('./fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Gilroy';
   font-weight: normal;
   font-style: normal;
   src: url('./fonts/Gilroy-Regular.ttf') format('truetype'),
     url('./fonts/Gilroy-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 700;
+  font-style: normal;
+  src: url('./fonts/Gilroy-Bold.ttf') format('truetype');
 }

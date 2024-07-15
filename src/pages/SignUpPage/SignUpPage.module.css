@@ -1,6 +1,8 @@
 .container {
+  box-sizing: border-box;
   background-color: rgb(240, 239, 244);
-  width: 334px;
+  width: 100%;
+  max-width: 375px;
   padding: 24px 16px;
   height: 780px;
   border-radius: 30px;
@@ -38,6 +40,7 @@
 }
 @media screen and (min-width: 768px) {
   .container {
+    max-width: none;
     padding: 32px;
     width: 704px;
     height: 960px;

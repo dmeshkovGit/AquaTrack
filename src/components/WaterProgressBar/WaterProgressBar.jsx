@@ -2,7 +2,7 @@ import css from '../WaterProgressBar/WaterProgressBar.module.css';
 import { useEffect, useState } from 'react';
 
 export default function WaterProgressBar() {
-  const [percent, setPercent] = useState(39);
+  const [percent, setPercent] = useState(75);
   const [isPercentVisible, setIsPercentVisible] = useState(true);
 
   useEffect(() => {

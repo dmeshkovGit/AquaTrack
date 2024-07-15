@@ -28,17 +28,29 @@
   padding: 0;
 }
 
-.addIconStyle {
-  background-color: var(--accent);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-}
 .addBtnStyle:hover {
   color: var(--main);
 }
 .addBtnStyle:hover .addIconStyle {
   background-color: var(--main);
+}
+.icon {
+  stroke: var(--main-white);
+}
+.addIconStyle {
+  box-sizing: border-box;
+  background-color: var(--accent);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  stroke: var(--main);
+  padding: 6px;
+}
+.btn:hover .icon {
+  stroke: var(--accent);
+}
+.addBtnStyle:hover .addIconStyle {
+  stroke: var(--main-white);
 }
 
 @media screen and (min-width: 768px) {
