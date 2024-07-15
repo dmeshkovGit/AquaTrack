@@ -4,6 +4,13 @@ import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 
 export default function WaterForm() {
+  
+//    <div>
+//     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>) 
+//     : <h2> Тут буде форма для редагуання води</h2>}
+//   </div>;
+  
+  
   const [count, setCount] = useState(50);
   const [time, setTime] = useState(getFormattedTime());
 

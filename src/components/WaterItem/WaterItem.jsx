@@ -25,26 +25,34 @@ export default function WaterItem() {
       {Array(15).fill(null).map((_, index) => (
         <li key={index} className={css.water_item}>
         <div className={css.water_item_content}>
-          <img src="path_to_icon" alt="water" />
+          <Icon className={css.icon_glass_water} width={44} height={45} id="icon-water-glass"/>
           <div>
             <strong>250 ml</strong>
             <p>7:00 AM</p>
           </div>
           <div className={css.container_buttons}>
-          <button className={css.editButton} onClick={handleEdit}> <Icon className={css.svg_edit} width={16} height={16} id="eye"/> </button>
-          <button className={css.deleteButton} onClick={handleDelete}> <Icon className={css.svg_delete} width={16} height={16} id="eye"/> </button>
+          <button className={css.editButton} onClick={handleEdit}> <Icon className={css.svg_edit} width={16} height={16} id="icon-edit"/> </button>
+          <button className={css.deleteButton} onClick={handleDelete}> <Icon className={css.svg_delete} width={16} height={16} id="trash"/> </button>
           </div>
         </div>
       </li>
     ))}
   </ul>
   {isEditModalOpen && (
-    <Modal>
-      <WaterModal />
+    <Modal 
+    isOpen={isEditModalOpen} 
+    onClose={() => {
+      setIsEditModalOpen(false);
+    }}>
+      <WaterModal operationType="edit"/>
     </Modal>
   )}
   {isDeleteModalOpen && (
-    <Modal>
+    <Modal 
+    isOpen={isDeleteModalOpen} 
+    onClose={() => {
+      setIsDeleteModalOpen(false);
+    }}>
       <DeleteWaterModal />
     </Modal>
   )}
