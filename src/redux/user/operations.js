@@ -8,11 +8,11 @@ const clearAuthHeader = () => {
   instance.defaults.headers.common['Authorization'] = '';
 };
 
-export const register = createAsyncThunk(
-  'user/register',
+export const login = createAsyncThunk(
+  'user/login',
   async (userInfo, thunkAPI) => {
     try {
-      const data = await axios.post('/api/users/signup', userInfo);
+      const { data } = await instance.post('/api/users/login', userInfo);
       setAuthHeader(data.token);
       return data;
     } catch (error) {
@@ -21,12 +21,13 @@ export const register = createAsyncThunk(
   },
 );
 
-export const login = createAsyncThunk(
-  'user/login',
+export const register = createAsyncThunk(
+  'user/register',
   async (userInfo, thunkAPI) => {
     try {
-      const { data } = await axios.post('/api/users/login', userInfo);
+      const { data } = await instance.post('/api/users/register', userInfo);
       setAuthHeader(data.token);
+      login(userInfo);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -36,7 +37,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('user/logout', async (_, thunkAPI) => {
   try {
-    const { data } = await axios.post('/api/users/logout');
+    const { data } = await instance.post('/api/users/logout');
     clearAuthHeader();
     return data;
   } catch (error) {
@@ -52,7 +53,7 @@ export const refreshUser = createAsyncThunk(
     } = thunkAPI.getState();
 
     setAuthHeader(token);
-    const data = await axios.get('/users/refresh');
+    const { data } = await instance.get('/api/users/refresh');
 
     return data;
   },
@@ -71,7 +72,7 @@ export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async (id, thunkAPI) => {
     try {
-      const data = await axios.get(`/${id}`);
+      const { data } = await instance.get(`/api/users/${id}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -83,7 +84,10 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (userData, thunkAPI) => {
     try {
-      const data = await axios.put(`/api/users/${userData.id}`, userData);
+      const { data } = await instance.put(
+        `/api/users/${userData.id}`,
+        userData,
+      );
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
