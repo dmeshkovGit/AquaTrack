@@ -52,6 +52,7 @@
   font-size: 14px;
   line-height: 18px;
   border-radius: 30px;
+  transition: all var(--transition);
 }
 
 .signIn {
@@ -64,10 +65,16 @@
   font-weight: 700;
   border-radius: 30px;
   border: 1px solid var(--main);
+  transition: all var(--transition);
 }
 
 .tryTracker:hover {
   background-color: var(--accent-hover);
+}
+
+.signIn:hover {
+  border-color: var(--accent-hover);
+  color: var(--accent-hover);
 }
 
 @media screen and (min-width: 768px) {
@@ -110,10 +117,6 @@
     max-width: 672px;
   }
 
-  .signIn:hover {
-    border-color: var(--accent-hover);
-    color: var(--accent-hover);
-  }
   .title {
     font-size: 80px;
     line-height: 76px;

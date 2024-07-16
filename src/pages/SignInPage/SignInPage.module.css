@@ -1,5 +1,5 @@
 .container {
-  background-color: rgb(240, 239, 244);
+  background-color: var(--background);
 
   padding: 24px 16px;
   width: 344px;
@@ -11,7 +11,7 @@
 }
 .title {
   margin-bottom: 32px;
-  color: rgb(50, 63, 71);
+  color: var(--main);
   font-family: Poppins;
   font-size: 32px;
   font-weight: 700;
@@ -20,7 +20,7 @@
   text-transform: capitalize;
 }
 .notify {
-  color: rgba(47, 47, 47, 0.6);
+  color: var(--main-placeholder);
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -1%;
@@ -28,14 +28,20 @@
   margin-top: 16px;
 }
 .navLink {
-  color: rgb(50, 63, 71);
+  color: var(--main);
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
   text-transform: capitalize;
+  transition: all var(--transition);
 }
+
+.navLink:hover {
+  color: var(--accent-hover);
+}
+
 .advantagesSection {
   display: none;
 }

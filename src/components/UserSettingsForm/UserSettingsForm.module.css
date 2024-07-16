@@ -84,16 +84,16 @@
 }
 
 .input {
-  border: 1px solid rgba(47, 47, 47, 0.15);
+  border: 1px solid var(--main-border);
   border-radius: 15px;
   padding: 16px 0 16px 16px;
   outline: transparent;
 }
 .errorInput {
-  border-color: red;
+  border-color: var(--validation-error);
 }
 .errorText {
-  color: red;
+  color: var(--validation-error);
 }
 
 .rightPart {
@@ -129,6 +129,7 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--main);
+  transition: all var(--transition);
 }
 
 .saveBtn:hover,

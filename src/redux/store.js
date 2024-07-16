@@ -18,11 +18,11 @@ const userPersistConfig = {
   storage,
   whitelist: ['token'], // вказати яку властивість зберігти, поки що додав тільки токен
 };
-const persistedAuthReducer = persistReducer(userPersistConfig, userReducer);
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedAuthReducer,
+    user: persistedUserReducer,
     water: waterReducer,
   },
   middleware: getDefaultMiddleware =>

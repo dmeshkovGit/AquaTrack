@@ -5,6 +5,9 @@ import * as yup from 'yup';
 import clsx from 'clsx';
 import FormulaDescription from './FormulaDescription';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../redux/user/selectors';
+import { updateUser } from '../../redux/user/operations';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -34,24 +37,27 @@ const schema = yup.object().shape({
     .matches(/^[0-9]|\.|,|:*$/, 'Value is not valid, only numbers!'),
 });
 
-export default function UserSettingsForm() {
+export default function UserSettingsForm({ isModalOpen }) {
   const [gender, setGender] = useState('');
   const [activity, setActivity] = useState(0);
   const [weight, setWeight] = useState(0);
   const [waterVolume, setWaterVolume] = useState(0);
+
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: 'onBlur',
     defaultValues: {
-      gender: '',
-      name: '',
-      email: '',
-      weight: 0,
-      activeTime: 0,
-      liters: waterVolume,
+      gender: `${user.gender || ''}`,
+      name: `${user.name || ''}`,
+      email: `${user.email || ''}`,
+      weight: `${user.weight || 0}`,
+      activeTime: `${user.activeTime || 0}`,
+      liters: `${user.liters || waterVolume}`,
     },
     resolver: yupResolver(schema),
   });
@@ -67,10 +73,14 @@ export default function UserSettingsForm() {
       }
       setWaterVolume(volume);
     };
+
     countWaterVolume(gender, activity, weight);
   }, [gender, activity, weight]);
+
   const onSubmit = data => {
-    console.log(data);
+    dispatch(updateUser({ _id: user._id, ...data }))
+      .unwrap()
+      .then(() => isModalOpen(false));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={css.form}>

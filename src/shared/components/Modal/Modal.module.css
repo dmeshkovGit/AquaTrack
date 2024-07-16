@@ -2,25 +2,27 @@
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--main-placeholder);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 10px 0;
+  padding: 50px 0;
 }
 
 .modal {
-  background: #ffffff;
+  background: var(--main-white);
   border-radius: 15px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 100vh;
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 50px 0 var(--shadow);
   overflow-y: auto;
 }
 
@@ -52,6 +54,6 @@
 
 @media screen and (min-width: 768px) {
   .backdrop {
-    padding: 20px 0;
+    padding: 64px;
   }
 }

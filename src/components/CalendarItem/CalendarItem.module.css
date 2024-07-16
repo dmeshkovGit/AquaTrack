@@ -8,7 +8,7 @@
   border-radius: 50%;
   height: 28px;
   width: 28px;
-  color: rgb(50, 63, 71);
+  color: var(--main);
   font-family: Poppins;
   font-size: 14px;
   font-weight: 700;
@@ -25,7 +25,7 @@
   color: var(--accent);
 }
 .label {
-  color: rgba(47, 47, 47, 0.6);
+  color: #2f2f2f99;
   font-size: 10px;
   font-weight: 400;
   line-height: 10px;
