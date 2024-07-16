@@ -3,7 +3,6 @@ import Logo from '../../shared/components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from '../SignUpPage/SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
-import { ToastContainer } from 'react-toastify';
 
 export default function SignUpPage() {
   return (
@@ -26,7 +25,6 @@ export default function SignUpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
-      <ToastContainer />
     </div>
   );
 }

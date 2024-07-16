@@ -4,7 +4,6 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignIpPage() {
@@ -30,7 +29,6 @@ export default function SignIpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
-      <ToastContainer />
     </div>
   );
 }
