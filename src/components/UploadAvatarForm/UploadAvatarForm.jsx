@@ -5,12 +5,15 @@ import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { RxAvatar } from 'react-icons/rx';
-import { selectUser } from '../../redux/user/selectors';
+import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
+import toast from 'react-hot-toast';
+import Loader from '../Loader/Loader';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('');
+  const isLoading = useSelector(selectIsLoading);
   const user = useSelector(selectUser);
   const dispacth = useDispatch();
 
@@ -21,55 +24,61 @@ export default function UploadAvatarForm() {
     }
   };
   const onSubmit = () => {
-    dispacth(updateUser({ _id: user._id, avatarURL: image }));
+    dispacth(updateUser({ _id: user._id, avatarURL: image }))
+      .unwrap()
+      .then(() => toast.success('Avatar successfully updated'))
+      .catch(() => toast.error('Sorry, try again later'));
   };
   return (
-    <div className={css.container}>
-      {user.avatarURL || image ? (
-        <img
-          src={user.avatarURL || image}
-          width={60}
-          className={css.img}
-          alt={fileName}
-        />
-      ) : (
-        <RxAvatar size={38} className={css.iconAvatar} />
-      )}
-      <div className={css.formWrapper}>
-        <form
-          className={css.form}
-          onClick={() => document.querySelector('#avatarInput').click()}
-        >
-          <div className={css.wrapInput}>
-            <input
-              type="file"
-              name="avatarURL"
-              className={css.avatarInput}
-              accept="image/*, .png, .jpg, .jpeg, .web, .webp"
-              onChange={onChange}
-              hidden
-              id="avatarInput"
-            />
-            <MdOutlineFileUpload className={css.icon} />
-            <p className={css.text}>Upload avatar</p>
-          </div>
-        </form>
-        <div className={css.btnWrap}>
-          <button type="button" className={css.btn} onClick={onSubmit}>
-            <IoIosSend className={css.icon} />
-          </button>
-          <button
-            type="button"
-            className={css.btn}
-            onClick={() => {
-              setFileName('');
-              setImage(null);
-            }}
+    <>
+      <div className={css.container}>
+        {user.avatarURL || image ? (
+          <img
+            src={user.avatarURL || image}
+            width={60}
+            className={css.img}
+            alt={fileName}
+          />
+        ) : (
+          <RxAvatar size={38} className={css.iconAvatar} />
+        )}
+        <div className={css.formWrapper}>
+          <form
+            className={css.form}
+            onClick={() => document.querySelector('#avatarInput').click()}
           >
-            <MdDelete className={css.icon} />
-          </button>
+            <div className={css.wrapInput}>
+              <input
+                type="file"
+                name="avatarURL"
+                className={css.avatarInput}
+                accept="image/*, .png, .jpg, .jpeg, .web, .webp"
+                onChange={onChange}
+                hidden
+                id="avatarInput"
+              />
+              <MdOutlineFileUpload className={css.icon} />
+              <p className={css.text}>Upload avatar</p>
+            </div>
+          </form>
+          <div className={css.btnWrap}>
+            <button type="button" className={css.btn} onClick={onSubmit}>
+              <IoIosSend className={css.icon} />
+            </button>
+            <button
+              type="button"
+              className={css.btn}
+              onClick={() => {
+                setFileName('');
+                setImage(null);
+              }}
+            >
+              <MdDelete className={css.icon} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      {isLoading && <Loader />}
+    </>
   );
 }
