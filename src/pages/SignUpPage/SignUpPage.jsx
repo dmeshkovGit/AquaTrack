@@ -1,16 +1,11 @@
 import { NavLink } from 'react-router-dom';
-
 import Logo from '../../shared/components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from '../SignUpPage/SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
+import { ToastContainer } from 'react-toastify';
 
 export default function SignUpPage() {
-  const handleSignUp = data => {
-    console.log('Form Data:', data);
-    // логіка для надсилання даних на сервер
-  };
-
   return (
     <div className={css.desctopContainer}>
       <div className={css.container}>
@@ -19,7 +14,7 @@ export default function SignUpPage() {
         </div>
         <div className={css.content}>
           <h2 className={css.title}>Sign Up</h2>
-          <SignUpForm onSubmit={handleSignUp} />
+          <SignUpForm />
           <p className={css.notify}>
             Already have an account?{' '}
             <NavLink className={css.navLink} to="/signin">
@@ -31,6 +26,7 @@ export default function SignUpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
+      <ToastContainer />
     </div>
   );
 }

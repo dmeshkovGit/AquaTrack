@@ -17,6 +17,7 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--main-white);
+  text-transform: capitalize;
 }
 
 .popover {

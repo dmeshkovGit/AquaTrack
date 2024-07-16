@@ -72,6 +72,7 @@
   width: 75px;
   height: 75px;
   color: var(--main);
+  margin-bottom: 10px;
 }
 /* ================TABLET============= */
 @media screen and (min-width: 768px) {
@@ -86,6 +87,7 @@
   .img {
     width: 100px;
     height: 100px;
+    margin-bottom: 10px;
   }
 
   .icon {

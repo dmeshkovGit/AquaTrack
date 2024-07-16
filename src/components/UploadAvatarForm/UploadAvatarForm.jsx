@@ -46,6 +46,32 @@ export default function UploadAvatarForm() {
           <form
             className={css.form}
             onClick={() => document.querySelector('#avatarInput').click()}
+        >
+          <div className={css.wrapInput}>
+            <input
+              type="file"
+              name="avatarURL"
+              className={css.avatarInput}
+              accept="image/*, .png, .jpg, .jpeg, .web, .webp"
+              onChange={onChange}
+              hidden
+              id="avatarInput"
+            />
+            <MdOutlineFileUpload className={css.icon} />
+            <p className={css.text}>Upload avatar</p>
+          </div>
+        </form>
+        <div className={css.btnWrap}>
+          <button type="button" className={css.btn} onClick={onSubmit}>
+            <IoIosSend className={css.icon} />
+          </button>
+          <button
+            type="button"
+            className={css.btn}
+            onClick={() => {
+              setFileName('');
+              setImage(null);
+            }}
           >
             <div className={css.wrapInput}>
               <input
