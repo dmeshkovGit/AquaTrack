@@ -32,6 +32,7 @@ export default function WaterForm({ isOpen }) {
 
   const [count, setCount] = useState(50);
   const [time, setTime] = useState(getFormattedTime());
+  const [err, setErr] = useState(false);
 
   function getFormattedTime() {
     const now = new Date();
@@ -73,7 +74,10 @@ export default function WaterForm({ isOpen }) {
   const isNumber = event => {
     const charCode = event.which ? event.which : event.keyCode;
     if ((charCode < 48 || charCode > 57) && charCode !== 8) {
+      setErr(true);
       event.preventDefault();
+    } else {
+      setErr(false);
     }
   };
 
@@ -134,7 +138,7 @@ export default function WaterForm({ isOpen }) {
           maxLength="4"
         />
         <span className={css.error}>
-          {errors.Count && errors.Count.message}
+          {errors.Count && errors.Count.message} {err && 'Type numbers please'}
         </span>
       </label>
       <button className={css.saveBtn} type="submit">
