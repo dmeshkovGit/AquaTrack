@@ -20,14 +20,24 @@
   gap: 8px;
   transition: all var(--transition);
 }
+.settingIcon {
+  fill: none;
+  stroke: var(--main);
+  transition: all var(--transition);
+}
 
+.logoutIcon {
+  fill: none;
+  stroke: var(--logout-btn);
+  transition: all var(--transition);
+}
 .settingBtn:hover,
 .settingBtn:focus {
   color: #87d28d;
 }
 
-.settingBtn:hover .settingIcon,
-.settingBtn:focus .settingIcon {
+.settingBtn:hover > .settingIcon,
+.settingBtn:focus > .settingIcon {
   stroke: #87d28d;
 }
 
@@ -52,15 +62,6 @@
 .logoutBtn:hover,
 .logoutBtn:focus {
   color: var(--main);
-}
-.settingIcon {
-  fill: none;
-  stroke: var(--main);
-}
-
-.logoutIcon {
-  fill: none;
-  stroke: var(--logout-btn);
 }
 
 .modalCloseButton {

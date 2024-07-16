@@ -31,6 +31,7 @@
   transition: all var(--transition);
 }
 .iconUp {
+  transition: all var(--transition);
   transform: rotate(-180deg);
 }
 .iconAvatar {

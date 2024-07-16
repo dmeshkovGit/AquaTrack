@@ -6,8 +6,10 @@ import clsx from 'clsx';
 import FormulaDescription from './FormulaDescription';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '../../redux/user/selectors';
+import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
+import toast from 'react-hot-toast';
+import { Loader } from '../Loader/Loader';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -34,7 +36,7 @@ const schema = yup.object().shape({
     .string()
     .min(1, 'Too short! Minimum 1 symbols')
     .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/^[0-9]|\.|,|:*$/, 'Value is not valid, only numbers!'),
+    .matches(/[0-9.,]/, 'Value is not valid, only numbers!'),
 });
 
 export default function UserSettingsForm({ isModalOpen }) {
@@ -44,23 +46,32 @@ export default function UserSettingsForm({ isModalOpen }) {
   const [waterVolume, setWaterVolume] = useState(0);
 
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      gender: `${user.gender || ''}`,
+      gender: `${user.gender || gender}`,
       name: `${user.name || ''}`,
       email: `${user.email || ''}`,
-      weight: `${user.weight || 0}`,
-      activeTime: `${user.activeTime || 0}`,
-      liters: `${user.liters || waterVolume}`,
+      weight: `${user.weight || weight}`,
+      activeTime: `${user.activeTime || activity}`,
+      liters: `${user.liters}`,
     },
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    setGender(user.gender);
+    setActivity(user.activeTime);
+    setWeight(user.weight);
+  }, [user]);
 
   useEffect(() => {
     const countWaterVolume = (gender, activity = 0, weight = 0) => {
@@ -71,137 +82,154 @@ export default function UserSettingsForm({ isModalOpen }) {
       if (gender === 'woman') {
         volume = Number(weight) * 0.04 + Number(activity) * 0.6;
       }
+
       setWaterVolume(volume);
+      setValue('liters', user.liters || volume.toFixed(1));
     };
 
     countWaterVolume(gender, activity, weight);
-  }, [gender, activity, weight]);
+  }, [gender, activity, weight, user]);
 
   const onSubmit = data => {
     dispatch(updateUser({ _id: user._id, ...data }))
       .unwrap()
-      .then(() => isModalOpen(false));
+      .then(() => {
+        isModalOpen(false);
+        toast.success('Data was successfully updated');
+      })
+      .catch(() => toast.error('Sorry, try again later'));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-      <fieldset
-        className={css.fieldset}
-        {...register('gender')}
-        onChange={e => setGender(e.target.value)}
-      >
-        <legend className={css.legend}>Your gender identity</legend>
-        <div className={css.radioWrapper}>
-          <label className={css.labelsRadioWrap}>
-            <input
-              className={css.radioInput}
-              {...register('gender')}
-              type="radio"
-              name="gender"
-              value="woman"
-            />
-            <span className={css.fakeRadio}></span>
-            <span className={css.label}>Woman</span>
-          </label>
-          <label className={css.labelsRadioWrap}>
-            <input
-              autoComplete="off"
-              className={css.radioInput}
-              {...register('gender')}
-              type="radio"
-              name="gender"
-              value="man"
-            />
-            <span className={css.fakeRadio}></span>
-            <span className={css.label}>Man</span>
-          </label>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+        <fieldset
+          className={css.fieldset}
+          {...register('gender')}
+          onChange={e => {
+            setGender(e.target.value);
+          }}
+        >
+          <legend className={css.legend}>Your gender identity</legend>
+          <div className={css.radioWrapper}>
+            <label className={css.labelsRadioWrap}>
+              <input
+                className={css.radioInput}
+                {...register('gender')}
+                type="radio"
+                name="gender"
+                value="woman"
+              />
+              <span className={css.fakeRadio}></span>
+              <span className={css.label}>Woman</span>
+            </label>
+            <label className={css.labelsRadioWrap}>
+              <input
+                autoComplete="off"
+                className={css.radioInput}
+                {...register('gender')}
+                type="radio"
+                name="gender"
+                value="man"
+              />
+              <span className={css.fakeRadio}></span>
+              <span className={css.label}>Man</span>
+            </label>
+          </div>
+        </fieldset>
+        <div className={css.columnsWrapper}>
+          <div className={css.leftPart}>
+            <div className={css.labelContainer}>
+              <label
+                className={clsx(css.label, css.bold)}
+                {...register('name')}
+              >
+                Your name
+              </label>
+              <input
+                autoComplete="off"
+                type="text"
+                className={clsx(css.input, errors.name && css.errorInput)}
+                {...register('name')}
+              />
+              {errors.name && (
+                <p className={css.errorText}>{errors.name?.message}</p>
+              )}
+            </div>
+            <div className={css.labelContainer}>
+              <label
+                className={clsx(css.label, css.bold)}
+                {...register('email')}
+              >
+                Your email
+              </label>
+              <input
+                autoComplete="off"
+                className={clsx(css.input, errors.email && css.errorInput)}
+                {...register('email')}
+                type="email"
+              />
+              {errors.email && (
+                <p className={css.errorText}>{errors.email.message}</p>
+              )}
+            </div>
+            <FormulaDescription />
+          </div>
+          <div className={css.rightPart}>
+            <div className={css.labelContainer}>
+              <label className={css.label} {...register('weight')}>
+                Your weight in kilograms:
+              </label>
+              <input
+                autoComplete="off"
+                type="number"
+                className={clsx(css.input, errors.weight && css.errorInput)}
+                {...register('weight')}
+                onBlur={e => setWeight(e.target.value)}
+              />
+              {errors.weight && (
+                <p className={css.errorText}>{errors.weight.message}</p>
+              )}
+            </div>
+            <div className={css.labelContainer}>
+              <label className={css.label} {...register('activeTime')}>
+                The time of active participation in sports:
+              </label>
+              <input
+                autoComplete="off"
+                type="number"
+                className={clsx(css.input, errors.activeTime && css.errorInput)}
+                {...register('activeTime')}
+                onBlur={e => setActivity(e.target.value)}
+              />
+              {errors.activeTime && (
+                <p className={css.errorText}>{errors.activeTime.message}</p>
+              )}
+            </div>
+            <p className={css.waterAmount}>
+              The required amount of water in liters per day:{' '}
+              <span className={css.accent}>{waterVolume.toFixed(1)} l</span>
+            </p>
+            <div className={css.labelContainer}>
+              <label className={clsx(css.label, css.bold)}>
+                Write down how much water you will drink:
+              </label>
+              <input
+                autoComplete="off"
+                type="text"
+                className={clsx(css.input, errors.liters && css.errorInput)}
+                {...register('liters')}
+              />
+              {errors.liters && (
+                <p className={css.errorText}>{errors.liters.message}</p>
+              )}
+            </div>
+          </div>
         </div>
-      </fieldset>
-      <div className={css.columnsWrapper}>
-        <div className={css.leftPart}>
-          <div className={css.labelContainer}>
-            <label className={clsx(css.label, css.bold)} {...register('name')}>
-              Your name
-            </label>
-            <input
-              autoComplete="off"
-              type="text"
-              className={clsx(css.input, errors.name && css.errorInput)}
-              {...register('name')}
-            />
-            {errors.name && (
-              <p className={css.errorText}>{errors.name?.message}</p>
-            )}
-          </div>
-          <div className={css.labelContainer}>
-            <label className={clsx(css.label, css.bold)} {...register('email')}>
-              Your email
-            </label>
-            <input
-              autoComplete="off"
-              className={clsx(css.input, errors.email && css.errorInput)}
-              {...register('email')}
-              type="email"
-            />
-            {errors.email && (
-              <p className={css.errorText}>{errors.email.message}</p>
-            )}
-          </div>
-          <FormulaDescription />
-        </div>
-        <div className={css.rightPart}>
-          <div className={css.labelContainer}>
-            <label className={css.label} {...register('weight')}>
-              Your weight in kilograms:
-            </label>
-            <input
-              autoComplete="off"
-              type="number"
-              className={clsx(css.input, errors.weight && css.errorInput)}
-              {...register('weight')}
-              onBlur={e => setWeight(e.target.value)}
-            />
-            {errors.weight && (
-              <p className={css.errorText}>{errors.weight.message}</p>
-            )}
-          </div>
-          <div className={css.labelContainer}>
-            <label className={css.label} {...register('activeTime')}>
-              The time of active participation in sports:
-            </label>
-            <input
-              autoComplete="off"
-              type="number"
-              className={clsx(css.input, errors.activeTime && css.errorInput)}
-              {...register('activeTime')}
-              onBlur={e => setActivity(e.target.value)}
-            />
-            {errors.activeTime && (
-              <p className={css.errorText}>{errors.activeTime.message}</p>
-            )}
-          </div>
-          <p className={css.waterAmount}>
-            The required amount of water in liters per day:{' '}
-            <span className={css.accent}>{waterVolume.toFixed(1)} l</span>
-          </p>
-          <div className={css.labelContainer}>
-            <label className={clsx(css.label, css.bold)}>
-              Write down how much water you will drink:
-            </label>
-            <input
-              autoComplete="off"
-              type="number"
-              className={clsx(css.input, errors.liters && css.errorInput)}
-              {...register('liters')}
-            />
-            {errors.liters && (
-              <p className={css.errorText}>{errors.liters.message}</p>
-            )}
-          </div>
-        </div>
-      </div>
-      <button type="submit" className={css.saveBtn}>
-        Save
-      </button>
-    </form>
+        <button type="submit" className={css.saveBtn}>
+          Save
+        </button>
+      </form>
+      {isLoading && <Loader />}
+    </>
   );
 }
