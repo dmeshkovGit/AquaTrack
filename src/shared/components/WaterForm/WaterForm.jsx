@@ -28,6 +28,7 @@ export default function WaterForm({ isOpen }) {
   const [count, setCount] = useState(50);
   const [time, setTime] = useState(getFormattedTime());
   const [err, setErr] = useState(false);
+  const [timeErr, setTimeErr] = useState(false);
 
   function getFormattedTime() {
     const now = new Date();
@@ -76,6 +77,20 @@ export default function WaterForm({ isOpen }) {
     }
   };
 
+  const timeInputController = event => {
+    const value = event.target.value;
+    if (
+      !/^[0-2]$|^[0-2][0-3]$|^[0-2][0-3]:$|^[0-2][0-3]:[0-5]$|^[0-2][0-3]:[0-5]\d$/.test(
+        value,
+      )
+    ) {
+      setTimeErr(true);
+      event.preventDefault();
+    } else {
+      setTimeErr(false);
+    }
+  };
+
   return (
     <form
       className={css.form}
@@ -120,8 +135,13 @@ export default function WaterForm({ isOpen }) {
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
           {...register('Time', { required: true })}
+          onChange={timeInputController}
+          maxLength="5"
         />
-        <span className={css.error}>{errors.Time && errors.Time.message}</span>
+        <span className={css.error}>
+          {errors.Time && errors.Time.message}{' '}
+          {timeErr && `Type in format 'hh:mm' please`}
+        </span>
       </label>
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
