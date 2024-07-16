@@ -68,7 +68,6 @@ export default function WaterForm({ isOpen }) {
   const onCountChange = event => {
     const value = Number(event.target.value);
     setCount(value);
-    setValue('Count', value);
   };
 
   const isNumber = event => {
