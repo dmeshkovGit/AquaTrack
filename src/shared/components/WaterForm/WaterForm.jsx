@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import Icon from '../../../shared/components/Icon/Icon';
@@ -14,6 +14,8 @@ const schema = yup.object().shape({
 
   Count: yup
     .number()
+    .min(50, 'Value must be at least 50')
+    .max(1500, 'Value must be at most 1500')
     .test(
       'is-multiple',
       'Value must be number multiple of 50',
@@ -130,6 +132,7 @@ export default function WaterForm({ isOpen }) {
           {...register('Count')}
           onChange={onCountChange}
           onKeyDown={isNumber}
+          maxLength="4"
         />
         <span className={css.error}>
           {errors.Count && errors.Count.message}

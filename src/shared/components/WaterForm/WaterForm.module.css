@@ -51,7 +51,7 @@
 
 .count {
   box-sizing: border-box;
-  width: 98px;
+  min-width: 98px;
   height: 40px;
   border-radius: 30px;
   border: none;
@@ -148,7 +148,7 @@
     height: 43px;
     font-size: 15px;
     line-height: 22px;
-    width: 100px;
+    min-width: 100px;
   }
   .baseInput {
     width: 438px;
