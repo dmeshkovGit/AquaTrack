@@ -1,7 +1,7 @@
 .wrap {
   border-radius: 15px;
   padding: 14px 57px 14px 20px;
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 50px 0 var(--shadow);
   background: var(--main-white);
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
-  color: rgba(50, 63, 71, 0.4);
+  color: var(--logout-btn);
   border: none;
   background-color: inherit;
   gap: 8px;
@@ -60,7 +60,7 @@
 
 .logoutIcon {
   fill: none;
-  stroke: rgba(50, 63, 71, 0.4);
+  stroke: var(--logout-btn);
 }
 
 .modalCloseButton {
