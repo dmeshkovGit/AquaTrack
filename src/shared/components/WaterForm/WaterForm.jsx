@@ -16,11 +16,6 @@ const schema = yup.object().shape({
     .number()
     .min(50, 'Value must be at least 50')
     .max(1500, 'Value must be at most 1500')
-    .test(
-      'is-multiple',
-      'Value must be number multiple of 50',
-      value => value % 50 === 0,
-    )
     .required('Count is required'),
 });
 
