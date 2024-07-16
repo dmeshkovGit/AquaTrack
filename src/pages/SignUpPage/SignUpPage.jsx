@@ -11,15 +11,11 @@ export default function SignUpPage() {
   const navigate = useNavigate();
 
   const handleSignUp = async userInfo => {
-    console.log('userInfo:', userInfo);
-
     try {
-      const response = await dispatch(register(userInfo)).unwrap();
-      console.log('Response:', response.data);
+      const registerResponse = await dispatch(register(userInfo)).unwrap();
+      console.log('Register Response:', registerResponse);
 
-      // Перевірка, якщо реєстрація пройшла успішно
-      if (response) {
-        // перенаправити користувача або показати повідомлення про успіх
+      if (registerResponse) {
         navigate('/tracker');
       }
     } catch (error) {
@@ -27,7 +23,7 @@ export default function SignUpPage() {
       if (error.response && error.response.status === 409) {
         console.error('Registration failed: Email already exists');
       } else {
-        console.error('Registration failed:', error);
+        console.error('Registration failed:', error.message);
       }
     }
   };

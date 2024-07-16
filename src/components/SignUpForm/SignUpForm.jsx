@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import css from '../SignUpForm/SignUpForm.module.css';
@@ -28,9 +27,8 @@ const schema = yup.object().shape({
 export default function SignUpForm({ onSubmit }) {
   // const loading = useSelector(selectLoading);
   // const error = useSelector(selectError);
-  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -39,7 +37,7 @@ export default function SignUpForm({ onSubmit }) {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema), // інтеграція схеми валідації yup в react-hook-form.
+    resolver: yupResolver(schema),
   });
 
   const toggleShowPassword = () => {
@@ -128,7 +126,6 @@ export default function SignUpForm({ onSubmit }) {
           className={css.submitButton}
           type="submit"
           // disabled={loading}
-          // onClick={onSubmit} непотрібний onClick={onSubmit}
         >
           Sign Up
         </button>{' '}

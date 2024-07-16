@@ -1,14 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Logo from '../../shared/components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
+import { login } from '../../redux/user/operations';
 
 export default function SignIpPage() {
-  const handleSignIn = data => {
-    console.log('Form Data:', data);
-    // логіка для надсилання даних на сервер
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignIn = async userInfo => {
+    try {
+      const loginResponse = await dispatch(login(userInfo)).unwrap();
+      console.log('Login Response:', loginResponse);
+
+      if (loginResponse) {
+        navigate('/tracker');
+      }
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    }
   };
+
   return (
     <div className={css.desctopContainer}>
       <div className={css.container}>
