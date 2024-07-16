@@ -16,7 +16,7 @@ const handleRejected = state => {
   state.isLoading = false;
 };
 
-const userSlice = createSlice({
+const slice = createSlice({
   name: 'user',
   initialState: {
     user: {
@@ -98,4 +98,4 @@ const userSlice = createSlice({
       .addCase(updateUser.rejected, handleRejected),
 });
 
-export default userSlice.reducer;
+export default slice.reducer;

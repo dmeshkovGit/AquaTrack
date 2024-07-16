@@ -85,7 +85,7 @@ export const updateUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const { data } = await instance.put(
-        `/api/users/${userData.id}`,
+        `/api/users/${userData._id}`,
         userData,
       );
       return data;

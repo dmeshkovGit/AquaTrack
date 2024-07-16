@@ -62,7 +62,11 @@
   border: none;
   background-color: transparent;
 }
-
+.iconAvatar {
+  width: 75px;
+  height: 75px;
+  color: var(--main);
+}
 /* ================TABLET============= */
 @media screen and (min-width: 768px) {
   .form {
@@ -91,5 +95,9 @@
   .text {
     font-size: 16px;
     line-height: 150%;
+  }
+  .iconAvatar {
+    width: 100px;
+    height: 100px;
   }
 }
