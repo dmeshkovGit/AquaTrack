@@ -25,9 +25,9 @@ export default function UploadAvatarForm() {
   };
   return (
     <div className={css.container}>
-      {user.avatarURL || image ? (
+      {user.avatarUrl || image ? (
         <img
-          src={user.avatarURL || image}
+          src={user.avatarUrl || image}
           width={60}
           className={css.img}
           alt={fileName}
