@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { register as registerUser } from '../../redux/user/operations';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -24,10 +24,8 @@ const schema = yup.object().shape({
     .required('Repeat Password is required'),
 });
 
-export default function SignUpForm({ onSubmit }) {
-  // const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
-
+export default function SignUpForm() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   // об'єкт конфігурації параметрів хука useForm
@@ -46,90 +44,102 @@ export default function SignUpForm({ onSubmit }) {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
-    onSubmit({ email, password });
+
+    dispatch(registerUser({ email, password }))
+      .unwrap()
+      .then(registerResponse => {
+        console.log('Register Response:', registerResponse);
+        // if (registerResponse) {
+        //   navigate('/tracker');
+        // }
+      })
+      .catch(error => {
+        console.log('Error message:', error.message);
+        console.log('Error:', error);
+        console.log(
+          'Error response data message:',
+          error.response?.data?.message,
+        );
+
+        toast.error(`Registration failed: ${error.response?.data?.message}`);
+      });
   };
 
   return (
-    <>
-      <ToastContainer />
-      <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-        <div className={css.inputGroup}>
-          <label>Email</label>
+    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
+      <div className={css.inputGroup}>
+        <label>Email</label>
+        <input
+          type="text"
+          placeholder="Enter your email"
+          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          {...register('email')}
+        />
+        {errors.email && <p className={css.error}>{errors.email.message}</p>}
+      </div>
+      <div className={css.inputGroup}>
+        <label>Password</label>
+        <div className={css.passwordContainer}>
           <input
-            type="text"
-            placeholder="Enter your email"
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Enter your password"
             className={clsx(
               css.inputGroupInput,
-              errors.email && css.inputError,
+              errors.password && css.inputError,
             )}
-            {...register('email')}
+            {...register('password')}
           />
-          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? (
+              <Icon className={css.icon} id="eye" width={20} height={20} />
+            ) : (
+              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+            )}
+          </button>
         </div>
-        <div className={css.inputGroup}>
-          <label>Password</label>
-          <div className={css.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Enter your password"
-              className={clsx(
-                css.inputGroupInput,
-                errors.password && css.inputError,
-              )}
-              {...register('password')}
-            />
-            <button
-              type="button"
-              className={css.passwordToggle}
-              onClick={toggleShowPassword}
-            >
-              {showPassword ? (
-                <Icon className={css.icon} id="eye" width={20} height={20} />
-              ) : (
-                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-              )}
-            </button>
-          </div>
-          {errors.password && (
-            <p className={css.error}>{errors.password.message}</p>
-          )}
+        {errors.password && (
+          <p className={css.error}>{errors.password.message}</p>
+        )}
+      </div>
+      <div className={css.inputGroup}>
+        <label>Repeat Password</label>
+        <div className={css.passwordContainer}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Repeat password"
+            {...register('repeatPassword')}
+            className={clsx(
+              css.inputGroupInput,
+              errors.repeatPassword && css.inputError,
+            )}
+          />
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? (
+              <Icon className={css.icon} id="eye" width={20} height={20} />
+            ) : (
+              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+            )}
+          </button>
         </div>
-        <div className={css.inputGroup}>
-          <label>Repeat Password</label>
-          <div className={css.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Repeat password"
-              {...register('repeatPassword')}
-              className={clsx(
-                css.inputGroupInput,
-                errors.repeatPassword && css.inputError,
-              )}
-            />
-            <button
-              type="button"
-              className={css.passwordToggle}
-              onClick={toggleShowPassword}
-            >
-              {showPassword ? (
-                <Icon className={css.icon} id="eye" width={20} height={20} />
-              ) : (
-                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-              )}
-            </button>
-          </div>
-          {errors.repeatPassword && (
-            <p className={css.error}>{errors.repeatPassword.message}</p>
-          )}
-        </div>
-        <button
-          className={css.submitButton}
-          type="submit"
-          // disabled={loading}
-        >
-          Sign Up
-        </button>{' '}
-      </form>
-    </>
+        {errors.repeatPassword && (
+          <p className={css.error}>{errors.repeatPassword.message}</p>
+        )}
+      </div>
+      <button
+        className={css.submitButton}
+        type="submit"
+        // disabled={loading}
+      >
+        Sign Up
+      </button>
+    </form>
   );
 }
