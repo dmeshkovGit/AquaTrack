@@ -8,7 +8,7 @@ import { RxAvatar } from 'react-icons/rx';
 import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
-import Loader from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
