@@ -6,6 +6,9 @@ import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 import { login } from '../../redux/user/operations';
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function SignIpPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,6 +23,15 @@ export default function SignIpPage() {
       }
     } catch (error) {
       console.error('Login failed:', error.message);
+      toast.error(`Login failed: ${error.message}`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -45,6 +57,7 @@ export default function SignIpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
+      <ToastContainer />
     </div>
   );
 }

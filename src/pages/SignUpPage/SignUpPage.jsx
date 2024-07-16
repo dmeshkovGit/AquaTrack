@@ -5,6 +5,8 @@ import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from '../SignUpPage/SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 import { register } from '../../redux/user/operations';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -19,12 +21,16 @@ export default function SignUpPage() {
         navigate('/tracker');
       }
     } catch (error) {
-      // Обробка помилки реєстрації
-      if (error.response && error.response.status === 409) {
-        console.error('Registration failed: Email already exists');
-      } else {
-        console.error('Registration failed:', error.message);
-      }
+      console.error('Registration failed:', error.message);
+      toast.error(`Registration failed: ${error.message}`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

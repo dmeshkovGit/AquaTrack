@@ -68,7 +68,7 @@ export default function SignInForm({ onSubmit }) {
             onClick={toggleShowPassword}
           >
             {showPassword ? (
-              <Icon className={css.icon} id="eye" width={18} height={18} />
+              <Icon className={css.icon} id="eye" width={20} height={20} />
             ) : (
               <Icon className={css.icon} id="eyeOff" width={20} height={20} />
             )}
