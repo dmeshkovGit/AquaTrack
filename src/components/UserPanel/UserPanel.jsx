@@ -8,13 +8,6 @@ export default function UserPanel() {
   const dispatch = useDispatch();
   return (
     <div className={css.wrap}>
-      <button
-        onClick={() =>
-          dispatch(login({ email: 'test1@gmail.com', password: 'test123' }))
-        }
-      >
-        click
-      </button>
       <p className={css.title}>
         Hello,{' '}
         <span className={css.name}>{user.name ? user.name : 'User'}</span>
