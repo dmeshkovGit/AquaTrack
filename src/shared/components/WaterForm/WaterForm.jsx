@@ -51,10 +51,6 @@ export default function WaterForm({ isOpen }) {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    setValue('Count', count);
-  }, [count, setValue]);
-
   const incrementCount = () => {
     const newCount = Number(count + 50);
     setCount(newCount);
