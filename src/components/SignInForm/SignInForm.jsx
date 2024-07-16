@@ -48,14 +48,15 @@ export default function SignInForm({ onSubmit }) {
         // }
       })
       .catch(error => {
-        console.log('Error message:', error.message);
-        console.log('Error:', error);
-        console.log(
-          'Error response data message:',
-          error.response?.data?.message,
-        );
+        // console.log('Error message:', error.message);
+        // console.log('Error:', error);
+        // console.log(
+        //   'Error response data message:',
+        //   error.response?.data?.message,
+        // );
 
-        toast.error(`login failed: ${error.response?.data?.message}`);
+        // toast.error(`login failed: ${error}`);
+        toast.error('login failed: Emai or passwrd is wrong');
       });
   };
 
