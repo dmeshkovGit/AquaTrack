@@ -3,6 +3,11 @@ import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import Icon from '../../../shared/components/Icon/Icon';
 import { yupResolver } from '@hookform/resolvers/yup';
+import {
+  isNumber,
+  timeInputController,
+  getFormattedTime,
+} from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
 
@@ -29,13 +34,6 @@ export default function WaterForm({ isOpen }) {
   const [time, setTime] = useState(getFormattedTime());
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
-
-  function getFormattedTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
 
   const {
     register,
@@ -65,30 +63,6 @@ export default function WaterForm({ isOpen }) {
   const onCountChange = event => {
     const value = Number(event.target.value);
     setCount(value);
-  };
-
-  const isNumber = event => {
-    const charCode = event.which ? event.which : event.keyCode;
-    if ((charCode < 48 || charCode > 57) && charCode !== 8) {
-      setErr(true);
-      event.preventDefault();
-    } else {
-      setErr(false);
-    }
-  };
-
-  const timeInputController = event => {
-    const value = event.target.value;
-    if (
-      !/^[0-2]$|^[0-2][0-3]$|^[0-2][0-3]:$|^[0-2][0-3]:[0-5]$|^[0-2][0-3]:[0-5]\d$/.test(
-        value,
-      )
-    ) {
-      setTimeErr(true);
-      event.preventDefault();
-    } else {
-      setTimeErr(false);
-    }
   };
 
   return (
@@ -135,7 +109,7 @@ export default function WaterForm({ isOpen }) {
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
           {...register('Time', { required: true })}
-          onChange={timeInputController}
+          onChange={event => timeInputController(event, setTimeErr)}
           maxLength="5"
         />
         <span className={css.error}>
@@ -149,7 +123,7 @@ export default function WaterForm({ isOpen }) {
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
           onChange={onCountChange}
-          onKeyDown={isNumber}
+          onKeyDown={event => isNumber(event, setErr)}
           maxLength="4"
         />
         <span className={css.error}>
