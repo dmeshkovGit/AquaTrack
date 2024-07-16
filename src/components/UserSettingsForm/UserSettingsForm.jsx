@@ -34,7 +34,7 @@ const schema = yup.object().shape({
     .string()
     .min(1, 'Too short! Minimum 1 symbols')
     .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/^[0-9]|\.|,|:*$/, 'Value is not valid, only numbers!'),
+    .matches(/[0-9.,]/, 'Value is not valid, only numbers!'),
 });
 
 export default function UserSettingsForm({ isModalOpen }) {
@@ -45,22 +45,30 @@ export default function UserSettingsForm({ isModalOpen }) {
 
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      gender: `${user.gender || ''}`,
+      gender: `${user.gender || gender}`,
       name: `${user.name || ''}`,
       email: `${user.email || ''}`,
-      weight: `${user.weight || 0}`,
-      activeTime: `${user.activeTime || 0}`,
-      liters: `${user.liters || waterVolume}`,
+      weight: `${user.weight || weight}`,
+      activeTime: `${user.activeTime || activity}`,
+      liters: `${user.liters}`,
     },
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    setGender(user.gender);
+    setActivity(user.activeTime);
+    setWeight(user.weight);
+  }, [user]);
 
   useEffect(() => {
     const countWaterVolume = (gender, activity = 0, weight = 0) => {
@@ -71,11 +79,13 @@ export default function UserSettingsForm({ isModalOpen }) {
       if (gender === 'woman') {
         volume = Number(weight) * 0.04 + Number(activity) * 0.6;
       }
+
       setWaterVolume(volume);
+      setValue('liters', user.liters || volume.toFixed(1));
     };
 
     countWaterVolume(gender, activity, weight);
-  }, [gender, activity, weight]);
+  }, [gender, activity, weight, user]);
 
   const onSubmit = data => {
     dispatch(updateUser({ _id: user._id, ...data }))
@@ -87,7 +97,9 @@ export default function UserSettingsForm({ isModalOpen }) {
       <fieldset
         className={css.fieldset}
         {...register('gender')}
-        onChange={e => setGender(e.target.value)}
+        onChange={e => {
+          setGender(e.target.value);
+        }}
       >
         <legend className={css.legend}>Your gender identity</legend>
         <div className={css.radioWrapper}>
@@ -189,7 +201,7 @@ export default function UserSettingsForm({ isModalOpen }) {
             </label>
             <input
               autoComplete="off"
-              type="number"
+              type="text"
               className={clsx(css.input, errors.liters && css.errorInput)}
               {...register('liters')}
             />
