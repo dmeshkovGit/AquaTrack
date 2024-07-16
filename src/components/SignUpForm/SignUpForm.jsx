@@ -9,26 +9,29 @@ import 'react-toastify/dist/ReactToastify.css';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
-// import registerUser from '../../redux/auth/operations';
+
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
-    .required('Password is required'),
+    .required('Password is required')
+    .test('passwords-match', 'Passwords must match', function (value) {
+      return value === this.parent.repeatPassword;
+    }),
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Repeat Password is required'),
 });
 
-export default function SignUpForm() {
-  const dispatch = useDispatch();
+export default function SignUpForm({ onSubmit }) {
   // const loading = useSelector(selectLoading);
   // const error = useSelector(selectError);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
@@ -39,29 +42,19 @@ export default function SignUpForm() {
     resolver: yupResolver(schema), // інтеграція схеми валідації yup в react-hook-form.
   });
 
-  const onSubmit = async data => {
-    console.log(data);
-    // try {
-    //   // запит на реєстрацію user
-    //   const result = await dispatch(registerUser(data));
-    //   if (registerUser.fulfilled.match(result)) {
-    //     reset();
-    //     navigate('/tracker');
-    //   } else if (registerUser.rejected.match(result)) {
-    //     setErrorMessage(result.payload.message || 'Registration failed');
-    //   }
-    // } catch (err) {
-    //   setErrorMessage(err.message);
-    // }
-  };
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleFormSubmit = data => {
+    const { email, password } = data;
+    onSubmit({ email, password });
   };
 
   return (
     <>
       <ToastContainer />
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
         <div className={css.inputGroup}>
           <label>Email</label>
           <input
@@ -103,7 +96,6 @@ export default function SignUpForm() {
             <p className={css.error}>{errors.password.message}</p>
           )}
         </div>
-
         <div className={css.inputGroup}>
           <label>Repeat Password</label>
           <div className={css.passwordContainer}>
@@ -136,11 +128,10 @@ export default function SignUpForm() {
           className={css.submitButton}
           type="submit"
           // disabled={loading}
-          onClick={onSubmit}
+          // onClick={onSubmit} непотрібний onClick={onSubmit}
         >
           Sign Up
-        </button>
-        {/* <div className={css.link}></div> */}
+        </button>{' '}
       </form>
     </>
   );
