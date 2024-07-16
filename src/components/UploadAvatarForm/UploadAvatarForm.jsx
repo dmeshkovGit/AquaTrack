@@ -24,6 +24,7 @@ export default function UploadAvatarForm() {
     dispacth(updateUser({ _id: user._id, avatarURL: image }));
   };
   return (
+<<<<<<< Updated upstream
     <div className={css.container}>
       {user.avatarURL || image ? (
         <img
@@ -65,6 +66,24 @@ export default function UploadAvatarForm() {
               setFileName('');
               setImage(null);
             }}
+=======
+    <>
+      <div className={css.container}>
+        {user.avatarURL || image ? (
+          <img
+            src={user.avatarURL || image}
+            width={60}
+            className={css.img}
+            alt={fileName}
+          />
+        ) : (
+          <RxAvatar size={38} className={css.iconAvatar} />
+        )}
+        <div className={css.formWrapper}>
+          <form
+            className={css.form}
+            onClick={() => document.querySelector('#avatarInput').click()}
+>>>>>>> Stashed changes
           >
             <MdDelete className={css.icon} />
           </button>
