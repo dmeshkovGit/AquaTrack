@@ -17,7 +17,9 @@
 }
 .name {
   font-weight: 700;
+  text-transform: capitalize;
 }
+
 /* ==============TABLET================  */
 @media screen and (min-width: 768px) {
   .wrap {
