@@ -4,11 +4,10 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function SignIpPage() {
-  const handleSignIn = data => {
-    console.log('Form Data:', data);
-    // логіка для надсилання даних на сервер
-  };
   return (
     <div className={css.desctopContainer}>
       <div className={css.container}>
@@ -18,7 +17,7 @@ export default function SignIpPage() {
         <div className={css.content}>
           <h2 className={css.title}>Sign in</h2>
 
-          <SignInForm onSubmit={handleSignIn} />
+          <SignInForm />
 
           <p className={css.notify}>
             Don`t have an account?{' '}
@@ -31,6 +30,7 @@ export default function SignIpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
+      <ToastContainer />
     </div>
   );
 }

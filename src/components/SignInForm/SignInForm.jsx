@@ -5,6 +5,9 @@ import * as yup from 'yup';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { login } from '../../redux/user/operations';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   email: yup
@@ -17,73 +20,90 @@ const schema = yup.object().shape({
     .required('Password is required'),
 });
 
-export default function SignInForm() {
+export default function SignInForm({ onSubmit }) {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = data => console.log(data);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleFormSubmit = data => {
+    const { email, password } = data;
+    dispatch(login({ email, password }))
+      .unwrap()
+      .then(loginResponse => {
+        console.log('login Response:', loginResponse);
+        // if (loginResponse) {
+        //   navigate('/tracker');
+        // }
+      })
+      .catch(error => {
+        // console.log('Error message:', error.message);
+        // console.log('Error:', error);
+        // console.log(
+        //   'Error response data message:',
+        //   error.response?.data?.message,
+        // );
+
+        // toast.error(`login failed: ${error}`);
+        toast.error('login failed: Emai or passwrd is wrong');
+      });
+  };
+
   return (
-    <>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={css.inputGroup}>
-          <label>Email</label>
+    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
+      <div className={css.inputGroup}>
+        <label>Email</label>
+        <input
+          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          type="text"
+          placeholder="Enter your email"
+          {...register('email')}
+        />
+        {errors.email && <p className={css.error}>{errors.email.message}</p>}
+      </div>
+      <div className={css.inputGroup}>
+        <label>Password</label>
+        <div className={css.passwordContainer}>
           <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Enter your password"
+            {...register('password')}
             className={clsx(
               css.inputGroupInput,
-              errors.email && css.inputError,
+              errors.password && css.inputError,
             )}
-            type="text"
-            placeholder="Enter your email"
-            {...register('email')}
           />
-          {errors.email && <p className={css.error}>{errors.email.message}</p>}
-        </div>
-        <div className={css.inputGroup}>
-          <label>Password</label>
-          <div className={css.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Enter your password"
-              {...register('password')}
-              className={clsx(
-                css.inputGroupInput,
-                errors.password && css.inputError,
-              )}
-            />
 
-            <button
-              type="button"
-              className={css.passwordToggle}
-              onClick={toggleShowPassword}
-            >
-              {showPassword ? (
-                <Icon className={css.icon} id="eye" width={18} height={18} />
-              ) : (
-                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-              )}
-            </button>
-          </div>
-          {errors.password && (
-            <p className={css.error}>{errors.password.message}</p>
-          )}
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? (
+              <Icon className={css.icon} id="eye" width={20} height={20} />
+            ) : (
+              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+            )}
+          </button>
         </div>
-        <button type="submit" className={css.submitButton} onClick={onSubmit}>
-          Sign In
-        </button>
-        {/* <div className={css.link}></div> */}
-      </form>
-    </>
+        {errors.password && (
+          <p className={css.error}>{errors.password.message}</p>
+        )}
+      </div>
+      <button type="submit" className={css.submitButton} onClick={onSubmit}>
+        Sign In
+      </button>
+    </form>
   );
 }

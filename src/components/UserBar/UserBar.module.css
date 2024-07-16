@@ -17,6 +17,7 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--main-white);
+  text-transform: capitalize;
 }
 
 .popover {
@@ -30,6 +31,7 @@
   transition: all var(--transition);
 }
 .iconUp {
+  transition: all var(--transition);
   transform: rotate(-180deg);
 }
 .iconAvatar {

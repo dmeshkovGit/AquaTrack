@@ -38,8 +38,8 @@ export default function UserBar() {
           onClick={() => setIsPopoverOpen(!isPopoverOpen)}
         >
           <p className={css.name}>{user.name ? user.name : 'User'}</p>
-          {user.avatarURL ? (
-            <img className={css.img} src={user.avatarURL} alt="avatar" />
+          {user.avatarUrl ? (
+            <img className={css.img} src={user.avatarUrl} alt="avatar" />
           ) : (
             <RxAvatar size={38} className={css.iconAvatar} />
           )}

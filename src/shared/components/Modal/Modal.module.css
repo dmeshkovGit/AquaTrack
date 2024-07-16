@@ -7,17 +7,13 @@
   width: 100%;
   height: 100%;
   background: var(--main-placeholder);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 1000;
-  padding: 50px 0;
 }
 
 .modal {
   background: var(--main-white);
   border-radius: 15px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -27,8 +23,7 @@
 }
 
 .modal::-webkit-scrollbar {
-  border-radius: 15px;
-  width: 8px;
+  width: 22px;
 }
 .modal::-webkit-scrollbar-track {
   background: inherit;
@@ -36,6 +31,8 @@
 .modal::-webkit-scrollbar-thumb {
   background: var(--background);
   border-radius: 15px;
+  background-clip: content-box;
+  border: 8px solid transparent;
 }
 .closeButton {
   z-index: 1;
@@ -53,7 +50,10 @@
 }
 
 @media screen and (min-width: 768px) {
-  .backdrop {
-    padding: 64px;
+  .modal::-webkit-scrollbar {
+    width: 36px;
+  }
+  .modal::-webkit-scrollbar-thumb {
+    border: 15px solid transparent;
   }
 }
