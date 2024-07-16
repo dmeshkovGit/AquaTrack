@@ -75,6 +75,7 @@
   margin-top: 32px;
   font-weight: bold;
   padding: 16px;
+  transition: all var(--transition);
 }
 .submitButton:hover,
 .submitButton:focus {

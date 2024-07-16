@@ -15,6 +15,7 @@
   line-height: 18px;
   margin-left: auto;
   letter-spacing: -0.1px;
+  transition: all var(--transition);
 }
 .btn:hover {
   color: var(--accent);
@@ -26,6 +27,7 @@
   width: 124px;
   height: 30px;
   padding: 0;
+  transition: all var(--transition);
 }
 
 .addBtnStyle:hover {
@@ -36,6 +38,7 @@
 }
 .icon {
   stroke: var(--main-white);
+  transition: all var(--transition);
 }
 .addIconStyle {
   box-sizing: border-box;

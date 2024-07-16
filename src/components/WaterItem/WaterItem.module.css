@@ -70,6 +70,7 @@
 ::-webkit-scrollbar {
   width: 10px; /* ширина вертикального скролбару */
   height: 10px; /* висота горизонтального скролбару */
+  transition: all var(--transition);
 }
 
 /* Фон скролбару */
