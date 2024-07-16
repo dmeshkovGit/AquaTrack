@@ -9,12 +9,12 @@
   display: flex;
   gap: 10px;
   padding: 14px 20px;
-  justify-content: center;
   align-items: center;
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
   margin-left: auto;
+  letter-spacing: -0.1px;
 }
 .btn:hover {
   color: var(--accent);

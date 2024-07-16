@@ -19,6 +19,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 78px;
 }
 
 @media screen and (min-width: 768px) {
@@ -28,6 +29,9 @@
     background-image: url('/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
     background-size: 374px 477px;
     background-position: bottom 32px center;
+  }
+  .logoWraper {
+    margin-bottom: 101px;
   }
 }
 
