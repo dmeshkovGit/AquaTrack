@@ -35,7 +35,13 @@
   line-height: 18px;
   letter-spacing: -1%;
   text-transform: capitalize;
+  transition: all var(--transition);
 }
+
+.navLink:hover {
+  color: var(--accent-hover);
+}
+
 .advantagesSection {
   display: none;
 }

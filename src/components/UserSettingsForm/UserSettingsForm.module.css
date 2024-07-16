@@ -129,6 +129,7 @@
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--main);
+  transition: all var(--transition);
 }
 
 .saveBtn:hover,
