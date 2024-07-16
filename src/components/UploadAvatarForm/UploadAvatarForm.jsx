@@ -5,15 +5,12 @@ import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { RxAvatar } from 'react-icons/rx';
-import { selectIsLoading, selectUser } from '../../redux/user/selectors';
+import { selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
-import toast from 'react-hot-toast';
-import { Loader } from '../Loader/Loader';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('');
-  const isLoading = useSelector(selectIsLoading);
   const user = useSelector(selectUser);
   const dispacth = useDispatch();
 
@@ -24,10 +21,7 @@ export default function UploadAvatarForm() {
     }
   };
   const onSubmit = () => {
-    dispacth(updateUser({ _id: user._id, avatarURL: image }))
-      .unwrap()
-      .then(() => toast.success('Avatar successfully updated'))
-      .catch(() => toast.error('Sorry, try again later'));
+    dispacth(updateUser({ _id: user._id, avatarURL: image }));
   };
   return (
     <>
@@ -46,32 +40,6 @@ export default function UploadAvatarForm() {
           <form
             className={css.form}
             onClick={() => document.querySelector('#avatarInput').click()}
-        >
-          <div className={css.wrapInput}>
-            <input
-              type="file"
-              name="avatarURL"
-              className={css.avatarInput}
-              accept="image/*, .png, .jpg, .jpeg, .web, .webp"
-              onChange={onChange}
-              hidden
-              id="avatarInput"
-            />
-            <MdOutlineFileUpload className={css.icon} />
-            <p className={css.text}>Upload avatar</p>
-          </div>
-        </form>
-        <div className={css.btnWrap}>
-          <button type="button" className={css.btn} onClick={onSubmit}>
-            <IoIosSend className={css.icon} />
-          </button>
-          <button
-            type="button"
-            className={css.btn}
-            onClick={() => {
-              setFileName('');
-              setImage(null);
-            }}
           >
             <div className={css.wrapInput}>
               <input
@@ -104,7 +72,6 @@ export default function UploadAvatarForm() {
           </div>
         </div>
       </div>
-      {isLoading && <Loader />}
     </>
   );
 }
