@@ -69,21 +69,13 @@ export default function WaterForm({ isOpen }) {
 
   const onCountChange = event => {
     const value = Number(event.target.value);
-    if (value % 50 === 0) {
-      setCount(value);
-      setValue('Count', value);
-    }
+    setCount(value);
+    setValue('Count', value);
   };
 
-  const onInputKeyPressTime = event => {
+  const isNumber = event => {
     const charCode = event.which ? event.which : event.keyCode;
-    if (charCode < 48 || charCode > 58) {
-      event.preventDefault();
-    }
-  };
-  const onInputKeyPressCount = event => {
-    const charCode = event.which ? event.which : event.keyCode;
-    if (charCode < 48 || charCode > 57) {
+    if ((charCode < 48 || charCode > 57) && charCode !== 8) {
       event.preventDefault();
     }
   };
@@ -131,7 +123,6 @@ export default function WaterForm({ isOpen }) {
         Recording time:
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
-          onKeyPress={onInputKeyPressTime}
           {...register('Time', { required: true })}
         />
         <span className={css.error}>{errors.Time && errors.Time.message}</span>
@@ -142,7 +133,7 @@ export default function WaterForm({ isOpen }) {
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
           onChange={onCountChange}
-          onKeyPress={onInputKeyPressCount}
+          onKeyDown={isNumber}
         />
         <span className={css.error}>
           {errors.Count && errors.Count.message}
