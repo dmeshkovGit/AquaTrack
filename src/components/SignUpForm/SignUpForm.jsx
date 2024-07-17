@@ -73,7 +73,7 @@ export default function SignUpForm() {
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
-            tabindex="-1"
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />
@@ -102,6 +102,7 @@ export default function SignUpForm() {
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />

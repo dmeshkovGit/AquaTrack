@@ -69,7 +69,7 @@ export default function SignInForm({ onSubmit }) {
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
-            tabindex="-1"
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />

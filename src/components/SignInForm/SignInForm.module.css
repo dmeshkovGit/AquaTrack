@@ -30,6 +30,7 @@
   background-color: transparent;
   padding: 16px;
   outline: none;
+  height: 50px;
 }
 .inputGroupInput::placeholder {
   color: var(--main-placeholder);
@@ -59,7 +60,8 @@
   line-height: 0;
   right: 16px;
   top: 4px;
-  padding: 12px;
+  padding: 10px;
+  background-color: transparent;
   /* display: none; */
 }
 .icon {
@@ -99,6 +101,9 @@
 
   .inputGroupInput::placeholder {
     font-size: 16px;
+  }
+  .inputGroupInput {
+    height: 56px;
   }
 
   .passwordToggle {
