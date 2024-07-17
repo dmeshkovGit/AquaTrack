@@ -26,7 +26,7 @@ export default function SignUpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

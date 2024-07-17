@@ -30,7 +30,7 @@ export default function SignIpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }
