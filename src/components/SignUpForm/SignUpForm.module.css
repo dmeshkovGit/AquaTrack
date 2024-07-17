@@ -9,11 +9,9 @@
   position: relative;
   width: 100%;
 }
-
 .inputGroup:nth-child(-n + 2) {
   padding-bottom: 16px;
 }
-
 .inputGroup > label {
   color: var(--main-text);
   font-family: Poppins;
@@ -23,7 +21,6 @@
   letter-spacing: -1%;
   margin-bottom: 8px;
 }
-
 .inputGroupInput {
   box-sizing: border-box;
   width: 100%;
@@ -51,17 +48,16 @@
   letter-spacing: -1%;
   margin-top: 10px;
 }
-
 .passwordContainer {
   position: relative;
 }
 .passwordToggle {
   position: absolute;
   border: none;
-  right: 16px;
-  top: 16px;
   line-height: 0;
-  padding: 0;
+  right: 16px;
+  top: 4px;
+  padding: 12px;
   /* display: none; */
 }
 
@@ -92,9 +88,11 @@
   .form {
     width: 436px;
   }
+
   .inputGroup:nth-child(-n + 2) {
     padding-bottom: 20px;
   }
+
   .inputGroup > label {
     font-size: 16px;
   }
@@ -105,7 +103,10 @@
 
   .passwordToggle {
     display: block;
+    top: 16px;
+    padding: 0;
   }
+
   .submitButton {
     padding: 18px;
   }
