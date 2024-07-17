@@ -10,6 +10,7 @@ import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { Loader } from '../Loader/Loader';
+import { isNumber } from '../../helpers/validationsHelper';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -22,21 +23,9 @@ const schema = yup.object().shape({
     .required('Name is required')
     .min(3, 'Too short! Minimum 3 symbols')
     .max(30, 'Too long! Maximum 30 symbols'),
-  weight: yup
-    .string()
-    .min(1, 'Too short! Minimum 1 symbols')
-    .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/^[0-9]/, 'Value is not valid, only numbers!'),
-  activeTime: yup
-    .string()
-    .min(1, 'Too short! Minimum 1 symbols')
-    .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/^[0-9]/, 'Value is not valid, only numbers!'),
-  liters: yup
-    .string()
-    .min(1, 'Too short! Minimum 1 symbols')
-    .max(3, 'Too long! Maximum 3 symbols')
-    .matches(/[0-9.,]/, 'Value is not valid, only numbers!'),
+  weight: yup.string().max(3, 'Too long! Maximum 3 symbols'),
+  activeTime: yup.string().max(3, 'Too long! Maximum 3 symbols'),
+  liters: yup.string().max(3, 'Too long! Maximum 3 symbols'),
 });
 
 export default function UserSettingsForm({ isModalOpen }) {
@@ -44,7 +33,8 @@ export default function UserSettingsForm({ isModalOpen }) {
   const [activity, setActivity] = useState(0);
   const [weight, setWeight] = useState(0);
   const [waterVolume, setWaterVolume] = useState(0);
-
+  const [liters, setLiters] = useState(0);
+  const [err, setErr] = useState(false);
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
@@ -55,14 +45,14 @@ export default function UserSettingsForm({ isModalOpen }) {
     setValue,
     formState: { errors },
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       gender: `${user.gender || gender}`,
       name: `${user.name || ''}`,
       email: `${user.email || ''}`,
       weight: `${user.weight || weight}`,
       activeTime: `${user.activeTime || activity}`,
-      liters: `${user.liters}`,
+      liters: `${user.liters || liters}`,
     },
     resolver: yupResolver(schema),
   });
@@ -71,6 +61,7 @@ export default function UserSettingsForm({ isModalOpen }) {
     setGender(user.gender);
     setActivity(user.activeTime);
     setWeight(user.weight);
+    setLiters(user.liters);
   }, [user]);
 
   useEffect(() => {
@@ -84,7 +75,7 @@ export default function UserSettingsForm({ isModalOpen }) {
       }
 
       setWaterVolume(volume);
-      setValue('liters', user.liters || volume.toFixed(1));
+      setValue('liters', liters || volume.toFixed(1));
     };
 
     countWaterVolume(gender, activity, weight);
@@ -181,13 +172,19 @@ export default function UserSettingsForm({ isModalOpen }) {
               </label>
               <input
                 autoComplete="off"
-                type="number"
+                type="text"
                 className={clsx(css.input, errors.weight && css.errorInput)}
                 {...register('weight')}
-                onBlur={e => setWeight(e.target.value)}
+                onBlur={e => {
+                  setWeight(e.target.value);
+                }}
+                onKeyDown={event => isNumber(event, setErr)}
+                maxLength="2"
               />
               {errors.weight && (
-                <p className={css.errorText}>{errors.weight.message}</p>
+                <p className={css.errorText}>
+                  {errors.weight.message} {err && 'Type numbers please'}
+                </p>
               )}
             </div>
             <div className={css.labelContainer}>
@@ -196,13 +193,18 @@ export default function UserSettingsForm({ isModalOpen }) {
               </label>
               <input
                 autoComplete="off"
-                type="number"
+                type="text"
                 className={clsx(css.input, errors.activeTime && css.errorInput)}
                 {...register('activeTime')}
                 onBlur={e => setActivity(e.target.value)}
+                onKeyDown={event => isNumber(event, setErr)}
+                maxLength="2"
               />
               {errors.activeTime && (
-                <p className={css.errorText}>{errors.activeTime.message}</p>
+                <p className={css.errorText}>
+                  {errors.activeTime.message}
+                  {err && 'Type numbers please'}
+                </p>
               )}
             </div>
             <p className={css.waterAmount}>
@@ -218,9 +220,15 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.liters && css.errorInput)}
                 {...register('liters')}
+                onBlur={e => setLiters(e.target.value)}
+                onKeyDown={event => isNumber(event, setErr)}
+                maxLength="2"
               />
               {errors.liters && (
-                <p className={css.errorText}>{errors.liters.message}</p>
+                <p className={css.errorText}>
+                  {errors.liters.message}
+                  {err && 'Type numbers please'}
+                </p>
               )}
             </div>
           </div>
