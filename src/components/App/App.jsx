@@ -9,10 +9,10 @@ import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SharedLayout from '../SharedLayout/SharedLayout';
 import HomePage from '../../pages/HomePage/HomePage';
-import { Loader } from '../Loader/Loader';
 import { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { refreshUserToken } from '../../redux/user/operations';
+import { Loader } from '../../shared/components/Loader/Loader';
 
 function App() {
   const dispatch = useDispatch();
