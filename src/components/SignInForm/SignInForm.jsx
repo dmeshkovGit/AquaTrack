@@ -6,7 +6,9 @@ import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { login } from '../../redux/user/operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLoading } from '../../redux/user/selectors';
+import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 
 const schema = yup.object().shape({
   email: yup
@@ -22,7 +24,7 @@ const schema = yup.object().shape({
 export default function SignInForm({ onSubmit }) {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-
+  const isLoading = useSelector(selectIsLoading);
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
@@ -69,7 +71,7 @@ export default function SignInForm({ onSubmit }) {
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
-            tabindex="-1"
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />
@@ -83,7 +85,7 @@ export default function SignInForm({ onSubmit }) {
         )}
       </div>
       <button type="submit" className={css.submitButton} onClick={onSubmit}>
-        Sign In
+        {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
     </form>
   );

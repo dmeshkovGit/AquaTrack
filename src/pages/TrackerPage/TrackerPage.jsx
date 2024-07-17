@@ -4,6 +4,7 @@ import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedI
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchUser } from '../../redux/user/operations';
+import { Loader } from '../../shared/components/Loader/Loader';
 
 export default function TrackerPage() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function TrackerPage() {
   return (
     <div className={css.trackerContainer}>
       <WaterMainInfo />
+      <Loader />
       <WaterDetailedInfo />
     </div>
   );
