@@ -222,7 +222,7 @@ export default function UserSettingsForm({ isModalOpen }) {
                 {...register('liters')}
                 onBlur={e => setLiters(e.target.value)}
                 onKeyDown={event => isNumber(event, setErr)}
-                maxLength="2"
+                maxLength="3"
               />
               {errors.liters && (
                 <p className={css.errorText}>

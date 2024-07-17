@@ -66,12 +66,6 @@
   color: var(--accent-hover);
 }
 
-.btnWrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .btn {
   display: flex;
   justify-content: center;
