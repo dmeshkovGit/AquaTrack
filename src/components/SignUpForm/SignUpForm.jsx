@@ -7,7 +7,6 @@ import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
-import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -44,26 +43,7 @@ export default function SignUpForm() {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
-
-    dispatch(registerUser({ email, password }))
-      .unwrap()
-      .then(registerResponse => {
-        console.log('Register Response:', registerResponse);
-        // if (registerResponse) {
-        //   navigate('/tracker');
-        // }
-      })
-      .catch(error => {
-        // console.log('Error message:', error.message);
-        // console.log('Error:', error);
-        // console.log(
-        //   'Error response data message:',
-        //   error.response?.data?.message,
-        // );
-
-        // toast.error(`Registration failed: ${error.response?.data?.message}`);
-        toast.error('Registration failed: Emai is already exist');
-      });
+    dispatch(registerUser({ email, password }));
   };
 
   return (
