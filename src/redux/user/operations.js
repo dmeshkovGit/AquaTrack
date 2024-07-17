@@ -45,6 +45,7 @@ export const register = createAsyncThunk(
         toast.error('This email is already used');
       }
       return thunkAPI.rejectWithValue(response);
+
     }
   },
 );
