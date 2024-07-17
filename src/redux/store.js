@@ -16,7 +16,7 @@ import waterReducer from './water/slice';
 const userPersistConfig = {
   key: 'user',
   storage,
-  whitelist: ['token'], // вказати яку властивість зберігти, поки що додав тільки токен
+  whitelist: ['refreshToken'], // вказати яку властивість зберігти, поки що додав тільки токен
 };
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 

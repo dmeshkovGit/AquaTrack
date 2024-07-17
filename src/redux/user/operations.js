@@ -46,34 +46,37 @@ export const logout = createAsyncThunk('user/logout', async (_, thunkAPI) => {
   }
 });
 
-export const refreshUser = createAsyncThunk(
-  'user/refresh',
+export const refreshUserToken = createAsyncThunk(
+  'user/refreshUserToken',
   async (_, thunkAPI) => {
     const {
-      user: { token },
+      user: { refreshToken },
     } = thunkAPI.getState();
 
-    setAuthHeader(token);
-    const { data } = await instance.get('/api/users/refresh');
+    const { data } = await instance.get('/api/users/refresh', {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    });
+
+    setAuthHeader(data.accessToken);
 
     return data;
   },
   {
     condition: (_, { getState }) => {
       const {
-        user: { token },
+        user: { refreshToken },
       } = getState();
 
-      return token !== null;
+      return refreshToken !== null;
     },
   },
 );
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
-  async (id, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const { data } = await instance.get(`/api/users/${id}`);
+      const { data } = await instance.get(`/api/users/current`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -84,6 +87,7 @@ export const fetchUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (userData, thunkAPI) => {
+    console.log(userData);
     try {
       const { data } = await instance.put(
         `/api/users/${userData._id}`,
