@@ -56,10 +56,10 @@ export default function SignUpForm() {
       .catch(error => {
         // console.log('Error message:', error.message);
         // console.log('Error:', error);
-        // console.log(
-        //   'Error response data message:',
-        //   error.response?.data?.message,
-        // );
+        console.log(
+          'Error response data message:',
+          error.response?.data?.message,
+        );
 
         // toast.error(`Registration failed: ${error.response?.data?.message}`);
         toast.error('Registration failed: Emai is already exist');

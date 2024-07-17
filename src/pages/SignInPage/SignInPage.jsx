@@ -15,9 +15,7 @@ export default function SignIpPage() {
         </div>
         <div className={css.content}>
           <h2 className={css.title}>Sign in</h2>
-
           <SignInForm />
-
           <p className={css.notify}>
             Don`t have an account?{' '}
             <Link className={css.navLink} to="/signup">
