@@ -1,9 +1,26 @@
+import { useSelector } from 'react-redux';
 import css from '../WaterProgressBar/WaterProgressBar.module.css';
 import { useEffect, useState } from 'react';
+import { selectUserWaterNorm } from '../../redux/user/selectors';
+import { selectDayWater } from '../../redux/water/selectors';
 
 export default function WaterProgressBar() {
-  const [percent, setPercent] = useState(75);
+  const [percent, setPercent] = useState(0);
   const [isPercentVisible, setIsPercentVisible] = useState(true);
+  const dayWater = useSelector(selectUserWaterNorm);
+
+  // Для ТЕСТУ ПОКИ НЕ ЗАПИСУЮТЬСЯ ДАНІ В СЕТІНГС ЮЗЕРА
+  // const dayWater = 1 * 1000;
+
+  const dayDrinking = useSelector(selectDayWater);
+
+  useEffect(() => {
+    const totalAmount = dayDrinking.reduce(
+      (acc, drink) => acc + drink.amount,
+      0,
+    );
+    setPercent(Math.round((totalAmount * 100) / dayWater));
+  }, [dayDrinking, dayWater]);
 
   useEffect(() => {
     if (percent < 10 || (percent > 39 && percent < 57) || percent > 85) {
@@ -17,7 +34,7 @@ export default function WaterProgressBar() {
     <div className={css.wrapper}>
       <h6 className={css.header}> Today</h6>
       <div className={css.bar}>
-        <div className={css.progressLine} style={{ width: `${percent}%` }}>
+        <div className={css.progressLine} style={{ maxWidth: `${percent}%` }}>
           {isPercentVisible && (
             <span className={css.activePercent} style={{ left: `100%` }}>
               {`${percent}%`}
@@ -26,9 +43,9 @@ export default function WaterProgressBar() {
         </div>
       </div>
       <div className={css.textContainer}>
-        <p className={css.text}>0%</p>
+        <p className={css.text1}>0%</p>
         <p className={css.text}>50%</p>
-        <p className={css.text}>100%</p>
+        <p className={css.text2}>100%</p>
       </div>
     </div>
   );
