@@ -104,6 +104,7 @@
 .incrementBtn:hover {
   background-color: transparent;
 }
+
 .saveBtn:hover {
   background-color: var(--accent-hover);
 }
@@ -119,6 +120,11 @@
 .counterBtn:hover .iconPlus {
   stroke: var(--main-white);
 }
+.decrementBtn:hover .iconMinus,
+.incrementBtn:hover .iconPlus {
+  stroke: var(--main);
+}
+
 .error {
   font-weight: 400;
   font-size: 14px;
@@ -159,8 +165,10 @@
     width: 438px;
     height: 56px;
     padding: 16px 16px;
-    /* margin-bottom: 24px; */
     border: 1px solid var(--main-text);
+  }
+  .baseInput:focus {
+    outline: none;
   }
   .secondaryLabel {
     font-size: 18px;

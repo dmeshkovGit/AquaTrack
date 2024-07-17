@@ -3,6 +3,11 @@ import css from '../WaterForm/WaterForm.module.css';
 import { useForm } from 'react-hook-form';
 import Icon from '../../../shared/components/Icon/Icon';
 import { yupResolver } from '@hookform/resolvers/yup';
+import {
+  isNumber,
+  timeInputController,
+  getFormattedTime,
+} from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
 
@@ -16,11 +21,6 @@ const schema = yup.object().shape({
     .number()
     .min(50, 'Value must be at least 50')
     .max(1500, 'Value must be at most 1500')
-    .test(
-      'is-multiple',
-      'Value must be number multiple of 50',
-      value => value % 50 === 0,
-    )
     .required('Count is required'),
 });
 
@@ -32,13 +32,8 @@ export default function WaterForm({ isOpen }) {
 
   const [count, setCount] = useState(50);
   const [time, setTime] = useState(getFormattedTime());
-
-  function getFormattedTime() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
+  const [err, setErr] = useState(false);
+  const [timeErr, setTimeErr] = useState(false);
 
   const {
     register,
@@ -68,13 +63,6 @@ export default function WaterForm({ isOpen }) {
   const onCountChange = event => {
     const value = Number(event.target.value);
     setCount(value);
-  };
-
-  const isNumber = event => {
-    const charCode = event.which ? event.which : event.keyCode;
-    if ((charCode < 48 || charCode > 57) && charCode !== 8) {
-      event.preventDefault();
-    }
   };
 
   return (
@@ -121,8 +109,13 @@ export default function WaterForm({ isOpen }) {
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
           {...register('Time', { required: true })}
+          onChange={event => timeInputController(event, setTimeErr)}
+          maxLength="5"
         />
-        <span className={css.error}>{errors.Time && errors.Time.message}</span>
+        <span className={css.error}>
+          {errors.Time && errors.Time.message}{' '}
+          {timeErr && `Type in format 'hh:mm' please`}
+        </span>
       </label>
       <label className={css.secondaryLabel}>
         Enter the value of the water used:
@@ -130,11 +123,11 @@ export default function WaterForm({ isOpen }) {
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
           onChange={onCountChange}
-          onKeyDown={isNumber}
+          onKeyDown={event => isNumber(event, setErr)}
           maxLength="4"
         />
         <span className={css.error}>
-          {errors.Count && errors.Count.message}
+          {errors.Count && errors.Count.message} {err && 'Type numbers please'}
         </span>
       </label>
       <button className={css.saveBtn} type="submit">

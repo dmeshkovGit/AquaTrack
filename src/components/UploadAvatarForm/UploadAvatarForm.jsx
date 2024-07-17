@@ -24,52 +24,54 @@ export default function UploadAvatarForm() {
     dispacth(updateUser({ _id: user._id, avatarURL: image }));
   };
   return (
-    <div className={css.container}>
-      {user.avatarUrl || image ? (
-        <img
-          src={user.avatarUrl || image}
-          width={60}
-          className={css.img}
-          alt={fileName}
-        />
-      ) : (
-        <RxAvatar size={38} className={css.iconAvatar} />
-      )}
-      <div className={css.formWrapper}>
-        <form
-          className={css.form}
-          onClick={() => document.querySelector('#avatarInput').click()}
-        >
-          <div className={css.wrapInput}>
-            <input
-              type="file"
-              name="avatarURL"
-              className={css.avatarInput}
-              accept="image/*, .png, .jpg, .jpeg, .web, .webp"
-              onChange={onChange}
-              hidden
-              id="avatarInput"
-            />
-            <MdOutlineFileUpload className={css.icon} />
-            <p className={css.text}>Upload avatar</p>
-          </div>
-        </form>
-        <div className={css.btnWrap}>
-          <button type="button" className={css.btn} onClick={onSubmit}>
-            <IoIosSend className={css.icon} />
-          </button>
-          <button
-            type="button"
-            className={css.btn}
-            onClick={() => {
-              setFileName('');
-              setImage(null);
-            }}
+    <>
+      <div className={css.container}>
+        {user.avatarURL || image ? (
+          <img
+            src={user.avatarURL || image}
+            width={60}
+            className={css.img}
+            alt={fileName}
+          />
+        ) : (
+          <RxAvatar size={38} className={css.iconAvatar} />
+        )}
+        <div className={css.formWrapper}>
+          <form
+            className={css.form}
+            onClick={() => document.querySelector('#avatarInput').click()}
           >
-            <MdDelete className={css.icon} />
-          </button>
+            <div className={css.wrapInput}>
+              <input
+                type="file"
+                name="avatarURL"
+                className={css.avatarInput}
+                accept="image/*, .png, .jpg, .jpeg, .web, .webp"
+                onChange={onChange}
+                hidden
+                id="avatarInput"
+              />
+              <MdOutlineFileUpload className={css.icon} />
+              <p className={css.text}>Upload avatar</p>
+            </div>
+          </form>
+          <div className={css.btnWrap}>
+            <button type="button" className={css.btn} onClick={onSubmit}>
+              <IoIosSend className={css.icon} />
+            </button>
+            <button
+              type="button"
+              className={css.btn}
+              onClick={() => {
+                setFileName('');
+                setImage(null);
+              }}
+            >
+              <MdDelete className={css.icon} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

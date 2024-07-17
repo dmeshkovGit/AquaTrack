@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
@@ -11,8 +11,21 @@ import SharedLayout from '../SharedLayout/SharedLayout';
 import HomePage from '../../pages/HomePage/HomePage';
 import { Loader } from '../Loader/Loader';
 import { Toaster } from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser, refreshUserToken } from '../../redux/user/operations';
+import { selectIsLoggedIn } from '../../redux/user/selectors';
 
 function App() {
+  const dispach = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  useEffect(() => {
+    dispach(refreshUserToken());
+  }, [dispach]);
+
+  useEffect(() => {
+    isLoggedIn && dispach(fetchUser());
+  }, [dispach, isLoggedIn]);
+
   return (
     <>
       <Toaster position="top-center" />

@@ -3,7 +3,7 @@ import {
   fetchUser,
   login,
   logout,
-  refreshUser,
+  refreshUserToken,
   register,
   updateUser,
 } from './operations';
@@ -30,6 +30,7 @@ const slice = createSlice({
       liters: 0,
     },
     token: null,
+    refreshToken: null,
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
@@ -40,6 +41,7 @@ const slice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
         state.user = action.payload.user;
         state.isLoggedIn = true;
       })
@@ -50,24 +52,26 @@ const slice = createSlice({
         state.user = action.payload.user;
         state.isLoggedIn = true;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
       })
       .addCase(login.rejected, handleRejected)
-      .addCase(refreshUser.pending, state => {
+      .addCase(refreshUserToken.pending, state => {
         state.isLoading = true;
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
+      .addCase(refreshUserToken.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
         state.isRefreshing = false;
         state.isLoggedIn = true;
       })
-      .addCase(refreshUser.rejected, state => {
+      .addCase(refreshUserToken.rejected, state => {
         state.isLoading = false;
         state.isRefreshing = false;
       })
       .addCase(logout.pending, handlePending)
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(logout.fulfilled, state => {
         state.isLoading = false;
         state.user = {
           id: '',
@@ -80,6 +84,7 @@ const slice = createSlice({
           liters: 0,
         };
         state.token = null;
+        state.refreshToken = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })
