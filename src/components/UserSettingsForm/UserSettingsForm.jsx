@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../../shared/components/Loader/Loader';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
