@@ -31,7 +31,7 @@ export const register = createAsyncThunk(
       login(userInfo);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   },
 );

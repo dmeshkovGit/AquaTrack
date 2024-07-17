@@ -4,7 +4,6 @@ import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignIpPage() {
@@ -16,9 +15,7 @@ export default function SignIpPage() {
         </div>
         <div className={css.content}>
           <h2 className={css.title}>Sign in</h2>
-
           <SignInForm />
-
           <p className={css.notify}>
             Don`t have an account?{' '}
             <Link className={css.navLink} to="/signup">
@@ -30,7 +27,6 @@ export default function SignIpPage() {
       <div className={css.advantagesSection}>
         <AdvantagesSection />
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 }
