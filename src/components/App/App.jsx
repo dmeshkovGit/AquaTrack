@@ -9,22 +9,17 @@ import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SharedLayout from '../SharedLayout/SharedLayout';
 import HomePage from '../../pages/HomePage/HomePage';
-import { Loader } from '../Loader/Loader';
 import { Toaster } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, refreshUserToken } from '../../redux/user/operations';
-import { selectIsLoggedIn } from '../../redux/user/selectors';
+import { useDispatch } from 'react-redux';
+import { refreshUserToken } from '../../redux/user/operations';
+import { Loader } from '../../shared/components/Loader/Loader';
 
 function App() {
-  const dispach = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  useEffect(() => {
-    dispach(refreshUserToken());
-  }, [dispach]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    isLoggedIn && dispach(fetchUser());
-  }, [dispach, isLoggedIn]);
+    dispatch(refreshUserToken());
+  }, [dispatch]);
 
   return (
     <>

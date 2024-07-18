@@ -5,8 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
+import { selectIsLoading } from '../../redux/user/selectors';
+import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -44,6 +46,8 @@ export default function SignUpForm() {
     const { email, password } = data;
     dispatch(registerUser({ email, password }));
   };
+
+  const isLoading = useSelector(selectIsLoading);
 
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -120,7 +124,7 @@ export default function SignUpForm() {
         type="submit"
         // disabled={loading}
       >
-        Sign Up
+        {isLoading ? <AuthLoader /> : 'Sign Up'}
       </button>
     </form>
   );
