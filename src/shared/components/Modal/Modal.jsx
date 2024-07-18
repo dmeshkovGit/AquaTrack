@@ -13,12 +13,17 @@ export default function Modal({ children, isOpen, onClose, btnClassName }) {
     };
 
     if (isOpen) {
+      document.body.classList.add('modalIsOpen');
       document.addEventListener('keydown', handleEscape);
     } else {
+      document.body.classList.remove('modalIsOpen');
       document.removeEventListener('keydown', handleEscape);
     }
 
-    return () => document.removeEventListener('keydown', handleEscape);
+    return () => {
+      document.body.classList.remove('modalIsOpen');
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, [isOpen, onClose]);
 
   return (
