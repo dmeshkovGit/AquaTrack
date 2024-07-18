@@ -55,7 +55,7 @@
   border-radius: 50%;
   border: 1px solid var(--accent);
   position: absolute;
-  right: -4px;
+  right: -8px;
   top: 50%;
   background-color: var(--main-white);
   transform: translateY(-50%);
@@ -81,10 +81,19 @@
     font-size: 15px;
     line-height: 22px;
   }
-  .text {
+  .text,
+  .text1,
+  .text2 {
     font-size: 12px;
     line-height: 22px;
   }
+  .text1 {
+    margin-left: -4px;
+  }
+  .text2 {
+    margin-right: -10px;
+  }
+
   .activePercent {
     font-size: 10px;
     line-height: 18px;
