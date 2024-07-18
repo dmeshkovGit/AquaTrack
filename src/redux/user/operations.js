@@ -21,6 +21,12 @@ export const login = createAsyncThunk(
         message: error.response.data.message,
         statusCode: error.response.status,
       };
+      console.log('Response.statusCode Type: ', typeof response.statusCode);
+      if (response.statusCode === 401) {
+        toast.error('Email or password is wrong');
+      } else {
+        toast.error('Login failed');
+      }
       return thunkAPI.rejectWithValue(response);
     }
   },
