@@ -6,9 +6,9 @@ import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { login } from '../../redux/user/operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading } from '../../redux/user/selectors';
-import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 
 const schema = yup.object().shape({
   email: yup
@@ -87,6 +87,7 @@ export default function SignInForm({ onSubmit }) {
       <button type="submit" className={css.submitButton} onClick={onSubmit}>
         {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }
