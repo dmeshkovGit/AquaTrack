@@ -17,7 +17,6 @@ export const login = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      console.log(error);
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,
