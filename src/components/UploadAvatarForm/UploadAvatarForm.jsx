@@ -5,12 +5,12 @@ import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
-import { updateUser } from '../../redux/user/operations';
+import { updateAvatar, updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('avatar');
   const user = useSelector(selectUser);
   const dispacth = useDispatch();
 
@@ -18,9 +18,7 @@ export default function UploadAvatarForm() {
     files[0] && setFileName(files[0].name);
     if (!files) return;
     setImage(URL.createObjectURL(files[0]));
-    dispacth(
-      updateUser({ _id: user._id, avatarURL: URL.createObjectURL(files[0]) }),
-    )
+    dispacth(updateAvatar({ avatar: files[0] }))
       .unwrap()
       .then(() => toast.success('Avatar updated'))
       .catch(() => toast.error('Sorry, try again later'));
