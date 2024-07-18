@@ -5,12 +5,9 @@ import WaterModal from '../../components/WaterModal/WaterModal';
 import Modal from '../Modal/Modal';
 
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import '../../../translate/index.js';
 
 export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { t } = useTranslation();
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -34,7 +31,7 @@ export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
           height="16"
           id="icon-plus"
         />
-        {t('Add water')}
+        Add water
       </button>
       {isOpenModal && (
         <Modal

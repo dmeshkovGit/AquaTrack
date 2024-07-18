@@ -4,14 +4,10 @@ import { useEffect, useState } from 'react';
 import { selectUserWaterNorm } from '../../redux/user/selectors';
 import { selectDayWater } from '../../redux/water/selectors';
 
-import { useTranslation } from 'react-i18next';
-import '../../translate/index.js';
-
 export default function WaterProgressBar() {
   const [percent, setPercent] = useState(0);
   const [isPercentVisible, setIsPercentVisible] = useState(true);
   const dayWater = useSelector(selectUserWaterNorm);
-  const { t } = useTranslation();
 
   // Для ТЕСТУ ПОКИ НЕ ЗАПИСУЮТЬСЯ ДАНІ В СЕТІНГС ЮЗЕРА
   // const dayWater = 1 * 1000;
@@ -38,7 +34,7 @@ export default function WaterProgressBar() {
 
   return (
     <div className={css.wrapper}>
-      <h6 className={css.header}>{t('Today water')}</h6>
+      <h6 className={css.header}> Today</h6>
       <div className={css.bar}>
         <div className={css.progressLine} style={{ maxWidth: `${percent}%` }}>
           {isPercentVisible && (

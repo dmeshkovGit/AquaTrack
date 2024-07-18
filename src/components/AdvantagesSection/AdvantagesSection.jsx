@@ -1,11 +1,7 @@
 import clsx from 'clsx';
 import css from './AdvantagesSection.module.css';
 
-import { useTranslation } from 'react-i18next';
-import '../../translate/index.js';
-
 export default function AdvantagesSection() {
-  const { t } = useTranslation();
   const users = [
     {
       name: 'firstUser',
@@ -40,20 +36,14 @@ export default function AdvantagesSection() {
             })}
           </ul>
           <p className={css.usersText}>
-            {t('Our 1')}{' '}
-            <span className={css.textAccent}>{t('Happy customers')}</span>{' '}
-            {t('Our 2')}
+            Our <span className={css.textAccent}>happy</span> customers
           </p>
         </div>
         <div className={css.features}>
-          <span className={clsx(css.habit, css.feature)}>
-            {t('Habit drive')}
-          </span>
-          <span className={clsx(css.view, css.feature)}>
-            {t('View statistics')}
-          </span>
+          <span className={clsx(css.habit, css.feature)}>Habit drive</span>
+          <span className={clsx(css.view, css.feature)}>View statistics</span>
           <span className={clsx(css.personal, css.feature)}>
-            {t('Personal rate')}
+            Personal rate setting
           </span>
         </div>
       </div>
