@@ -105,7 +105,7 @@ const slice = createSlice({
       .addCase(updateAvatar.pending, handlePending)
       .addCase(updateAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user.avatarURL = action.payload.user.avatar;
+        state.user.avatarURL = action.payload.avatarURL;
       })
       .addCase(updateAvatar.rejected, handleRejected),
 });
