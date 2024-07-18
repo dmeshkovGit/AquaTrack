@@ -9,6 +9,7 @@ import { login } from '../../redux/user/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import { toast } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup
@@ -21,17 +22,19 @@ const schema = yup.object().shape({
     .required('Password is required'),
 });
 
-export default function SignInForm({ onSubmit }) {
+export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
   const toggleShowPassword = () => {
@@ -39,8 +42,23 @@ export default function SignInForm({ onSubmit }) {
   };
 
   const handleFormSubmit = data => {
-    const { email, password } = data;
-    dispatch(login({ email, password }));
+    dispatch(login(data))
+      .then(action => {
+        if (login.fulfilled.match(action)) {
+          toast.success('Login successful');
+        } else if (login.rejected.match(action)) {
+          const errorMessage = action.payload?.message || 'Login failed';
+          const statusCode = action.payload ? action.payload.statusCode : null;
+
+          console.error(
+            `Login failed with status code ${statusCode}: ${errorMessage}`,
+          );
+        }
+      })
+      .catch(error => {
+        // Этот блок не будет выполняться, поскольку dispatch всегда возвращает успешный промис
+        console.error('Unexpected error:', error);
+      });
   };
 
   return (
@@ -51,6 +69,8 @@ export default function SignInForm({ onSubmit }) {
           className={clsx(css.inputGroupInput, errors.email && css.inputError)}
           type="text"
           placeholder="Enter your email"
+          name="email"
+          autoComplete="on"
           {...register('email')}
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
@@ -61,6 +81,8 @@ export default function SignInForm({ onSubmit }) {
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Enter your password"
+            name="password"
+            autoComplete="on"
             {...register('password')}
             className={clsx(
               css.inputGroupInput,
@@ -84,7 +106,11 @@ export default function SignInForm({ onSubmit }) {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <button type="submit" className={css.submitButton} onClick={onSubmit}>
+      <button
+        type="submit"
+        className={css.submitButton}
+        disabled={!isValid || isLoading}
+      >
         {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
     </form>
