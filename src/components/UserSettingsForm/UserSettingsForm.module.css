@@ -167,6 +167,10 @@
     width: 141px;
     height: 56px;
   }
+
+  .rightPart {
+    margin-top: 24px;
+  }
 }
 
 /* ===================DESKTOP================== */
@@ -183,5 +187,9 @@
 
   .labelContainer {
     width: 400px;
+  }
+
+  .rightPart {
+    margin-top: 0;
   }
 }
