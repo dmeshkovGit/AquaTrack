@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
 import { toast } from 'react-toastify';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
@@ -34,7 +34,6 @@ export default function SignUpForm() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -45,27 +44,10 @@ export default function SignUpForm() {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
-
-    dispatch(registerUser({ email, password }))
-      .unwrap()
-      .then(registerResponse => {
-        console.log('Register Response:', registerResponse);
-        // if (registerResponse) {
-        //   navigate('/tracker');
-        // }
-      })
-      .catch(error => {
-        // console.log('Error message:', error.message);
-        // console.log('Error:', error);
-        // console.log(
-        //   'Error response data message:',
-        //   error.response?.data?.message,
-        // );
-
-        // toast.error(`Registration failed: ${error.response?.data?.message}`);
-        toast.error('Registration failed: Emai is already exist');
-      });
+    dispatch(registerUser({ email, password }));
   };
+
+  const isLoading = useSelector(selectIsLoading);
 
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -95,6 +77,7 @@ export default function SignUpForm() {
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />
@@ -140,7 +123,7 @@ export default function SignUpForm() {
         type="submit"
         // disabled={loading}
       >
-        Sign Up
+        {isLoading ? <AuthLoader /> : 'Sign Up'}
       </button>
       <GoogleAuthBtn />
     </form>

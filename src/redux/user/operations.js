@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../API/axiosInstance';
+import toast from 'react-hot-toast';
 
 const setAuthHeader = token => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -17,7 +18,11 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
-      return thunkAPI.rejectWithValue(error.message);
+      const response = {
+        message: error.response.data.message,
+        statusCode: error.response.status,
+      };
+      return thunkAPI.rejectWithValue(response);
     }
   },
 );
@@ -31,7 +36,16 @@ export const register = createAsyncThunk(
       login(userInfo);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const response = {
+        message: error.response.data.message,
+        statusCode: error.response.status,
+      };
+      console.log(typeof response.statusCode);
+      if (response.statusCode === 409) {
+        toast.error('This email is already used');
+      }
+      return thunkAPI.rejectWithValue(response);
+
     }
   },
 );
@@ -79,7 +93,11 @@ export const fetchUser = createAsyncThunk(
       const { data } = await instance.get(`/api/users/current`);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const response = {
+        message: error.response.data.message,
+        statusCode: error.response.status,
+      };
+      return thunkAPI.rejectWithValue(response);
     }
   },
 );
@@ -95,7 +113,11 @@ export const updateUser = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const response = {
+        message: error.response.data.message,
+        statusCode: error.response.status,
+      };
+      return thunkAPI.rejectWithValue(response);
     }
   },
 );

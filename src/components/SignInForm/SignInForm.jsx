@@ -24,12 +24,12 @@ const schema = yup.object().shape({
 export default function SignInForm({ onSubmit }) {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-
+  const isLoading = useSelector(selectIsLoading);
+  // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -40,25 +40,7 @@ export default function SignInForm({ onSubmit }) {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
-    dispatch(login({ email, password }))
-      .unwrap()
-      .then(loginResponse => {
-        console.log('login Response:', loginResponse);
-        // if (loginResponse) {
-        //   navigate('/tracker');
-        // }
-      })
-      .catch(error => {
-        // console.log('Error message:', error.message);
-        // console.log('Error:', error);
-        // console.log(
-        //   'Error response data message:',
-        //   error.response?.data?.message,
-        // );
-
-        // toast.error(`login failed: ${error}`);
-        toast.error('login failed: Emai or passwrd is wrong');
-      });
+    dispatch(login({ email, password }));
   };
 
   return (
@@ -85,11 +67,11 @@ export default function SignInForm({ onSubmit }) {
               errors.password && css.inputError,
             )}
           />
-
           <button
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />
@@ -103,7 +85,7 @@ export default function SignInForm({ onSubmit }) {
         )}
       </div>
       <button type="submit" className={css.submitButton} onClick={onSubmit}>
-        Sign In
+        {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
       <GoogleAuthBtn />
     </form>
