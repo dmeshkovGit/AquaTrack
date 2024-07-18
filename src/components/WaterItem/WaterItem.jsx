@@ -5,9 +5,13 @@ import Modal from '../../shared/components/Modal/Modal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 import Icon from '../../shared/components/Icon/Icon';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -40,7 +44,7 @@ export default function WaterItem() {
                   id="icon-water-glass"
                 />
                 <div>
-                  <strong>250 ml</strong>
+                  <strong>250 {t('Water add')}</strong>
                   <p>7:00 AM</p>
                 </div>
                 <div className={css.container_buttons}>

@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 import { login } from '../../redux/user/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
@@ -22,73 +24,79 @@ const schema = yup.object().shape({
     .required('Password is required'),
 });
 
-export default function SignInForm({ onSubmit }) {
-  const dispatch = useDispatch();
+export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const isLoading = useSelector(selectIsLoading);
-  // об'єкт конфігурації параметрів хука useForm
+
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const onSubmit = data => console.log(data);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleFormSubmit = data => {
-    const { email, password } = data;
-    dispatch(login({ email, password }));
-  };
-
   return (
-    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={css.inputGroup}>
-        <label>Email</label>
-        <input
-          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
-          type="text"
-          placeholder="Enter your email"
-          {...register('email')}
-        />
-        {errors.email && <p className={css.error}>{errors.email.message}</p>}
-      </div>
-      <div className={css.inputGroup}>
-        <label>Password</label>
-        <div className={css.passwordContainer}>
+    <>
+      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={css.inputGroup}>
+          <label>{t('Email user')}</label>
           <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
-            {...register('password')}
             className={clsx(
               css.inputGroupInput,
-              errors.password && css.inputError,
+              errors.email && css.inputError,
             )}
+            type="text"
+            placeholder={t('Enter email')}
+            {...register('email')}
           />
-          <button
-            type="button"
-            className={css.passwordToggle}
-            onClick={toggleShowPassword}
-            tabIndex="-1"
-          >
-            {showPassword ? (
-              <Icon className={css.icon} id="eye" width={20} height={20} />
-            ) : (
-              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-            )}
-          </button>
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
+        <div className={css.inputGroup}>
+          <label>{t('Password user')}</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('Enter password')}
+              {...register('password')}
+              className={clsx(
+                css.inputGroupInput,
+                errors.password && css.inputError,
+              )}
+            />
+
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? (
+                <Icon className={css.icon} id="eye" width={18} height={18} />
+              ) : (
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+              )}
+            </button>
+          </div>
+          {errors.password && (
+            <p className={css.error}>{errors.password.message}</p>
+          )}
+        </div>
+
         {errors.password && (
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
       <button type="submit" className={css.submitButton} onClick={onSubmit}>
-        {isLoading ? <AuthLoader /> : 'Sign in'}
+        {isLoading ? <AuthLoader /> :  {t('Login user')}}
       </button>
       <GoogleAuthBtn />
     </form>
+</>
   );
 }
