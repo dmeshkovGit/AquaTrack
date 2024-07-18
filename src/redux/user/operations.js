@@ -17,7 +17,6 @@ export const login = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      console.log(error);
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,
@@ -40,12 +39,10 @@ export const register = createAsyncThunk(
         message: error.response.data.message,
         statusCode: error.response.status,
       };
-      console.log(typeof response.statusCode);
       if (response.statusCode === 409) {
         toast.error('This email is already used');
       }
       return thunkAPI.rejectWithValue(response);
-
     }
   },
 );
@@ -105,7 +102,6 @@ export const fetchUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (userData, thunkAPI) => {
-    console.log(userData);
     try {
       const { data } = await instance.put(
         `/api/users/${userData._id}`,
