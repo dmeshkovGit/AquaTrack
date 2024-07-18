@@ -19,7 +19,9 @@ export default function WaterProgressBar() {
       (acc, drink) => acc + drink.amount,
       0,
     );
-    setPercent(Math.round((totalAmount * 100) / dayWater));
+    if (totalAmount > 0) {
+      setPercent(Math.round((totalAmount * 100) / dayWater));
+    }
   }, [dayDrinking, dayWater]);
 
   useEffect(() => {

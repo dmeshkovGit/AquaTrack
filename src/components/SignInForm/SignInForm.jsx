@@ -7,6 +7,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { login } from '../../redux/user/operations';
 import { useDispatch, useSelector } from 'react-redux';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 import { toast } from 'react-hot-toast';
@@ -113,6 +114,7 @@ export default function SignInForm() {
       >
         {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }
