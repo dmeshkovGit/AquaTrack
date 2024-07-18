@@ -10,6 +10,7 @@ import LogOutModal from '../LogOutModal/LogOutModal';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
+
 export default function UserBar() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);

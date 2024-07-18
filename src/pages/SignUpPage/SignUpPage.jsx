@@ -1,10 +1,20 @@
 import { NavLink } from 'react-router-dom';
+
 import Logo from '../../shared/components/Logo/Logo';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import css from '../SignUpPage/SignUpPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function SignUpPage() {
+  const { t } = useTranslation();
+  const handleSignUp = data => {
+    console.log('Form Data:', data);
+    // логіка для надсилання даних на сервер
+  };
+
   return (
     <div className={css.desctopContainer}>
       <div className={css.container}>
@@ -12,12 +22,12 @@ export default function SignUpPage() {
           <Logo />
         </div>
         <div className={css.content}>
-          <h2 className={css.title}>Sign Up</h2>
-          <SignUpForm />
+          <h2 className={css.title}>{t('Register user form')}</h2>
+          <SignUpForm onSubmit={handleSignUp} />
           <p className={css.notify}>
-            Already have an account?{' '}
+            {t('Already have')}{' '}
             <NavLink className={css.navLink} to="/signin">
-              sign in
+              {t('Login user')}
             </NavLink>
           </p>
         </div>
