@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import { login } from '../../redux/user/operations';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 
 const schema = yup.object().shape({
   email: yup
@@ -104,6 +105,7 @@ export default function SignInForm({ onSubmit }) {
       <button type="submit" className={css.submitButton} onClick={onSubmit}>
         Sign In
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }

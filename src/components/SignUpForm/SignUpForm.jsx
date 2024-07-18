@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
 import { toast } from 'react-toastify';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -141,6 +142,7 @@ export default function SignUpForm() {
       >
         Sign Up
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }
