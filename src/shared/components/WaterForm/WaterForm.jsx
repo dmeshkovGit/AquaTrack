@@ -7,9 +7,13 @@ import {
   isNumber,
   timeInputController,
   getFormattedTime,
+  parseTimeToUnix,
 } from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { addWater } from '../../../redux/water/operations';
+import { selectUserWaterNorm } from '../../../redux/user/selectors';
 
 const schema = yup.object().shape({
   Time: yup
@@ -25,6 +29,10 @@ const schema = yup.object().shape({
 });
 
 export default function WaterForm({ isOpen }) {
+  const dispatch = useDispatch();
+  const dailyNorm = useSelector(selectUserWaterNorm);
+  // const dailyNorm = 1;
+
   //    <div>
   //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
   //     : <h2> Тут буде форма для редагуання води</h2>}
@@ -64,15 +72,21 @@ export default function WaterForm({ isOpen }) {
     const value = Number(event.target.value);
     setCount(value);
   };
+  const onSubmit = data => {
+    if (dailyNorm > 0) {
+      const obj = {
+        amount: data.Count,
+        date: parseTimeToUnix(data.Time),
+      };
+      dispatch(addWater(obj));
+      isOpen(false);
+    } else {
+      alert('Введи денну норму курва');
+    }
+  };
 
   return (
-    <form
-      className={css.form}
-      onSubmit={handleSubmit(data => {
-        console.log(data);
-        isOpen(false);
-      })}
-    >
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
       <p className={css.text}>Correct entered data:</p>
       <p className={css.secondaryText}>Amount of water:</p>
       <div className={css.counterContainer}>

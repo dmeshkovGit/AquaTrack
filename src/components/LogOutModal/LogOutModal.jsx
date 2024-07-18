@@ -3,7 +3,7 @@ import css from '../LogOutModal/LogOutModal.module.css';
 import { logout } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../redux/user/selectors';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../../shared/components/Loader/Loader';
 
 export default function LogOutModal({ isModalOpen }) {
   const isLoading = useSelector(selectIsLoading);

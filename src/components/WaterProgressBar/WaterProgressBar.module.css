@@ -32,12 +32,21 @@
   display: flex;
   justify-content: space-between;
 }
-.text {
+.text,
+.text1,
+.text2 {
   font-weight: 400;
   font-size: 10px;
   line-height: 10px;
   color: var(--main-text);
 }
+.text1 {
+  margin-left: -4px;
+}
+.text2 {
+  margin-right: -10px;
+}
+
 .activePercent {
   font-weight: 400;
   font-size: 8px;
@@ -55,7 +64,7 @@
   border-radius: 50%;
   border: 1px solid var(--accent);
   position: absolute;
-  right: -4px;
+  right: -8px;
   top: 50%;
   background-color: var(--main-white);
   transform: translateY(-50%);
@@ -81,10 +90,13 @@
     font-size: 15px;
     line-height: 22px;
   }
-  .text {
+  .text,
+  .text1,
+  .text2 {
     font-size: 12px;
     line-height: 22px;
   }
+
   .activePercent {
     font-size: 10px;
     line-height: 18px;

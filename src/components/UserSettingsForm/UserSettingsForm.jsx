@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import { Loader } from '../Loader/Loader';
 import { isNumber } from '../../helpers/validationsHelper';
 
+
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
   email: yup
