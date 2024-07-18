@@ -35,8 +35,7 @@
   transition: all var(--transition);
 }
 
-.icon:hover,
-.icon:focus {
+.icon:hover {
   color: var(--accent-hover);
   scale: 1.1;
 }
@@ -53,12 +52,18 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   color: var(--main-text);
+  transition: all var(--transition);
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.btnWrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.text:hover {
+  color: var(--accent-hover);
+}
+
+.text:hover > .icon {
+  color: var(--accent-hover);
 }
 
 .btn {

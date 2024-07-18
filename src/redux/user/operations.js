@@ -121,3 +121,26 @@ export const updateUser = createAsyncThunk(
     }
   },
 );
+
+export const updateAvatar = createAsyncThunk(
+  'user/updateAvatar',
+  async (avatarFile, thunkAPI) => {
+    try {
+      const {
+        user: { user },
+      } = thunkAPI.getState();
+      const { data } = await instance.put(
+        `/api/users/${user._id}`,
+        avatarFile,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);

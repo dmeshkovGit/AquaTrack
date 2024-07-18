@@ -27,7 +27,7 @@
 
 .logoutBtn {
   border-radius: 30px;
-  padding: 14px 126px;
+  padding: 14px 0;
   min-width: 100%;
   display: flex;
   align-items: center;

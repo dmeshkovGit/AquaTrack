@@ -4,38 +4,44 @@ import { MdOutlineFileUpload } from 'react-icons/md';
 import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { RxAvatar } from 'react-icons/rx';
 import { selectUser } from '../../redux/user/selectors';
-import { updateUser } from '../../redux/user/operations';
+import { updateAvatar, updateUser } from '../../redux/user/operations';
+import toast from 'react-hot-toast';
 
 export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('avatar');
   const user = useSelector(selectUser);
   const dispacth = useDispatch();
 
   const onChange = ({ target: { files } }) => {
     files[0] && setFileName(files[0].name);
-    if (files) {
-      setImage(URL.createObjectURL(files[0]));
-    }
+    if (!files) return;
+    setImage(URL.createObjectURL(files[0]));
+    dispacth(updateAvatar({ avatar: files[0] }))
+      .unwrap()
+      .then(() => toast.success('Avatar updated'))
+      .catch(() => toast.error('Sorry, try again later'));
   };
-  const onSubmit = () => {
-    dispacth(updateUser({ _id: user._id, avatarURL: image }));
+
+  const onDelete = () => {
+    setFileName('');
+    setImage(null);
+    dispacth(updateUser({ _id: user._id, avatarURL: null }))
+      .unwrap()
+      .then(() => toast.success('Avatar deleted'))
+      .catch(() => toast.error('Sorry, try again later'));
   };
   return (
     <>
       <div className={css.container}>
-        {user.avatarURL || image ? (
-          <img
-            src={user.avatarURL || image}
-            width={60}
-            className={css.img}
-            alt={fileName}
-          />
-        ) : (
-          <RxAvatar size={38} className={css.iconAvatar} />
-        )}
+        <img
+          src={image || user.avatarURL}
+          width={60}
+          className={css.img}
+          alt={fileName}
+        />
+
         <div className={css.formWrapper}>
           <form
             className={css.form}
@@ -46,30 +52,22 @@ export default function UploadAvatarForm() {
                 type="file"
                 name="avatarURL"
                 className={css.avatarInput}
-                accept="image/*, .png, .jpg, .jpeg, .web, .webp"
+                accept="image/*, .png, .jpg, .jpeg, .web, .webp, .gif, .svg"
                 onChange={onChange}
                 hidden
                 id="avatarInput"
               />
-              <MdOutlineFileUpload className={css.icon} />
-              <p className={css.text}>Upload avatar</p>
+
+              <p className={css.text}>
+                <MdOutlineFileUpload className={css.icon} />
+                Upload avatar
+              </p>
             </div>
           </form>
-          <div className={css.btnWrap}>
-            <button type="button" className={css.btn} onClick={onSubmit}>
-              <IoIosSend className={css.icon} />
-            </button>
-            <button
-              type="button"
-              className={css.btn}
-              onClick={() => {
-                setFileName('');
-                setImage(null);
-              }}
-            >
-              <MdDelete className={css.icon} />
-            </button>
-          </div>
+
+          <button type="button" className={css.btn} onClick={onDelete}>
+            <MdDelete className={css.icon} />
+          </button>
         </div>
       </div>
     </>

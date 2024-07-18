@@ -5,9 +5,13 @@ import * as yup from 'yup';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
-
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import { login } from '../../redux/user/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
+import { selectIsLoading } from '../../redux/user/selectors';
+import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 
 const schema = yup.object().shape({
   email: yup
@@ -83,11 +87,16 @@ export default function SignInForm() {
             <p className={css.error}>{errors.password.message}</p>
           )}
         </div>
-        <button type="submit" className={css.submitButton} onClick={onSubmit}>
-          {t('Login user')}
-        </button>
-        {/* <div className={css.link}></div> */}
-      </form>
-    </>
+
+        {errors.password && (
+          <p className={css.error}>{errors.password.message}</p>
+        )}
+      </div>
+      <button type="submit" className={css.submitButton} onClick={onSubmit}>
+        {isLoading ? <AuthLoader /> :  {t('Login user')}}
+      </button>
+      <GoogleAuthBtn />
+    </form>
+</>
   );
 }

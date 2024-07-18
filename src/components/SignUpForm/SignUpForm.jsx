@@ -9,11 +9,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import css from '../SignUpForm/SignUpForm.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
-// import registerUser from '../../redux/auth/operations';
-
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { register as registerUser } from '../../redux/user/operations';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
+import { selectIsLoading } from '../../redux/user/selectors';
+import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
@@ -137,16 +139,20 @@ export default function SignUpForm() {
             <p className={css.error}>{errors.repeatPassword.message}</p>
           )}
         </div>
-        <button
-          className={css.submitButton}
-          type="submit"
-          // disabled={loading}
-          onClick={onSubmit}
-        >
-          {t('Register user form')}
-        </button>
-        {/* <div className={css.link}></div> */}
-      </form>
-    </>
+
+        {errors.repeatPassword && (
+          <p className={css.error}>{errors.repeatPassword.message}</p>
+        )}
+      </div>
+      <button
+        className={css.submitButton}
+        type="submit"
+        // disabled={loading}
+      >
+        {isLoading ? <AuthLoader /> : {t('Register user form')}}
+      </button>
+      <GoogleAuthBtn />
+    </form>
+</>
   );
 }

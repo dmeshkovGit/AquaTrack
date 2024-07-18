@@ -13,12 +13,17 @@ export default function Modal({ children, isOpen, onClose, btnClassName }) {
     };
 
     if (isOpen) {
+      document.body.classList.add('modalIsOpen');
       document.addEventListener('keydown', handleEscape);
     } else {
+      document.body.classList.remove('modalIsOpen');
       document.removeEventListener('keydown', handleEscape);
     }
 
-    return () => document.removeEventListener('keydown', handleEscape);
+    return () => {
+      document.body.classList.remove('modalIsOpen');
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, [isOpen, onClose]);
 
   return (
@@ -30,7 +35,12 @@ export default function Modal({ children, isOpen, onClose, btnClassName }) {
               className={clsx(css.closeButton, btnClassName)}
               onClick={onClose}
             >
-              <Icon id="x-close" width="12" height="12" />
+              <Icon
+                id="x-close"
+                width="24"
+                height="24"
+                className={css.closeIcon}
+              />
             </button>
             {children}
           </div>
