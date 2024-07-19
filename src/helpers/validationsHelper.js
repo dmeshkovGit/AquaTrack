@@ -43,6 +43,12 @@ export const parseTimeToUnix = time => {
   now.setMilliseconds(0);
   return now.getTime();
 };
+export const unixParser = time => {
+  return new Date(time).toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 
 export const maxNumber = ({ target }, setError, setValue, clearErrors) => {
   const { value, max, name } = target;

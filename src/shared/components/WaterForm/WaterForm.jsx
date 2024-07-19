@@ -6,13 +6,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   isNumber,
   timeInputController,
-  getFormattedTime,
   parseTimeToUnix,
+  getFormattedTime,
+  unixParser,
 } from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { addWater } from '../../../redux/water/operations';
+import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
 
 import { useTranslation } from 'react-i18next';
@@ -31,21 +32,23 @@ const schema = yup.object().shape({
     .required('Count is required'),
 });
 
-export default function WaterForm({ isOpen }) {
-  const dispatch = useDispatch();
-  const dailyNorm = useSelector(selectUserWaterNorm);
-  // const dailyNorm = 1;
-
-  //    <div>
-  //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
-  //     : <h2> Тут буде форма для редагуання води</h2>}
-  //   </div>;
-
-  const [count, setCount] = useState(50);
-  const [time, setTime] = useState(getFormattedTime());
+export default function WaterForm({
+  isOpen,
+  operationAdd,
+  waterId,
+  waterAmount,
+  waterTime,
+}) {
+  const [count, setCount] = useState(operationAdd ? 50 : waterAmount);
+  const [time, setTime] = useState(
+    operationAdd ? getFormattedTime() : unixParser(waterTime),
+  );
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+  const dailyNorm = useSelector(selectUserWaterNorm);
 
   const {
     register,
@@ -82,7 +85,11 @@ export default function WaterForm({ isOpen }) {
         amount: data.Count,
         date: parseTimeToUnix(data.Time),
       };
-      dispatch(addWater(obj));
+      if (operationAdd) {
+        dispatch(addWater(obj));
+      } else {
+        dispatch(editWater({ id: waterId, newNote: obj }));
+      }
       isOpen(false);
     } else {
       alert('Введи денну норму курва');
