@@ -33,8 +33,9 @@ export default function WaterItem() {
     setIsDeleteModalOpen(false);
   };
 
-  const handleEdit = () => {
+  const handleEdit = id => {
     setIsEditModalOpen(true);
+    setSelectedWaterId(id);
   };
 
   return (
@@ -61,7 +62,10 @@ export default function WaterItem() {
                   </p>
                 </div>
                 <div className={css.container_buttons}>
-                  <button className={css.editButton} onClick={handleEdit}>
+                  <button
+                    className={css.editButton}
+                    onClick={() => handleEdit(water._id)}
+                  >
                     {' '}
                     <Icon
                       className={css.svg_edit}
@@ -98,7 +102,11 @@ export default function WaterItem() {
             setIsEditModalOpen(false);
           }}
         >
-          <WaterModal operationType="edit" isOpen={setIsEditModalOpen} />
+          <WaterModal
+            operationType="edit"
+            isOpen={setIsEditModalOpen}
+            waterId={selectedWaterId}
+          />
         </Modal>
       )}
       {isDeleteModalOpen && (

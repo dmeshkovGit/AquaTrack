@@ -14,7 +14,6 @@ import WaterForm from '../WaterForm/WaterForm';
 //       <WaterForm operationType={operationType}/>
 
 export default function WaterModal({ operationAdd, isOpen, waterId }) {
-  console.log('waterID', waterId);
   return (
     <div className={css.container}>
       <h1 className={css.header}>
