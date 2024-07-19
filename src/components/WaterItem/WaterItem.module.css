@@ -30,7 +30,7 @@
   color: var(--main);
 }
 
-.water_item p {
+.date {
   font-size: 12px;
   color: var(--main-text);
   margin-top: 5px;

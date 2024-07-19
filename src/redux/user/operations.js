@@ -17,11 +17,16 @@ export const login = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      console.log(error);
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,
       };
+      console.log('Response.statusCode Type: ', typeof response.statusCode);
+      if (response.statusCode === 401) {
+        toast.error('Email or password is wrong');
+      } else {
+        toast.error('Login failed');
+      }
       return thunkAPI.rejectWithValue(response);
     }
   },
@@ -40,12 +45,10 @@ export const register = createAsyncThunk(
         message: error.response.data.message,
         statusCode: error.response.status,
       };
-      console.log(typeof response.statusCode);
       if (response.statusCode === 409) {
         toast.error('This email is already used');
       }
       return thunkAPI.rejectWithValue(response);
-
     }
   },
 );
@@ -105,7 +108,6 @@ export const fetchUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (userData, thunkAPI) => {
-    console.log(userData);
     try {
       const { data } = await instance.put(
         `/api/users/${userData._id}`,
@@ -118,6 +120,29 @@ export const updateUser = createAsyncThunk(
         statusCode: error.response.status,
       };
       return thunkAPI.rejectWithValue(response);
+    }
+  },
+);
+
+export const updateAvatar = createAsyncThunk(
+  'user/updateAvatar',
+  async (avatarFile, thunkAPI) => {
+    try {
+      const {
+        user: { user },
+      } = thunkAPI.getState();
+      const { data } = await instance.put(
+        `/api/users/${user._id}`,
+        avatarFile,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );

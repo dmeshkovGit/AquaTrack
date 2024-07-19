@@ -2,6 +2,10 @@ body {
   font-family: Poppins;
 }
 
+.modalIsOpen {
+  overflow: hidden;
+}
+
 button {
   cursor: pointer;
   font-family: inherit;
