@@ -1,23 +1,27 @@
 import css from '../ChooseDate/ChooseDate.module.css';
 import { useEffect, useState } from 'react';
 
-export default function ChooseDate() {
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
-  const [currentDate, setCurrentDate] = useState("");
+export default function ChooseDate() {
+  const [currentDate, setCurrentDate] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
-
     const today = new Date().toDateString();
 
-
     if (today === new Date().toDateString()) {
-      setCurrentDate(`Today`);
+      setCurrentDate(t('Today water'));
+    } else {
+      setCurrentDate(`Another day from calendar`);
     }
+  }, []);
 
-    else {setCurrentDate(`Another day from calendar`); }
-
-  },[]);
-
-
-  return <div> <h2 className={css.currentDate}>{currentDate}</h2></div>;
+  return (
+    <div>
+      {' '}
+      <h2 className={css.currentDate}>{currentDate}</h2>
+    </div>
+  );
 }

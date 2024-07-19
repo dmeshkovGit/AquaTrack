@@ -2,6 +2,9 @@ import css from '../DeleteWaterModal/DeleteWaterModal.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteWater } from '../../redux/water/operations';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function DeleteWaterModal({ onClose, waterId }) {
   const dispatch = useDispatch();
 
@@ -13,18 +16,19 @@ export default function DeleteWaterModal({ onClose, waterId }) {
       console.log(error);
     }
   };
+  const { t } = useTranslation();
 
   return (
     <div className={css.modalContent}>
       <button className={css.closeButton} onClick={onClose}></button>
-      <h1 className={css.title}>Delete entry</h1>
-      <p className={css.message}>Are you sure you want to delete the entry?</p>
+      <h1 className={css.title}>{t('Delete entry')}</h1>
+      <p className={css.message}>{t('Your sure')}</p>
       <div className={css.buttons}>
         <button className={css.deleteButton} onClick={handleDelete}>
-          Delete
+          {t('Delete card')}
         </button>
         <button className={css.cancelButton} onClick={onClose}>
-          Cancel
+          {t('Log exit')}
         </button>
       </div>
     </div>
