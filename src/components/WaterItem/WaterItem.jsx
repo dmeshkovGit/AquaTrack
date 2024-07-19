@@ -98,7 +98,7 @@ export default function WaterItem() {
             setIsEditModalOpen(false);
           }}
         >
-          <WaterModal operationType="edit" />
+          <WaterModal operationType="edit" isOpen={setIsEditModalOpen} />
         </Modal>
       )}
       {isDeleteModalOpen && (

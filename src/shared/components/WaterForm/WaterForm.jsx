@@ -12,7 +12,7 @@ import {
 import * as yup from 'yup';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { addWater } from '../../../redux/water/operations';
+import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
 
 const schema = yup.object().shape({
@@ -81,6 +81,7 @@ export default function WaterForm({ isOpen, operationAdd, waterId }) {
       if (operationAdd) {
         dispatch(addWater(obj));
       } else {
+        console.log('message');
         dispatch(editWater(waterId, obj));
       }
       isOpen(false);
