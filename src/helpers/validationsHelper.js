@@ -7,7 +7,6 @@ export const isNumber = (event, setErr) => {
     (charCode < 37 || charCode > 40)
   ) {
     setErr(true);
-    console.log(event.which);
     event.preventDefault();
   } else {
     setErr(false);
@@ -43,4 +42,11 @@ export const parseTimeToUnix = time => {
   now.setSeconds(0);
   now.setMilliseconds(0);
   return now.getTime();
+};
+export const unixParser = time => {
+  return new Date(time).toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 };

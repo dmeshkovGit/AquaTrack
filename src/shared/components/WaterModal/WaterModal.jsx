@@ -13,7 +13,13 @@ import WaterForm from '../WaterForm/WaterForm';
 //       <h1 className={css.title}> {getTitle(operationType)} </h1>
 //       <WaterForm operationType={operationType}/>
 
-export default function WaterModal({ operationAdd, isOpen, waterId }) {
+export default function WaterModal({
+  operationAdd,
+  isOpen,
+  waterId,
+  waterAmount,
+  waterTime,
+}) {
   return (
     <div className={css.container}>
       <h1 className={css.header}>
@@ -24,6 +30,8 @@ export default function WaterModal({ operationAdd, isOpen, waterId }) {
         isOpen={isOpen}
         operationAdd={operationAdd}
         waterId={waterId}
+        waterAmount={waterAmount}
+        waterTime={waterTime}
       />
     </div>
   );

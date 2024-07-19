@@ -6,8 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   isNumber,
   timeInputController,
-  getFormattedTime,
   parseTimeToUnix,
+  getFormattedTime,
+  unixParser,
 } from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
@@ -28,20 +29,22 @@ const schema = yup.object().shape({
     .required('Count is required'),
 });
 
-export default function WaterForm({ isOpen, operationAdd, waterId }) {
-  const dispatch = useDispatch();
-  const dailyNorm = useSelector(selectUserWaterNorm);
-  // const dailyNorm = 1;
-
-  //    <div>
-  //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
-  //     : <h2> Тут буде форма для редагуання води</h2>}
-  //   </div>;
-
-  const [count, setCount] = useState(50);
-  const [time, setTime] = useState(getFormattedTime());
+export default function WaterForm({
+  isOpen,
+  operationAdd,
+  waterId,
+  waterAmount,
+  waterTime,
+}) {
+  const [count, setCount] = useState(operationAdd ? 50 : waterAmount);
+  const [time, setTime] = useState(
+    operationAdd ? getFormattedTime() : unixParser(waterTime),
+  );
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
+
+  const dispatch = useDispatch();
+  const dailyNorm = useSelector(selectUserWaterNorm);
 
   const {
     register,

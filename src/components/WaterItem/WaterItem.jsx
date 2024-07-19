@@ -7,11 +7,14 @@ import Icon from '../../shared/components/Icon/Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDayWater } from '../../redux/water/operations';
 import { selectDayWater } from '../../redux/water/selectors';
+import { unixParser } from '../../helpers/validationsHelper.js';
 
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedWaterId, setSelectedWaterId] = useState(null);
+  const [selectedWaterAmount, setSelectedWaterAmount] = useState(null);
+  const [selectedWaterTime, setSelectedWaterTime] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -33,9 +36,11 @@ export default function WaterItem() {
     setIsDeleteModalOpen(false);
   };
 
-  const handleEdit = id => {
+  const handleEdit = (id, amount, date) => {
     setIsEditModalOpen(true);
     setSelectedWaterId(id);
+    setSelectedWaterAmount(amount);
+    setSelectedWaterTime(date);
   };
 
   return (
@@ -53,18 +58,14 @@ export default function WaterItem() {
                 />
                 <div>
                   <strong>{water.amount} ml</strong>
-                  <p className={css.date}>
-                    {new Date(water.createdAt).toLocaleTimeString('en-US', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true,
-                    })}
-                  </p>
+                  <p className={css.date}>{unixParser(water.date)}</p>
                 </div>
                 <div className={css.container_buttons}>
                   <button
                     className={css.editButton}
-                    onClick={() => handleEdit(water._id)}
+                    onClick={() =>
+                      handleEdit(water._id, water.amount, water.date)
+                    }
                   >
                     {' '}
                     <Icon
@@ -106,6 +107,8 @@ export default function WaterItem() {
             operationType="edit"
             isOpen={setIsEditModalOpen}
             waterId={selectedWaterId}
+            waterAmount={selectedWaterAmount}
+            waterTime={selectedWaterTime}
           />
         </Modal>
       )}
