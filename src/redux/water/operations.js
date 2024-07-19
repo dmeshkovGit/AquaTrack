@@ -42,4 +42,17 @@ export const deleteWater = createAsyncThunk(
   },
 );
 
+export const editWater = createAsyncThunk(
+  'water/editWater',
+  async ({ id, newNote }, thunkAPI) => {
+    try {
+      const response = await instance.put(`api/water/:${id}`, newNote);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export default { deleteWater, getDayWater, addWater };
