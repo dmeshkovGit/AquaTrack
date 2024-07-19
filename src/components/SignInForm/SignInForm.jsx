@@ -5,9 +5,12 @@ import * as yup from 'yup';
 import Icon from '../../shared/components/Icon/Icon';
 import { useState } from 'react';
 import clsx from 'clsx';
-
-import { useTranslation } from 'react-i18next';
-import '../../translate/index.js';
+import { login } from '../../redux/user/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
+import { selectIsLoading } from '../../redux/user/selectors';
+import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import { toast } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup
@@ -21,73 +24,97 @@ const schema = yup.object().shape({
 });
 
 export default function SignInForm() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const isLoading = useSelector(selectIsLoading);
 
-  const { t } = useTranslation();
+  // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
-  const onSubmit = data => console.log(data);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleFormSubmit = data => {
+    dispatch(login(data))
+      .then(action => {
+        if (login.fulfilled.match(action)) {
+          toast.success('Login successful');
+        } else if (login.rejected.match(action)) {
+          const errorMessage = action.payload?.message || 'Login failed';
+          const statusCode = action.payload ? action.payload.statusCode : null;
+
+          console.error(
+            `Login failed with status code ${statusCode}: ${errorMessage}`,
+          );
+        }
+      })
+      .catch(error => {
+        // Этот блок не будет выполняться, поскольку dispatch всегда возвращает успешный промис
+        console.error('Unexpected error:', error);
+      });
+  };
+
   return (
-    <>
-      <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={css.inputGroup}>
-          <label>{t('Email user')}</label>
+    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
+      <div className={css.inputGroup}>
+        <label>Email</label>
+        <input
+          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          type="text"
+          placeholder="Enter your email"
+          name="email"
+          autoComplete="on"
+          {...register('email')}
+        />
+        {errors.email && <p className={css.error}>{errors.email.message}</p>}
+      </div>
+      <div className={css.inputGroup}>
+        <label>Password</label>
+        <div className={css.passwordContainer}>
           <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Enter your password"
+            name="password"
+            autoComplete="on"
+            {...register('password')}
             className={clsx(
               css.inputGroupInput,
-              errors.email && css.inputError,
+              errors.password && css.inputError,
             )}
-            type="text"
-            placeholder={t('Enter email')}
-            {...register('email')}
           />
-          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowPassword}
+            tabIndex="-1"
+          >
+            {showPassword ? (
+              <Icon className={css.icon} id="eye" width={20} height={20} />
+            ) : (
+              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+            )}
+          </button>
         </div>
-        <div className={css.inputGroup}>
-          <label>{t('Password user')}</label>
-          <div className={css.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder={t('Enter password')}
-              {...register('password')}
-              className={clsx(
-                css.inputGroupInput,
-                errors.password && css.inputError,
-              )}
-            />
-
-            <button
-              type="button"
-              className={css.passwordToggle}
-              onClick={toggleShowPassword}
-            >
-              {showPassword ? (
-                <Icon className={css.icon} id="eye" width={18} height={18} />
-              ) : (
-                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-              )}
-            </button>
-          </div>
-          {errors.password && (
-            <p className={css.error}>{errors.password.message}</p>
-          )}
-        </div>
-        <button type="submit" className={css.submitButton} onClick={onSubmit}>
-          {t('Login user')}
-        </button>
-        {/* <div className={css.link}></div> */}
-      </form>
-    </>
+        {errors.password && (
+          <p className={css.error}>{errors.password.message}</p>
+        )}
+      </div>
+      <button
+        type="submit"
+        className={css.submitButton}
+        disabled={!isValid || isLoading}
+      >
+        {isLoading ? <AuthLoader /> : 'Sign in'}
+      </button>
+      <GoogleAuthBtn />
+    </form>
   );
 }

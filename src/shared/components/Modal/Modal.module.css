@@ -43,6 +43,8 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
 }
 
 .closeButton:focus {
@@ -55,5 +57,13 @@
   }
   .modal::-webkit-scrollbar-thumb {
     border: 15px solid transparent;
+  }
+  .closeButton {
+    width: 28px;
+    height: 28px;
+  }
+  .closeIcon {
+    width: 28px;
+    height: 28px;
   }
 }
