@@ -23,7 +23,6 @@ export default function Calendar() {
     }
     setDays([...list]);
   }, []);
-
   return (
     daysList.length && (
       <ul className={css.calendar}>
