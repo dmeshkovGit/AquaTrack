@@ -46,7 +46,7 @@ const slice = createSlice({
       })
       .addCase(editWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = state.items.map(item =>
+        state.dayWater = state.dayWater.map(item =>
           item._id === action.payload._id ? action.payload : item,
         );
       })
