@@ -10,17 +10,13 @@ import { register as registerUser } from '../../redux/user/operations';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
-import { toast } from 'react-hot-toast';
+
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
-  // проверять инпут password == repeatPassword
-  // .test('passwords-match', 'Passwords must match', function (value) {
-  //   return value === this.parent.repeatPassword;
-  // })
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -49,18 +45,7 @@ export default function SignUpForm() {
   const handleFormSubmit = data => {
     const { email, password } = data;
     dispatch(registerUser({ email, password }))
-      .then(action => {
-        if (registerUser.fulfilled.match(action)) {
-          toast.success('Register successful');
-        } else if (registerUser.rejected.match(action)) {
-          const errorMessage = action.payload?.message || 'Login failed';
-          const statusCode = action.payload ? action.payload.statusCode : null;
-
-          console.error(
-            `Login failed with status code ${statusCode}: ${errorMessage}`,
-          );
-        }
-      })
+      .then()
       .catch(error => {
         console.error('Unexpected error:', error);
       });
@@ -142,11 +127,7 @@ export default function SignUpForm() {
           <p className={css.error}>{errors.repeatPassword.message}</p>
         )}
       </div>
-      <button
-        className={css.submitButton}
-        type="submit"
-        disabled={!isValid || isLoading}
-      >
+      <button className={css.submitButton} type="submit" disabled={!isValid}>
         {isLoading ? <AuthLoader /> : 'Sign Up'}
       </button>
       <GoogleAuthBtn />
