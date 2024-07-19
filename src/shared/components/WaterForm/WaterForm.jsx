@@ -84,7 +84,7 @@ export default function WaterForm({ isOpen, operationAdd, waterId }) {
         console.log(waterId);
         console.log(obj);
 
-        dispatch(editWater(waterId, obj));
+        dispatch(editWater({ id: waterId, newNote: obj }));
       }
       isOpen(false);
     } else {

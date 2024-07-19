@@ -45,6 +45,8 @@ export const deleteWater = createAsyncThunk(
 export const editWater = createAsyncThunk(
   'water/editWater',
   async ({ id, newNote }, thunkAPI) => {
+    console.log(id);
+    console.log(newNote);
     try {
       const response = await instance.put(`api/water/:${id}`, newNote);
       return response.data;
