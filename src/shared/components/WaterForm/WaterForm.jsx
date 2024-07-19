@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     .required('Count is required'),
 });
 
-export default function WaterForm({ isOpen }) {
+export default function WaterForm({ isOpen, operationAdd, waterId }) {
   const dispatch = useDispatch();
   const dailyNorm = useSelector(selectUserWaterNorm);
   // const dailyNorm = 1;
@@ -78,7 +78,11 @@ export default function WaterForm({ isOpen }) {
         amount: data.Count,
         date: parseTimeToUnix(data.Time),
       };
-      dispatch(addWater(obj));
+      if (operationAdd) {
+        dispatch(addWater(obj));
+      } else {
+        dispatch(editWater(waterId, obj));
+      }
       isOpen(false);
     } else {
       alert('Введи денну норму курва');

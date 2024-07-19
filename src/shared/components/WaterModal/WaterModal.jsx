@@ -13,14 +13,19 @@ import WaterForm from '../WaterForm/WaterForm';
 //       <h1 className={css.title}> {getTitle(operationType)} </h1>
 //       <WaterForm operationType={operationType}/>
 
-export default function WaterModal({ operationAdd, isOpen }) {
+export default function WaterModal({ operationAdd, isOpen, waterId }) {
+  console.log('waterID', waterId);
   return (
     <div className={css.container}>
       <h1 className={css.header}>
         {operationAdd ? 'Add water' : 'Edit the entered amount of water'}
       </h1>
 
-      <WaterForm isOpen={isOpen} />
+      <WaterForm
+        isOpen={isOpen}
+        operationAdd={operationAdd}
+        waterId={waterId}
+      />
     </div>
   );
 }
