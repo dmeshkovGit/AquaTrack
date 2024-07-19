@@ -49,6 +49,7 @@ export const unixParser = time => {
     minute: '2-digit',
     hour12: false,
   });
+};
 
 export const maxNumber = ({ target }, setError, setValue, clearErrors) => {
   const { value, max, name } = target;
