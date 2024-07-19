@@ -1,23 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import css from '../WaterItem/WaterItem.module.css';
 import WaterModal from '../../shared/components/WaterModal/WaterModal';
 import Modal from '../../shared/components/Modal/Modal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 import Icon from '../../shared/components/Icon/Icon';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDayWater } from '../../redux/water/operations';
+import { selectDayWater } from '../../redux/water/selectors';
 
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedWaterId, setSelectedWaterId] = useState(null);
 
-  const handleOpenDeleteModal = () => {
+  const dispatch = useDispatch();
+
+  const dataWaterOfDay = useSelector(selectDayWater);
+
+  console.log(dataWaterOfDay);
+
+  useEffect(() => {
+    dispatch(getDayWater());
+  }, [dispatch]);
+
+  const handleOpenDeleteModal = id => {
+    setSelectedWaterId(id);
     setIsDeleteModalOpen(true);
   };
 
   const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const handleDelete = () => {
+    setSelectedWaterId(null);
     setIsDeleteModalOpen(false);
   };
 
@@ -27,11 +39,10 @@ export default function WaterItem() {
 
   return (
     <>
-      <ul className={css.list_water_items}>
-        {Array(15)
-          .fill(null)
-          .map((_, index) => (
-            <li key={index} className={css.water_item}>
+      {dataWaterOfDay.length > 0 ? (
+        <ul className={css.list_water_items}>
+          {dataWaterOfDay.map(water => (
+            <li key={water._id} className={css.water_item}>
               <div className={css.water_item_content}>
                 <Icon
                   className={css.icon_glass_water}
@@ -40,8 +51,14 @@ export default function WaterItem() {
                   id="icon-water-glass"
                 />
                 <div>
-                  <strong>250 ml</strong>
-                  <p>7:00 AM</p>
+                  <strong>{water.amount} ml</strong>
+                  <p className={css.date}>
+                    {new Date(water.createdAt).toLocaleTimeString('en-US', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true,
+                    })}
+                  </p>
                 </div>
                 <div className={css.container_buttons}>
                   <button className={css.editButton} onClick={handleEdit}>
@@ -55,7 +72,7 @@ export default function WaterItem() {
                   </button>
                   <button
                     className={css.deleteButton}
-                    onClick={handleOpenDeleteModal}
+                    onClick={() => handleOpenDeleteModal(water._id)}
                   >
                     {' '}
                     <Icon
@@ -69,7 +86,11 @@ export default function WaterItem() {
               </div>
             </li>
           ))}
-      </ul>
+        </ul>
+      ) : (
+        <p>No data available</p>
+      )}
+
       {isEditModalOpen && (
         <Modal
           isOpen={isEditModalOpen}
@@ -84,7 +105,7 @@ export default function WaterItem() {
         <Modal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
           <DeleteWaterModal
             onClose={handleCloseDeleteModal}
-            onDelete={handleDelete}
+            waterId={selectedWaterId}
           />
         </Modal>
       )}
