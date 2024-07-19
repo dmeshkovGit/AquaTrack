@@ -7,12 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
 import { updateAvatar, updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
-export default function UploadAvatarForm() {
+
+
+export default function UploadAvatarForm({ isModalOpen }) {
+
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('avatar');
   const user = useSelector(selectUser);
   const dispacth = useDispatch();
+  const { t } = useTranslation();
 
   const onChange = ({ target: { files } }) => {
     files[0] && setFileName(files[0].name);
@@ -60,7 +66,7 @@ export default function UploadAvatarForm() {
 
               <p className={css.text}>
                 <MdOutlineFileUpload className={css.icon} />
-                Upload avatar
+                {t('Upload avatar')}
               </p>
             </div>
           </form>
