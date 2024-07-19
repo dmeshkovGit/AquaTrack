@@ -9,7 +9,7 @@ export default function GoogleAuthBtn() {
       <motion.a
         whileTap={{ scale: 1 }}
         whileHover={{ scale: 1.03 }}
-        href="https://aqua-track.vercel.app/api/auth/google"
+        href="https://aquatrack-api-crcb.onrender.com/api/users/google"
         className={css.googleBtn}
       >
         <img src={googleLogo} className={css.googleIcon} />
