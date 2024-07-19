@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
-import { toast } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup
@@ -44,20 +43,8 @@ export default function SignInForm() {
 
   const handleFormSubmit = data => {
     dispatch(login(data))
-      .then(action => {
-        if (login.fulfilled.match(action)) {
-          toast.success('Login successful');
-        } else if (login.rejected.match(action)) {
-          const errorMessage = action.payload?.message || 'Login failed';
-          const statusCode = action.payload ? action.payload.statusCode : null;
-
-          console.error(
-            `Login failed with status code ${statusCode}: ${errorMessage}`,
-          );
-        }
-      })
+      .then()
       .catch(error => {
-        // Этот блок не будет выполняться, поскольку dispatch всегда возвращает успешный промис
         console.error('Unexpected error:', error);
       });
   };
@@ -107,11 +94,7 @@ export default function SignInForm() {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <button
-        type="submit"
-        className={css.submitButton}
-        disabled={!isValid || isLoading}
-      >
+      <button type="submit" className={css.submitButton} disabled={!isValid}>
         {isLoading ? <AuthLoader /> : 'Sign in'}
       </button>
       <GoogleAuthBtn />
