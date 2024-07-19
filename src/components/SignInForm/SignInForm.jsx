@@ -11,6 +11,9 @@ import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -26,6 +29,7 @@ export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -52,11 +56,11 @@ export default function SignInForm() {
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className={css.inputGroup}>
-        <label>Email</label>
+        <label>{t('Email user')}</label>
         <input
           className={clsx(css.inputGroupInput, errors.email && css.inputError)}
           type="text"
-          placeholder="Enter your email"
+          placeholder={t('Enter email')}
           name="email"
           autoComplete="on"
           {...register('email')}
@@ -64,11 +68,11 @@ export default function SignInForm() {
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
       <div className={css.inputGroup}>
-        <label>Password</label>
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
             name="password"
             autoComplete="on"
             {...register('password')}
@@ -95,7 +99,7 @@ export default function SignInForm() {
         )}
       </div>
       <button type="submit" className={css.submitButton} disabled={!isValid}>
-        {isLoading ? <AuthLoader /> : 'Sign in'}
+        {isLoading ? <AuthLoader /> : t('Login user')}
       </button>
       <GoogleAuthBtn />
     </form>

@@ -10,6 +10,8 @@ import { register as registerUser } from '../../redux/user/operations';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -27,6 +29,7 @@ export default function SignUpForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -54,10 +57,10 @@ export default function SignUpForm() {
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className={css.inputGroup}>
-        <label>Email</label>
+        <label>{t('Email user')}</label>
         <input
           type="text"
-          placeholder="Enter your email"
+          placeholder={t('Enter email')}
           name="email"
           autoComplete="off"
           className={clsx(css.inputGroupInput, errors.email && css.inputError)}
@@ -66,11 +69,11 @@ export default function SignUpForm() {
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
       <div className={css.inputGroup}>
-        <label>Password</label>
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
             name="password"
             autoComplete="new-password"
             className={clsx(
@@ -97,11 +100,11 @@ export default function SignUpForm() {
         )}
       </div>
       <div className={css.inputGroup}>
-        <label>Repeat Password</label>
+        <label>{t('Repeat password')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Repeat password"
+            placeholder={t('Repeat password')}
             name="repeatPassword"
             autoComplete="password-confirmation"
             {...register('repeatPassword')}
@@ -127,8 +130,9 @@ export default function SignUpForm() {
           <p className={css.error}>{errors.repeatPassword.message}</p>
         )}
       </div>
+
       <button className={css.submitButton} type="submit" disabled={!isValid}>
-        {isLoading ? <AuthLoader /> : 'Sign Up'}
+        {isLoading ? <AuthLoader /> : t('Register user form')}
       </button>
       <GoogleAuthBtn />
     </form>
