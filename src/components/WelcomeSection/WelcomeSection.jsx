@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import Logo from '../../shared/components/Logo/Logo';
 import css from './WelcomeSection.module.css';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function WelcomeSection() {
+  const { t } = useTranslation();
   return (
     <div className={css.container}>
       <div className={css.logo}>
@@ -15,10 +19,10 @@ export default function WelcomeSection() {
       </div>
       <div className={css.buttons}>
         <Link to="/signup" className={css.tryTracker}>
-          Try tracker
+          {t('Register user')}
         </Link>
         <Link to="/signin" className={css.signIn}>
-          Sign In
+          {t('Login user')}
         </Link>
       </div>
     </div>

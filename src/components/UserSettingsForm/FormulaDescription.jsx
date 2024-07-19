@@ -1,10 +1,14 @@
 import css from './FormulaDescription.module.css';
 import { BsExclamationLg } from 'react-icons/bs';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function FormulaDescription() {
+  const { t } = useTranslation();
   return (
     <div className={css.formulaWrap}>
-      <h3 className={css.title}>My daily norma</h3>
+      <h3 className={css.title}>{t('Daily norma')}</h3>
       <div className={css.genderFormulaWrap}>
         <div className={css.genderFormula}>
           <p className={css.formulaText}>For man:</p>
