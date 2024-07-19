@@ -8,7 +8,7 @@ import { selectUser } from '../../redux/user/selectors';
 import { updateAvatar, updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 
-export default function UploadAvatarForm({ isModalOpen }) {
+export default function UploadAvatarForm() {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('avatar');
   const user = useSelector(selectUser);
@@ -20,10 +20,7 @@ export default function UploadAvatarForm({ isModalOpen }) {
     setImage(URL.createObjectURL(files[0]));
     dispacth(updateAvatar({ avatar: files[0] }))
       .unwrap()
-      .then(() => {
-        toast.success('Avatar updated');
-        isModalOpen(false);
-      })
+      .then(() => toast.success('Avatar updated'))
       .catch(() => toast.error('Sorry, try again later'));
   };
 
