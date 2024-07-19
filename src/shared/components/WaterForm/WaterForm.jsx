@@ -15,6 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
 
+import { useTranslation } from 'react-i18next';
+import '../../../translate/index.js';
+
 const schema = yup.object().shape({
   Time: yup
     .string()
@@ -42,6 +45,7 @@ export default function WaterForm({ isOpen }) {
   const [time, setTime] = useState(getFormattedTime());
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
+  const { t } = useTranslation();
 
   const {
     register,
@@ -87,8 +91,8 @@ export default function WaterForm({ isOpen }) {
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <p className={css.text}>Correct entered data:</p>
-      <p className={css.secondaryText}>Amount of water:</p>
+      <p className={css.text}>{t('Correct entered')}:</p>
+      <p className={css.secondaryText}>{t('Amount of water')}:</p>
       <div className={css.counterContainer}>
         <button
           className={clsx(css.counterBtn, count <= 50 && css.decrementBtn)}
@@ -103,7 +107,9 @@ export default function WaterForm({ isOpen }) {
             id="icon-minus"
           />
         </button>
-        <p className={css.count}>{count} ml</p>
+        <p className={css.count}>
+          {count} {t('Water add')}
+        </p>
         <button
           className={clsx(css.counterBtn, count >= 1500 && css.incrementBtn)}
           type="button"
@@ -119,7 +125,7 @@ export default function WaterForm({ isOpen }) {
         </button>
       </div>
       <label className={css.baseLabel}>
-        Recording time:
+        {t('Recording time')}:
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
           {...register('Time', { required: true })}
@@ -132,7 +138,7 @@ export default function WaterForm({ isOpen }) {
         </span>
       </label>
       <label className={css.secondaryLabel}>
-        Enter the value of the water used:
+        {t('Enter the value')}:
         <input
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
@@ -145,7 +151,7 @@ export default function WaterForm({ isOpen }) {
         </span>
       </label>
       <button className={css.saveBtn} type="submit">
-        Save
+        {t('Save setting')}
       </button>
     </form>
   );

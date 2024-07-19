@@ -8,10 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDayWater } from '../../redux/water/operations';
 import { selectDayWater } from '../../redux/water/selectors';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedWaterId, setSelectedWaterId] = useState(null);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -51,7 +55,9 @@ export default function WaterItem() {
                   id="icon-water-glass"
                 />
                 <div>
-                  <strong>{water.amount} ml</strong>
+                  <strong>
+                    {water.amount} {t('Water add')}
+                  </strong>
                   <p className={css.date}>
                     {new Date(water.createdAt).toLocaleTimeString('en-US', {
                       hour: '2-digit',
