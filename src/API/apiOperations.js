@@ -1,9 +1,9 @@
 import instance from './axiosInstance';
 
-export const getMonthInfo = async () => {
+export const getMonthInfo = async date => {
   try {
-    const { data } = await instance.get(`/api/water/month/1720848000`);
-    console.log(data);
+    const { data } = await instance.get(`api/water/month/${date}`);
+    return data;
   } catch (error) {
     console.log(error);
   }

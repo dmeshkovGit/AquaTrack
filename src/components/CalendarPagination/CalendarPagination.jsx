@@ -22,7 +22,13 @@ export default function CalendarPagination({
           <FaAngleRight />
         </button>
       </div>
-      <Icon className={css.icon} id="pieChart" height={20} width={20} />
+      <Icon
+        onClick={isOpen}
+        className={css.icon}
+        id="pieChart"
+        height={20}
+        width={20}
+      />
     </div>
   );
 }

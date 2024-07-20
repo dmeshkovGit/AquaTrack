@@ -9,6 +9,7 @@ import { getMonthInfo } from '../../API/apiOperations.js';
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
   const [showChart, setShowChart] = useState(false);
+  const [daysList, setDays] = useState([]);
 
   const toggleView = () => {
     console.log('Icon clicked');
@@ -21,7 +22,15 @@ export default function MonthInfo() {
   }, []);
 
   useEffect(() => {
-    console.log(date);
+    const getMonth = async () => {
+      try {
+        const response = await getMonthInfo(new Date(date).getTime());
+        if (response) setDays(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMonth();
   }, [date]);
 
   const handlePrevMonth = () => {
@@ -36,14 +45,6 @@ export default function MonthInfo() {
     setDate(prevDate => {
       const newDate = new Date(prevDate);
       newDate.setMonth(newDate.getMonth() + 1);
-      return newDate;
-    });
-  };
-
-  const handleChangeDay = day => {
-    setDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(day);
       return newDate;
     });
   };
@@ -74,7 +75,7 @@ export default function MonthInfo() {
           isOpen={toggleView}
         />
       </div>
-      <Calendar handleChangeDay={handleChangeDay} />
+      <Calendar daysList={daysList} />
     </div>
   );
 }
