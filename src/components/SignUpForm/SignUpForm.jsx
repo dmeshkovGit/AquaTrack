@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
-import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 
@@ -132,7 +132,7 @@ export default function SignUpForm() {
       </div>
 
       <button className={css.submitButton} type="submit" disabled={!isValid}>
-        {isLoading ? <AuthLoader /> : t('Register user form')}
+        {isLoading ? <DotLoader text="Signing Up" /> : t('Register user form')}
       </button>
       <GoogleAuthBtn />
     </form>

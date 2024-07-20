@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
-import { Loader } from '../../shared/components/Loader/Loader';
 import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
 
 import { useTranslation } from 'react-i18next';
@@ -250,7 +249,6 @@ export default function UserSettingsForm({ isModalOpen }) {
           {t('Save setting')}
         </button>
       </form>
-      {isLoading && <Loader />}
     </>
   );
 }
