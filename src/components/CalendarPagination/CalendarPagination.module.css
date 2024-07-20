@@ -1,11 +1,11 @@
 .paginationContainer {
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 22px;
 }
 .buttonsContainer {
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 20px;
 }
 .button {
