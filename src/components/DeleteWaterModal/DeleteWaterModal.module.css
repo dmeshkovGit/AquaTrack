@@ -31,11 +31,13 @@
     font-size: 16px;
   }
   
+
   .buttons {
     display: flex;
     justify-content: space-around;
     gap: 10px;
   }
+
   
   .deleteButton {
     background-color: var(--accent);
