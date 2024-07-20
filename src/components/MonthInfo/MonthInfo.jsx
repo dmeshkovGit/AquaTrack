@@ -1,6 +1,6 @@
-import css from '../MonthInfo/MonthInfo.module.css';
 import CalendarPagination from '../../components/CalendarPagination/CalendarPagination';
 import Calendar from '../../components/Calendar/Calendar';
+import css from './MonthInfo.module.css';
 import { useEffect, useState } from 'react';
 
 import '../../translate/index.js';
@@ -8,14 +8,22 @@ import { getMonthInfo } from '../../API/apiOperations.js';
 
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
+  const [showChart, setShowChart] = useState(false);
+
+  const toggleView = () => {
+    console.log('Icon clicked');
+    setShowChart(prevShowChart => !prevShowChart);
+  };
 
   useEffect(() => {
     setDate(new Date());
     getMonthInfo();
   }, []);
+
   useEffect(() => {
     console.log(date);
   }, [date]);
+
   const handlePrevMonth = () => {
     setDate(prevDate => {
       const newDate = new Date(prevDate);
@@ -63,6 +71,7 @@ export default function MonthInfo() {
           handleNextMonth={handleNextMonth}
           monthNames={monthNames}
           date={date}
+          isOpen={toggleView}
         />
       </div>
       <Calendar handleChangeDay={handleChangeDay} />

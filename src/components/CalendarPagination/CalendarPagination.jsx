@@ -1,12 +1,13 @@
-import Icon from '../../shared/components/Icon/Icon';
-import css from '../CalendarPagination/CalendarPagination.module.css';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import css from './CalendarPagination.module.css';
+import Icon from '../../shared/components/Icon/Icon';
 
 export default function CalendarPagination({
   handlePrevMonth,
   monthNames,
   handleNextMonth,
   date,
+  isOpen,
 }) {
   return (
     <div className={css.paginationContainer}>
@@ -21,7 +22,16 @@ export default function CalendarPagination({
           <FaAngleRight />
         </button>
       </div>
-      <Icon className={css.icon} id="pieChart" height={20} width={20} />
+      <div className={css.iconContainer}>
+        <Icon
+          className={css.icon}
+          id="pieChart"
+          onClick={() => {
+            console.log('Div clicked');
+            isOpen();
+          }}
+        />
+      </div>
     </div>
   );
 }

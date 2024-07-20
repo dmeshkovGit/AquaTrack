@@ -3,7 +3,7 @@ import css from '../LogOutModal/LogOutModal.module.css';
 import { logout } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../redux/user/selectors';
-import { Loader } from '../../shared/components/Loader/Loader';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
@@ -25,7 +25,7 @@ export default function LogOutModal({ isModalOpen }) {
         <p className={css.text}>{t('Do you really')}</p>
         <div className={css.btnWrap}>
           <button className={css.logoutBtn} type="button" onClick={onClick}>
-            {t('Log out')}
+            {isLoading ? <DotLoader text="Logging out" /> : t('Log out')}
           </button>
           <button
             className={css.cancelBtn}
@@ -36,7 +36,6 @@ export default function LogOutModal({ isModalOpen }) {
           </button>
         </div>
       </div>
-      {isLoading && <Loader />}
     </>
   );
 }
