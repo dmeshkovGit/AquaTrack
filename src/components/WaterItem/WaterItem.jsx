@@ -7,6 +7,8 @@ import Icon from '../../shared/components/Icon/Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDayWater } from '../../redux/water/operations';
 import { selectDayWater } from '../../redux/water/selectors';
+import { Loader } from '../../shared/components/Loader/Loader';
+import { selectIsLoading } from '../../redux/water/selectors';
 
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -14,7 +16,7 @@ export default function WaterItem() {
   const [selectedWaterId, setSelectedWaterId] = useState(null);
 
   const dispatch = useDispatch();
-
+  const isLoading = useSelector(selectIsLoading);
   const dataWaterOfDay = useSelector(selectDayWater);
 
   console.log(dataWaterOfDay);
@@ -88,7 +90,15 @@ export default function WaterItem() {
           ))}
         </ul>
       ) : (
-        <p>No data available</p>
+        <div className={css.container_without_water}>
+          <Icon
+            className={css.icon_glass_water}
+            width={44}
+            height={45}
+            id="icon-water-glass"
+          />
+          <p className={css.text_}>Not found, please add water</p>
+        </div>
       )}
 
       {isEditModalOpen && (
@@ -109,6 +119,7 @@ export default function WaterItem() {
           />
         </Modal>
       )}
+      {isLoading && <Loader />}
     </>
   );
 }
