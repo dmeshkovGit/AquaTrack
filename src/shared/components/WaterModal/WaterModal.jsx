@@ -1,6 +1,9 @@
 import css from '../WaterModal/WaterModal.module.css';
 import WaterForm from '../WaterForm/WaterForm';
 
+import { useTranslation } from 'react-i18next';
+import '../../../translate/index.js';
+
 // export default function WaterModal({ operationType }) {
 
 //   const getTitle = (type) =>
@@ -13,14 +16,29 @@ import WaterForm from '../WaterForm/WaterForm';
 //       <h1 className={css.title}> {getTitle(operationType)} </h1>
 //       <WaterForm operationType={operationType}/>
 
-export default function WaterModal({ operationAdd, isOpen }) {
+export default function WaterModal({
+  operationAdd,
+  isOpen,
+  waterId,
+  waterAmount,
+  waterTime,
+}) {
+
+  const { t } = useTranslation();
+
   return (
     <div className={css.container}>
       <h1 className={css.header}>
-        {operationAdd ? 'Add water' : 'Edit the entered amount of water'}
+        {operationAdd ? t('Add water') : t('Edit amount')}
       </h1>
 
-      <WaterForm isOpen={isOpen} />
+      <WaterForm
+        isOpen={isOpen}
+        operationAdd={operationAdd}
+        waterId={waterId}
+        waterAmount={waterAmount}
+        waterTime={waterTime}
+      />
     </div>
   );
 }

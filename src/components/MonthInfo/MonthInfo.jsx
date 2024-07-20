@@ -3,11 +3,15 @@ import CalendarPagination from '../../components/CalendarPagination/CalendarPagi
 import Calendar from '../../components/Calendar/Calendar';
 import { useEffect, useState } from 'react';
 
+import '../../translate/index.js';
+import { getMonthInfo } from '../../API/apiOperations.js';
+
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     setDate(new Date());
+    getMonthInfo();
   }, []);
   useEffect(() => {
     console.log(date);

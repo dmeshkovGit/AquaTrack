@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
 import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
-import { toast } from 'react-hot-toast';
+
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 const schema = yup.object().shape({
   email: yup
@@ -27,6 +29,7 @@ export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -44,20 +47,8 @@ export default function SignInForm() {
 
   const handleFormSubmit = data => {
     dispatch(login(data))
-      .then(action => {
-        if (login.fulfilled.match(action)) {
-          toast.success('Login successful');
-        } else if (login.rejected.match(action)) {
-          const errorMessage = action.payload?.message || 'Login failed';
-          const statusCode = action.payload ? action.payload.statusCode : null;
-
-          console.error(
-            `Login failed with status code ${statusCode}: ${errorMessage}`,
-          );
-        }
-      })
+      .then()
       .catch(error => {
-        // Этот блок не будет выполняться, поскольку dispatch всегда возвращает успешный промис
         console.error('Unexpected error:', error);
       });
   };
@@ -65,11 +56,11 @@ export default function SignInForm() {
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className={css.inputGroup}>
-        <label>Email</label>
+        <label>{t('Email user')}</label>
         <input
           className={clsx(css.inputGroupInput, errors.email && css.inputError)}
           type="text"
-          placeholder="Enter your email"
+          placeholder={t('Enter email')}
           name="email"
           autoComplete="on"
           {...register('email')}
@@ -77,11 +68,11 @@ export default function SignInForm() {
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
       <div className={css.inputGroup}>
-        <label>Password</label>
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
             name="password"
             autoComplete="on"
             {...register('password')}
@@ -107,12 +98,8 @@ export default function SignInForm() {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <button
-        type="submit"
-        className={css.submitButton}
-        disabled={!isValid || isLoading}
-      >
-        {isLoading ? <AuthLoader /> : 'Sign in'}
+      <button type="submit" className={css.submitButton} disabled={!isValid}>
+        {isLoading ? <AuthLoader /> : t('Login user')}
       </button>
       <GoogleAuthBtn />
     </form>
