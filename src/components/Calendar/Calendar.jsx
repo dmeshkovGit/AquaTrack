@@ -2,7 +2,7 @@ import css from '../Calendar/Calendar.module.css';
 import CalendarItem from '../../components/CalendarItem/CalendarItem';
 import { useEffect, useState } from 'react';
 
-export default function Calendar() {
+export default function Calendar({ handleChangeDay }) {
   const [daysList, setDays] = useState([]);
   const [activeDay, setActiveDay] = useState('');
   useEffect(() => {
@@ -23,11 +23,16 @@ export default function Calendar() {
     }
     setDays([...list]);
   }, []);
+
+  const handleClickDay = day => {
+    setActiveDay(day);
+    handleChangeDay(day);
+  };
   return (
     daysList.length && (
       <ul className={css.calendar}>
         {daysList.map(i => (
-          <li key={i}>
+          <li key={i} onClick={() => handleClickDay(i)}>
             <CalendarItem item={i} activeDay={activeDay} />
           </li>
         ))}
