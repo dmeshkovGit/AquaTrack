@@ -15,7 +15,21 @@
 }
 
 .darkTheme {
-  --main: #323f47;
+  --main: rgba(11 26 35 / 63%);
+  --main-text: #0a0a0b;
+  --main-border: #000000;
+  --main-placeholder: #000000;
+  --logout-btn: #323f4766;
+  --shadow: #0000001a;
+  --accent: #323a47;
+  --accent-hover: #00000042;
+  --background: #323a47;
+  --main-white: #e0e0e0;
+  --validation-error: #ef5050;
+}
+
+.pinkTheme {
+  --main: #2593a3;
   --main-text: #2f2f2f;
   --main-border: #2f2f2f33;
   --main-placeholder: #2f2f2f99;
@@ -23,7 +37,7 @@
   --shadow: #0000001a;
   --accent: #9be1a0;
   --accent-hover: #87d28d;
-  --background: #f0eff4;
+  --background: rgb(220 33 99 / 34%);
   --main-white: #fff;
   --validation-error: #ef5050;
 }

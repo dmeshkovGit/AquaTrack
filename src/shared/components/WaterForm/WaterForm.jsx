@@ -6,14 +6,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   isNumber,
   timeInputController,
-  getFormattedTime,
   parseTimeToUnix,
+  getFormattedTime,
+  unixParser,
 } from '../../../helpers/validationsHelper';
 import * as yup from 'yup';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { addWater } from '../../../redux/water/operations';
+import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
+
+import { useTranslation } from 'react-i18next';
+import '../../../translate/index.js';
 
 const schema = yup.object().shape({
   Time: yup
@@ -28,20 +32,23 @@ const schema = yup.object().shape({
     .required('Count is required'),
 });
 
-export default function WaterForm({ isOpen }) {
-  const dispatch = useDispatch();
-  const dailyNorm = useSelector(selectUserWaterNorm);
-  // const dailyNorm = 1;
-
-  //    <div>
-  //     {operationType === "add" ? ( <h2> Тут буде форма для додавання води</h2>)
-  //     : <h2> Тут буде форма для редагуання води</h2>}
-  //   </div>;
-
-  const [count, setCount] = useState(50);
-  const [time, setTime] = useState(getFormattedTime());
+export default function WaterForm({
+  isOpen,
+  operationAdd,
+  waterId,
+  waterAmount,
+  waterTime,
+}) {
+  const [count, setCount] = useState(operationAdd ? 50 : waterAmount);
+  const [time, setTime] = useState(
+    operationAdd ? getFormattedTime() : unixParser(waterTime),
+  );
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
+  const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+  const dailyNorm = useSelector(selectUserWaterNorm);
 
   const {
     register,
@@ -78,7 +85,11 @@ export default function WaterForm({ isOpen }) {
         amount: data.Count,
         date: parseTimeToUnix(data.Time),
       };
-      dispatch(addWater(obj));
+      if (operationAdd) {
+        dispatch(addWater(obj));
+      } else {
+        dispatch(editWater({ id: waterId, newNote: obj }));
+      }
       isOpen(false);
     } else {
       alert('Введи денну норму курва');
@@ -87,8 +98,8 @@ export default function WaterForm({ isOpen }) {
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <p className={css.text}>Correct entered data:</p>
-      <p className={css.secondaryText}>Amount of water:</p>
+      <p className={css.text}>{t('Correct entered')}:</p>
+      <p className={css.secondaryText}>{t('Amount of water')}:</p>
       <div className={css.counterContainer}>
         <button
           className={clsx(css.counterBtn, count <= 50 && css.decrementBtn)}
@@ -103,7 +114,9 @@ export default function WaterForm({ isOpen }) {
             id="icon-minus"
           />
         </button>
-        <p className={css.count}>{count} ml</p>
+        <p className={css.count}>
+          {count} {t('Water add')}
+        </p>
         <button
           className={clsx(css.counterBtn, count >= 1500 && css.incrementBtn)}
           type="button"
@@ -119,7 +132,7 @@ export default function WaterForm({ isOpen }) {
         </button>
       </div>
       <label className={css.baseLabel}>
-        Recording time:
+        {t('Recording time')}:
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
           {...register('Time', { required: true })}
@@ -132,7 +145,7 @@ export default function WaterForm({ isOpen }) {
         </span>
       </label>
       <label className={css.secondaryLabel}>
-        Enter the value of the water used:
+        {t('Enter the value')}:
         <input
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
           {...register('Count')}
@@ -145,7 +158,7 @@ export default function WaterForm({ isOpen }) {
         </span>
       </label>
       <button className={css.saveBtn} type="submit">
-        Save
+        {t('Save setting')}
       </button>
     </form>
   );

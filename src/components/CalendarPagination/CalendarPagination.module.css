@@ -1,12 +1,14 @@
 .paginationContainer {
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 22px;
 }
 .buttonsContainer {
   display: flex;
-  align-item: center;
-  gap: 20px;
+  align-items: center;
+
+  justify-content: space-between;
+  width: 220px;
 }
 .button {
   border: none;

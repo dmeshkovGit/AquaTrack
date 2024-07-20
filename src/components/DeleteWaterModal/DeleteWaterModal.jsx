@@ -1,13 +1,14 @@
 import css from '../DeleteWaterModal/DeleteWaterModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWater } from '../../redux/water/operations';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 import { selectIsLoading } from '../../redux/water/selectors.js';
-import { Loader } from '../../shared/components/Loader/Loader';
 
 export default function DeleteWaterModal({ onClose, waterId }) {
   const dispatch = useDispatch();
-  const isLoader = useSelector(selectIsLoading);
-
+  const isLoading = useSelector(selectIsLoading);
   const handleDelete = () => {
     try {
       dispatch(deleteWater(waterId));
@@ -16,29 +17,21 @@ export default function DeleteWaterModal({ onClose, waterId }) {
       console.log(error);
     }
   };
+  const { t } = useTranslation();
 
   return (
-    <>
-      <div className={css.modalContent}>
-        <button className={css.closeButton} onClick={onClose}></button>
-        <h3 className={css.title}>Delete entry</h3>
-        <p className={css.message}>
-          Are you sure you want to delete the entry?
-        </p>
-        <div className={css.btnWrap}>
-          <button
-            className={css.deleteButton}
-            type="button"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
-          <button className={css.cancelButton} type="button" onClick={onClose}>
-            Cancel
-          </button>
-        </div>
+    <div className={css.modalContent}>
+      <button className={css.closeButton} onClick={onClose}></button>
+      <h1 className={css.title}>{t('Delete entry')}</h1>
+      <p className={css.message}>{t('Your sure')}</p>
+      <div className={css.buttons}>
+        <button className={css.deleteButton} onClick={handleDelete}>
+          {isLoading ? <DotLoader text="Deleting" /> : t('Delete card')}
+        </button>
+        <button className={css.cancelButton} onClick={onClose}>
+          {t('Log exit')}
+        </button>
       </div>
-      {isLoader && <Loader />}
-    </>
+    </div>
   );
 }
