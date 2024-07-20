@@ -6,7 +6,9 @@
 .buttonsContainer {
   display: flex;
   align-items: center;
-  gap: 20px;
+
+  justify-content: space-between;
+  width: 220px;
 }
 .button {
   border: none;
