@@ -8,12 +8,10 @@ import { selectUser } from '../../redux/user/selectors';
 import { updateAvatar, updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { RxAvatar } from 'react-icons/rx';
 import '../../translate/index.js';
 
-
-
 export default function UploadAvatarForm({ isModalOpen }) {
-
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState('avatar');
   const user = useSelector(selectUser);
@@ -41,12 +39,16 @@ export default function UploadAvatarForm({ isModalOpen }) {
   return (
     <>
       <div className={css.container}>
-        <img
-          src={image || user.avatarURL}
-          width={60}
-          className={css.img}
-          alt={fileName}
-        />
+        {user.avatarURL || image ? (
+          <img
+            src={image || user.avatarURL}
+            width={60}
+            className={css.img}
+            alt={fileName}
+          />
+        ) : (
+          <RxAvatar className={css.iconAvatar} />
+        )}
 
         <div className={css.formWrapper}>
           <form

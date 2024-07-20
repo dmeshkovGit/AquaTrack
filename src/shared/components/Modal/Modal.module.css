@@ -52,8 +52,17 @@
   height: 24px;
 }
 
+.closeIcon {
+  stroke: var(--main);
+  transition: all var(--transition);
+}
+
 .closeButton:focus {
   outline: none;
+}
+
+.closeButton:hover > .closeIcon {
+  stroke: var(--logout-btn);
 }
 
 @media screen and (min-width: 768px) {
