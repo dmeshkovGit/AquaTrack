@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import css from './CalendarPagination.module.css';
+import Icon from '../../shared/components/Icon/Icon';
+
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 
+
 export default function CalendarPagination({ isOpen }) {
+
   const [date, setDate] = useState(new Date());
   const { t } = useTranslation();
 
@@ -58,10 +62,9 @@ export default function CalendarPagination({ isOpen }) {
           id="pieChart"
           style={{
             cursor: 'pointer',
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             backgroundColor: 'red',
-            borderRadius: '50%',
           }}
           onClick={() => {
             console.log('Div clicked');
