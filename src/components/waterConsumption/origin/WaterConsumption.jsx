@@ -31,9 +31,15 @@ export default function TestChart() {
             <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis domain={[0, 2.5]} />
+        <CartesianGrid stroke="none" />
+        <XAxis dataKey="name" axisLine={false} tickLine={false} />
+        <YAxis
+          domain={[0, 2.5]}
+          tickFormatter={tick => (tick === 0 ? '0%' : `${tick} L`)}
+          ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
+          axisLine={false}
+          tickLine={false}
+        />
         <Tooltip />
         <Area
           type="monotone"
@@ -46,9 +52,14 @@ export default function TestChart() {
           type="monotone"
           dataKey="uv"
           stroke="#9BE1A0"
-          activeDot={{ r: 8 }}
+          dot={<CustomDot />}
+          activeDot={{ r: 18 }}
         />
       </AreaChart>
     </ResponsiveContainer>
   );
 }
+const CustomDot = props => {
+  const { cx, cy, fill } = props;
+  return <circle cx={cx} cy={cy} r={18} stroke="none" fill={fill} />;
+};
