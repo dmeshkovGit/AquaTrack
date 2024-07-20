@@ -3,6 +3,9 @@ import WaterForm from '../WaterForm/WaterForm';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
+import { WaterLoader } from '../WaterLoader/WaterLoader.jsx';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from '../../../redux/water/selectors.js';
 
 // export default function WaterModal({ operationType }) {
 
@@ -23,11 +26,12 @@ export default function WaterModal({
   waterAmount,
   waterTime,
 }) {
-
+  const isLoading = useSelector(selectIsLoading);
   const { t } = useTranslation();
 
   return (
     <div className={css.container}>
+      {isLoading && <WaterLoader />}
       <h1 className={css.header}>
         {operationAdd ? t('Add water') : t('Edit amount')}
       </h1>
