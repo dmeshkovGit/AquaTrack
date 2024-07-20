@@ -67,22 +67,6 @@
   stroke-width: 0;
 }
 
-
-.container_without_water {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 24px;
-  margin-bottom: 30px;
-  background-color: var(--main-white);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-shadow: 0 2px 4px var(--shadow);
-}
-
 /* Основний скролбар */
 ::-webkit-scrollbar {
   width: 10px; /* ширина вертикального скролбару */
