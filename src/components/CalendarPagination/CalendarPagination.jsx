@@ -3,8 +3,14 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import css from './CalendarPagination.module.css';
 import Icon from '../../shared/components/Icon/Icon';
 
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
+
 export default function CalendarPagination({ isOpen }) {
+
   const [date, setDate] = useState(new Date());
+  const { t } = useTranslation();
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
@@ -23,18 +29,18 @@ export default function CalendarPagination({ isOpen }) {
   };
 
   const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    t('Month january'),
+    t('Month february'),
+    t('Month march'),
+    t('Month april'),
+    t('Month may'),
+    t('Month june'),
+    t('Month july'),
+    t('Month august'),
+    t('Month september'),
+    t('Month october'),
+    t('Month november'),
+    t('Month december'),
   ];
 
   return (

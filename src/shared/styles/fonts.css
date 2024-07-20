@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Poppins';
   font-weight: normal;
   font-style: normal;
@@ -11,7 +11,7 @@
   font-weight: 700;
   font-style: normal;
   src: url('./fonts/Poppins-Bold.ttf') format('truetype');
-}
+} */
 
 @font-face {
   font-family: 'Gilroy';
