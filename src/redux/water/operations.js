@@ -45,6 +45,19 @@ export const deleteWater = createAsyncThunk(
       const response = await instance.delete(`api/water/${id}`);
       return response.data;
     } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const editWater = createAsyncThunk(
+  'water/editWater',
+  async ({ id, newNote }, thunkAPI) => {
+    try {
+      const response = await instance.put(`api/water/${id}`, newNote);
+      return response.data;
+    } catch (error) {
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,

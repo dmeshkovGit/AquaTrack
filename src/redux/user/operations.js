@@ -23,7 +23,11 @@ export const login = createAsyncThunk(
       };
       console.log('Response.statusCode Type: ', typeof response.statusCode);
       if (response.statusCode === 401) {
-        toast.error('Email or password is wrong');
+        if (response.message === 'Please verify your email') {
+          toast.error('Please verify your email');
+        } else {
+          toast.error('Email or password is wrong');
+        }
       } else {
         toast.error('Login failed');
       }
@@ -37,8 +41,8 @@ export const register = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     try {
       const { data } = await instance.post('/api/users/register', userInfo);
-      setAuthHeader(data.token);
-      login(userInfo);
+      // setAuthHeader(data.token);
+      // login(userInfo);
       return data;
     } catch (error) {
       const response = {

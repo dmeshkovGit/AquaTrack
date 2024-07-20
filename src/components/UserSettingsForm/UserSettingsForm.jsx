@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
-import { Loader } from '../../shared/components/Loader/Loader';
-import { isNumber } from '../../helpers/validationsHelper';
+import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
+
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -23,9 +25,9 @@ const schema = yup.object().shape({
     .required('Name is required')
     .min(3, 'Too short! Minimum 3 symbols')
     .max(30, 'Too long! Maximum 30 symbols'),
-  weight: yup.string().max(3, 'Too long! Maximum 3 symbols'),
-  activeTime: yup.string().max(3, 'Too long! Maximum 3 symbols'),
-  liters: yup.string().max(3, 'Too long! Maximum 3 symbols'),
+  weight: yup.number().max(150, 'Maximum 150 kg'),
+  activeTime: yup.number().max(24, 'Maximum 24 hours'),
+  liters: yup.number().max(10, 'Maximum 10 liters'),
 });
 
 export default function UserSettingsForm({ isModalOpen }) {
@@ -34,15 +36,18 @@ export default function UserSettingsForm({ isModalOpen }) {
   const [weight, setWeight] = useState(0);
   const [waterVolume, setWaterVolume] = useState(0);
   const [liters, setLiters] = useState(0);
-  const [err, setErr] = useState(false);
+
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
     setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     mode: 'onChange',
@@ -90,6 +95,7 @@ export default function UserSettingsForm({ isModalOpen }) {
       })
       .catch(() => toast.error('Sorry, try again later'));
   };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
@@ -100,7 +106,7 @@ export default function UserSettingsForm({ isModalOpen }) {
             setGender(e.target.value);
           }}
         >
-          <legend className={css.legend}>Your gender identity</legend>
+          <legend className={css.legend}>{t('Your gender')}</legend>
           <div className={css.radioWrapper}>
             <label className={css.labelsRadioWrap}>
               <input
@@ -111,7 +117,7 @@ export default function UserSettingsForm({ isModalOpen }) {
                 value="woman"
               />
               <span className={css.fakeRadio}></span>
-              <span className={css.label}>Woman</span>
+              <span className={css.label}>{t('Woman gender')}</span>
             </label>
             <label className={css.labelsRadioWrap}>
               <input
@@ -123,7 +129,7 @@ export default function UserSettingsForm({ isModalOpen }) {
                 value="man"
               />
               <span className={css.fakeRadio}></span>
-              <span className={css.label}>Man</span>
+              <span className={css.label}>{t('Man gender')}</span>
             </label>
           </div>
         </fieldset>
@@ -134,7 +140,7 @@ export default function UserSettingsForm({ isModalOpen }) {
                 className={clsx(css.label, css.bold)}
                 {...register('name')}
               >
-                Your name
+                {t('Your name')}
               </label>
               <input
                 autoComplete="off"
@@ -151,7 +157,7 @@ export default function UserSettingsForm({ isModalOpen }) {
                 className={clsx(css.label, css.bold)}
                 {...register('email')}
               >
-                Your email
+                {t('Your email')}
               </label>
               <input
                 autoComplete="off"
@@ -168,7 +174,7 @@ export default function UserSettingsForm({ isModalOpen }) {
           <div className={css.rightPart}>
             <div className={css.labelContainer}>
               <label className={css.label} {...register('weight')}>
-                Your weight in kilograms:
+                {t('Your weight')}
               </label>
               <input
                 autoComplete="off"
@@ -178,18 +184,20 @@ export default function UserSettingsForm({ isModalOpen }) {
                 onBlur={e => {
                   setWeight(e.target.value);
                 }}
-                onKeyDown={event => isNumber(event, setErr)}
-                maxLength="2"
+                onKeyDown={event =>
+                  isNumberAndDot(event, setError, clearErrors)
+                }
+                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                maxLength="3"
+                max="150"
               />
               {errors.weight && (
-                <p className={css.errorText}>
-                  {errors.weight.message} {err && 'Type numbers please'}
-                </p>
+                <p className={css.errorText}>{errors.weight.message}</p>
               )}
             </div>
             <div className={css.labelContainer}>
               <label className={css.label} {...register('activeTime')}>
-                The time of active participation in sports:
+                {t('Time active')}
               </label>
               <input
                 autoComplete="off"
@@ -197,23 +205,26 @@ export default function UserSettingsForm({ isModalOpen }) {
                 className={clsx(css.input, errors.activeTime && css.errorInput)}
                 {...register('activeTime')}
                 onBlur={e => setActivity(e.target.value)}
-                onKeyDown={event => isNumber(event, setErr)}
-                maxLength="2"
+                onKeyDown={event =>
+                  isNumberAndDot(event, setError, clearErrors)
+                }
+                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                maxLength="3"
+                max="24"
               />
               {errors.activeTime && (
-                <p className={css.errorText}>
-                  {errors.activeTime.message}
-                  {err && 'Type numbers please'}
-                </p>
+                <p className={css.errorText}>{errors.activeTime.message}</p>
               )}
             </div>
             <p className={css.waterAmount}>
-              The required amount of water in liters per day:{' '}
-              <span className={css.accent}>{waterVolume.toFixed(1)} l</span>
+              {t('Required amount')}{' '}
+              <span className={css.accent}>
+                {waterVolume.toFixed(1)} {t('Count water')}
+              </span>
             </p>
             <div className={css.labelContainer}>
               <label className={clsx(css.label, css.bold)}>
-                Write down how much water you will drink:
+                {t('Write down')}
               </label>
               <input
                 autoComplete="off"
@@ -221,23 +232,23 @@ export default function UserSettingsForm({ isModalOpen }) {
                 className={clsx(css.input, errors.liters && css.errorInput)}
                 {...register('liters')}
                 onBlur={e => setLiters(e.target.value)}
-                onKeyDown={event => isNumber(event, setErr)}
+                onKeyDown={event =>
+                  isNumberAndDot(event, setError, clearErrors)
+                }
+                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
                 maxLength="3"
+                max="10"
               />
               {errors.liters && (
-                <p className={css.errorText}>
-                  {errors.liters.message}
-                  {err && 'Type numbers please'}
-                </p>
+                <p className={css.errorText}>{errors.liters.message}</p>
               )}
             </div>
           </div>
         </div>
         <button type="submit" className={css.saveBtn}>
-          Save
+          {t('Save setting')}
         </button>
       </form>
-      {isLoading && <Loader />}
     </>
   );
 }

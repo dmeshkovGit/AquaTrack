@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWater, getDayWater, deleteWater } from './operations';
+import { addWater, getDayWater, deleteWater, editWater } from './operations';
 
 const slice = createSlice({
   name: 'water',
@@ -39,6 +39,18 @@ const slice = createSlice({
         );
       })
       .addCase(deleteWater.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(editWater.pending, state => {
+        state.loading = true;
+      })
+      .addCase(editWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dayWater = state.dayWater.map(item =>
+          item._id === action.payload._id ? action.payload : item,
+        );
+      })
+      .addCase(editWater.rejected, state => {
         state.loading = false;
       }),
 });

@@ -9,18 +9,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
 import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
-import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
-import { toast } from 'react-hot-toast';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
-  // проверять инпут password == repeatPassword
-  // .test('passwords-match', 'Passwords must match', function (value) {
-  //   return value === this.parent.repeatPassword;
-  // })
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -31,6 +29,7 @@ export default function SignUpForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -49,18 +48,7 @@ export default function SignUpForm() {
   const handleFormSubmit = data => {
     const { email, password } = data;
     dispatch(registerUser({ email, password }))
-      .then(action => {
-        if (registerUser.fulfilled.match(action)) {
-          toast.success('Register successful');
-        } else if (registerUser.rejected.match(action)) {
-          const errorMessage = action.payload?.message || 'Login failed';
-          const statusCode = action.payload ? action.payload.statusCode : null;
-
-          console.error(
-            `Login failed with status code ${statusCode}: ${errorMessage}`,
-          );
-        }
-      })
+      .then()
       .catch(error => {
         console.error('Unexpected error:', error);
       });
@@ -69,10 +57,10 @@ export default function SignUpForm() {
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
       <div className={css.inputGroup}>
-        <label>Email</label>
+        <label>{t('Email user')}</label>
         <input
           type="text"
-          placeholder="Enter your email"
+          placeholder={t('Enter email')}
           name="email"
           autoComplete="off"
           className={clsx(css.inputGroupInput, errors.email && css.inputError)}
@@ -81,11 +69,11 @@ export default function SignUpForm() {
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
       <div className={css.inputGroup}>
-        <label>Password</label>
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
             name="password"
             autoComplete="new-password"
             className={clsx(
@@ -112,11 +100,11 @@ export default function SignUpForm() {
         )}
       </div>
       <div className={css.inputGroup}>
-        <label>Repeat Password</label>
+        <label>{t('Repeat password')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Repeat password"
+            placeholder={t('Repeat password')}
             name="repeatPassword"
             autoComplete="password-confirmation"
             {...register('repeatPassword')}
@@ -142,12 +130,9 @@ export default function SignUpForm() {
           <p className={css.error}>{errors.repeatPassword.message}</p>
         )}
       </div>
-      <button
-        className={css.submitButton}
-        type="submit"
-        disabled={!isValid || isLoading}
-      >
-        {isLoading ? <AuthLoader /> : 'Sign Up'}
+
+      <button className={css.submitButton} type="submit" disabled={!isValid}>
+        {isLoading ? <DotLoader text="Signing Up" /> : t('Register user form')}
       </button>
       <GoogleAuthBtn />
     </form>

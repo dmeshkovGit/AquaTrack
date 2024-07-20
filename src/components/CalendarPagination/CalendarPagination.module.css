@@ -1,26 +1,40 @@
 .paginationContainer {
   display: flex;
-  align-item: center;
-  gap: 22px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 231px;
 }
+
 .buttonsContainer {
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 20px;
 }
+
 .button {
   border: none;
   background-color: transparent;
+  font-size: 24px; /* Додамо розмір іконки */
+  cursor: pointer;
 }
+
 .title {
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -1%;
 }
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+}
+
 .icon {
   fill: transparent;
 }
+
 @media screen and (min-width: 768px) {
   .title {
     font-size: 16px;

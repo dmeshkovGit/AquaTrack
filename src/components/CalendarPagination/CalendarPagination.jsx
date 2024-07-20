@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import Icon from '../../shared/components/Icon/Icon';
-import css from '../CalendarPagination/CalendarPagination.module.css';
+import { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import css from './CalendarPagination.module.css';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
-export default function CalendarPagination() {
+export default function CalendarPagination({ isOpen }) {
   const [date, setDate] = useState(new Date());
-
-  useEffect(() => {
-    setDate(new Date());
-  }, []);
+  const { t } = useTranslation();
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
@@ -27,18 +25,18 @@ export default function CalendarPagination() {
   };
 
   const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    t('Month january'),
+    t('Month february'),
+    t('Month march'),
+    t('Month april'),
+    t('Month may'),
+    t('Month june'),
+    t('Month july'),
+    t('Month august'),
+    t('Month september'),
+    t('Month october'),
+    t('Month november'),
+    t('Month december'),
   ];
 
   return (
@@ -54,7 +52,23 @@ export default function CalendarPagination() {
           <FaAngleRight />
         </button>
       </div>
-      <Icon className={css.icon} id="pieChart" height={20} width={20} />
+      <div className={css.iconContainer}>
+        <div
+          className={css.icon}
+          id="pieChart"
+          style={{
+            cursor: 'pointer',
+            width: 24,
+            height: 24,
+            backgroundColor: 'red',
+            borderRadius: '50%',
+          }}
+          onClick={() => {
+            console.log('Div clicked');
+            isOpen();
+          }}
+        ></div>
+      </div>
     </div>
   );
 }
