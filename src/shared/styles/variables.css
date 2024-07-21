@@ -30,13 +30,13 @@
 
 .pinkTheme {
   --main: #2593a3;
-  --main-text: #2f2f2f;
+  --main-text: #5c5454f2;
   --main-border: #2f2f2f33;
   --main-placeholder: #2f2f2f99;
   --logout-btn: #323f4766;
   --shadow: #0000001a;
-  --accent: #9be1a0;
-  --accent-hover: #87d28d;
+  --accent: #ff478b73;
+  --accent-hover: #e18daeba;
   --background: rgb(220 33 99 / 34%);
   --main-white: #fff;
   --validation-error: #ef5050;
