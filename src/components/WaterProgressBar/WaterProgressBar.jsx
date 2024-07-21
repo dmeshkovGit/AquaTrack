@@ -13,9 +13,6 @@ export default function WaterProgressBar() {
   const dayWater = useSelector(selectUserWaterNorm);
   const { t } = useTranslation();
 
-  // Для ТЕСТУ ПОКИ НЕ ЗАПИСУЮТЬСЯ ДАНІ В СЕТІНГС ЮЗЕРА
-  // const dayWater = 1 * 1000;
-
   const dayDrinking = useSelector(selectDayWater);
 
   useEffect(() => {
@@ -40,7 +37,13 @@ export default function WaterProgressBar() {
     <div className={css.wrapper}>
       <h6 className={css.header}>{t('Today water')}</h6>
       <div className={css.bar}>
-        <div className={css.progressLine} style={{ maxWidth: `${percent}%` }}>
+        <div
+          className={css.progressLine}
+          style={{
+            minWidth: `12px`,
+            maxWidth: `${percent}%`,
+          }}
+        >
           {isPercentVisible && (
             <span className={css.activePercent} style={{ left: `100%` }}>
               {`${percent}%`}
