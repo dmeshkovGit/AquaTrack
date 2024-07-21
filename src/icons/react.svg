@@ -43,8 +43,8 @@
 </symbol>
 
 <symbol id="x-close" viewBox="0 0 28 28">
-<path d="M21 7L7 21" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7 7L21 21" stroke="#2F2F2F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21 7L7 21"  stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7 7L21 21"  stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
 
 <symbol id="edit" viewBox="0 0 16 16">

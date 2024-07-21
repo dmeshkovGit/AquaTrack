@@ -1,24 +1,26 @@
 import css from '../Calendar/Calendar.module.css';
 import CalendarItem from '../../components/CalendarItem/CalendarItem';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getDayWater } from '../../redux/water/operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectActiveDay } from '../../redux/water/selectors';
+import { setActiveDay } from '../../redux/water/slice';
 
 export default function Calendar({ daysList }) {
-  const [activeDay, setActiveDay] = useState('');
+  const activeDay = useSelector(selectActiveDay);
   const dispatch = useDispatch();
   useEffect(() => {
     const now = new Date();
     const currentDate = now.toISOString().split('T')[0] + 'T00:00:00.000Z';
-    setActiveDay(currentDate);
-  }, []);
+    dispatch(setActiveDay(currentDate));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getDayWater(new Date(activeDay).getTime()));
   }, [activeDay, dispatch]);
 
   const handleClickDay = day => {
-    setActiveDay(day);
+    dispatch(setActiveDay(day));
   };
   return (
     daysList?.length && (

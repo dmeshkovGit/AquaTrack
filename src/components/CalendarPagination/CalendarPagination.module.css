@@ -10,12 +10,16 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  justify-content: space-between;
+  width: 178px;
 }
 
 .button {
+  display: flex;
+  justify-content: center;
   border: none;
   background-color: transparent;
-  font-size: 24px; /* Додамо розмір іконки */
+  font-size: 24px;
   cursor: pointer;
 }
 
@@ -31,11 +35,22 @@
   align-items: center;
 }
 
+.titleUk {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+
 .icon {
   fill: transparent;
 }
 
 @media screen and (min-width: 768px) {
+  .buttonsContainer {
+    width: 200px;
+  }
   .title {
     font-size: 16px;
     line-height: 24px;

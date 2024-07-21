@@ -28,15 +28,15 @@ function App() {
       <Toaster position="top-center" />
 
       <SharedLayout>
-        {/* <div className="translateContainer">
-          <h3>{i18n.language}</h3>
+        <div className="translateContainer">
+          <h3 className="activeLang">{i18n.language}</h3>
           <div>
             <button onClick={() => i18n.changeLanguage('en')}>English</button>
             <button onClick={() => i18n.changeLanguage('uk')}>
               Українська
             </button>
           </div>
-        </div> */}
+        </div>
 
         <Suspense fallback={null}>
           <Routes>

@@ -9,6 +9,7 @@ import LogOutModal from '../LogOutModal/LogOutModal';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
+import { RxAvatar } from 'react-icons/rx';
 
 export default function UserBar() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -38,8 +39,11 @@ export default function UserBar() {
           onClick={() => setIsPopoverOpen(!isPopoverOpen)}
         >
           <p className={css.name}>{user.name ? user.name : 'User'}</p>
-
-          <img className={css.img} src={user.avatarURL} alt="avatar" />
+          {user.avatarURL ? (
+            <img className={css.img} src={user.avatarURL} alt="avatar" />
+          ) : (
+            <RxAvatar className={css.iconAvatar} />
+          )}
 
           <IoIosArrowDown
             className={clsx(css.icon, isPopoverOpen && css.iconUp)}
