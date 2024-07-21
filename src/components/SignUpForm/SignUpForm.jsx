@@ -32,7 +32,6 @@ export default function SignUpForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoading = useSelector(selectIsLoading);
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // об'єкт конфігурації параметрів хука useForm
   const {
