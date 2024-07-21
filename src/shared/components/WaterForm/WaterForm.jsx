@@ -45,7 +45,7 @@ export default function WaterForm({
   );
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const dailyNorm = useSelector(selectUserWaterNorm);
@@ -98,8 +98,16 @@ export default function WaterForm({
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <p className={css.text}>{t('Correct entered')}:</p>
-      <p className={css.secondaryText}>{t('Amount of water')}:</p>
+      <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
+        {t('Correct entered')}:
+      </p>
+      <p
+        className={clsx(css.secondaryText, {
+          [css.secondaryTextUk]: i18n.language === 'uk',
+        })}
+      >
+        {t('Amount of water')}:
+      </p>
       <div className={css.counterContainer}>
         <button
           className={clsx(css.counterBtn, count <= 50 && css.decrementBtn)}
@@ -114,7 +122,9 @@ export default function WaterForm({
             id="icon-minus"
           />
         </button>
-        <p className={css.count}>
+        <p
+          className={clsx(css.count, { [css.countUk]: i18n.language === 'uk' })}
+        >
           {count} {t('Water add')}
         </p>
         <button
@@ -131,7 +141,11 @@ export default function WaterForm({
           />
         </button>
       </div>
-      <label className={css.baseLabel}>
+      <label
+        className={clsx(css.baseLabel, {
+          [css.baseLabelUk]: i18n.language === 'uk',
+        })}
+      >
         {t('Recording time')}:
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
@@ -144,7 +158,11 @@ export default function WaterForm({
           {timeErr && `Type in format 'hh:mm' please`}
         </span>
       </label>
-      <label className={css.secondaryLabel}>
+      <label
+        className={clsx(css.secondaryLabel, {
+          [css.secondaryLabelUk]: i18n.language === 'uk',
+        })}
+      >
         {t('Enter the value')}:
         <input
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
@@ -157,7 +175,12 @@ export default function WaterForm({
           {errors.Count && errors.Count.message} {err && 'Type numbers please'}
         </span>
       </label>
-      <button className={css.saveBtn} type="submit">
+      <button
+        className={clsx(css.saveBtn, {
+          [css.saveBtnUk]: i18n.language === 'uk',
+        })}
+        type="submit"
+      >
         {t('Save setting')}
       </button>
     </form>

@@ -3,9 +3,10 @@ import css from './AdvantagesSection.module.css';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import { FaLanguage } from 'react-icons/fa';
 
 export default function AdvantagesSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const users = [
     {
       name: 'firstUser',
@@ -39,20 +40,42 @@ export default function AdvantagesSection() {
               );
             })}
           </ul>
-          <p className={css.usersText}>
+          <p
+            className={clsx(css.usersText, {
+              [css.usersTextUk]: i18n.language === 'uk',
+            })}
+          >
             {t('Our 1')}{' '}
-            <span className={css.textAccent}>{t('Happy customers')}</span>{' '}
+            <span
+              className={clsx(css.textAccent, {
+                [css.textAccentUk]: i18n.language === 'uk',
+              })}
+            >
+              {t('Happy customers')}
+            </span>{' '}
             {t('Our 2')}
           </p>
         </div>
         <div className={css.features}>
-          <span className={clsx(css.habit, css.feature)}>
+          <span
+            className={clsx(css.habit, css.feature, {
+              [css.featureUk]: i18n.language === 'uk',
+            })}
+          >
             {t('Habit drive')}
           </span>
-          <span className={clsx(css.view, css.feature)}>
+          <span
+            className={clsx(css.view, css.feature, {
+              [css.featureUk]: i18n.language === 'uk',
+            })}
+          >
             {t('View statistics')}
           </span>
-          <span className={clsx(css.personal, css.feature)}>
+          <span
+            className={clsx(css.personal, css.feature, {
+              [css.featureUk]: i18n.language === 'uk',
+            })}
+          >
             {t('Personal rate')}
           </span>
         </div>

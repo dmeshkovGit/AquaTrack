@@ -66,6 +66,12 @@
   text-align: start;
 }
 
+.usersTextUk {
+  font-family: var(--font-family);
+  display: block;
+  text-align: start;
+}
+
 .firstUser {
   z-index: 3;
 }
@@ -77,6 +83,11 @@
 }
 
 .textAccent {
+  color: var(--accent);
+}
+
+.textAccent {
+  font-family: var(--font-family);
   color: var(--accent);
 }
 
@@ -92,6 +103,18 @@
 }
 
 .feature {
+  display: block;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 8px;
+  letter-spacing: -0.01em;
+  padding: 9px 12px;
+  color: var(--main);
+  border-radius: 30px;
+}
+
+.featureUk {
+  font-family: var(--font-family);
   display: block;
   font-size: 8px;
   font-weight: 700;

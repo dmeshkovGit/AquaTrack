@@ -5,12 +5,11 @@ import Icon from '../../shared/components/Icon/Icon';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
-
+import clsx from 'clsx';
 
 export default function CalendarPagination({ isOpen }) {
-
   const [date, setDate] = useState(new Date());
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
@@ -49,7 +48,9 @@ export default function CalendarPagination({ isOpen }) {
         <button className={css.button} onClick={handlePrevMonth}>
           <FaAngleLeft />
         </button>
-        <p className={css.title}>
+        <p
+          className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+        >
           {monthNames[date.getMonth()]}, {date.getFullYear()}
         </p>
         <button className={css.button} onClick={handleNextMonth}>

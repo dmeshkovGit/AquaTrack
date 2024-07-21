@@ -17,6 +17,28 @@
   letter-spacing: -0.1px;
   transition: all var(--transition);
 }
+
+.btnUk {
+  width: 140px;
+  height: 46px;
+  border-radius: 30px;
+  border: none;
+  color: var(--main-white);
+  background-color: var(--main);
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  margin-left: auto;
+  letter-spacing: -0.1px;
+  transition: all var(--transition);
+}
+
 .btn:hover {
   color: var(--accent);
 }

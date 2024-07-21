@@ -18,7 +18,7 @@ export default function WaterItem() {
   const [selectedWaterId, setSelectedWaterId] = useState(null);
   const [selectedWaterAmount, setSelectedWaterAmount] = useState(null);
   const [selectedWaterTime, setSelectedWaterTime] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -61,7 +61,9 @@ export default function WaterItem() {
                   id="icon-water-glass"
                 />
                 <div>
-                  <strong>{water.amount} {t('Water add')}</strong>
+                  <strong>
+                    {water.amount} {t('Water add')}
+                  </strong>
                   <p className={css.date}>{unixParser(water.date)}</p>
                 </div>
                 <div className={css.container_buttons}>
