@@ -1,37 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import css from '../WaterItem/WaterItem.module.css';
 import WaterModal from '../../shared/components/WaterModal/WaterModal';
 import Modal from '../../shared/components/Modal/Modal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 import Icon from '../../shared/components/Icon/Icon';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDayWater } from '../../redux/water/operations';
+import { selectActiveDay, selectDayWater } from '../../redux/water/selectors';
+import { selectIsLoading } from '../../redux/water/selectors';
+import { unixParser } from '../../helpers/validationsHelper.js';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedWaterId, setSelectedWaterId] = useState(null);
+  const [selectedWaterAmount, setSelectedWaterAmount] = useState(null);
+  const [selectedWaterTime, setSelectedWaterTime] = useState(null);
+  const { t, i18n } = useTranslation();
 
-  const handleOpenDeleteModal = () => {
+  const isLoading = useSelector(selectIsLoading);
+  const dataWaterOfDay = useSelector(selectDayWater);
+
+  const handleOpenDeleteModal = id => {
+    setSelectedWaterId(id);
     setIsDeleteModalOpen(true);
   };
 
   const handleCloseDeleteModal = () => {
+    setSelectedWaterId(null);
     setIsDeleteModalOpen(false);
   };
 
-  const handleDelete = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  const handleEdit = () => {
+  const handleEdit = (id, amount, date) => {
     setIsEditModalOpen(true);
+    setSelectedWaterId(id);
+    setSelectedWaterAmount(amount);
+    setSelectedWaterTime(date);
   };
 
   return (
     <>
-      <ul className={css.list_water_items}>
-        {Array(15)
-          .fill(null)
-          .map((_, index) => (
-            <li key={index} className={css.water_item}>
+      {dataWaterOfDay.length > 0 ? (
+        <ul className={css.list_water_items}>
+          {dataWaterOfDay.map(water => (
+            <li key={water._id} className={css.water_item}>
               <div className={css.water_item_content}>
                 <Icon
                   className={css.icon_glass_water}
@@ -40,11 +54,18 @@ export default function WaterItem() {
                   id="icon-water-glass"
                 />
                 <div>
-                  <strong>250 ml</strong>
-                  <p>7:00 AM</p>
+                  <strong>
+                    {water.amount} {t('Water add')}
+                  </strong>
+                  <p className={css.date}>{unixParser(water.date)}</p>
                 </div>
                 <div className={css.container_buttons}>
-                  <button className={css.editButton} onClick={handleEdit}>
+                  <button
+                    className={css.editButton}
+                    onClick={() =>
+                      handleEdit(water._id, water.amount, water.date)
+                    }
+                  >
                     {' '}
                     <Icon
                       className={css.svg_edit}
@@ -55,7 +76,7 @@ export default function WaterItem() {
                   </button>
                   <button
                     className={css.deleteButton}
-                    onClick={handleOpenDeleteModal}
+                    onClick={() => handleOpenDeleteModal(water._id)}
                   >
                     {' '}
                     <Icon
@@ -69,7 +90,19 @@ export default function WaterItem() {
               </div>
             </li>
           ))}
-      </ul>
+        </ul>
+      ) : (
+        <div className={css.container_without_water}>
+          <Icon
+            className={css.icon_glass_water}
+            width={44}
+            height={45}
+            id="icon-water-glass"
+          />
+          <p className={css.text_}>Not found, please add water</p>
+        </div>
+      )}
+
       {isEditModalOpen && (
         <Modal
           isOpen={isEditModalOpen}
@@ -77,14 +110,20 @@ export default function WaterItem() {
             setIsEditModalOpen(false);
           }}
         >
-          <WaterModal operationType="edit" />
+          <WaterModal
+            operationType="edit"
+            isOpen={setIsEditModalOpen}
+            waterId={selectedWaterId}
+            waterAmount={selectedWaterAmount}
+            waterTime={selectedWaterTime}
+          />
         </Modal>
       )}
       {isDeleteModalOpen && (
         <Modal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
           <DeleteWaterModal
             onClose={handleCloseDeleteModal}
-            onDelete={handleDelete}
+            waterId={selectedWaterId}
           />
         </Modal>
       )}

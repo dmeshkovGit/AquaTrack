@@ -34,6 +34,11 @@
   background-clip: content-box;
   border: 8px solid transparent;
 }
+.modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(81, 83, 84, 0.3);
+  background-clip: content-box;
+  border: 8px solid transparent;
+}
 .closeButton {
   z-index: 1;
   position: absolute;
@@ -43,10 +48,21 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.closeIcon {
+  stroke: var(--main);
+  transition: all var(--transition);
 }
 
 .closeButton:focus {
   outline: none;
+}
+
+.closeButton:hover > .closeIcon {
+  stroke: var(--logout-btn);
 }
 
 @media screen and (min-width: 768px) {
@@ -55,5 +71,18 @@
   }
   .modal::-webkit-scrollbar-thumb {
     border: 15px solid transparent;
+  }
+  .modal::-webkit-scrollbar-thumb:hover {
+    background: rgba(81, 83, 84, 0.3);
+    background-clip: content-box;
+    border: 14px solid transparent;
+  }
+  .closeButton {
+    width: 28px;
+    height: 28px;
+  }
+  .closeIcon {
+    width: 28px;
+    height: 28px;
   }
 }

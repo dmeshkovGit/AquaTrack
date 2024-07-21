@@ -3,7 +3,11 @@ import css from '../LogOutModal/LogOutModal.module.css';
 import { logout } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../redux/user/selectors';
-import { Loader } from '../../shared/components/Loader/Loader';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
+
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+import clsx from 'clsx';
 
 export default function LogOutModal({ isModalOpen }) {
   const isLoading = useSelector(selectIsLoading);
@@ -14,25 +18,39 @@ export default function LogOutModal({ isModalOpen }) {
       .then(() => isModalOpen(false))
       .catch(() => toast.error('Sorry, try again later'));
   };
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className={css.modal}>
-        <h3 className={css.title}>Log out</h3>
-        <p className={css.text}>Do you really want to leave?</p>
+        <h3
+          className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+        >
+          {t('Log out')}
+        </h3>
+        <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
+          {t('Do you really')}
+        </p>
         <div className={css.btnWrap}>
-          <button className={css.logoutBtn} type="button" onClick={onClick}>
-            Log out
+          <button
+            className={clsx(css.logoutBtn, {
+              [css.logoutBtnUk]: i18n.language === 'uk',
+            })}
+            type="button"
+            onClick={onClick}
+          >
+            {isLoading ? <DotLoader text="Logging out" /> : t('Log out')}
           </button>
           <button
-            className={css.cancelBtn}
+            className={clsx(css.cancelBtn, {
+              [css.cancelBtnUk]: i18n.language === 'uk',
+            })}
             type="button"
             onClick={() => isModalOpen(false)}
           >
-            Cancel
+            {t('Log exit')}
           </button>
         </div>
       </div>
-      {isLoading && <Loader />}
     </>
   );
 }

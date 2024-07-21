@@ -56,6 +56,16 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
+
+.legend {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
 .leftPart {
   display: flex;
   flex-direction: column;
@@ -69,6 +79,15 @@
   width: 303px;
 }
 .label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.labelUk {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;
@@ -110,11 +129,39 @@
   color: var(--main-text);
 }
 
+.waterAmountUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
 .accent {
   color: var(--accent);
 }
 
 .saveBtn {
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 116px;
+  height: 46px;
+  border: none;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  transition: all var(--transition);
+}
+
+.saveBtnUk {
+  font-family: var(--font-family);
   border-radius: 30px;
   display: flex;
   justify-content: center;
@@ -167,6 +214,10 @@
     width: 141px;
     height: 56px;
   }
+
+  .rightPart {
+    margin-top: 24px;
+  }
 }
 
 /* ===================DESKTOP================== */
@@ -183,5 +234,9 @@
 
   .labelContainer {
     width: 400px;
+  }
+
+  .rightPart {
+    margin-top: 0;
   }
 }

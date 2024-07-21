@@ -12,6 +12,20 @@
   width: 100%;
 }
 
+.wrapUk {
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
 .title {
   margin-right: auto;
 }

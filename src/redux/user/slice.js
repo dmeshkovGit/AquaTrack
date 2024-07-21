@@ -5,6 +5,7 @@ import {
   logout,
   refreshUserToken,
   register,
+  updateAvatar,
   updateUser,
 } from './operations';
 
@@ -43,7 +44,6 @@ const slice = createSlice({
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.user = action.payload.user;
-        state.isLoggedIn = true;
       })
       .addCase(register.rejected, handleRejected)
       .addCase(login.pending, handlePending)
@@ -100,7 +100,13 @@ const slice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
       })
-      .addCase(updateUser.rejected, handleRejected),
+      .addCase(updateUser.rejected, handleRejected)
+      .addCase(updateAvatar.pending, handlePending)
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.avatarURL = action.payload.avatarURL;
+      })
+      .addCase(updateAvatar.rejected, handleRejected),
 });
 
 export default slice.reducer;

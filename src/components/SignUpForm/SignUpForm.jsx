@@ -7,18 +7,18 @@ import Icon from '../../shared/components/Icon/Icon';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { register as registerUser } from '../../redux/user/operations';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
-import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password must be at least 8 characters')
-    .required('Password is required')
-    .test('passwords-match', 'Passwords must match', function (value) {
-      return value === this.parent.repeatPassword;
-    }),
+    .required('Password is required'),
   repeatPassword: yup
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -28,14 +28,17 @@ const schema = yup.object().shape({
 export default function SignUpForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const isLoading = useSelector(selectIsLoading);
+  const { t, i18n } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
   const toggleShowPassword = () => {
@@ -44,32 +47,51 @@ export default function SignUpForm() {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
-    dispatch(registerUser({ email, password }));
+    dispatch(registerUser({ email, password }))
+      .then()
+      .catch(error => {
+        console.error('Unexpected error:', error);
+      });
   };
-
-  const isLoading = useSelector(selectIsLoading);
 
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={css.inputGroup}>
-        <label>Email</label>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
+        <label>{t('Email user')}</label>
         <input
           type="text"
-          placeholder="Enter your email"
-          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          placeholder={t('Enter email')}
+          name="email"
+          autoComplete="off"
+          className={clsx(css.inputGroupInput, errors.email && css.inputError, {
+            [css.inputGroupInputUk]: i18n.language === 'uk',
+          })}
           {...register('email')}
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
-      <div className={css.inputGroup}>
-        <label>Password</label>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
+            name="password"
+            autoComplete="new-password"
             className={clsx(
               css.inputGroupInput,
-              errors.password && css.inputError,
+              errors.email && css.inputError,
+              {
+                [css.inputGroupInputUk]: i18n.language === 'uk',
+              },
             )}
             {...register('password')}
           />
@@ -90,22 +112,32 @@ export default function SignUpForm() {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <div className={css.inputGroup}>
-        <label>Repeat Password</label>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
+        <label>{t('Repeat password')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Repeat password"
+            placeholder={t('Repeat password')}
+            name="repeatPassword"
+            autoComplete="password-confirmation"
             {...register('repeatPassword')}
             className={clsx(
               css.inputGroupInput,
-              errors.repeatPassword && css.inputError,
+              errors.email && css.inputError,
+              {
+                [css.inputGroupInputUk]: i18n.language === 'uk',
+              },
             )}
           />
           <button
             type="button"
             className={css.passwordToggle}
             onClick={toggleShowPassword}
+            tabIndex="-1"
           >
             {showPassword ? (
               <Icon className={css.icon} id="eye" width={20} height={20} />
@@ -118,13 +150,17 @@ export default function SignUpForm() {
           <p className={css.error}>{errors.repeatPassword.message}</p>
         )}
       </div>
+
       <button
-        className={css.submitButton}
+        className={clsx(css.submitButton, {
+          [css.submitButtonUk]: i18n.language === 'uk',
+        })}
         type="submit"
-        // disabled={loading}
+        disabled={!isValid}
       >
-        {isLoading ? <AuthLoader /> : 'Sign Up'}
+        {isLoading ? <DotLoader text="Signing Up" /> : t('Register user form')}
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }

@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWater } from './operations';
+import { addWater, getDayWater, deleteWater, editWater } from './operations';
 
 const slice = createSlice({
   name: 'water',
   initialState: {
+    activeDay: '',
     dayWater: [],
     loading: false,
+  },
+  reducers: {
+    setActiveDay: (state, action) => {
+      state.activeDay = action.payload;
+    },
   },
   extraReducers: builder =>
     builder
@@ -14,11 +20,64 @@ const slice = createSlice({
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayWater.push(action.payload);
+
+        if (state.dayWater.length > 0) {
+          if (state.dayWater[0].date) {
+            const firstDate = new Date(state.dayWater[0].date);
+            const newDate = new Date(action.payload.date);
+
+            const sameDay =
+              firstDate.getUTCFullYear() === newDate.getUTCFullYear() &&
+              firstDate.getUTCMonth() === newDate.getUTCMonth() &&
+              firstDate.getUTCDate() === newDate.getUTCDate();
+
+            if (sameDay) {
+              state.dayWater.push(action.payload);
+            }
+          }
+        } else {
+          state.dayWater.push(action.payload);
+        }
       })
       .addCase(addWater.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(getDayWater.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getDayWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dayWater = action.payload.flat();
+      })
+      .addCase(getDayWater.rejected, state => {
+        state.loading = false;
+        state.dayWater = [];
+      })
+      .addCase(deleteWater.pending, state => {
+        state.loading = true;
+      })
+      .addCase(deleteWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dayWater = state.dayWater.filter(
+          item => item._id !== action.payload._id,
+        );
+      })
+      .addCase(deleteWater.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(editWater.pending, state => {
+        state.loading = true;
+      })
+      .addCase(editWater.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dayWater = state.dayWater.map(item =>
+          item._id === action.payload._id ? action.payload : item,
+        );
+      })
+      .addCase(editWater.rejected, state => {
         state.loading = false;
       }),
 });
 
 export default slice.reducer;
+export const { setActiveDay } = slice.actions;

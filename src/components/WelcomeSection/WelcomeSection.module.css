@@ -30,7 +30,25 @@
   line-height: 18px;
 }
 
+.subtitleUk {
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--main-text);
+  margin-bottom: 16px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
 .title {
+  font-size: 38px;
+  color: var(--main);
+  margin-bottom: 32px;
+  line-height: 38px;
+  font-weight: 700;
+}
+
+.titleUk {
+  font-family: var(--font-family);
   font-size: 38px;
   color: var(--main);
   margin-bottom: 32px;
@@ -55,7 +73,34 @@
   transition: all var(--transition);
 }
 
+.tryTrackerUk {
+  font-family: var(--font-family);
+  padding: 14px 19px;
+  background-color: var(--accent);
+  color: var(--main);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  border-radius: 30px;
+  transition: all var(--transition);
+}
+
 .signIn {
+  padding: 14px 28px;
+  background-color: var(--background);
+  color: var(--main);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  border-radius: 30px;
+  border: 1px solid var(--main);
+  transition: all var(--transition);
+}
+
+.signInUk {
+  font-family: var(--font-family);
   padding: 14px 28px;
   background-color: var(--background);
   color: var(--main);
