@@ -5,7 +5,7 @@ const slice = createSlice({
   name: 'water',
   initialState: {
     activeDay: '',
-    dayWater: [],
+    dayWater: { date: '', water: [] },
     loading: false,
   },
   reducers: {
@@ -21,22 +21,14 @@ const slice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
 
-        if (state.dayWater.length > 0) {
-          if (state.dayWater[0].date) {
-            const firstDate = new Date(state.dayWater[0].date);
-            const newDate = new Date(action.payload.date);
+        const date = new Date(action.payload.date);
+        date.setUTCHours(0, 0, 0, 0);
+        const requestDate = date.toISOString();
 
-            const sameDay =
-              firstDate.getUTCFullYear() === newDate.getUTCFullYear() &&
-              firstDate.getUTCMonth() === newDate.getUTCMonth() &&
-              firstDate.getUTCDate() === newDate.getUTCDate();
+        state.dayWater.date = state.activeDay;
 
-            if (sameDay) {
-              state.dayWater.push(action.payload);
-            }
-          }
-        } else {
-          state.dayWater.push(action.payload);
+        if (state.dayWater.date === requestDate) {
+          state.dayWater.water.push(action.payload);
         }
       })
       .addCase(addWater.rejected, state => {
@@ -47,18 +39,18 @@ const slice = createSlice({
       })
       .addCase(getDayWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayWater = action.payload.flat();
+        state.dayWater.water = action.payload.flat();
       })
       .addCase(getDayWater.rejected, state => {
         state.loading = false;
-        state.dayWater = [];
+        state.dayWater.water = [];
       })
       .addCase(deleteWater.pending, state => {
         state.loading = true;
       })
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayWater = state.dayWater.filter(
+        state.dayWater.water = state.dayWater.water.filter(
           item => item._id !== action.payload._id,
         );
       })
@@ -70,7 +62,7 @@ const slice = createSlice({
       })
       .addCase(editWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayWater = state.dayWater.map(item =>
+        state.dayWater.water = state.dayWater.water.map(item =>
           item._id === action.payload._id ? action.payload : item,
         );
       })
