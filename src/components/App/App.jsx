@@ -12,12 +12,10 @@ import HomePage from '../../pages/HomePage/HomePage';
 import { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { refreshUserToken } from '../../redux/user/operations';
-import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 
 function App() {
   const dispatch = useDispatch();
-  const { i18n } = useTranslation();
 
   useEffect(() => {
     dispatch(refreshUserToken());
@@ -28,16 +26,6 @@ function App() {
       <Toaster position="top-center" />
 
       <SharedLayout>
-        {/* <div className="translateContainer">
-          <h3>{i18n.language}</h3>
-          <div>
-            <button onClick={() => i18n.changeLanguage('en')}>English</button>
-            <button onClick={() => i18n.changeLanguage('uk')}>
-              Українська
-            </button>
-          </div>
-        </div> */}
-
         <Suspense fallback={null}>
           <Routes>
             <Route

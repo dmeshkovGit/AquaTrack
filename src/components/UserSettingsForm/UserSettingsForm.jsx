@@ -10,7 +10,7 @@ import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
-
+import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 
@@ -181,15 +181,16 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.weight && css.errorInput)}
                 {...register('weight')}
-                onBlur={e => {
-                  setWeight(e.target.value);
-                }}
+                onBlur={e => {}}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
-                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                onChange={e => {
+                  maxNumber(e, setError, setValue, clearErrors);
+                  setWeight(e.target.value);
+                }}
                 maxLength="3"
-                max="150"
+                max="500"
               />
               {errors.weight && (
                 <p className={css.errorText}>{errors.weight.message}</p>
@@ -204,7 +205,6 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.activeTime && css.errorInput)}
                 {...register('activeTime')}
-                onBlur={e => setActivity(e.target.value)}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
@@ -231,11 +231,13 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.liters && css.errorInput)}
                 {...register('liters')}
-                onBlur={e => setLiters(e.target.value)}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
-                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                onChange={e => {
+                  maxNumber(e, setError, setValue, clearErrors);
+                  setLiters(e.target.value);
+                }}
                 maxLength="3"
                 max="10"
               />
@@ -249,6 +251,7 @@ export default function UserSettingsForm({ isModalOpen }) {
           {t('Save setting')}
         </button>
       </form>
+      {isLoading && <WaterLoader />}
     </>
   );
 }
