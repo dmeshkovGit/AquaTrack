@@ -74,10 +74,10 @@ export default function SignUpForm() {
 
   const handleModalConfirm = () => {
     // Логика при нажатии кнопки "Pease verify emai" в модалке
-    dispatch(logout())
-      .unwrap()
-      .then(() => setIsModalOpen(false))
-      .catch(() => toast.error(t('Sorry, try again later')));
+    // dispatch(logout())
+    //   .unwrap()
+    //   .then(() => setIsModalOpen(false))
+    //   .catch(() => toast.error(t('Sorry, try again later')));
   };
 
   const handleModalCancel = () => {
