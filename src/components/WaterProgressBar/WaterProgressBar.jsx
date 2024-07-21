@@ -49,9 +49,9 @@ export default function WaterProgressBar() {
         </div>
       </div>
       <div className={css.textContainer}>
-        <p className={css.text1}>0%</p>
+        <p className={css.text}>0%</p>
         <p className={css.text}>50%</p>
-        <p className={css.text2}>100%</p>
+        <p className={css.text}>100%</p>
       </div>
     </div>
   );

@@ -64,7 +64,7 @@
   border-radius: 50%;
   border: 1px solid var(--accent);
   position: absolute;
-  right: -8px;
+  right: -6px;
   top: 50%;
   background-color: var(--main-white);
   transform: translateY(-50%);
