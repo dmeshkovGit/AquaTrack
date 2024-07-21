@@ -14,7 +14,7 @@ export default function UserPanel() {
     <div className={css.wrap}>
       <p className={css.title}>
         {t('Hello user')},{' '}
-        <span className={css.name}>{user.name ? user.name : 'User'}</span>
+        <span className={css.name}>{user.name ? user.name : 'User'}!</span>
       </p>
       <UserBar />
     </div>

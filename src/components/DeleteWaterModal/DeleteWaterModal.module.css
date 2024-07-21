@@ -1,109 +1,142 @@
 .modalContent {
-    background: var(--main-white);
-    position: relative;
-    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    padding: 40px;
-    width: auto;
-    height: auto;
-  }
-  
-  .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .message {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
+  border-radius: 15px;
+  padding: 40px 14px;
+  background: var(--main-white);
+  position: relative;
+}
 
-  .buttons {
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  margin-bottom: 16px;
+}
+
+.message {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  margin-bottom: 28px;
+}
+
+/* .buttons {
     display: flex;
     justify-content: space-around;
     gap: 10px;
+  } */
+
+.deleteButton {
+  border-radius: 30px;
+  padding: 14px 0;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  border: none;
+  outline: transparent;
+  margin-bottom: 9px;
+  transition: all var(--transition);
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
+  background-color: var(--accent-hover);
+}
+
+.cancelButton {
+  min-width: 100%;
+  border-radius: 30px;
+  padding: 14px 126px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: transparent;
+  background: var(--background);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: rgba(50, 63, 71, 0.3);
+  transition: all var(--transition);
+}
+
+.cancelButton:hover,
+.cancelButton:focus {
+  color: var(--main-text);
+}
+
+/* =================TABLET=============== */
+
+@media screen and (min-width: 768px) {
+  .modalContent {
+    width: 516px;
+    padding: 40px;
   }
 
-  
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+
+  .message {
+    font-size: 18px;
+    line-height: 133%;
+  }
+
+  .btnWrap {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
   .deleteButton {
-    background-color: var(--accent);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color var(--transition);
-    font-family: var(--font-family);
-    font-weight: 700;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
     line-height: 150%;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--main);
-    padding: 18px 67px;
-    width: 176px;
-    height: 60px;
+    min-width: 0;
+    margin-bottom: 0;
   }
-  
-  .deleteButton:hover {
-    background-color: var(--accent-hover);
-  }
-  
+
   .cancelButton {
-    background-color:var(--background);
-    border: none;
-    border-radius: 30px;
-    color: rgba(50, 63, 71, 0.3);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color var(--transition);
-    font-family: var(--font-family);
-    font-weight: 700;
+    min-width: 0;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
     line-height: 150%;
-    letter-spacing: -0.01em;
-    text-align: center;
-    padding: 18px 59px;
-    width: 176px;
-    height: 60px;
-  }
-  
-  .cancelButton:hover {
-    color: var(--main-text);
-  }
-  
-
-  @media screen and (max-width: 768px) {
-
-    .buttons {
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-    
   }
 
-@media screen and (min-width: 320px) and (max-width: 375) {
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .deleteButton,
-    .cancelButton {
-        margin-bottom: 10px;
-    }
+  .closeButton {
+    top: 20px;
+    right: 20px;
+  }
 }
