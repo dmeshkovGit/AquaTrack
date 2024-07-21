@@ -20,18 +20,23 @@ const slice = createSlice({
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
-        if (state.dayWater[0].date) {
-          const firstDate = new Date(state.dayWater[0].date);
-          const newDate = new Date(action.payload.date);
 
-          const sameDay =
-            firstDate.getUTCFullYear() === newDate.getUTCFullYear() &&
-            firstDate.getUTCMonth() === newDate.getUTCMonth() &&
-            firstDate.getUTCDate() === newDate.getUTCDate();
+        if (state.dayWater.length > 0) {
+          if (state.dayWater[0].date) {
+            const firstDate = new Date(state.dayWater[0].date);
+            const newDate = new Date(action.payload.date);
 
-          if (sameDay) {
-            state.dayWater.push(action.payload);
+            const sameDay =
+              firstDate.getUTCFullYear() === newDate.getUTCFullYear() &&
+              firstDate.getUTCMonth() === newDate.getUTCMonth() &&
+              firstDate.getUTCDate() === newDate.getUTCDate();
+
+            if (sameDay) {
+              state.dayWater.push(action.payload);
+            }
           }
+        } else {
+          state.dayWater.push(action.payload);
         }
       })
       .addCase(addWater.rejected, state => {
