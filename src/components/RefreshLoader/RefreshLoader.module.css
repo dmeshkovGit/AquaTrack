@@ -739,7 +739,7 @@
     rgba(227, 227, 227, 0) 60%,
     rgba(227, 227, 227, 0) 100%
   );
-  animation: gradient-animation_2 1.2s linear infinite;
+  animation: gradient-animation_2 1s linear infinite;
 }
 
 @keyframes gradient-animation_2 {
