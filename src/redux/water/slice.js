@@ -4,8 +4,14 @@ import { addWater, getDayWater, deleteWater, editWater } from './operations';
 const slice = createSlice({
   name: 'water',
   initialState: {
+    activeDay: '',
     dayWater: [],
     loading: false,
+  },
+  reducers: {
+    setActiveDay: (state, action) => {
+      state.activeDay = action.payload;
+    },
   },
   extraReducers: builder =>
     builder
@@ -28,6 +34,7 @@ const slice = createSlice({
       })
       .addCase(getDayWater.rejected, state => {
         state.loading = false;
+        state.dayWater = [];
       })
       .addCase(deleteWater.pending, state => {
         state.loading = true;
@@ -56,3 +63,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
+export const { setActiveDay } = slice.actions;

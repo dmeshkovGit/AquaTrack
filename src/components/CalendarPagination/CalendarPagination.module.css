@@ -6,11 +6,12 @@
 .buttonsContainer {
   display: flex;
   align-items: center;
-
   justify-content: space-between;
-  width: 220px;
+  width: 178px;
 }
 .button {
+  display: flex;
+  justify-content: center;
   border: none;
   background-color: transparent;
 }
@@ -24,6 +25,9 @@
   fill: transparent;
 }
 @media screen and (min-width: 768px) {
+  .buttonsContainer {
+    width: 200px;
+  }
   .title {
     font-size: 16px;
     line-height: 24px;

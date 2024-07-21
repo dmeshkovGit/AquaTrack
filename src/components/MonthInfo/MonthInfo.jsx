@@ -5,11 +5,14 @@ import { useEffect, useState } from 'react';
 
 import '../../translate/index.js';
 import { getMonthInfo } from '../../API/apiOperations.js';
+import { useSelector } from 'react-redux';
+import { selectDayWater } from '../../redux/water/selectors.js';
 
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
   const [showChart, setShowChart] = useState(false);
   const [daysList, setDays] = useState([]);
+  const dayWater = useSelector(selectDayWater);
 
   const toggleView = () => {
     console.log('Icon clicked');
@@ -31,7 +34,7 @@ export default function MonthInfo() {
       }
     };
     getMonth();
-  }, [date]);
+  }, [date, dayWater]);
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
