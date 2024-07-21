@@ -12,7 +12,6 @@ import HomePage from '../../pages/HomePage/HomePage';
 import { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUserToken } from '../../redux/user/operations';
-import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
 import RefreshLoader from '../RefreshLoader/RefreshLoader.jsx';
@@ -32,15 +31,6 @@ function App() {
       <Toaster position="top-center" />
 
       <SharedLayout>
-        <div className="translateContainer">
-          <h3 className="activeLang">{i18n.language}</h3>
-          <div>
-            <button onClick={() => i18n.changeLanguage('en')}>English</button>
-            <button onClick={() => i18n.changeLanguage('uk')}>
-              Українська
-            </button>
-          </div>
-        </div>
         {isRefreshing ? (
           <RefreshLoader />
         ) : (
