@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
-
+import { selectActiveDay } from '../../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
 
@@ -38,6 +38,7 @@ export default function WaterForm({
   waterId,
   waterAmount,
   waterTime,
+  addForActiveDay,
 }) {
   const [count, setCount] = useState(operationAdd ? 50 : waterAmount);
   const [time, setTime] = useState(
@@ -48,7 +49,9 @@ export default function WaterForm({
   const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
-  const dailyNorm = useSelector(selectUserWaterNorm);
+  // const dailyNorm = useSelector(selectUserWaterNorm);
+  const day = useSelector(selectActiveDay);
+  const date = new Date(day);
 
   const {
     register,
@@ -80,9 +83,16 @@ export default function WaterForm({
     setCount(value);
   };
   const onSubmit = async data => {
+    let unixTime;
+    if (addForActiveDay) {
+      unixTime = parseTimeToUnix(data.Time, date);
+    } else {
+      unixTime = parseTimeToUnix(data.Time, false);
+    }
+
     const obj = {
       amount: data.Count,
-      date: parseTimeToUnix(data.Time),
+      date: unixTime,
     };
     if (operationAdd) {
       await dispatch(addWater(obj));

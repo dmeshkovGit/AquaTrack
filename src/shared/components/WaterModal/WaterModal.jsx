@@ -26,6 +26,7 @@ export default function WaterModal({
   waterId,
   waterAmount,
   waterTime,
+  addForActiveDay,
 }) {
   const isLoading = useSelector(selectIsLoading);
   const { t, i18n } = useTranslation();
@@ -45,6 +46,7 @@ export default function WaterModal({
         waterId={waterId}
         waterAmount={waterAmount}
         waterTime={waterTime}
+        addForActiveDay={addForActiveDay}
       />
     </div>
   );
