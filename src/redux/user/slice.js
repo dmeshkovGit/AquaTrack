@@ -29,7 +29,6 @@ const slice = createSlice({
       weight: 0,
       activeTime: 0,
       liters: 0,
-      theme: '',
     },
     token: null,
     refreshToken: null,
