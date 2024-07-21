@@ -10,14 +10,18 @@ import TrackerPage from '../../pages/TrackerPage/TrackerPage';
 import SharedLayout from '../SharedLayout/SharedLayout';
 import HomePage from '../../pages/HomePage/HomePage';
 import { Toaster } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshUserToken } from '../../redux/user/operations';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
+import RefreshLoader from '../RefreshLoader/RefreshLoader.jsx';
+import { selectIsRefreshing } from '../../redux/user/selectors.js';
 
 function App() {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUserToken());
@@ -37,44 +41,47 @@ function App() {
             </button>
           </div>
         </div>
-
-        <Suspense fallback={null}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RestrictedRoute
-                  component={<HomePage />}
-                  redirectTo="/tracker"
-                />
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <RestrictedRoute
-                  component={<SignUpPage />}
-                  redirectTo="/tracker"
-                />
-              }
-            />
-            <Route
-              path="/signin"
-              element={
-                <RestrictedRoute
-                  component={<SignInPage />}
-                  redirectTo="/tracker"
-                />
-              }
-            />
-            <Route
-              path="/tracker"
-              element={
-                <PrivateRoute component={<TrackerPage />} redirectTo="/" />
-              }
-            />
-          </Routes>
-        </Suspense>
+        {isRefreshing ? (
+          <RefreshLoader />
+        ) : (
+          <Suspense fallback={<WaterLoader />}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <RestrictedRoute
+                    component={<HomePage />}
+                    redirectTo="/tracker"
+                  />
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <RestrictedRoute
+                    component={<SignUpPage />}
+                    redirectTo="/tracker"
+                  />
+                }
+              />
+              <Route
+                path="/signin"
+                element={
+                  <RestrictedRoute
+                    component={<SignInPage />}
+                    redirectTo="/tracker"
+                  />
+                }
+              />
+              <Route
+                path="/tracker"
+                element={
+                  <PrivateRoute component={<TrackerPage />} redirectTo="/" />
+                }
+              />
+            </Routes>
+          </Suspense>
+        )}
       </SharedLayout>
     </>
   );
