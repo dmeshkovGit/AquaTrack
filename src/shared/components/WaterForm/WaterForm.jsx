@@ -90,20 +90,6 @@ export default function WaterForm({
       unixTime = parseTimeToUnix(data.Time, false);
     }
 
-    // let unixTime;
-
-    // if (addForActiveDay) {
-    //   const [hours, minutes] = data.Time.split(':');
-    //   const activeDate = new Date(date);
-    //   activeDate.setHours(hours);
-    //   activeDate.setMinutes(minutes);
-    //   activeDate.setSeconds(0);
-    //   activeDate.setMilliseconds(0);
-    //   unixTime = activeDate.getTime();
-    // } else {
-    //   parseTimeToUnix(data.Time);
-    // }
-
     const obj = {
       amount: data.Count,
       date: unixTime,

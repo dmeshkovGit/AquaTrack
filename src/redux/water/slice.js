@@ -20,7 +20,19 @@ const slice = createSlice({
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
-        state.dayWater.push(action.payload);
+        if (state.dayWater[0].date) {
+          const firstDate = new Date(state.dayWater[0].date);
+          const newDate = new Date(action.payload.date);
+
+          const sameDay =
+            firstDate.getUTCFullYear() === newDate.getUTCFullYear() &&
+            firstDate.getUTCMonth() === newDate.getUTCMonth() &&
+            firstDate.getUTCDate() === newDate.getUTCDate();
+
+          if (sameDay) {
+            state.dayWater.push(action.payload);
+          }
+        }
       })
       .addCase(addWater.rejected, state => {
         state.loading = false;
