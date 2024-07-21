@@ -16,7 +16,9 @@ export default function Calendar({ daysList }) {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getDayWater(new Date(activeDay).getTime()));
+    if (activeDay) {
+      dispatch(getDayWater(new Date(activeDay).getTime()));
+    }
   }, [activeDay, dispatch]);
 
   const handleClickDay = day => {
