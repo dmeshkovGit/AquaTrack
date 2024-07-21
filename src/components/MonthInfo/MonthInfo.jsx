@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CalendarPagination from '../../components/CalendarPagination/CalendarPagination';
 import Calendar from '../../components/Calendar/Calendar';
-import WaterConsumption from '../../components/WaterConsumption/origin/WaterConsumption.jsx';
+import WaterConsumption from '../../components/waterConsumption/origin/WaterConsumption.jsx';
 import css from './MonthInfo.module.css';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
