@@ -19,7 +19,6 @@ import { selectIsRefreshing } from '../../redux/user/selectors.js';
 
 function App() {
   const dispatch = useDispatch();
-  const { i18n } = useTranslation();
   const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
