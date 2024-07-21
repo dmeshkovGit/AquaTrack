@@ -12,6 +12,7 @@ import { selectIsLoading } from '../../redux/user/selectors';
 import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import LogOutModal from '../LogOutModal/LogOutModal.jsx';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -28,6 +29,7 @@ const schema = yup.object().shape({
 export default function SignUpForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoading = useSelector(selectIsLoading);
   const { t } = useTranslation();
 
@@ -35,6 +37,7 @@ export default function SignUpForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
@@ -47,94 +50,143 @@ export default function SignUpForm() {
 
   const handleFormSubmit = data => {
     const { email, password } = data;
+
     dispatch(registerUser({ email, password }))
-      .then()
+      .then(action => {
+        if (registerUser.fulfilled.match(action)) {
+          // toast.success('Register successful');
+          reset();
+          setIsModalOpen(true);
+        }
+        // else if (registerUser.rejected.match(action)) {
+        //   const errorMessage = action.payload?.message || 'Login failed';
+        //   const statusCode = action.payload ? action.payload.statusCode : null;
+
+        //   console.error(
+        //     `Login failed with status code ${statusCode}: ${errorMessage}`,
+        //   );
+        // }
+      })
       .catch(error => {
         console.error('Unexpected error:', error);
       });
   };
 
-  return (
-    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={css.inputGroup}>
-        <label>{t('Email user')}</label>
-        <input
-          type="text"
-          placeholder={t('Enter email')}
-          name="email"
-          autoComplete="off"
-          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
-          {...register('email')}
-        />
-        {errors.email && <p className={css.error}>{errors.email.message}</p>}
-      </div>
-      <div className={css.inputGroup}>
-        <label>{t('Password user')}</label>
-        <div className={css.passwordContainer}>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder={t('Enter password')}
-            name="password"
-            autoComplete="new-password"
-            className={clsx(
-              css.inputGroupInput,
-              errors.password && css.inputError,
-            )}
-            {...register('password')}
-          />
-          <button
-            type="button"
-            className={css.passwordToggle}
-            onClick={toggleShowPassword}
-            tabIndex="-1"
-          >
-            {showPassword ? (
-              <Icon className={css.icon} id="eye" width={20} height={20} />
-            ) : (
-              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-            )}
-          </button>
-        </div>
-        {errors.password && (
-          <p className={css.error}>{errors.password.message}</p>
-        )}
-      </div>
-      <div className={css.inputGroup}>
-        <label>{t('Repeat password')}</label>
-        <div className={css.passwordContainer}>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder={t('Repeat password')}
-            name="repeatPassword"
-            autoComplete="password-confirmation"
-            {...register('repeatPassword')}
-            className={clsx(
-              css.inputGroupInput,
-              errors.repeatPassword && css.inputError,
-            )}
-          />
-          <button
-            type="button"
-            className={css.passwordToggle}
-            onClick={toggleShowPassword}
-            tabIndex="-1"
-          >
-            {showPassword ? (
-              <Icon className={css.icon} id="eye" width={20} height={20} />
-            ) : (
-              <Icon className={css.icon} id="eyeOff" width={20} height={20} />
-            )}
-          </button>
-        </div>
-        {errors.repeatPassword && (
-          <p className={css.error}>{errors.repeatPassword.message}</p>
-        )}
-      </div>
+  const handleModalConfirm = () => {
+    // Логика при нажатии кнопки "Pease verify emai" в модалке
+    dispatch(logout())
+      .unwrap()
+      .then(() => setIsModalOpen(false))
+      .catch(() => toast.error(t('Sorry, try again later')));
+  };
 
-      <button className={css.submitButton} type="submit" disabled={!isValid}>
-        {isLoading ? <DotLoader text="Signing Up" /> : t('Register user form')}
-      </button>
-      <GoogleAuthBtn />
-    </form>
+  const handleModalCancel = () => {
+    // Логика при нажатии кнопки "Cancel" в модалке
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      {isModalOpen && (
+        <LogOutModal
+          isModalOpen={setIsModalOpen}
+          titleText={t('Please verify email')}
+          messageText={t('Chek emai for confirm email.')}
+          confirmButtonText={t('verify email')}
+          cancelButtonText={t('Cancel')}
+          loaderText={t('Please wait')}
+          onConfirmClick={handleModalConfirm}
+          onCancelClick={handleModalCancel}
+        />
+      )}
+      <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
+        <div className={css.inputGroup}>
+          <label>{t('Email user')}</label>
+          <input
+            type="text"
+            placeholder={t('Enter email')}
+            name="email"
+            autoComplete="off"
+            className={clsx(
+              css.inputGroupInput,
+              errors.email && css.inputError,
+            )}
+            {...register('email')}
+          />
+          {errors.email && <p className={css.error}>{errors.email.message}</p>}
+        </div>
+        <div className={css.inputGroup}>
+          <label>{t('Password user')}</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('Enter password')}
+              name="password"
+              autoComplete="new-password"
+              className={clsx(
+                css.inputGroupInput,
+                errors.password && css.inputError,
+              )}
+              {...register('password')}
+            />
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+              tabIndex="-1"
+            >
+              {showPassword ? (
+                <Icon className={css.icon} id="eye" width={20} height={20} />
+              ) : (
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+              )}
+            </button>
+          </div>
+          {errors.password && (
+            <p className={css.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <div className={css.inputGroup}>
+          <label>{t('Repeat password')}</label>
+          <div className={css.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('Repeat password')}
+              name="repeatPassword"
+              autoComplete="password-confirmation"
+              {...register('repeatPassword')}
+              className={clsx(
+                css.inputGroupInput,
+                errors.repeatPassword && css.inputError,
+              )}
+            />
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+              tabIndex="-1"
+            >
+              {showPassword ? (
+                <Icon className={css.icon} id="eye" width={20} height={20} />
+              ) : (
+                <Icon className={css.icon} id="eyeOff" width={20} height={20} />
+              )}
+            </button>
+          </div>
+          {errors.repeatPassword && (
+            <p className={css.error}>{errors.repeatPassword.message}</p>
+          )}
+        </div>
+
+        <button className={css.submitButton} type="submit" disabled={!isValid}>
+          {isLoading ? (
+            <DotLoader text="Signing Up" />
+          ) : (
+            t('Register user form')
+          )}
+        </button>
+        <GoogleAuthBtn />
+      </form>
+    </>
   );
 }
