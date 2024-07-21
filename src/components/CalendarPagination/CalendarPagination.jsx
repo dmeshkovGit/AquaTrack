@@ -1,46 +1,18 @@
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import css from './CalendarPagination.module.css';
-import Icon from '../../shared/components/Icon/Icon';
-
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 import clsx from 'clsx';
 import { useState } from 'react';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import css from './CalendarPagination.module.css';
 
-export default function CalendarPagination({ isOpen }) {
-  const [date, setDate] = useState(new Date());
+export default function CalendarPagination({
+  isOpen,
+  handlePrevMonth,
+  handleNextMonth,
+  monthNames,
+  date,
+}) {
   const { t, i18n } = useTranslation();
-
-  const handlePrevMonth = () => {
-    setDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setMonth(newDate.getMonth() - 1);
-      return newDate;
-    });
-  };
-
-  const handleNextMonth = () => {
-    setDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setMonth(newDate.getMonth() + 1);
-      return newDate;
-    });
-  };
-
-  const monthNames = [
-    t('Month january'),
-    t('Month february'),
-    t('Month march'),
-    t('Month april'),
-    t('Month may'),
-    t('Month june'),
-    t('Month july'),
-    t('Month august'),
-    t('Month september'),
-    t('Month october'),
-    t('Month november'),
-    t('Month december'),
-  ];
 
   return (
     <div className={css.paginationContainer}>
@@ -57,13 +29,23 @@ export default function CalendarPagination({ isOpen }) {
           <FaAngleRight />
         </button>
       </div>
-      <Icon
-        onClick={isOpen}
-        className={css.icon}
-        id="pieChart"
-        height={20}
-        width={20}
-      />
+      <div className={css.iconContainer}>
+        <div
+          className={css.icon}
+          id="pieChart"
+          style={{
+            cursor: 'pointer',
+            width: 24,
+            height: 24,
+            backgroundColor: 'red',
+            borderRadius: '50%',
+          }}
+          onClick={() => {
+            console.log('Div clicked');
+            isOpen();
+          }}
+        ></div>
+      </div>
     </div>
   );
 }

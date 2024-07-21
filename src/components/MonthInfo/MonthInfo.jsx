@@ -1,29 +1,23 @@
+import { useState, useEffect } from 'react';
 import CalendarPagination from '../../components/CalendarPagination/CalendarPagination';
 import Calendar from '../../components/Calendar/Calendar';
+import WaterConsumption from '../../components/waterConsumption/origin/WaterConsumption.jsx';
 import css from './MonthInfo.module.css';
-import { useEffect, useState } from 'react';
-
-import '../../translate/index.js';
 import clsx from 'clsx';
 import { getMonthInfo } from '../../API/apiOperations.js';
 import { useSelector } from 'react-redux';
 import { selectDayWater } from '../../redux/water/selectors.js';
 import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 export default function MonthInfo() {
-  const [date, setDate] = useState(new Date());
   const [showChart, setShowChart] = useState(false);
   const { t, i18n } = useTranslation();
   const [daysList, setDays] = useState([]);
   const dayWater = useSelector(selectDayWater);
-
-  const toggleView = () => {
-    console.log('Icon clicked');
-    setShowChart(prevShowChart => !prevShowChart);
-  };
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    setDate(new Date());
     getMonthInfo();
   }, []);
 
@@ -38,6 +32,10 @@ export default function MonthInfo() {
     };
     getMonth();
   }, [date, dayWater]);
+
+  const toggleView = () => {
+    setShowChart(prevShowChart => !prevShowChart);
+  };
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
@@ -69,13 +67,14 @@ export default function MonthInfo() {
     'November',
     'December',
   ];
+
   return (
     <div className={css.monthInfoContainer}>
       <div className={css.monthInfoPaginationContainer}>
         <h2
           className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
         >
-          {showChart ? 'Static' : t('Month water')}
+          {showChart ? 'Statistics' : t('Month water')}
         </h2>
         <CalendarPagination
           handlePrevMonth={handlePrevMonth}
@@ -84,9 +83,8 @@ export default function MonthInfo() {
           date={date}
           isOpen={toggleView}
         />
-        {showChart ? <TestChart /> : <Calendar />}
       </div>
-      <Calendar daysList={daysList} />
+      {showChart ? <WaterConsumption /> : <Calendar />}
     </div>
   );
 }
