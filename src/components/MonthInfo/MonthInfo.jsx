@@ -22,10 +22,10 @@ export default function MonthInfo() {
     setShowChart(prevShowChart => !prevShowChart);
   };
 
-  useEffect(() => {
-    setDate(new Date());
-    getMonthInfo();
-  }, []);
+  // useEffect(() => {
+  //   setDate(new Date());
+  //   getMonthInfo();
+  // }, []);
 
   useEffect(() => {
     const getMonth = async () => {
