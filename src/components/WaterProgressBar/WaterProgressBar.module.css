@@ -28,6 +28,14 @@
   font-size: 14px;
   line-height: 14px;
 }
+
+.headerUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+}
+
 .textContainer {
   display: flex;
   justify-content: space-between;

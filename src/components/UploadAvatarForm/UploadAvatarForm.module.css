@@ -67,6 +67,19 @@
   align-items: center;
 }
 
+.textUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+  transition: all var(--transition);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .text:hover {
   color: var(--accent-hover);
 }

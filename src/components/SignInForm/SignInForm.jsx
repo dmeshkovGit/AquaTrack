@@ -29,7 +29,7 @@ export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // об'єкт конфігурації параметрів хука useForm
   const {
@@ -55,10 +55,16 @@ export default function SignInForm() {
 
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={css.inputGroup}>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
         <label>{t('Email user')}</label>
         <input
-          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          className={clsx(css.inputGroupInput, errors.email && css.inputError, {
+            [css.inputGroupInputUk]: i18n.language === 'uk',
+          })}
           type="text"
           placeholder={t('Enter email')}
           name="email"
@@ -67,7 +73,11 @@ export default function SignInForm() {
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
-      <div className={css.inputGroup}>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
         <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
@@ -78,7 +88,10 @@ export default function SignInForm() {
             {...register('password')}
             className={clsx(
               css.inputGroupInput,
-              errors.password && css.inputError,
+              errors.email && css.inputError,
+              {
+                [css.inputGroupInputUk]: i18n.language === 'uk',
+              },
             )}
           />
           <button
@@ -98,7 +111,13 @@ export default function SignInForm() {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <button type="submit" className={css.submitButton} disabled={!isValid}>
+      <button
+        type="submit"
+        className={clsx(css.submitButton, {
+          [css.submitButtonUk]: i18n.language === 'uk',
+        })}
+        disabled={!isValid}
+      >
         {isLoading ? <DotLoader text="Signing In" /> : t('Login user')}
       </button>
       <GoogleAuthBtn />

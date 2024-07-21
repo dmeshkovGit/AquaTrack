@@ -4,17 +4,26 @@ import { motion } from 'framer-motion';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
+import clsx from 'clsx';
 
 export default function GoogleAuthBtn() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <div className={css.wrapper}>
-      <p className={css.separator}>{t('Or google')}</p>
+      <p
+        className={clsx(css.separator, {
+          [css.separatorUk]: i18n.language === 'uk',
+        })}
+      >
+        {t('Or google')}
+      </p>
       <motion.a
         whileTap={{ scale: 1 }}
         whileHover={{ scale: 1.03 }}
         href="https://aquatrack-api-crcb.onrender.com/api/users/google"
-        className={css.googleBtn}
+        className={clsx(css.googleBtn, {
+          [css.googleBtnUk]: i18n.language === 'uk',
+        })}
       >
         <img src={googleLogo} className={css.googleIcon} />
         <p>{t('Sign google')}</p>

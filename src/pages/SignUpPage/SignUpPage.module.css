@@ -19,6 +19,17 @@
   line-height: 32px;
   letter-spacing: -1%;
 }
+
+.titleUk {
+  font-family: var(--font-family);
+  margin-bottom: 32px;
+  color: var(--main);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -1%;
+}
+
 .notify {
   color: var(--main-placeholder);
   font-size: 14px;
@@ -27,9 +38,31 @@
   text-align: center;
   margin-top: 16px;
 }
+
+.notifyUk {
+  font-family: var(--font-family);
+  color: var(--main-placeholder);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+  text-align: center;
+  margin-top: 16px;
+}
+
 .navLink {
   color: var(--main);
   font-family: Poppins;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+  text-transform: capitalize;
+  transition: all var(--transition);
+}
+
+.navLinkUk {
+  font-family: var(--font-family);
+  color: var(--main);
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
