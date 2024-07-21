@@ -12,7 +12,8 @@ import { selectIsLoading } from '../../redux/user/selectors';
 import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
-import LogOutModal from '../LogOutModal/LogOutModal.jsx';
+import SignUpModal from '../SignUpModal/SignUpModal.jsx';
+import Modal from '../../shared/components/Modal/Modal.jsx';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -72,13 +73,13 @@ export default function SignUpForm() {
       });
   };
 
-  const handleModalConfirm = () => {
-    // Логика при нажатии кнопки "Pease verify emai" в модалке
-    // dispatch(logout())
-    //   .unwrap()
-    //   .then(() => setIsModalOpen(false))
-    //   .catch(() => toast.error(t('Sorry, try again later')));
-  };
+  // const handleModalConfirm = () => {
+  //   Логика при нажатии кнопки "Pease verify emai" в модалке
+  //   dispatch(logout())
+  //     .unwrap()
+  //     .then(() => setIsModalOpen(false))
+  //     .catch(() => toast.error(t('Sorry, try again later')));
+  // };
 
   const handleModalCancel = () => {
     // Логика при нажатии кнопки "Cancel" в модалке
@@ -88,15 +89,11 @@ export default function SignUpForm() {
   return (
     <>
       {isModalOpen && (
-        <LogOutModal
-          isModalOpen={setIsModalOpen}
-          titleText={t('Please verify email')}
-          messageText={t('Chek emai for confirm email.')}
-          confirmButtonText={t('verify email')}
-          cancelButtonText={t('Cancel')}
-          loaderText={t('Please wait')}
-          onConfirmClick={handleModalConfirm}
-          onCancelClick={handleModalCancel}
+        <Modal
+          children={<SignUpModal />}
+          isOpen={setIsModalOpen}
+          onClose={handleModalCancel}
+          // btnClassName={''}
         />
       )}
       <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
