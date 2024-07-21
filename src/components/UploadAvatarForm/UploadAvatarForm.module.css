@@ -17,6 +17,7 @@
   justify-content: center;
   width: 133px;
   height: 18px;
+  margin-right: 15px;
 }
 
 .img {
@@ -51,7 +52,6 @@
 .wrapInput {
   display: flex;
   gap: 8px;
-  width: 133px;
   align-items: center;
 }
 
@@ -128,7 +128,7 @@
   .wrapInput {
     display: flex;
     gap: 8px;
-    width: 152px;
+    width: 252px;
   }
 
   .text {
