@@ -4,13 +4,16 @@ import css from './MonthInfo.module.css';
 import { useEffect, useState } from 'react';
 
 import '../../translate/index.js';
+import clsx from 'clsx';
 import { getMonthInfo } from '../../API/apiOperations.js';
 import { useSelector } from 'react-redux';
 import { selectDayWater } from '../../redux/water/selectors.js';
+import { useTranslation } from 'react-i18next';
 
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
   const [showChart, setShowChart] = useState(false);
+  const { t, i18n } = useTranslation();
   const [daysList, setDays] = useState([]);
   const dayWater = useSelector(selectDayWater);
 
@@ -69,7 +72,11 @@ export default function MonthInfo() {
   return (
     <div className={css.monthInfoContainer}>
       <div className={css.monthInfoPaginationContainer}>
-        <h2 className={css.title}>Month</h2>
+        <h2
+          className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+        >
+          {showChart ? 'Static' : t('Month water')}
+        </h2>
         <CalendarPagination
           handlePrevMonth={handlePrevMonth}
           handleNextMonth={handleNextMonth}
@@ -77,6 +84,7 @@ export default function MonthInfo() {
           date={date}
           isOpen={toggleView}
         />
+        {showChart ? <TestChart /> : <Calendar />}
       </div>
       <Calendar daysList={daysList} />
     </div>

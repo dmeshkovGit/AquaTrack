@@ -18,7 +18,7 @@ export default function WaterItem() {
   const [selectedWaterId, setSelectedWaterId] = useState(null);
   const [selectedWaterAmount, setSelectedWaterAmount] = useState(null);
   const [selectedWaterTime, setSelectedWaterTime] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const isLoading = useSelector(selectIsLoading);
   const dataWaterOfDay = useSelector(selectDayWater);
