@@ -37,4 +37,11 @@
     width: 38px;
     font-size: 16px;
   }
+  .label {
+    font-size: 12px;
+    line-height: 22.4px;
+  }
+  .container {
+    gap: 4px;
+  }
 }

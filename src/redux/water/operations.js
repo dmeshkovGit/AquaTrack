@@ -5,7 +5,8 @@ export const getDayWater = createAsyncThunk(
   'water/DayWater',
   async (date, thunkAPI) => {
     try {
-      const response = await instance.get(`api/water/day/1704844800000`);
+
+      const response = await instance.get(`api/water/day/${date}`);
       console.log(response.data);
       return response.data.WaterData;
     } catch (error) {

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import css from './CalendarPagination.module.css';
 import Icon from '../../shared/components/Icon/Icon';
@@ -6,6 +5,7 @@ import Icon from '../../shared/components/Icon/Icon';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 import clsx from 'clsx';
+import { useState } from 'react';
 
 export default function CalendarPagination({ isOpen }) {
   const [date, setDate] = useState(new Date());
@@ -57,22 +57,13 @@ export default function CalendarPagination({ isOpen }) {
           <FaAngleRight />
         </button>
       </div>
-      <div className={css.iconContainer}>
-        <div
-          className={css.icon}
-          id="pieChart"
-          style={{
-            cursor: 'pointer',
-            width: 20,
-            height: 20,
-            backgroundColor: 'red',
-          }}
-          onClick={() => {
-            console.log('Div clicked');
-            isOpen();
-          }}
-        ></div>
-      </div>
+      <Icon
+        onClick={isOpen}
+        className={css.icon}
+        id="pieChart"
+        height={20}
+        width={20}
+      />
     </div>
   );
 }

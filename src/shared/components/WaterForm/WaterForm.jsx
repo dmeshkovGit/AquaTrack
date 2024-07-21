@@ -79,20 +79,17 @@ export default function WaterForm({
     const value = Number(event.target.value);
     setCount(value);
   };
-  const onSubmit = data => {
-    if (dailyNorm > 0) {
-      const obj = {
-        amount: data.Count,
-        date: parseTimeToUnix(data.Time),
-      };
-      if (operationAdd) {
-        dispatch(addWater(obj));
-      } else {
-        dispatch(editWater({ id: waterId, newNote: obj }));
-      }
+  const onSubmit = async data => {
+    const obj = {
+      amount: data.Count,
+      date: parseTimeToUnix(data.Time),
+    };
+    if (operationAdd) {
+      await dispatch(addWater(obj));
       isOpen(false);
     } else {
-      alert('Введи денну норму курва');
+      await dispatch(editWater({ id: waterId, newNote: obj }));
+      isOpen(false);
     }
   };
 

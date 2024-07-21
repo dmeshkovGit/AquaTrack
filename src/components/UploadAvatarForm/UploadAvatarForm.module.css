@@ -28,6 +28,15 @@
   margin-bottom: 10px;
 }
 
+.iconAvatar {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  margin-bottom: 10px;
+  color: var(--main);
+}
 .icon {
   color: var(--main);
   width: 18px;
@@ -107,7 +116,11 @@
     height: 100px;
     margin-bottom: 10px;
   }
-
+  .iconAvatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
   .icon {
     width: 20px;
     height: 20px;
