@@ -4,11 +4,12 @@ import Icon from '../../shared/components/Icon/Icon';
 import { selectUser } from '../../redux/user/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 import { useForm } from 'react-hook-form';
 import { updateUser } from '../../redux/user/operations';
 
 export default function AppSettingsForm() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const language = localStorage.getItem('i18nextLng');
@@ -40,7 +41,13 @@ export default function AppSettingsForm() {
         onChange={onChangeTheme}
         name="theme"
       >
-        <legend className={css.legend}>Choose your theme color</legend>
+        <legend
+          className={clsx(css.legend, {
+            [css.legendUk]: i18n.language === 'uk',
+          })}
+        >
+          {t('Choose your theme')}
+        </legend>
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input
@@ -84,7 +91,13 @@ export default function AppSettingsForm() {
         onChange={onChangeLang}
         name="language"
       >
-        <legend className={css.legend}>Choose your app language</legend>
+        <legend
+          className={clsx(css.legend, {
+            [css.legendUk]: i18n.language === 'uk',
+          })}
+        >
+          {t('Choose your app')}
+        </legend>
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input

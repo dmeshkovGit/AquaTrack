@@ -9,6 +9,7 @@ import { selectDayWater } from '../../redux/water/selectors';
 import { unixParser } from '../../helpers/validationsHelper.js';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import clsx from 'clsx';
 
 export default function WaterItem() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function WaterItem() {
   const [selectedWaterId, setSelectedWaterId] = useState(null);
   const [selectedWaterAmount, setSelectedWaterAmount] = useState(null);
   const [selectedWaterTime, setSelectedWaterTime] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const dataWaterOfDay = useSelector(selectDayWater);
 
@@ -96,7 +97,13 @@ export default function WaterItem() {
             height={45}
             id="icon-water-glass"
           />
-          <p className={css.text_}>Not found, please add water</p>
+          <p
+            className={clsx(css.text_, {
+              [css.text_Uk]: i18n.language === 'uk',
+            })}
+          >
+            {t('Not found')}
+          </p>
         </div>
       )}
 

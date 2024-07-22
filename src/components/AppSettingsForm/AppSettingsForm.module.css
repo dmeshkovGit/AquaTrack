@@ -73,6 +73,16 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
+
+.legendUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
 .switchWrap {
   display: flex;
   align-items: center;

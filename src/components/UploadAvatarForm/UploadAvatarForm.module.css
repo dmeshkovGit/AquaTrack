@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100px;
 }
 .form {
   height: 18px;
@@ -17,7 +18,7 @@
   justify-content: center;
   width: 133px;
   height: 18px;
-  margin-right: 15px;
+  /* margin-right: 15px; */
 }
 
 .img {
@@ -94,6 +95,7 @@
   align-items: center;
   border: none;
   background-color: transparent;
+  margin-left: 8px;
 }
 .iconAvatar {
   width: 75px;

@@ -53,7 +53,7 @@
   text-align: center;
   color: var(--main);
   padding: 18px 67px;
-  width: 176px;
+  width: 304px;
   height: 60px;
 }
 
@@ -76,7 +76,26 @@
   letter-spacing: -0.01em;
   text-align: center;
   padding: 18px 59px;
-  width: 176px;
+  width: 304px;
+  height: 60px;
+}
+
+.cancelButtonUk {
+  background-color: var(--background);
+  border: none;
+  border-radius: 30px;
+  color: rgba(50, 63, 71, 0.3);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color var(--transition);
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding: 18px 59px;
+  width: 304px;
   height: 60px;
 }
 
@@ -107,6 +126,9 @@
 
 @media screen and (min-width: 768px) {
   .modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 516px;
     padding: 40px;
   }
@@ -122,18 +144,23 @@
   }
 
   .buttons {
+    width: 356px;
     justify-content: center;
     gap: 10px;
   }
 
   .deleteButton {
+    display: flex;
+    justify-content: center;
     padding: 18px 60px;
-    min-width: 0;
+    width: 170px;
     margin-bottom: 0;
   }
 
   .cancelButton {
-    min-width: 0;
+    display: flex;
+    justify-content: center;
+    width: 170px;
     padding: 18px 60px;
   }
 
