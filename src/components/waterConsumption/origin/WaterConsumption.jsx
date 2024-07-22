@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   LineChart,
   Line,
@@ -10,21 +10,45 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-
-const testData = [
-  { name: '16', uv: 2 },
-  { name: '17', uv: 2.2 },
-  { name: '18', uv: 1.8 },
-  { name: '19', uv: 1.75 },
-  { name: '20', uv: 2.5 },
-  { name: '21', uv: 1.9 },
-  { name: '22', uv: 2 },
-];
+import axios from 'axios';
 
 export default function TestChart() {
+  const [weekData, setWeekData] = useState([]);
+
+  useEffect(() => {
+    const fetchWeeklyData = async () => {
+      try {
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - startDate.getDay());
+
+        const dates = Array.from({ length: 7 }, (v, i) => {
+          const date = new Date(startDate);
+          date.setDate(startDate.getDate() + i);
+          return date.toISOString().split('T')[0]; // Формат YYYY-MM-DD
+        });
+
+        const promises = dates.map(
+          date => axios.get(`/api/water/day/${date}`), // Використовуйте формат YYYY-MM-DD
+        );
+        const results = await Promise.all(promises);
+
+        const data = results.map((result, index) => ({
+          name: dates[index].split('-').reverse().join('-'),
+          uv: result.data.totalDayWater,
+        }));
+
+        setWeekData(data);
+      } catch (error) {
+        console.error('Error fetching weekly data', error);
+      }
+    };
+
+    fetchWeeklyData();
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <AreaChart data={testData}>
+      <AreaChart data={weekData}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
             <stop offset="46%" stopColor="#9BE1A0" stopOpacity={0.8} />
@@ -59,6 +83,7 @@ export default function TestChart() {
     </ResponsiveContainer>
   );
 }
+
 const CustomDot = props => {
   const { cx, cy, fill } = props;
   return <circle cx={cx} cy={cy} r={18} stroke="none" fill={fill} />;
