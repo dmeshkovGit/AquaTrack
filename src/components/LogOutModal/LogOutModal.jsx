@@ -12,45 +12,45 @@ import clsx from 'clsx';
 export default function LogOutModal({ isModalOpen }) {
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+
   const onClick = () => {
     dispatch(logout())
       .unwrap()
       .then(() => isModalOpen(false))
-      .catch(() => toast.error('Sorry, try again later'));
+      .catch(() => toast.error(t('Sorry, try again later')));
   };
-  const { t, i18n } = useTranslation();
+
   return (
-    <>
-      <div className={css.modal}>
-        <h3
-          className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+    <div className={css.modal}>
+      <h3
+        className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+      >
+        {t('Log out')}
+      </h3>
+      <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
+        {t('Do you really')}
+      </p>
+      <div className={css.btnWrap}>
+        <button
+          className={clsx(css.logoutBtn, {
+            [css.logoutBtnUk]: i18n.language === 'uk',
+          })}
+          type="button"
+          onClick={onClick}
         >
-          {t('Log out')}
-        </h3>
-        <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
-          {t('Do you really')}
-        </p>
-        <div className={css.btnWrap}>
-          <button
-            className={clsx(css.logoutBtn, {
-              [css.logoutBtnUk]: i18n.language === 'uk',
-            })}
-            type="button"
-            onClick={onClick}
-          >
-            {isLoading ? <DotLoader text="Logging out" /> : t('Log out')}
-          </button>
-          <button
-            className={clsx(css.cancelBtn, {
-              [css.cancelBtnUk]: i18n.language === 'uk',
-            })}
-            type="button"
-            onClick={() => isModalOpen(false)}
-          >
-            {t('Log exit')}
-          </button>
-        </div>
+          {isLoading ? <DotLoader text="Logging out" /> : t('Log out')}
+        </button>
+        <button
+          className={clsx(css.cancelBtn, {
+            [css.cancelBtnUk]: i18n.language === 'uk',
+          })}
+          type="button"
+          onClick={() => isModalOpen(false)}
+        >
+          {t('Log exit')}
+        </button>
       </div>
-    </>
+    </div>
   );
 }
