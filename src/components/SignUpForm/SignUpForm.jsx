@@ -98,10 +98,10 @@ export default function SignUpForm() {
       )}
       <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
         <div
-        className={clsx(css.inputGroup, {
-          [css.inputGroupUk]: i18n.language === 'uk',
-        })}
-      >
+          className={clsx(css.inputGroup, {
+            [css.inputGroupUk]: i18n.language === 'uk',
+          })}
+        >
           <label>{t('Email user')}</label>
           <input
             type="text"
@@ -110,19 +110,20 @@ export default function SignUpForm() {
             autoComplete="off"
             className={clsx(
               css.inputGroupInput,
-              errors.email && css.inputError, {
-            [css.inputGroupInputUk]: i18n.language === 'uk',
-          },
+              errors.email && css.inputError,
+              {
+                [css.inputGroupInputUk]: i18n.language === 'uk',
+              },
             )}
             {...register('email')}
           />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
         <div
-        className={clsx(css.inputGroup, {
-          [css.inputGroupUk]: i18n.language === 'uk',
-        })}
-      >
+          className={clsx(css.inputGroup, {
+            [css.inputGroupUk]: i18n.language === 'uk',
+          })}
+        >
           <label>{t('Password user')}</label>
           <div className={css.passwordContainer}>
             <input
@@ -133,9 +134,9 @@ export default function SignUpForm() {
               className={clsx(
                 css.inputGroupInput,
                 errors.email && css.inputError,
-              {
-                [css.inputGroupInputUk]: i18n.language === 'uk',
-              },
+                {
+                  [css.inputGroupInputUk]: i18n.language === 'uk',
+                },
               )}
               {...register('password')}
             />
@@ -157,10 +158,10 @@ export default function SignUpForm() {
           )}
         </div>
         <div
-        className={clsx(css.inputGroup, {
-          [css.inputGroupUk]: i18n.language === 'uk',
-        })}
-      >
+          className={clsx(css.inputGroup, {
+            [css.inputGroupUk]: i18n.language === 'uk',
+          })}
+        >
           <label>{t('Repeat password')}</label>
           <div className={css.passwordContainer}>
             <input
@@ -172,9 +173,9 @@ export default function SignUpForm() {
               className={clsx(
                 css.inputGroupInput,
                 errors.email && css.inputError,
-              {
-                [css.inputGroupInputUk]: i18n.language === 'uk',
-              },
+                {
+                  [css.inputGroupInputUk]: i18n.language === 'uk',
+                },
               )}
             />
             <button
@@ -195,16 +196,21 @@ export default function SignUpForm() {
           )}
         </div>
 
-      <button
-        className={clsx(css.submitButton, {
-          [css.submitButtonUk]: i18n.language === 'uk',
-        })}
-        type="submit"
-        disabled={!isValid}
-      >
-        {isLoading ? <DotLoader text="Signing Up" /> : t('Register user form')}
-      </button>
-      <GoogleAuthBtn />
-    </form>
+        <button
+          className={clsx(css.submitButton, {
+            [css.submitButtonUk]: i18n.language === 'uk',
+          })}
+          type="submit"
+          disabled={!isValid}
+        >
+          {isLoading ? (
+            <DotLoader text="Signing Up" />
+          ) : (
+            t('Register user form')
+          )}
+        </button>
+        <GoogleAuthBtn />
+      </form>
+    </>
   );
 }
