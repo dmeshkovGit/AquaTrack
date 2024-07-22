@@ -90,12 +90,17 @@ const slice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(logout.rejected, handleRejected)
-      .addCase(fetchUser.pending, handlePending)
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
+      .addCase(fetchUser.pending, handlePending, state => {
+        state.isRefreshing = true;
       })
-      .addCase(fetchUser.rejected, handleRejected)
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoading = false;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchUser.rejected, handleRejected, state => {
+        state.isRefreshing = false;
+      })
       .addCase(updateUser.pending, handlePending)
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
