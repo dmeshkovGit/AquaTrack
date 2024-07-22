@@ -19,7 +19,7 @@
   transform: translate(-50%, -50%);
   max-height: 100vh;
   box-shadow: 0 4px 50px 0 var(--shadow);
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .modal::-webkit-scrollbar {
@@ -80,6 +80,8 @@
   .closeButton {
     width: 28px;
     height: 28px;
+    top: 40px;
+    right: 40px;
   }
   .closeIcon {
     width: 28px;

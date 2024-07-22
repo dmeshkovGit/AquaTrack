@@ -7,6 +7,7 @@ import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import clsx from 'clsx';
 
 export default function LogOutModal({ isModalOpen }) {
   const isLoading = useSelector(selectIsLoading);
@@ -19,19 +20,39 @@ export default function LogOutModal({ isModalOpen }) {
       .then(() => isModalOpen(false))
       .catch(() => toast.error(t('Sorry, try again later')));
   };
-
+  const { t, i18n } = useTranslation();
   return (
-    <div className={css.modal}>
-      <h3 className={css.title}>{t('Log out')}</h3>
-      <p className={css.text}>{t('Do you really')}</p>
-      <div className={css.btnWrap}>
-        <button className={css.logoutBtn} type="button" onClick={onClick}>
-          {isLoading ? <DotLoader text={t('Logging out')} /> : t('Log out')}
-        </button>
-        <button className={css.cancelBtn} type="button" onClick={onClick}>
-          {t('Log exit')}
-        </button>
+    <>
+      <div className={css.modal}>
+        <h3
+          className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
+        >
+          {t('Log out')}
+        </h3>
+        <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
+          {t('Do you really')}
+        </p>
+        <div className={css.btnWrap}>
+          <button
+            className={clsx(css.logoutBtn, {
+              [css.logoutBtnUk]: i18n.language === 'uk',
+            })}
+            type="button"
+            onClick={onClick}
+          >
+            {isLoading ? <DotLoader text="Logging out" /> : t('Log out')}
+          </button>
+          <button
+            className={clsx(css.cancelBtn, {
+              [css.cancelBtnUk]: i18n.language === 'uk',
+            })}
+            type="button"
+            onClick={() => isModalOpen(false)}
+          >
+            {t('Log exit')}
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

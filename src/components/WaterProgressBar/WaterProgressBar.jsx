@@ -6,6 +6,8 @@ import { selectDayWater } from '../../redux/water/selectors';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import clsx from 'clsx';
+import i18n from '../../translate/index.js';
 
 export default function WaterProgressBar() {
   const [percent, setPercent] = useState(0);
@@ -35,7 +37,11 @@ export default function WaterProgressBar() {
 
   return (
     <div className={css.wrapper}>
-      <h6 className={css.header}>{t('Today water')}</h6>
+      <h6
+        className={clsx(css.header, { [css.headerUk]: i18n.language === 'uk' })}
+      >
+        {t('Today water')}
+      </h6>
       <div className={css.bar}>
         <div
           className={css.progressLine}

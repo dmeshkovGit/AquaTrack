@@ -13,6 +13,15 @@
   color: var(--main);
 }
 
+.titleUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
 .genderFormulaWrap {
   display: flex;
   flex-direction: column;
@@ -26,6 +35,15 @@
 }
 
 .formulaText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.formulaTextUk {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;
@@ -55,6 +73,15 @@
   color: var(--main-placeholder);
 }
 
+.textUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-placeholder);
+}
+
 .accent {
   color: var(--accent);
 }
@@ -72,6 +99,15 @@
 }
 
 .notificationText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.notificationTextUk {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;

@@ -21,6 +21,17 @@
   letter-spacing: -1%;
   margin-bottom: 8px;
 }
+
+.inputGroupUk > label {
+  font-family: var(--font-family);
+  color: var(--main-text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+  margin-bottom: 8px;
+}
+
 .inputGroupInput {
   box-sizing: border-box;
   width: 100%;
@@ -31,6 +42,7 @@
   outline: none;
   height: 50px;
 }
+
 .inputGroupInput::placeholder {
   color: var(--main-placeholder);
   font-family: Poppins;
@@ -38,6 +50,15 @@
   line-height: 18px;
   letter-spacing: -1%;
 }
+
+.inputGroupInputUk::placeholder {
+  color: var(--main-placeholder);
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+
 .inputError {
   border: 1px solid var(--validation-error);
   color: var(--validation-error);
@@ -78,6 +99,17 @@
 .submitButton:hover,
 .submitButton:focus {
   background-color: var(--accent-hover);
+}
+
+.submitButtonUk {
+  font-family: var(--font-family);
+  background: var(--accent);
+  border-radius: 30px;
+  border: none;
+  margin-top: 32px;
+  font-weight: bold;
+  padding: 16px;
+  transition: all var(--transition);
 }
 
 .submitButton:disabled {

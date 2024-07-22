@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import css from '../WaterItem/WaterItem.module.css';
 import WaterModal from '../../shared/components/WaterModal/WaterModal';
 import Modal from '../../shared/components/Modal/Modal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
 import Icon from '../../shared/components/Icon/Icon';
-import { useDispatch, useSelector } from 'react-redux';
-import { getDayWater } from '../../redux/water/operations';
-import { selectActiveDay, selectDayWater } from '../../redux/water/selectors';
-import { selectIsLoading } from '../../redux/water/selectors';
+import { useSelector } from 'react-redux';
+import { selectDayWater } from '../../redux/water/selectors';
 import { unixParser } from '../../helpers/validationsHelper.js';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
@@ -20,7 +18,6 @@ export default function WaterItem() {
   const [selectedWaterTime, setSelectedWaterTime] = useState(null);
   const { t } = useTranslation();
 
-  const isLoading = useSelector(selectIsLoading);
   const dataWaterOfDay = useSelector(selectDayWater);
 
   const handleOpenDeleteModal = id => {

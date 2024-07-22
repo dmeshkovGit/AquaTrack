@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
-
+import { selectActiveDay } from '../../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
 
@@ -38,6 +38,7 @@ export default function WaterForm({
   waterId,
   waterAmount,
   waterTime,
+  addForActiveDay,
 }) {
   const [count, setCount] = useState(operationAdd ? 50 : waterAmount);
   const [time, setTime] = useState(
@@ -45,10 +46,12 @@ export default function WaterForm({
   );
   const [err, setErr] = useState(false);
   const [timeErr, setTimeErr] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
-  const dailyNorm = useSelector(selectUserWaterNorm);
+  // const dailyNorm = useSelector(selectUserWaterNorm);
+  const day = useSelector(selectActiveDay);
+  const date = new Date(day);
 
   const {
     register,
@@ -80,9 +83,16 @@ export default function WaterForm({
     setCount(value);
   };
   const onSubmit = async data => {
+    let unixTime;
+    if (addForActiveDay) {
+      unixTime = parseTimeToUnix(data.Time, date);
+    } else {
+      unixTime = parseTimeToUnix(data.Time, false);
+    }
+
     const obj = {
       amount: data.Count,
-      date: parseTimeToUnix(data.Time),
+      date: unixTime,
     };
     if (operationAdd) {
       await dispatch(addWater(obj));
@@ -95,8 +105,16 @@ export default function WaterForm({
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <p className={css.text}>{t('Correct entered')}:</p>
-      <p className={css.secondaryText}>{t('Amount of water')}:</p>
+      <p className={clsx(css.text, { [css.textUk]: i18n.language === 'uk' })}>
+        {t('Correct entered')}:
+      </p>
+      <p
+        className={clsx(css.secondaryText, {
+          [css.secondaryTextUk]: i18n.language === 'uk',
+        })}
+      >
+        {t('Amount of water')}:
+      </p>
       <div className={css.counterContainer}>
         <button
           className={clsx(css.counterBtn, count <= 50 && css.decrementBtn)}
@@ -111,7 +129,9 @@ export default function WaterForm({
             id="icon-minus"
           />
         </button>
-        <p className={css.count}>
+        <p
+          className={clsx(css.count, { [css.countUk]: i18n.language === 'uk' })}
+        >
           {count} {t('Water add')}
         </p>
         <button
@@ -128,7 +148,11 @@ export default function WaterForm({
           />
         </button>
       </div>
-      <label className={css.baseLabel}>
+      <label
+        className={clsx(css.baseLabel, {
+          [css.baseLabelUk]: i18n.language === 'uk',
+        })}
+      >
         {t('Recording time')}:
         <input
           className={clsx(css.baseInput, errors.Time && css.errorInput)}
@@ -141,7 +165,11 @@ export default function WaterForm({
           {timeErr && `Type in format 'hh:mm' please`}
         </span>
       </label>
-      <label className={css.secondaryLabel}>
+      <label
+        className={clsx(css.secondaryLabel, {
+          [css.secondaryLabelUk]: i18n.language === 'uk',
+        })}
+      >
         {t('Enter the value')}:
         <input
           className={clsx(css.baseInput, errors.Count && css.errorInput)}
@@ -154,7 +182,12 @@ export default function WaterForm({
           {errors.Count && errors.Count.message} {err && 'Type numbers please'}
         </span>
       </label>
-      <button className={css.saveBtn} type="submit">
+      <button
+        className={clsx(css.saveBtn, {
+          [css.saveBtnUk]: i18n.language === 'uk',
+        })}
+        type="submit"
+      >
         {t('Save setting')}
       </button>
     </form>

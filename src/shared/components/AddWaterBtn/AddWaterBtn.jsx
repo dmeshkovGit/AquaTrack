@@ -8,9 +8,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
 
-export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
+export default function AddWaterBtn({
+  WaterDetailedInfoStyles,
+  addForActiveDay,
+}) {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
@@ -19,7 +22,9 @@ export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
   return (
     <>
       <button
-        className={clsx(css.btn, WaterDetailedInfoStyles && css.addBtnStyle)}
+        className={clsx(css.btn, WaterDetailedInfoStyles && css.addBtnStyle, {
+          [css.btnUk]: i18n.language === 'uk',
+        })}
         type="button"
         onClick={() => {
           handleOpenModal();
@@ -47,6 +52,7 @@ export default function AddWaterBtn({ WaterDetailedInfoStyles }) {
             operationAdd={true}
             operationType="add"
             isOpen={setIsOpenModal}
+            addForActiveDay={addForActiveDay}
           />
         </Modal>
       )}

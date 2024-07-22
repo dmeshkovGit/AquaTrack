@@ -10,7 +10,7 @@ import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
-
+import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 
@@ -40,7 +40,7 @@ export default function UserSettingsForm({ isModalOpen }) {
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const {
     register,
@@ -84,7 +84,7 @@ export default function UserSettingsForm({ isModalOpen }) {
     };
 
     countWaterVolume(gender, activity, weight);
-  }, [gender, activity, weight, user]);
+  }, [gender, activity, weight, user, setValue, liters]);
 
   const onSubmit = data => {
     dispatch(updateUser({ _id: user._id, ...data }))
@@ -106,7 +106,13 @@ export default function UserSettingsForm({ isModalOpen }) {
             setGender(e.target.value);
           }}
         >
-          <legend className={css.legend}>{t('Your gender')}</legend>
+          <legend
+            className={clsx(css.legend, {
+              [css.legendUk]: i18n.language === 'uk',
+            })}
+          >
+            {t('Your gender')}
+          </legend>
           <div className={css.radioWrapper}>
             <label className={css.labelsRadioWrap}>
               <input
@@ -117,7 +123,13 @@ export default function UserSettingsForm({ isModalOpen }) {
                 value="woman"
               />
               <span className={css.fakeRadio}></span>
-              <span className={css.label}>{t('Woman gender')}</span>
+              <span
+                className={clsx(css.label, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
+              >
+                {t('Woman gender')}
+              </span>
             </label>
             <label className={css.labelsRadioWrap}>
               <input
@@ -129,7 +141,13 @@ export default function UserSettingsForm({ isModalOpen }) {
                 value="man"
               />
               <span className={css.fakeRadio}></span>
-              <span className={css.label}>{t('Man gender')}</span>
+              <span
+                className={clsx(css.label, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
+              >
+                {t('Man gender')}
+              </span>
             </label>
           </div>
         </fieldset>
@@ -137,7 +155,9 @@ export default function UserSettingsForm({ isModalOpen }) {
           <div className={css.leftPart}>
             <div className={css.labelContainer}>
               <label
-                className={clsx(css.label, css.bold)}
+                className={clsx(css.label, css.bold, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
                 {...register('name')}
               >
                 {t('Your name')}
@@ -154,7 +174,9 @@ export default function UserSettingsForm({ isModalOpen }) {
             </div>
             <div className={css.labelContainer}>
               <label
-                className={clsx(css.label, css.bold)}
+                className={clsx(css.label, css.bold, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
                 {...register('email')}
               >
                 {t('Your email')}
@@ -173,7 +195,12 @@ export default function UserSettingsForm({ isModalOpen }) {
           </div>
           <div className={css.rightPart}>
             <div className={css.labelContainer}>
-              <label className={css.label} {...register('weight')}>
+              <label
+                className={clsx(css.label, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
+                {...register('weight')}
+              >
                 {t('Your weight')}
               </label>
               <input
@@ -181,22 +208,28 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.weight && css.errorInput)}
                 {...register('weight')}
-                onBlur={e => {
-                  setWeight(e.target.value);
-                }}
+                onBlur={e => {}}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
-                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                onChange={e => {
+                  maxNumber(e, setError, setValue, clearErrors);
+                  setWeight(e.target.value);
+                }}
                 maxLength="3"
-                max="150"
+                max="500"
               />
               {errors.weight && (
                 <p className={css.errorText}>{errors.weight.message}</p>
               )}
             </div>
             <div className={css.labelContainer}>
-              <label className={css.label} {...register('activeTime')}>
+              <label
+                className={clsx(css.label, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
+                {...register('activeTime')}
+              >
                 {t('Time active')}
               </label>
               <input
@@ -204,7 +237,6 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.activeTime && css.errorInput)}
                 {...register('activeTime')}
-                onBlur={e => setActivity(e.target.value)}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
@@ -216,14 +248,26 @@ export default function UserSettingsForm({ isModalOpen }) {
                 <p className={css.errorText}>{errors.activeTime.message}</p>
               )}
             </div>
-            <p className={css.waterAmount}>
+            <p
+              className={clsx(css.waterAmount, {
+                [css.waterAmountUk]: i18n.language === 'uk',
+              })}
+            >
               {t('Required amount')}{' '}
-              <span className={css.accent}>
+              <span
+                className={clsx(css.accent, {
+                  [css.accentUk]: i18n.language === 'uk',
+                })}
+              >
                 {waterVolume.toFixed(1)} {t('Count water')}
               </span>
             </p>
             <div className={css.labelContainer}>
-              <label className={clsx(css.label, css.bold)}>
+              <label
+                className={clsx(css.label, css.bold, {
+                  [css.labelUk]: i18n.language === 'uk',
+                })}
+              >
                 {t('Write down')}
               </label>
               <input
@@ -231,11 +275,13 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.liters && css.errorInput)}
                 {...register('liters')}
-                onBlur={e => setLiters(e.target.value)}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
-                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                onChange={e => {
+                  maxNumber(e, setError, setValue, clearErrors);
+                  setLiters(e.target.value);
+                }}
                 maxLength="3"
                 max="10"
               />
@@ -245,10 +291,16 @@ export default function UserSettingsForm({ isModalOpen }) {
             </div>
           </div>
         </div>
-        <button type="submit" className={css.saveBtn}>
+        <button
+          type="submit"
+          className={clsx(css.saveBtn, {
+            [css.saveBtnUk]: i18n.language === 'uk',
+          })}
+        >
           {t('Save setting')}
         </button>
       </form>
+      {isLoading && <WaterLoader />}
     </>
   );
 }

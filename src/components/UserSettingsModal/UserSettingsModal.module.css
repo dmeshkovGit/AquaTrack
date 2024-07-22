@@ -3,6 +3,8 @@
   padding: 40px 20px;
   box-shadow: 0 4px 50px 0 var(--shadow);
   background: var(--main-white);
+  transition: all var(--transition);
+  overflow: auto;
 }
 
 .title {
@@ -14,6 +16,59 @@
   margin-bottom: 30px;
 }
 
+.details {
+  min-width: 304px;
+  transition: all var(--transition);
+}
+
+.summary {
+  background: var(--main-white);
+  border-radius: 15px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 50px 0 var(--shadow);
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0, 01em;
+  color: var(--main);
+  gap: 10px;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 180px;
+}
+
+.summary::marker {
+  content: none;
+}
+.summary:hover {
+  color: var(--accent-hover);
+}
+
+.summary:hover .icon {
+  color: var(--accent-hover);
+  scale: 1.1;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  transition: all var(--transition);
+}
+
+.appDetails[open] .appIcon {
+  transform: rotate(180deg);
+}
+
+.userDetails[open] .userIcon {
+  transform: rotate(180deg);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
 @media screen and (min-width: 768px) {
   .wrap {
     padding: 40px;
@@ -21,5 +76,20 @@
   .title {
     font-size: 28px;
     line-height: 114%;
+  }
+
+  .details {
+    width: 568px;
+  }
+
+  .summary {
+    font-size: 16px;
+    line-height: 124%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .details {
+    min-width: 840px;
   }
 }

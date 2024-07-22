@@ -21,6 +21,15 @@
   line-height: 18px;
   letter-spacing: -1%;
 }
+
+.titleUk {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+
 .icon {
   fill: transparent;
 }

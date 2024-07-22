@@ -1,6 +1,7 @@
-/* .monthInfoContainer {
-  padding: 20px;
-} */
+.monthInfoContainer {
+  width: 100%;
+  min-height: 348px;
+}
 
 .monthInfoPaginationContainer {
   display: flex;
@@ -16,9 +17,19 @@
 }
 
 @media screen and (min-width: 768px) {
+  .monthInfoContainer {
+    min-height: 360px;
+  }
   .title {
     font-size: 28px;
     font-weight: 700;
     line-height: 32px;
   }
+}
+
+.titleUk {
+  font-family: var(--font-family);
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
