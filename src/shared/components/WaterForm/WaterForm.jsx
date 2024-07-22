@@ -17,6 +17,7 @@ import { addWater, editWater } from '../../../redux/water/operations';
 import { selectUserWaterNorm } from '../../../redux/user/selectors';
 import { selectActiveDay } from '../../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
+import toast, { Toaster } from 'react-hot-toast';
 import '../../../translate/index.js';
 
 const schema = yup.object().shape({
@@ -31,6 +32,8 @@ const schema = yup.object().shape({
     .max(1500, 'Value must be at most 1500')
     .required('Count is required'),
 });
+
+const notify = text => toast.error(text);
 
 export default function WaterForm({
   isOpen,
@@ -49,7 +52,6 @@ export default function WaterForm({
   const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
-  // const dailyNorm = useSelector(selectUserWaterNorm);
   const day = useSelector(selectActiveDay);
   const date = new Date(day);
 
@@ -94,6 +96,15 @@ export default function WaterForm({
       amount: data.Count,
       date: unixTime,
     };
+
+    if (obj.date > new Date()) {
+      return notify('You can`t select future date');
+    }
+
+    if (obj.date < 1672524000) {
+      return notify('You cannot select a date before 01.01.2023');
+    }
+
     if (operationAdd) {
       await dispatch(addWater(obj));
       isOpen(false);
