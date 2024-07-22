@@ -54,7 +54,7 @@
   justify-content: center;
   border: none;
   outline: transparent;
-  background: var(--background);
+  background: var(--accent);
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
