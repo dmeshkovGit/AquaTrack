@@ -15,7 +15,6 @@ export const getDayWater = createAsyncThunk(
         return [];
       }
       const response = await instance.get(`api/water/day/${date}`);
-      console.log(response.data);
       return response.data.WaterData;
     } catch (error) {
       console.log(error);
