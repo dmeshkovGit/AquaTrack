@@ -16,8 +16,13 @@ export default function ChooseDate() {
     if (new Date(selectedDay).toDateString() === new Date().toDateString()) {
       setCurrentDate(t('Today water'));
     } else {
-      const date = new Date(selectedDay).toDateString();
-      setCurrentDate(date);
+      const date = new Date(selectedDay);
+      const monthKey = `Month ${date
+        .toLocaleString('en-US', { month: 'long' })
+        .toLowerCase()}`;
+      const translatedMonth = t(monthKey);
+      const formattedDate = `${date.getDate()}, ${translatedMonth}`;
+      setCurrentDate(formattedDate);
     }
   }, [selectedDay, t]);
 
