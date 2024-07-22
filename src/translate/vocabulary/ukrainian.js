@@ -67,4 +67,9 @@ export const uk = {
   'Delete entry': 'Видалити запис',
   'Your sure': 'Ви впевнені, що хочете видалити запис?',
   'Delete card': 'Видалити',
+  'Not found': 'Not found, please add water',
+  'App settings': 'Налаштування додатку',
+  'User settings': 'Налаштуванні користувача',
+  'Choose your theme': 'Виберіть колір теми',
+  'Choose your app': 'Виберіть мову додатку',
 };

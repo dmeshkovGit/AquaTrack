@@ -19,6 +19,20 @@
   box-shadow: 0 2px 4px var(--shadow);
 }
 
+.text_ {
+  font-family: var(--font-family);
+  color: var(--main-placeholder);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.text_Uk {
+  font-family: var(--font-family);
+  color: var(--main-placeholder);
+  font-size: 14px;
+  line-height: 18px;
+}
+
 .water_item_content {
   display: flex;
   align-items: center;
