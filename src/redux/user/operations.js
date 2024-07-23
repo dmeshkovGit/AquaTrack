@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../API/axiosInstance';
-import toast from 'react-hot-toast';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker.jsx';
 
 const setAuthHeader = token => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -24,12 +24,12 @@ export const login = createAsyncThunk(
       console.log('Response.statusCode Type: ', typeof response.statusCode);
       if (response.statusCode === 401) {
         if (response.message === 'Please verify your email') {
-          toast.error('Please verify your email');
+          toastMaker('Please verify your email', 'error');
         } else {
-          toast.error('Email or password is wrong');
+          toastMaker('Email or password is wrong', 'error');
         }
       } else {
-        toast.error('Login failed');
+        toastMaker('Login failed', 'error');
       }
       return thunkAPI.rejectWithValue(response);
     }

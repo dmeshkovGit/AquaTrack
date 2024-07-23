@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router';
 import RestrictedRoute from '../Routes/RestrictedRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
 import '../App/App.css';
-// import WelcomeSection from '../WelcomeSection/WelcomeSection';
 import SignUpPage from '../../pages/SignUpPage/SignUpPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import TrackerPage from '../../pages/TrackerPage/TrackerPage';
@@ -27,7 +26,12 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-center" />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
 
       <SharedLayout>
         {isRefreshing ? (

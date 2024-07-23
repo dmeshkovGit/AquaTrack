@@ -1,12 +1,11 @@
 import css from './UploadAvatarForm.module.css';
 import { useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { IoIosSend } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/selectors';
 import { updateAvatar, updateUser } from '../../redux/user/operations';
-import toast from 'react-hot-toast';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker.jsx';
 import { useTranslation } from 'react-i18next';
 import { RxAvatar } from 'react-icons/rx';
 import '../../translate/index.js';
@@ -25,8 +24,8 @@ export default function UploadAvatarForm({ isModalOpen }) {
     setImage(URL.createObjectURL(files[0]));
     dispacth(updateAvatar({ avatar: files[0] }))
       .unwrap()
-      .then(() => toast.success('Avatar updated'))
-      .catch(() => toast.error('Sorry, try again later'));
+      .then(() => toastMaker('Avatar updated', 'succes'))
+      .catch(() => toastMaker('Sorry, try again later', 'error'));
   };
 
   const onDelete = () => {
@@ -34,8 +33,8 @@ export default function UploadAvatarForm({ isModalOpen }) {
     setImage(null);
     dispacth(updateUser({ _id: user._id, avatarURL: null }))
       .unwrap()
-      .then(() => toast.success('Avatar deleted'))
-      .catch(() => toast.error('Sorry, try again later'));
+      .then(() => toastMaker('Avatar deleted', 'succes'))
+      .catch(() => toastMaker('Sorry, try again later', 'error'));
   };
   return (
     <>
@@ -75,12 +74,12 @@ export default function UploadAvatarForm({ isModalOpen }) {
                   <MdOutlineFileUpload className={css.icon} />
                   {t('Upload avatar')}
                 </p>
-                <button type="button" className={css.btn} onClick={onDelete}>
-                  <MdDelete className={css.icon} />
-                </button>
               </div>
             </div>
           </form>
+          <button type="button" className={css.btn} onClick={onDelete}>
+            <MdDelete className={css.icon} />
+          </button>
         </div>
       </div>
     </>

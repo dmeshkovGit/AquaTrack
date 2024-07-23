@@ -14,11 +14,10 @@ import * as yup from 'yup';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWater, editWater } from '../../../redux/water/operations';
-import { selectUserWaterNorm } from '../../../redux/user/selectors';
 import { selectActiveDay } from '../../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
-import toast, { Toaster } from 'react-hot-toast';
 import '../../../translate/index.js';
+import toastMaker from '../../helpers/toastMaker/toastMaker.jsx';
 
 const schema = yup.object().shape({
   Time: yup
@@ -32,8 +31,6 @@ const schema = yup.object().shape({
     .max(1500, 'Value must be at most 1500')
     .required('Count is required'),
 });
-
-const notify = text => toast.error(text);
 
 export default function WaterForm({
   isOpen,
@@ -98,11 +95,11 @@ export default function WaterForm({
     };
 
     if (obj.date > new Date()) {
-      return notify('You can`t select future date');
+      toastMaker("You can't drink water in the future", 'error');
     }
 
     if (obj.date < 1672524000) {
-      return notify('You cannot select a date before 01.01.2023');
+      toastMaker('You cannot select a date before 01.01.2023', 'error');
     }
 
     if (operationAdd) {
