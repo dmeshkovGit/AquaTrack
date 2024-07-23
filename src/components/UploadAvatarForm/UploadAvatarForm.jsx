@@ -14,7 +14,6 @@ import clsx from 'clsx';
 const validFileExtensions = ['jpg', 'png'];
 
 function isValidFileType(fileName) {
-  console.log(fileName);
   return validFileExtensions.includes(fileName.split('.').pop());
 }
 
