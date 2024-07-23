@@ -7,8 +7,17 @@
   line-height: 24px;
   margin-bottom: 24px;
 }
+
+.headerUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 24px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
-    margin: 40px;
+    margin: 40px 0 40px 40px;
   }
 }

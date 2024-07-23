@@ -1,0 +1,114 @@
+.modal {
+  border-radius: 15px;
+  padding: 40px 0px 40px 20px;
+  background: var(--main-white);
+  position: relative;
+  width: 296px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  margin-bottom: 16px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  margin-bottom: 28px;
+}
+
+.okBtn {
+  border-radius: 30px;
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  border: none;
+  outline: transparent;
+  margin-bottom: 9px;
+  transition: all var(--transition);
+  width: 118px;
+}
+
+/* .logoutBtn:hover,
+.logoutBtn:focus {
+  background-color: var(--accent-hover);
+} */
+.cancelBtn:hover,
+.cancelBtn:focus {
+  color: var(--main);
+  background-color: var(--accent-hover);
+}
+.closeBtn {
+  top: 16px;
+  right: 16px;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f474d;
+}
+
+/* =================TABLET=============== */
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 516px;
+    padding: 40px 0 40px 40px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+  .text {
+    font-size: 18px;
+    line-height: 133%;
+  }
+  .btnWrap {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .logoutBtn {
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 150%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  .cancelBtn {
+    min-width: 0;
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .closeBtn {
+    top: 20px;
+    right: 20px;
+  }
+}

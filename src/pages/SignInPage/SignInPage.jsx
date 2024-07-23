@@ -3,10 +3,12 @@ import Logo from '../../shared/components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
-
-import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
+import clsx from 'clsx';
 
 export default function SignIpPage() {
+  const { t, i18n } = useTranslation();
   return (
     <div className={css.desctopContainer}>
       <div className={css.container}>
@@ -14,12 +16,23 @@ export default function SignIpPage() {
           <Logo />
         </div>
         <div className={css.content}>
-          <h2 className={css.title}>Sign in</h2>
+          <h2
+            className={clsx(css.title, {
+              [css.titleUk]: i18n.language === 'uk',
+            })}
+          >
+            {t('Sign in')}
+          </h2>
           <SignInForm />
           <p className={css.notify}>
-            Don`t have an account?{' '}
-            <Link className={css.navLink} to="/signup">
-              sign up
+            {t('Do not')}{' '}
+            <Link
+              className={clsx(css.navLink, {
+                [css.navLinkUk]: i18n.language === 'uk',
+              })}
+              to="/signup"
+            >
+              {t('Register user form')}
             </Link>
           </p>
         </div>

@@ -56,6 +56,16 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
+
+.legend {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
 .leftPart {
   display: flex;
   flex-direction: column;
@@ -69,6 +79,15 @@
   width: 303px;
 }
 .label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.labelUk {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
   line-height: 129%;
@@ -110,6 +129,15 @@
   color: var(--main-text);
 }
 
+.waterAmountUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
 .accent {
   color: var(--accent);
 }
@@ -132,10 +160,31 @@
   transition: all var(--transition);
 }
 
+.saveBtnUk {
+  font-family: var(--font-family);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 116px;
+  height: 46px;
+  border: none;
+  background: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--main);
+  transition: all var(--transition);
+}
+
 .saveBtn:hover,
 .saveBtn:focus {
   background-color: var(--accent-hover);
 }
+
+/* ==============TABLET============= */
 
 @media screen and (min-width: 768px) {
   .form {
@@ -167,6 +216,10 @@
     width: 141px;
     height: 56px;
   }
+
+  .rightPart {
+    margin-top: 24px;
+  }
 }
 
 /* ===================DESKTOP================== */
@@ -183,5 +236,99 @@
 
   .labelContainer {
     width: 400px;
+  }
+
+  .rightPart {
+    margin-top: 0;
+  }
+}
+
+.details {
+  min-width: 304px;
+  width: 100%;
+  transition: all var(--transition);
+}
+
+.summary {
+  background-color: inherit;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0, 01em;
+  color: var(--main);
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+  border: 1px solid var(--main-border);
+  border-radius: 15px;
+  padding: 16px;
+  outline: transparent;
+}
+
+.summaryUk {
+  font-family: var(--font-family);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0, 01em;
+  color: var(--main);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.summary::marker {
+  content: none;
+}
+.summary:hover {
+  color: var(--accent-hover);
+}
+
+.summary:hover .icon {
+  color: var(--accent-hover);
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  transition: all var(--transition);
+}
+
+.appDetails[open] .appIcon {
+  transform: rotate(180deg);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .wrap {
+    padding: 40px 0 40px 40px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 114%;
+  }
+
+  .details {
+    width: 568px;
+  }
+
+  .summary {
+    font-size: 16px;
+    line-height: 124%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .details {
+    min-width: 840px;
   }
 }

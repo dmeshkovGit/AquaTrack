@@ -7,8 +7,12 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { login } from '../../redux/user/operations';
 import { useDispatch, useSelector } from 'react-redux';
+import GoogleAuthBtn from '../../shared/components/GoogleAuthBtn/GoogleAuthBtn';
 import { selectIsLoading } from '../../redux/user/selectors';
-import AuthLoader from '../../shared/components/AuthLoader/AuthLoader';
+import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
+
+import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 
 const schema = yup.object().shape({
   email: yup
@@ -21,17 +25,20 @@ const schema = yup.object().shape({
     .required('Password is required'),
 });
 
-export default function SignInForm({ onSubmit }) {
+export default function SignInForm() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const isLoading = useSelector(selectIsLoading);
+  const { t, i18n } = useTranslation();
+
   // об'єкт конфігурації параметрів хука useForm
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange',
   });
 
   const toggleShowPassword = () => {
@@ -39,32 +46,52 @@ export default function SignInForm({ onSubmit }) {
   };
 
   const handleFormSubmit = data => {
-    const { email, password } = data;
-    dispatch(login({ email, password }));
+    dispatch(login(data))
+      .then()
+      .catch(error => {
+        console.error('Unexpected error:', error);
+      });
   };
 
   return (
     <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className={css.inputGroup}>
-        <label>Email</label>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
+        <label>{t('Email user')}</label>
         <input
-          className={clsx(css.inputGroupInput, errors.email && css.inputError)}
+          className={clsx(css.inputGroupInput, errors.email && css.inputError, {
+            [css.inputGroupInputUk]: i18n.language === 'uk',
+          })}
           type="text"
-          placeholder="Enter your email"
+          placeholder={t('Enter email')}
+          name="email"
+          autoComplete="on"
           {...register('email')}
         />
         {errors.email && <p className={css.error}>{errors.email.message}</p>}
       </div>
-      <div className={css.inputGroup}>
-        <label>Password</label>
+      <div
+        className={clsx(css.inputGroup, {
+          [css.inputGroupUk]: i18n.language === 'uk',
+        })}
+      >
+        <label>{t('Password user')}</label>
         <div className={css.passwordContainer}>
           <input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
+            placeholder={t('Enter password')}
+            name="password"
+            autoComplete="on"
             {...register('password')}
             className={clsx(
               css.inputGroupInput,
-              errors.password && css.inputError,
+              errors.email && css.inputError,
+              {
+                [css.inputGroupInputUk]: i18n.language === 'uk',
+              },
             )}
           />
           <button
@@ -84,9 +111,16 @@ export default function SignInForm({ onSubmit }) {
           <p className={css.error}>{errors.password.message}</p>
         )}
       </div>
-      <button type="submit" className={css.submitButton} onClick={onSubmit}>
-        {isLoading ? <AuthLoader /> : 'Sign in'}
+      <button
+        type="submit"
+        className={clsx(css.submitButton, {
+          [css.submitButtonUk]: i18n.language === 'uk',
+        })}
+        disabled={!isValid}
+      >
+        {isLoading ? <DotLoader text="Signing In" /> : t('Login user')}
       </button>
+      <GoogleAuthBtn />
     </form>
   );
 }

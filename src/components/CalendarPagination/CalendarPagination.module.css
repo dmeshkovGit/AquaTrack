@@ -1,14 +1,17 @@
 .paginationContainer {
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 22px;
 }
 .buttonsContainer {
   display: flex;
-  align-item: center;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  width: 178px;
 }
 .button {
+  display: flex;
+  justify-content: center;
   border: none;
   background-color: transparent;
 }
@@ -18,10 +21,22 @@
   line-height: 18px;
   letter-spacing: -1%;
 }
+
+.titleUk {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+
 .icon {
   fill: transparent;
 }
 @media screen and (min-width: 768px) {
+  .buttonsContainer {
+    width: 200px;
+  }
   .title {
     font-size: 16px;
     line-height: 24px;

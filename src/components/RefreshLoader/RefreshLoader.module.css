@@ -1,0 +1,142 @@
+.trackerContainer {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media screen and (min-width: 1440px) {
+  .trackerContainer {
+    max-height: 736px;
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+.WaterMainInfoContainer {
+  position: relative;
+  overflow: hidden;
+  height: 415px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--accent);
+  border-radius: 30px;
+  padding: 24px 16px 32px 16px;
+  background-image: url('/boardBg/Mobile/1x/transparent_bottle_for_water\ 1-min.png');
+  background-repeat: no-repeat;
+  background-position: bottom 30px center;
+  background-size: 262px 335px;
+}
+
+.logoWraper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 78px;
+}
+
+@media screen and (min-width: 768px) {
+  .WaterMainInfoContainer {
+    height: 578px;
+    padding: 32px 32px 64px 32px;
+    background-image: url('/boardBg/Tablet/1x/transparent_bottle_for_water\ 1-min.png');
+    background-size: 374px 477px;
+    background-position: bottom 32px center;
+  }
+  .logoWraper {
+    margin-bottom: 101px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .WaterMainInfoContainer {
+    height: 736px;
+    width: 672px;
+    background-image: url('/boardBg/Desctop/1x/transparent_bottle_for_water\ 1-1-min.png');
+    background-size: 472px 604px;
+    background-position: bottom 40px center;
+  }
+}
+
+@media (min-resolution: 192dpi) and (min-width: 375px) {
+  .WaterMainInfoContainer {
+    background-image: url('/boardBg/Mobile/2x/transparent_bottle_for_water\ 1@2x-min.png');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 768px) {
+  .WaterMainInfoContainer {
+    background-image: url('/boardBg/Tablet/2x/transparent_bottle_for_water\ 1@2x-min.png');
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 1440px) {
+  .WaterMainInfoContainer {
+    background-image: url('/boardBg/Desctop/2x/transparent_bottle_for_water\ 1-min.png');
+  }
+}
+
+.WaterDetailedInfoContainer {
+  height: 770px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  border-radius: 30px;
+  padding: 40px 20px;
+}
+
+@media screen and (min-width: 375px) {
+  .WaterDetailedInfoContainer {
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .WaterDetailedInfoContainer {
+    height: 738px;
+    padding: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .WaterDetailedInfoContainer {
+    width: 672px;
+  }
+}
+
+.WaterMainInfoContainer::after,
+.WaterDetailedInfoContainer::after {
+  width: 672px;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(227, 227, 227, 0) 0%,
+    rgba(227, 227, 227, 0) 40%,
+    rgba(227, 227, 227, 0.5) 50%,
+    rgba(227, 227, 227, 0) 60%,
+    rgba(227, 227, 227, 0) 100%
+  );
+  animation: gradient-animation_2 1s linear infinite;
+}
+
+@keyframes gradient-animation_2 {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -8,52 +8,103 @@
   height: 100%;
   background: var(--main-placeholder);
   z-index: 1000;
+  overflow: hidden;
+}
+.modalWrapper {
 }
 
 .modal {
-  background: var(--main-white);
-  border-radius: 15px;
+  position: relative;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 100vh;
   box-shadow: 0 4px 50px 0 var(--shadow);
-  overflow-y: auto;
+  max-width: 344px;
+  background: var(--main-white);
+  border-radius: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .modal::-webkit-scrollbar {
-  width: 22px;
+  margin-left: 20px;
+  width: 20px;
+  border-radius: 30px;
 }
 .modal::-webkit-scrollbar-track {
+  margin-top: 228px;
   background: inherit;
 }
 .modal::-webkit-scrollbar-thumb {
+  max-height: 240px;
   background: var(--background);
-  border-radius: 15px;
+  border-radius: 30px;
   background-clip: content-box;
-  border: 8px solid transparent;
+  border: 7px solid transparent;
+}
+.modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(81, 83, 84, 0.3);
+  background-clip: content-box;
+  border: 7px solid transparent;
 }
 .closeButton {
   z-index: 1;
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 1px;
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.top40pxBtn {
+  right: 16px;
+}
+.closeIcon {
+  stroke: var(--main);
+  transition: all var(--transition);
 }
 
 .closeButton:focus {
   outline: none;
 }
 
+.closeButton:hover > .closeIcon {
+  stroke: var(--logout-btn);
+}
+
 @media screen and (min-width: 768px) {
+  .modal {
+    max-width: 100%;
+  }
   .modal::-webkit-scrollbar {
-    width: 36px;
+    width: 40px;
+  }
+  .modal::-webkit-scrollbar-track {
+    margin-top: 268px;
   }
   .modal::-webkit-scrollbar-thumb {
-    border: 15px solid transparent;
+    border: 16px solid transparent;
+  }
+  .modal::-webkit-scrollbar-thumb:hover {
+    background: rgba(81, 83, 84, 0.3);
+    background-clip: content-box;
+    border: 16px solid transparent;
+  }
+  .closeButton {
+    width: 28px;
+    height: 28px;
+  }
+  .top40pxBtn {
+    top: 40px;
+    right: 40px;
+  }
+  .closeIcon {
+    width: 28px;
+    height: 28px;
   }
 }

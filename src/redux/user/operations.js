@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../API/axiosInstance';
-import toast from 'react-hot-toast';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker.jsx';
 
 const setAuthHeader = token => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -17,11 +17,20 @@ export const login = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      console.log(error);
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,
       };
+      console.log('Response.statusCode Type: ', typeof response.statusCode);
+      if (response.statusCode === 401) {
+        if (response.message === 'Please verify your email') {
+          toastMaker('Please verify your email', 'error');
+        } else {
+          toastMaker('Email or password is wrong', 'error');
+        }
+      } else {
+        toastMaker('Login failed', 'error');
+      }
       return thunkAPI.rejectWithValue(response);
     }
   },
@@ -32,20 +41,18 @@ export const register = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     try {
       const { data } = await instance.post('/api/users/register', userInfo);
-      setAuthHeader(data.token);
-      login(userInfo);
+      // setAuthHeader(data.token);
+      // login(userInfo);
       return data;
     } catch (error) {
       const response = {
         message: error.response.data.message,
         statusCode: error.response.status,
       };
-      console.log(typeof response.statusCode);
       if (response.statusCode === 409) {
         toast.error('This email is already used');
       }
       return thunkAPI.rejectWithValue(response);
-
     }
   },
 );
@@ -105,7 +112,6 @@ export const fetchUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (userData, thunkAPI) => {
-    console.log(userData);
     try {
       const { data } = await instance.put(
         `/api/users/${userData._id}`,
@@ -118,6 +124,29 @@ export const updateUser = createAsyncThunk(
         statusCode: error.response.status,
       };
       return thunkAPI.rejectWithValue(response);
+    }
+  },
+);
+
+export const updateAvatar = createAsyncThunk(
+  'user/updateAvatar',
+  async (avatarFile, thunkAPI) => {
+    try {
+      const {
+        user: { user },
+      } = thunkAPI.getState();
+      const { data } = await instance.put(
+        `/api/users/${user._id}`,
+        avatarFile,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );

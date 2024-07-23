@@ -14,11 +14,28 @@
   line-height: 20px;
   margin-bottom: 20px;
 }
+
+.textUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
 .secondaryText {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
 }
+
+.secondaryTextUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 .baseLabel {
   font-weight: 400;
   font-size: 14px;
@@ -26,6 +43,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.baseLabel {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
 .counterContainer {
   display: flex;
   gap: 8px;
@@ -65,6 +92,23 @@
   font-size: 14px;
   line-height: 18px;
 }
+
+.count {
+  font-family: var(--font-family);
+  box-sizing: border-box;
+  min-width: 98px;
+  height: 40px;
+  border-radius: 30px;
+  border: none;
+  padding: 11px 20px;
+  text-align: center;
+  background-color: var(--main);
+  color: var(--main-white);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 .baseInput {
   box-sizing: border-box;
   width: 303px;
@@ -83,6 +127,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.secondaryLabelUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .saveBtn {
   padding: 0;
   width: 116px;
@@ -96,6 +150,22 @@
   line-height: 18px;
   transition: all var(--transition);
 }
+
+.saveBtnUk {
+  font-family: var(--font-family);
+  padding: 0;
+  width: 116px;
+  height: 46px;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  transition: all var(--transition);
+}
+
 .counterBtn:hover {
   background-color: var(--main);
   color: var(--main-white);

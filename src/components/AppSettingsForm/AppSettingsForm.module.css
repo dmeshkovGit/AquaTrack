@@ -1,0 +1,191 @@
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 303px;
+}
+.label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+  position: relative;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 303px;
+}
+
+.fieldset {
+  border: none;
+  padding: 0;
+}
+
+.radioWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+.labelsRadioWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radioInput {
+  display: none;
+}
+.fakeRadio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 1px solid var(--accent);
+
+  position: relative;
+}
+.fakeRadio::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  opacity: 0;
+  transition: 0.2s;
+}
+.radioInput:checked + .fakeRadio::before {
+  opacity: 1;
+}
+.legend {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
+.legendUk {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
+.switchWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.switchLabel {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main);
+  width: 200px;
+}
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  width: 60px;
+  height: 34px;
+  border-radius: 34px;
+}
+
+.switchInput {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.switchSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: all var(--transition);
+}
+
+.switchSlider::before {
+  content: '';
+  position: absolute;
+  cursor: pointer;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  transition: all var(--transition);
+}
+
+.switchInput:focus .switchSlider {
+  box-shadow: 0 0 1px var(--shadow);
+}
+
+.switchInput:checked + .switchSlider {
+  background-color: green;
+}
+
+.switchInput:checked + .switchSlider::before {
+  transform: translateX(26px);
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+}
+/* ==============TABLET============= */
+
+@media screen and (min-width: 768px) {
+  .form {
+    width: 568px;
+  }
+
+  .labelContainer {
+    width: 568px;
+  }
+
+  .label {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .switchWrap {
+    gap: 14px;
+  }
+  .switchLabel {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 124%;
+    width: 380px;
+  }
+}
+
+/* ===================DESKTOP================== */
+
+@media screen and (min-width: 1440px) {
+  .form {
+    width: 840px;
+  }
+
+  .labelContainer {
+    width: 400px;
+  }
+}

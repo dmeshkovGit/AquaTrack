@@ -20,6 +20,21 @@
   gap: 8px;
   transition: all var(--transition);
 }
+
+.settingBtnUk {
+  font-family: var(--font-family);
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--main);
+  border: none;
+  background-color: inherit;
+  gap: 8px;
+  transition: all var(--transition);
+}
+
 .settingIcon {
   fill: none;
   stroke: var(--main);
@@ -33,15 +48,29 @@
 }
 .settingBtn:hover,
 .settingBtn:focus {
-  color: #87d28d;
+  color: var(--accent-hover);
 }
 
-.settingBtn:hover > .settingIcon,
-.settingBtn:focus > .settingIcon {
+.settingBtn:hover .settingIcon,
+.settingBtn:focus .settingIcon {
   stroke: #87d28d;
 }
 
 .logoutBtn {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--logout-btn);
+  border: none;
+  background-color: inherit;
+  gap: 8px;
+  transition: all var(--transition);
+}
+
+.logoutBtnUk {
+  font-family: var(--font-family);
   display: flex;
   align-items: center;
   font-weight: 700;

@@ -10,15 +10,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  gap: 8px;
 }
 .form {
   height: 18px;
   cursor: pointer;
   justify-content: center;
-  width: 133px;
   height: 18px;
+  /* margin-right: 15px; */
 }
 
+.error {
+  color: var(--validation-error);
+}
+
+.avatarSetWrapp {
+  display: flex;
+  gap: 8px;
+}
 .img {
   margin-left: auto;
   margin-right: auto;
@@ -28,6 +38,15 @@
   margin-bottom: 10px;
 }
 
+.iconAvatar {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  margin-bottom: 10px;
+  color: var(--main);
+}
 .icon {
   color: var(--main);
   width: 18px;
@@ -35,15 +54,13 @@
   transition: all var(--transition);
 }
 
-.icon:hover,
-.icon:focus {
+.icon:hover {
   color: var(--accent-hover);
   scale: 1.1;
 }
 .wrapInput {
   display: flex;
-  gap: 8px;
-  width: 133px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -53,12 +70,31 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   color: var(--main-text);
+  transition: all var(--transition);
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.btnWrap {
+.textUk {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+  transition: all var(--transition);
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+}
+
+.text:hover {
+  color: var(--accent-hover);
+}
+
+.text:hover > .icon {
+  color: var(--accent-hover);
 }
 
 .btn {
@@ -67,6 +103,7 @@
   align-items: center;
   border: none;
   background-color: transparent;
+  padding: 0;
 }
 .iconAvatar {
   width: 75px;
@@ -80,7 +117,6 @@
     height: 18px;
     cursor: pointer;
     justify-content: center;
-    width: 152px;
     height: 24px;
   }
 
@@ -89,7 +125,11 @@
     height: 100px;
     margin-bottom: 10px;
   }
-
+  .iconAvatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
   .icon {
     width: 20px;
     height: 20px;
@@ -97,7 +137,6 @@
   .wrapInput {
     display: flex;
     gap: 8px;
-    width: 152px;
   }
 
   .text {
