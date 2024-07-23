@@ -208,7 +208,6 @@ export default function UserSettingsForm({ isModalOpen }) {
                 type="text"
                 className={clsx(css.input, errors.weight && css.errorInput)}
                 {...register('weight')}
-                onBlur={e => {}}
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
@@ -240,7 +239,10 @@ export default function UserSettingsForm({ isModalOpen }) {
                 onKeyDown={event =>
                   isNumberAndDot(event, setError, clearErrors)
                 }
-                onChange={e => maxNumber(e, setError, setValue, clearErrors)}
+                onChange={e => {
+                  maxNumber(e, setError, setValue, clearErrors);
+                  setActivity(e.target.value);
+                }}
                 maxLength="3"
                 max="24"
               />
