@@ -52,9 +52,9 @@ export default function UserBar() {
       </Popover>
       {isSettingsModalOpen && (
         <Modal
+          btnClassName={css.settingsClose}
           isOpen={isSettingsModalOpen}
           onClose={() => {
-            document.body.style.overflow = 'auto';
             setIsSettingsModalOpen(false);
           }}
           isModal={isSettingsModalOpen}
@@ -66,7 +66,6 @@ export default function UserBar() {
         <Modal
           isOpen={isLogOutModalOpen}
           onClose={() => {
-            document.body.style.overflow = 'auto';
             setIsLogOutModalOpen(false);
           }}
           isModal={isLogOutModalOpen}

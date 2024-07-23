@@ -2,7 +2,6 @@ import CalendarPagination from '../../components/CalendarPagination/CalendarPagi
 import Calendar from '../../components/Calendar/Calendar';
 import css from './MonthInfo.module.css';
 import { useEffect, useState } from 'react';
-
 import '../../translate/index.js';
 import clsx from 'clsx';
 import { getMonthInfo } from '../../API/apiOperations.js';
@@ -21,11 +20,6 @@ export default function MonthInfo() {
     console.log('Icon clicked');
     setShowChart(prevShowChart => !prevShowChart);
   };
-
-  // useEffect(() => {
-  //   setDate(new Date());
-  //   getMonthInfo();
-  // }, []);
 
   useEffect(() => {
     const getMonth = async () => {

@@ -66,21 +66,21 @@ export default function UploadAvatarForm({ isModalOpen }) {
                 hidden
                 id="avatarInput"
               />
-
-              <p
-                className={clsx(css.text, {
-                  [css.textUk]: i18n.language === 'uk',
-                })}
-              >
-                <MdOutlineFileUpload className={css.icon} />
-                {t('Upload avatar')}
-              </p>
+              <div className={css.avatarSetWrapp}>
+                <p
+                  className={clsx(css.text, {
+                    [css.textUk]: i18n.language === 'uk',
+                  })}
+                >
+                  <MdOutlineFileUpload className={css.icon} />
+                  {t('Upload avatar')}
+                </p>
+                <button type="button" className={css.btn} onClick={onDelete}>
+                  <MdDelete className={css.icon} />
+                </button>
+              </div>
             </div>
           </form>
-
-          <button type="button" className={css.btn} onClick={onDelete}>
-            <MdDelete className={css.icon} />
-          </button>
         </div>
       </div>
     </>

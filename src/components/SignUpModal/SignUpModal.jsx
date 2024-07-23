@@ -22,23 +22,8 @@ export default function SignUpModal() {
         {t('Check your email to confirm your email address.')}
       </p>
       <div className={css.btnWrap}>
-        {/* <button
-          className={css.logoutBtn}
-          type="button"
-          onClick={handleConfirmClick}
-        >
-          {isLoading ? (
-            <DotLoader text={t('Logging out')} />
-          ) : (
-            confirmButtonText || t('Log out')
-          )}
-        </button> */}
-        <button
-          className={css.cancelBtn}
-          type="button"
-          onClick={handleCancelClick}
-        >
-          {t('Login')}
+        <button className={css.okBtn} type="button" onClick={handleCancelClick}>
+          Ok
         </button>
       </div>
     </div>

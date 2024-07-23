@@ -10,9 +10,10 @@ import { selectIsLoading, selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
 import toast from 'react-hot-toast';
 import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
-import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
+import AppSettingsForm from '../AppSettingsForm/AppSettingsForm.jsx';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const schema = yup.object().shape({
   gender: yup.string().required('Option is required'),
@@ -38,7 +39,6 @@ export default function UserSettingsForm({ isModalOpen }) {
   const [liters, setLiters] = useState(0);
 
   const user = useSelector(selectUser);
-  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
@@ -291,6 +291,17 @@ export default function UserSettingsForm({ isModalOpen }) {
             </div>
           </div>
         </div>
+        <details className={clsx(css.details, css.appDetails)}>
+          <summary
+            className={clsx(css.summary, {
+              [css.summaryUk]: i18n.language === 'uk',
+            })}
+          >
+            {t('App settings')}{' '}
+            <IoIosArrowDown className={clsx(css.icon, css.appIcon)} />
+          </summary>
+          <AppSettingsForm />
+        </details>
         <button
           type="submit"
           className={clsx(css.saveBtn, {
@@ -300,7 +311,6 @@ export default function UserSettingsForm({ isModalOpen }) {
           {t('Save setting')}
         </button>
       </form>
-      {isLoading && <WaterLoader />}
     </>
   );
 }

@@ -1,8 +1,9 @@
 .modal {
   border-radius: 15px;
-  padding: 40px 14px;
+  padding: 40px 0 40px 14px;
   background: var(--main-white);
   position: relative;
+  width: 330px;
 }
 
 .title {
@@ -152,8 +153,8 @@
 
 @media screen and (min-width: 768px) {
   .modal {
-    width: 516px;
-    padding: 40px;
+    width: 476px;
+    padding: 40px 0 40px 40px;
   }
   .title {
     font-size: 28px;

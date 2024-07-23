@@ -3,9 +3,7 @@ import WaterForm from '../WaterForm/WaterForm';
 
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
-import { WaterLoader } from '../WaterLoader/WaterLoader.jsx';
-import { useSelector } from 'react-redux';
-import { selectIsLoading } from '../../../redux/water/selectors.js';
+
 import clsx from 'clsx';
 
 // export default function WaterModal({ operationType }) {
@@ -28,12 +26,10 @@ export default function WaterModal({
   waterTime,
   addForActiveDay,
 }) {
-  const isLoading = useSelector(selectIsLoading);
   const { t, i18n } = useTranslation();
 
   return (
     <div className={css.container}>
-      {isLoading && <WaterLoader />}
       <h1
         className={clsx(css.header, { [css.headerUk]: i18n.language === 'uk' })}
       >
