@@ -8,14 +8,11 @@ import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 import clsx from 'clsx';
 import i18n from '../../translate/index.js';
-import { getDayWater } from '../../redux/water/operations.js';
-import { getFormattedTime } from '../../helpers/validationsHelper.js';
 
 export default function WaterProgressBar() {
   const [percent, setPercent] = useState(0);
   const [isPercentVisible, setIsPercentVisible] = useState(true);
   const dayWater = useSelector(selectUserWaterNorm);
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const dayDrinking = useSelector(selectCurrentDayWater);
@@ -38,15 +35,6 @@ export default function WaterProgressBar() {
     } else {
       setIsPercentVisible(true);
     }
-
-    const date = new Date();
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-
-    console.log(date.getTime());
-    dispatch(getDayWater(date.getTime()));
   }, [percent]);
 
   return (

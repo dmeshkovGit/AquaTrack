@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addWater, getDayWater, deleteWater, editWater } from './operations';
+import { logout } from '../user/operations';
 
 const slice = createSlice({
   name: 'water',
@@ -97,6 +98,10 @@ const slice = createSlice({
       })
       .addCase(editWater.rejected, state => {
         state.loading = false;
+      })
+      .addCase(logout.fulfilled, state => {
+        state.dayWater.water = [];
+        state.currentDay = [];
       }),
 });
 
