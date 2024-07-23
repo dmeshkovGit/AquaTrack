@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from '../WaterProgressBar/WaterProgressBar.module.css';
 import { useEffect, useState } from 'react';
 import { selectUserWaterNorm } from '../../redux/user/selectors';
-import { selectDayWater } from '../../redux/water/selectors';
+import { selectCurrentDayWater } from '../../redux/water/selectors';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
@@ -15,7 +15,7 @@ export default function WaterProgressBar() {
   const dayWater = useSelector(selectUserWaterNorm);
   const { t } = useTranslation();
 
-  const dayDrinking = useSelector(selectDayWater);
+  const dayDrinking = useSelector(selectCurrentDayWater);
 
   useEffect(() => {
     const totalAmount = dayDrinking.reduce(
