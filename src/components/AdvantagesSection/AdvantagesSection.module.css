@@ -51,6 +51,7 @@
 .usersItem {
   z-index: 2;
   border: 2px solid var(--main-white);
+  background-color: var(--main-white);
   border-radius: 50%;
   overflow: hidden;
   margin-left: -10px;
