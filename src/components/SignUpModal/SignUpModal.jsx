@@ -1,8 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import css from '../SignUpModal/SignUpModal.module.css';
-// import toast from 'react-hot-toast';
-// import { selectIsLoading } from '../../redux/user/selectors.js';
-// import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
