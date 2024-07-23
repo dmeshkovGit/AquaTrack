@@ -14,14 +14,14 @@ export default function AppSettingsForm() {
   const user = useSelector(selectUser);
   const language = localStorage.getItem('i18nextLng');
 
-  const { register } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      theme: user.theme,
-      language: language,
-      // notify: 'checked',
-    },
-  });
+  // const { register } = useForm({
+  //   mode: 'onChange',
+  //   defaultValues: {
+  //     theme: user.theme,
+  //     language: language,
+  //     // notify: 'defaultChecked',
+  //   },
+  // });
   // const onChangeNotify = e => {
   //   console.log(e.target.value);
   // };
@@ -34,9 +34,9 @@ export default function AppSettingsForm() {
     i18n.changeLanguage(e.target.value);
   };
   return (
-    <form className={css.form}>
+    <div className={css.form}>
       <fieldset
-        {...register('theme')}
+        // {...register('theme')}
         className={css.fieldset}
         onChange={onChangeTheme}
         name="theme"
@@ -51,7 +51,7 @@ export default function AppSettingsForm() {
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('theme')}
+              defaultChecked={user.theme === 'light'}
               className={css.radioInput}
               type="radio"
               name="theme"
@@ -62,7 +62,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('theme')}
+              defaultChecked={user.theme === 'dark'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -74,6 +74,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
+              defaultChecked={user.theme === 'pink'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -86,7 +87,7 @@ export default function AppSettingsForm() {
         </div>
       </fieldset>
       <fieldset
-        {...register('language')}
+        // {...register('language')}
         className={css.fieldset}
         onChange={onChangeLang}
         name="language"
@@ -101,7 +102,7 @@ export default function AppSettingsForm() {
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('language')}
+              defaultChecked={language === 'en'}
               className={css.radioInput}
               type="radio"
               name="lang"
@@ -113,7 +114,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('language')}
+              defaultChecked={language === 'uk'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -142,6 +143,6 @@ export default function AppSettingsForm() {
           <span className={css.switchSlider}></span>
         </label>
       </div> */}
-    </form>
+    </div>
   );
 }

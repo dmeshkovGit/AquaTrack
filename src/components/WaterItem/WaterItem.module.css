@@ -8,6 +8,10 @@
   margin-top: 24px;
 }
 
+.modalClsBtn {
+  top: 20px;
+}
+
 .water_item {
   flex: none;
   background-color: var(--main-white);
