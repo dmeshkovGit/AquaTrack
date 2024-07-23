@@ -120,7 +120,7 @@ export default function SignInForm() {
       >
         {isLoading ? <DotLoader text="Signing In" /> : t('Login user')}
       </button>
-      <GoogleAuthBtn />
+      {/* <GoogleAuthBtn /> */}
     </form>
   );
 }

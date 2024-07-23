@@ -14,12 +14,15 @@ export default function CalendarItem({ item, activeDay, index }) {
     let rounded = percentage.toFixed(1);
     return rounded.endsWith('.0') ? parseInt(rounded, 10) : parseFloat(rounded);
   };
+
   return (
     <div className={css.container}>
       <button
         className={clsx(
           css.button,
           item.dateParam == activeDay && css.activeButton,
+          calculateWaterPercentage(item.totalDayWater) >= 100 &&
+            css.fullDayButton,
         )}
       >
         {index + 1}

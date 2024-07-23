@@ -35,7 +35,7 @@ export default function AppSettingsForm() {
   };
   return (
     <div className={css.form}>
-      <fieldset
+      {/* <fieldset
         // {...register('theme')}
         className={css.fieldset}
         onChange={onChangeTheme}
@@ -71,8 +71,8 @@ export default function AppSettingsForm() {
             />
             <span className={css.fakeRadio}></span>
             <span className={clsx(css.label)}>Dark</span>
-          </label>
-          <label className={css.labelsRadioWrap}>
+          </label> */}
+      {/* <label className={css.labelsRadioWrap}>
             <input
               defaultChecked={user.theme === 'pink'}
               autoComplete="off"
@@ -83,9 +83,9 @@ export default function AppSettingsForm() {
             />
             <span className={css.fakeRadio}></span>
             <span className={clsx(css.label)}>Pink</span>
-          </label>
-        </div>
-      </fieldset>
+          </label> */}
+      {/* </div>
+      </fieldset> */}
       <fieldset
         // {...register('language')}
         className={css.fieldset}

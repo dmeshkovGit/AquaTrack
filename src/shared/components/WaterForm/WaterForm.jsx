@@ -96,10 +96,14 @@ export default function WaterForm({
 
     if (obj.date > new Date()) {
       toastMaker("You can't drink water in the future", 'error');
+      isOpen(false);
+      return;
     }
 
     if (obj.date < 1672524000) {
       toastMaker('You cannot select a date before 01.01.2023', 'error');
+      isOpen(false);
+      return;
     }
 
     if (operationAdd) {

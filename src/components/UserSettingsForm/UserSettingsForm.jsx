@@ -91,7 +91,7 @@ export default function UserSettingsForm({ isModalOpen }) {
       .unwrap()
       .then(() => {
         isModalOpen(false);
-        toastMaker('Data was successfully updated', 'succes');
+        toastMaker('Profile was successfully updated', 'succes');
       })
       .catch(() => toastMaker('Sorry, try again later', 'error'));
   };

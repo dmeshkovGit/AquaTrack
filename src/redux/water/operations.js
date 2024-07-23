@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import instance from '../../API/axiosInstance';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker';
 
 export const getDayWater = createAsyncThunk(
   'water/DayWater',
@@ -26,6 +27,16 @@ export const getDayWater = createAsyncThunk(
 export const addWater = createAsyncThunk(
   'water/addWater',
   async (newNote, thunkAPI) => {
+    // if (newNote.date > new Date().getTime()) {
+    //   toastMaker("You can't drink water in the future", 'error');
+    //   return;
+    // }
+
+    // if (newNote.date < 1672524000) {
+    //   toastMaker('You cannot select a date before 01.01.2023', 'error');
+    //   return;
+    // }
+
     try {
       const response = await instance.post('api/water', newNote);
       return response.data;

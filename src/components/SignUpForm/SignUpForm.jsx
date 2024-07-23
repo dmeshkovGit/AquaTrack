@@ -59,13 +59,30 @@ export default function SignUpForm() {
           reset();
           setIsModalOpen(true);
         }
+        // else if (registerUser.rejected.match(action)) {
+        //   const errorMessage = action.payload?.message || 'Login failed';
+        //   const statusCode = action.payload ? action.payload.statusCode : null;
+
+        //   console.error(
+        //     `Login failed with status code ${statusCode}: ${errorMessage}`,
+        //   );
+        // }
       })
       .catch(error => {
         console.error('Unexpected error:', error);
       });
   };
 
+  // const handleModalConfirm = () => {
+  //   Логика при нажатии кнопки "Pease verify emai" в модалке
+  //   dispatch(logout())
+  //     .unwrap()
+  //     .then(() => setIsModalOpen(false))
+  //     .catch(() => toast.error(t('Sorry, try again later')));
+  // };
+
   const handleModalCancel = () => {
+    // Логика при нажатии кнопки "Cancel" в модалке
     setIsModalOpen(false);
   };
 
@@ -76,6 +93,7 @@ export default function SignUpForm() {
           children={<SignUpModal />}
           isOpen={setIsModalOpen}
           onClose={handleModalCancel}
+          // btnClassName={''}
         />
       )}
       <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -191,7 +209,7 @@ export default function SignUpForm() {
             t('Register user form')
           )}
         </button>
-        <GoogleAuthBtn />
+        {/* <GoogleAuthBtn /> */}
       </form>
     </>
   );

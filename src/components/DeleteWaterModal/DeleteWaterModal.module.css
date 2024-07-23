@@ -3,7 +3,7 @@
   position: relative;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  padding: 40px 14px;
+  padding: 40px 0 40px 16px;
   width: auto;
   height: auto;
 }
@@ -130,7 +130,7 @@
     flex-direction: column;
     align-items: center;
     width: 516px;
-    padding: 40px;
+    padding: 40px 0 40px 40px;
   }
 
   .title {
