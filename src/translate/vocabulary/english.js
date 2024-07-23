@@ -67,4 +67,9 @@ export const en = {
   'Delete entry': 'Delete entry',
   'Your sure': 'Are you sure you want to delete the entry?',
   'Delete card': 'Delete',
+  'Not found': 'Not found, please add water',
+  'App settings': 'App Settings',
+  'User settings': 'User Settings',
+  'Choose your theme': 'Choose your theme color',
+  'Choose your app': 'Choose your app language',
 };

@@ -24,6 +24,8 @@ export default function WaterProgressBar() {
     );
     if (totalAmount > 0) {
       setPercent(Math.round((totalAmount * 100) / (dayWater * 1000)));
+    } else {
+      setPercent(0);
     }
   }, [dayDrinking, dayWater]);
 

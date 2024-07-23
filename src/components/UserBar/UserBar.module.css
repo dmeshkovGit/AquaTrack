@@ -50,6 +50,11 @@
   border-radius: 50%;
   color: var(--main-white);
 }
+
+.settingsClose {
+  top: 20px;
+}
+
 /* ===============TABLET================ */
 
 @media screen and (min-width: 768px) {
@@ -63,6 +68,11 @@
     height: 56px;
     gap: 10px;
   }
+  .settingsClose {
+    top: 40px;
+    right: 20px;
+  }
+
   .popover {
     padding: 8px;
   }

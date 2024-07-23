@@ -4,23 +4,24 @@ import Icon from '../../shared/components/Icon/Icon';
 import { selectUser } from '../../redux/user/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import '../../translate/index.js';
 import { useForm } from 'react-hook-form';
 import { updateUser } from '../../redux/user/operations';
 
 export default function AppSettingsForm() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const language = localStorage.getItem('i18nextLng');
 
-  const { register } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      theme: user.theme,
-      language: language,
-      // notify: 'checked',
-    },
-  });
+  // const { register } = useForm({
+  //   mode: 'onChange',
+  //   defaultValues: {
+  //     theme: user.theme,
+  //     language: language,
+  //     // notify: 'defaultChecked',
+  //   },
+  // });
   // const onChangeNotify = e => {
   //   console.log(e.target.value);
   // };
@@ -33,18 +34,24 @@ export default function AppSettingsForm() {
     i18n.changeLanguage(e.target.value);
   };
   return (
-    <form className={css.form}>
+    <div className={css.form}>
       <fieldset
-        {...register('theme')}
+        // {...register('theme')}
         className={css.fieldset}
         onChange={onChangeTheme}
         name="theme"
       >
-        <legend className={css.legend}>Choose your theme color</legend>
+        <legend
+          className={clsx(css.legend, {
+            [css.legendUk]: i18n.language === 'uk',
+          })}
+        >
+          {t('Choose your theme')}
+        </legend>
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('theme')}
+              defaultChecked={user.theme === 'light'}
               className={css.radioInput}
               type="radio"
               name="theme"
@@ -55,7 +62,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('theme')}
+              defaultChecked={user.theme === 'dark'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -67,6 +74,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
+              defaultChecked={user.theme === 'pink'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -79,16 +87,22 @@ export default function AppSettingsForm() {
         </div>
       </fieldset>
       <fieldset
-        {...register('language')}
+        // {...register('language')}
         className={css.fieldset}
         onChange={onChangeLang}
         name="language"
       >
-        <legend className={css.legend}>Choose your app language</legend>
+        <legend
+          className={clsx(css.legend, {
+            [css.legendUk]: i18n.language === 'uk',
+          })}
+        >
+          {t('Choose your app')}
+        </legend>
         <div className={css.radioWrapper}>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('language')}
+              defaultChecked={language === 'en'}
               className={css.radioInput}
               type="radio"
               name="lang"
@@ -100,7 +114,7 @@ export default function AppSettingsForm() {
           </label>
           <label className={css.labelsRadioWrap}>
             <input
-              {...register('language')}
+              defaultChecked={language === 'uk'}
               autoComplete="off"
               className={css.radioInput}
               type="radio"
@@ -129,6 +143,6 @@ export default function AppSettingsForm() {
           <span className={css.switchSlider}></span>
         </label>
       </div> */}
-    </form>
+    </div>
   );
 }

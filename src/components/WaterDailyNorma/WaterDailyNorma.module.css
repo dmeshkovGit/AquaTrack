@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: 120px;
+  width: 102px;
   height: 54px;
   border-radius: 15px;
   padding: 12px;
@@ -37,6 +37,7 @@
   font-size: 10px;
   line-height: 10px;
   color: var(--main-text);
+  width: 105px;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,6 +1,6 @@
 /* HTML: <div class="loader"></div> */
 .loaderWrapper {
-  z-index: 99999;
+  z-index: 9999999;
   background: #2f2f2f36;
   position: absolute;
   top: 0;
@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 
 .loader {

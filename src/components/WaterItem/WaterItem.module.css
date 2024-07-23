@@ -8,6 +8,10 @@
   margin-top: 24px;
 }
 
+.modalClsBtn {
+  top: 20px;
+}
+
 .water_item {
   flex: none;
   background-color: var(--main-white);
@@ -17,6 +21,20 @@
   justify-content: center;
   padding: 20px;
   box-shadow: 0 2px 4px var(--shadow);
+}
+
+.text_ {
+  font-family: var(--font-family);
+  color: var(--main-placeholder);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.text_Uk {
+  font-family: var(--font-family);
+  color: var(--main-placeholder);
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .water_item_content {
@@ -80,6 +98,7 @@
   justify-content: center;
   padding: 20px;
   box-shadow: 0 2px 4px var(--shadow);
+  height: 89px;
 }
 
 /* Основний скролбар */

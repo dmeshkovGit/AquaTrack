@@ -10,16 +10,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .form {
   height: 18px;
   cursor: pointer;
   justify-content: center;
-  width: 133px;
   height: 18px;
-  margin-right: 15px;
+  /* margin-right: 15px; */
 }
 
+.avatarSetWrapp {
+  display: flex;
+  gap: 8px;
+}
 .img {
   margin-left: auto;
   margin-right: auto;
@@ -51,7 +55,7 @@
 }
 .wrapInput {
   display: flex;
-  gap: 8px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -94,6 +98,7 @@
   align-items: center;
   border: none;
   background-color: transparent;
+  padding: 0;
 }
 .iconAvatar {
   width: 75px;
@@ -107,7 +112,6 @@
     height: 18px;
     cursor: pointer;
     justify-content: center;
-    width: 152px;
     height: 24px;
   }
 
@@ -128,7 +132,6 @@
   .wrapInput {
     display: flex;
     gap: 8px;
-    width: 252px;
   }
 
   .text {

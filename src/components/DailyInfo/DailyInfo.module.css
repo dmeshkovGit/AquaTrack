@@ -1,7 +1,13 @@
 .container_top_daily_info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+.container {
+  height: 176.6px;
+}
 
+.modalClsBtn {
+  top: 20px;
+}

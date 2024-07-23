@@ -44,12 +44,11 @@
 .logoutIcon {
   fill: none;
   stroke: var(--logout-btn);
-  stroke: green;
   transition: all var(--transition);
 }
 .settingBtn:hover,
 .settingBtn:focus {
-  color: #87d28d;
+  color: var(--accent-hover);
 }
 
 .settingBtn:hover .settingIcon,
