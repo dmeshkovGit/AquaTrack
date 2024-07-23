@@ -7,6 +7,9 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
+import { useSelector } from 'react-redux';
+import { selectActiveDay } from '../../../redux/water/selectors.js';
+import toastMaker from '../../helpers/toastMaker/toastMaker.jsx';
 
 export default function AddWaterBtn({
   WaterDetailedInfoStyles,
@@ -14,8 +17,15 @@ export default function AddWaterBtn({
 }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { t, i18n } = useTranslation();
+  const activeDay = useSelector(selectActiveDay);
 
   const handleOpenModal = () => {
+    if (addForActiveDay) {
+      if (new Date(activeDay).getTime() > new Date().getTime()) {
+        toastMaker("You can't drink water in the future", 'error');
+        return;
+      }
+    }
     setIsOpenModal(true);
   };
 

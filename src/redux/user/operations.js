@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
         message: error.response.data.message,
         statusCode: error.response.status,
       };
-      console.log('Response.statusCode Type: ', typeof response.statusCode);
+
       if (response.statusCode === 401) {
         if (response.message === 'Please verify your email') {
           toastMaker('Please verify your email', 'error');
@@ -50,7 +50,7 @@ export const register = createAsyncThunk(
         statusCode: error.response.status,
       };
       if (response.statusCode === 409) {
-        toast.error('This email is already used');
+        toastMaker('This email is already used', 'error');
       }
       return thunkAPI.rejectWithValue(response);
     }
@@ -73,7 +73,9 @@ export const refreshUserToken = createAsyncThunk(
     const {
       user: { refreshToken },
     } = thunkAPI.getState();
-
+    if (!refreshToken) {
+      throw new Error('empty refresh token');
+    }
     const { data } = await instance.get('/api/users/refresh', {
       headers: { Authorization: `Bearer ${refreshToken}` },
     });
