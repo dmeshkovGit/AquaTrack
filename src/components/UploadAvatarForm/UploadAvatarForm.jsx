@@ -11,7 +11,7 @@ import { RxAvatar } from 'react-icons/rx';
 import '../../translate/index.js';
 import clsx from 'clsx';
 
-const validFileExtensions = ['jpg', 'png', 'jpeg'];
+const validFileExtensions = ['jpg', 'png'];
 
 function isValidFileType(fileName) {
   console.log(fileName);
@@ -30,10 +30,7 @@ export default function UploadAvatarForm() {
     if (!files) return;
     const isValid = isValidFileType(files[0].name);
     if (!isValid) {
-      toastMaker(
-        'Invalid extension. Only .jpg, .jpeg, .png are available',
-        'error',
-      );
+      toastMaker('Invalid extension. Only .jpg, .png are available', 'error');
       return;
     }
     setImage(URL.createObjectURL(files[0]));
@@ -75,7 +72,7 @@ export default function UploadAvatarForm() {
                 type="file"
                 name="avatarURL"
                 className={css.avatarInput}
-                accept="image/*, .png, .jpg, .jpeg"
+                accept="image/*, .png, .jpg"
                 onChange={onChange}
                 hidden
                 id="avatarInput"
