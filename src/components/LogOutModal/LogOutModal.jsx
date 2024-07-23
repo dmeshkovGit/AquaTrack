@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from '../LogOutModal/LogOutModal.module.css';
 import { logout } from '../../redux/user/operations';
-import toast from 'react-hot-toast';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker.jsx';
 import { selectIsLoading } from '../../redux/user/selectors';
 import DotLoader from '../../shared/components/DotLoader/DotLoader.jsx';
 
@@ -18,7 +18,7 @@ export default function LogOutModal({ isModalOpen }) {
     dispatch(logout())
       .unwrap()
       .then(() => isModalOpen(false))
-      .catch(() => toast.error(t('Sorry, try again later')));
+      .catch(() => toastMaker(t('Sorry, try again later', 'error')));
   };
 
   return (

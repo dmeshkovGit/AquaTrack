@@ -3,8 +3,6 @@ import Logo from '../../shared/components/Logo/Logo';
 import SignInForm from '../../components/SignInForm/SignInForm';
 import css from '../SignInPage/SignInPage.module.css';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
-import 'react-toastify/dist/ReactToastify.css';
-
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
 import clsx from 'clsx';

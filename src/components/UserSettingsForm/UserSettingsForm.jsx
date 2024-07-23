@@ -6,9 +6,9 @@ import clsx from 'clsx';
 import FormulaDescription from './FormulaDescription';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading, selectUser } from '../../redux/user/selectors';
+import { selectUser } from '../../redux/user/selectors';
 import { updateUser } from '../../redux/user/operations';
-import toast from 'react-hot-toast';
+import toastMaker from '../../shared/helpers/toastMaker/toastMaker.jsx';
 import { isNumberAndDot, maxNumber } from '../../helpers/validationsHelper';
 import { useTranslation } from 'react-i18next';
 import '../../translate/index.js';
@@ -91,9 +91,9 @@ export default function UserSettingsForm({ isModalOpen }) {
       .unwrap()
       .then(() => {
         isModalOpen(false);
-        toast.success('Data was successfully updated');
+        toastMaker('Data was successfully updated', 'succes');
       })
-      .catch(() => toast.error('Sorry, try again later'));
+      .catch(() => toastMaker('Sorry, try again later', 'error'));
   };
 
   return (
