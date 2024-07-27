@@ -209,7 +209,7 @@ export default function SignUpForm() {
             t('Register user form')
           )}
         </button>
-        {/* <GoogleAuthBtn /> */}
+        <GoogleAuthBtn />
       </form>
     </>
   );
