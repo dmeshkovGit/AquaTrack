@@ -8,6 +8,7 @@ import clsx from 'clsx';
 
 export default function CalendarPagination({
   isOpen,
+  setIsOpen,
   handleNextMonth,
   handlePrevMonth,
   date,
@@ -49,13 +50,14 @@ export default function CalendarPagination({
           <FaAngleRight />
         </button>
       </div>
-      <Icon
-        onClick={isOpen}
-        className={css.icon}
-        id="pieChart"
-        height={20}
-        width={20}
-      />
+      <button className={css.button} type="button" onClick={setIsOpen}>
+        <Icon
+          className={clsx(css.icon, !isOpen && css.iconIsNotActive)}
+          id="pieChart"
+          height={20}
+          width={20}
+        />
+      </button>
     </div>
   );
 }

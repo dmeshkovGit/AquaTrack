@@ -73,4 +73,17 @@ export const editWater = createAsyncThunk(
   },
 );
 
+export const getMonthInfo = createAsyncThunk(
+  'water/getMonthInfo',
+  async (date, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`api/water/month/${date}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export default { deleteWater, getDayWater, addWater };

@@ -1,14 +1,5 @@
 import instance from './axiosInstance';
 
-export const getMonthInfo = async date => {
-  try {
-    const { data } = await instance.get(`api/water/month/${date}`);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getUsers = async () => {
   try {
     const { data } = await instance.get('/api/users');
@@ -19,5 +10,14 @@ export const getUsers = async () => {
       statusCode: error.response.status,
     };
     console.log(response.message);
+  }
+};
+
+export const getDayWaterAmount = async date => {
+  try {
+    const response = await instance.get(`api/water/day/${date}`);
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -12,7 +12,7 @@ import { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUserToken } from '../../redux/user/operations';
 import '../../translate/index.js';
-import { WaterLoader } from '../../shared/components/WaterLoader/WaterLoader.jsx';
+import WaterLoader from '../../shared/components/WaterLoader/WaterLoader.jsx';
 import RefreshLoader from '../RefreshLoader/RefreshLoader.jsx';
 import { selectIsRefreshing } from '../../redux/user/selectors.js';
 

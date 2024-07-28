@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWater, getDayWater, deleteWater, editWater } from './operations';
+import {
+  addWater,
+  getDayWater,
+  deleteWater,
+  editWater,
+  getMonthInfo,
+} from './operations';
 import { logout } from '../user/operations';
 
 const slice = createSlice({
@@ -7,6 +13,7 @@ const slice = createSlice({
   initialState: {
     activeDay: '',
     dayWater: { date: '', water: [] },
+    mounthWater: [],
     currentDay: [],
     loading: false,
   },
@@ -102,6 +109,16 @@ const slice = createSlice({
       .addCase(logout.fulfilled, state => {
         state.dayWater.water = [];
         state.currentDay = [];
+      })
+      .addCase(getMonthInfo.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getMonthInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.mounthWater = action.payload;
+      })
+      .addCase(getMonthInfo.rejected, state => {
+        state.loading = false;
       }),
 });
 
