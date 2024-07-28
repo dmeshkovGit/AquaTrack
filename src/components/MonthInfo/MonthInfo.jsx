@@ -4,34 +4,30 @@ import css from './MonthInfo.module.css';
 import { useEffect, useState } from 'react';
 import '../../translate/index.js';
 import clsx from 'clsx';
-import { getMonthInfo } from '../../API/apiOperations.js';
-import { useSelector } from 'react-redux';
-import { selectDayWater } from '../../redux/water/selectors.js';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectDayWater,
+  selectMonthWater,
+} from '../../redux/water/selectors.js';
 import { useTranslation } from 'react-i18next';
+import WaterStatistic from '../WaterStatistic/WaterStatistic.jsx';
+import { getMonthInfo } from '../../redux/water/operations.js';
 
 export default function MonthInfo() {
   const [date, setDate] = useState(new Date());
-  const [showChart, setShowChart] = useState(false);
+  const [showStat, setShowStat] = useState(false);
   const { t, i18n } = useTranslation();
-  const [daysList, setDays] = useState([]);
+  const daysList = useSelector(selectMonthWater);
   const dayWater = useSelector(selectDayWater);
+  const dispatch = useDispatch();
 
   const toggleView = () => {
-    console.log('Icon clicked');
-    setShowChart(prevShowChart => !prevShowChart);
+    setShowStat(showStat => !showStat);
   };
 
   useEffect(() => {
-    const getMonth = async () => {
-      try {
-        const response = await getMonthInfo(new Date(date).getTime());
-        if (response) setDays(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getMonth();
-  }, [date, dayWater]);
+    dispatch(getMonthInfo(new Date(date).getTime()));
+  }, [dispatch, date, dayWater]);
 
   const handlePrevMonth = () => {
     setDate(prevDate => {
@@ -69,18 +65,18 @@ export default function MonthInfo() {
         <h2
           className={clsx(css.title, { [css.titleUk]: i18n.language === 'uk' })}
         >
-          {showChart ? 'Static' : t('Month water')}
+          {showStat ? 'Static' : t('Month water')}
         </h2>
         <CalendarPagination
           handlePrevMonth={handlePrevMonth}
           handleNextMonth={handleNextMonth}
           monthNames={monthNames}
           date={date}
-          isOpen={toggleView}
+          isOpen={showStat}
+          setIsOpen={toggleView}
         />
-        {showChart ? <TestChart /> : <Calendar />}
       </div>
-      <Calendar daysList={daysList} />
+      {showStat ? <WaterStatistic /> : <Calendar daysList={daysList} />}
     </div>
   );
 }

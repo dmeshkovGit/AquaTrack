@@ -31,7 +31,11 @@
 }
 
 .icon {
-  fill: transparent;
+  stroke: var(--accent);
+  transition: all var(--transition);
+}
+.iconIsNotActive {
+  opacity: 0.4;
 }
 @media screen and (min-width: 768px) {
   .buttonsContainer {

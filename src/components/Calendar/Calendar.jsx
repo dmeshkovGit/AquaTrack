@@ -10,9 +10,11 @@ export default function Calendar({ daysList }) {
   const activeDay = useSelector(selectActiveDay);
   const dispatch = useDispatch();
   useEffect(() => {
-    const now = new Date();
-    const currentDate = now.toISOString().split('T')[0] + 'T00:00:00.000Z';
-    dispatch(setActiveDay(currentDate));
+    if (!activeDay) {
+      const now = new Date();
+      const currentDate = now.toISOString().split('T')[0] + 'T00:00:00.000Z';
+      dispatch(setActiveDay(currentDate));
+    }
   }, [dispatch]);
 
   useEffect(() => {

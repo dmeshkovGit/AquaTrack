@@ -3,7 +3,7 @@ import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import Icon from '../Icon/Icon';
-import { WaterLoader } from '../WaterLoader/WaterLoader.jsx';
+import WaterLoader from '../WaterLoader/WaterLoader.jsx';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../../redux/water/selectors.js';
 
