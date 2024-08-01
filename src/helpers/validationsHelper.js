@@ -34,23 +34,6 @@ export const getFormattedTime = () => {
   return `${hours}:${minutes}`;
 };
 
-export const parseTimeToUnix = (time, date) => {
-  const [hours, minutes] = time.split(':').map(Number);
-  let activeDate;
-
-  if (date) {
-    activeDate = new Date(date);
-  } else {
-    activeDate = new Date();
-  }
-
-  activeDate.setHours(hours);
-  activeDate.setMinutes(minutes);
-  activeDate.setSeconds(0);
-  activeDate.setMilliseconds(0);
-  return activeDate.getTime();
-};
-
 export const unixParser = time => {
   return new Date(time).toLocaleTimeString('en-US', {
     hour: '2-digit',
