@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import css from '../CalendarItem/CalendarItem.module.css';
 import { selectUserWaterNorm } from '../../redux/user/selectors';
 import { useSelector } from 'react-redux';
+import { getStartDay } from '../../helpers/timeConvertor';
 
 export default function CalendarItem({ item, activeDay, index }) {
   const countWater = useSelector(selectUserWaterNorm);
@@ -20,7 +21,8 @@ export default function CalendarItem({ item, activeDay, index }) {
       <button
         className={clsx(
           css.button,
-          item.dateParam == activeDay && css.activeButton,
+          getStartDay(new Date(item.dateParam)) === activeDay &&
+            css.activeButton,
           calculateWaterPercentage(item.totalDayWater) >= 100 &&
             css.fullDayButton,
         )}

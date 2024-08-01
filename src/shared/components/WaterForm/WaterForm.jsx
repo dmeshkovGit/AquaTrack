@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   isNumber,
   timeInputController,
-  parseTimeToUnix,
   getFormattedTime,
   unixParser,
 } from '../../../helpers/validationsHelper';
@@ -18,6 +17,7 @@ import { selectActiveDay } from '../../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
 import '../../../translate/index.js';
 import toastMaker from '../../helpers/toastMaker/toastMaker.jsx';
+import { parseTimeToUnix } from '../../../helpers/timeConvertor.js';
 
 const schema = yup.object().shape({
   Time: yup

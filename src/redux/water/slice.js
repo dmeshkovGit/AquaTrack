@@ -7,6 +7,7 @@ import {
   getMonthInfo,
 } from './operations';
 import { logout } from '../user/operations';
+import { getStartDay } from '../../helpers/timeConvertor';
 
 const slice = createSlice({
   name: 'water',
@@ -29,22 +30,17 @@ const slice = createSlice({
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
-
-        const date = new Date(action.payload.date);
-        date.setUTCHours(0, 0, 0, 0);
-        const requestDate = date.toISOString();
-
         state.dayWater.date = state.activeDay;
 
-        if (state.dayWater.date === requestDate) {
+        if (
+          state.dayWater.date === getStartDay(new Date(action.payload.date))
+        ) {
           state.dayWater.water.push(action.payload);
         }
 
-        const currentDate = new Date();
-        currentDate.setUTCHours(0, 0, 0, 0);
-        const currentDay = currentDate.toISOString();
-
-        if (currentDay === requestDate) {
+        if (
+          getStartDay(new Date()) === getStartDay(new Date(action.payload.date))
+        ) {
           state.currentDay.push(action.payload);
         }
       })
@@ -59,15 +55,10 @@ const slice = createSlice({
         state.dayWater.water = action.payload.flat();
 
         if (action.payload.length > 0) {
-          const date = new Date(action.payload[0].date);
-          date.setUTCHours(0, 0, 0, 0);
-          const requestDate = date.toISOString();
-
-          const currentDate = new Date();
-          currentDate.setUTCHours(0, 0, 0, 0);
-          const currentDay = currentDate.toISOString();
-
-          if (currentDay === requestDate) {
+          if (
+            getStartDay(new Date()) ===
+            getStartDay(new Date(action.payload[0].date))
+          ) {
             state.currentDay = action.payload.flat();
           }
         }

@@ -3,6 +3,8 @@ import WaterItem from '../../components/WaterItem/WaterItem';
 
 export default function WaterList() {
   return (
-    <div className={css.daily_info_container}> <WaterItem /> </div>
+    <div className={css.daily_info_container}>
+      <WaterItem />
+    </div>
   );
 }
