@@ -54,14 +54,14 @@ const slice = createSlice({
         state.loading = false;
         state.dayWater.water = action.payload.flat();
 
-        // if (action.payload.length > 0) {
-        //   if (
-        //     getStartDay(new Date()) ===
-        //     getStartDay(new Date(action.payload[0].date))
-        //   ) {
-        //     state.currentDay = action.payload.flat();
-        //   }
-        // }
+        if (action.payload.length > 0) {
+          if (
+            getStartDay(new Date()) ===
+            getStartDay(new Date(action.payload[0].date))
+          ) {
+            state.currentDay = action.payload.flat();
+          }
+        }
       })
       .addCase(getDayWater.rejected, state => {
         state.loading = false;
