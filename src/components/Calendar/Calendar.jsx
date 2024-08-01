@@ -18,7 +18,6 @@ export default function Calendar({ daysList }) {
 
     if (activeDay) {
       dispatch(getDayWater(new Date(activeDay).getTime()));
-      console.log(new Date(activeDay).getTime());
     }
   }, [dispatch, activeDay]);
 

@@ -6,13 +6,11 @@ export const getDayWater = createAsyncThunk(
   'water/DayWater',
   async (date, thunkAPI) => {
     try {
-      if (new Date(date).getTime() > new Date().getTime()) {
+      if (date > new Date().getTime()) {
         return [];
       }
-      if (
-        new Date(date).getTime() <
-        new Date('2023-01-01T00:00:00.000Z').getTime()
-      ) {
+
+      if (date < 1672524000) {
         return [];
       }
       const response = await instance.get(`api/water/day/${date}`);
