@@ -13,8 +13,7 @@ export const getDayWater = createAsyncThunk(
       if (date < 1672524000) {
         return [];
       }
-      console.log(date);
-      const response = await instance.get(`api/water/day/${date}`);
+      const response = await instance.get(`api/water/day/${date + 10800000}`);
       return response.data.WaterData;
     } catch (error) {
       console.log(error);
