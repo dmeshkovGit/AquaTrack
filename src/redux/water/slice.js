@@ -53,7 +53,6 @@ const slice = createSlice({
       .addCase(getDayWater.fulfilled, (state, action) => {
         state.loading = false;
         state.dayWater.water = action.payload.flat();
-        console.log(action.payload);
 
         // if (action.payload.length > 0) {
         //   if (
